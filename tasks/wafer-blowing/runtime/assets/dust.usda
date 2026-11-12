@@ -1,0 +1,38 @@
+#usda 1.0
+(defaultPrim = "Asset"
+ metersPerUnit = 1
+ upAxis = "Z")
+def Xform "Asset" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+ bool physics:rigidBodyEnabled = true
+ bool physics:kinematicEnabled = false
+ bool physxRigidBody:disableGravity = false
+ bool physxRigidBody:enableCCD = true
+ int physxRigidBody:solverPositionIterationCount = 64
+ int physxRigidBody:solverVelocityIterationCount = 4
+ float physics:mass = 0.000001
+ point3f physics:centerOfMass = (0, 0, 0)
+ float3 physics:diagonalInertia = (1.66666666667e-13, 1.66666666667e-13, 1.66666666667e-13)
+ def Material "Material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+  float physics:staticFriction = 0.4
+  float physics:dynamicFriction = 0.4
+  float physics:restitution = 0
+  token physxMaterial:frictionCombineMode = "max"
+  token outputs:surface.connect = </Asset/Material/Surface.outputs:surface>
+  def Shader "Surface" {
+   uniform token info:id = "UsdPreviewSurface"
+   color3f inputs:diffuseColor = (0.95, 0.015, 0.025)
+   color3f inputs:emissiveColor = (0.12, 0, 0)
+   float inputs:roughness = 0.65
+   float inputs:metallic = 0
+   token outputs:surface
+  }
+ }
+ def Cube "Particle" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+  double size = 0.001
+  color3f[] primvars:displayColor = [(0.95, 0.015, 0.025)]
+  float physxCollision:contactOffset = 0.00001
+  float physxCollision:restOffset = 0
+  rel material:binding:physics = </Asset/Material>
+  rel material:binding = </Asset/Material>
+ }
+}

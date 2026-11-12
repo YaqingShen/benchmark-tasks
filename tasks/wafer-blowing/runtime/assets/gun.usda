@@ -1,0 +1,133 @@
+#usda 1.0
+(
+ defaultPrim = "Asset"
+ metersPerUnit = 1
+ upAxis = "Z"
+)
+def Xform "Asset" (prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]) {
+bool physxArticulation:enabledSelfCollisions = false
+int physxArticulation:solverPositionIterationCount = 64
+int physxArticulation:solverVelocityIterationCount = 4
+def Material "gun_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Xform "blow_gun" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+uniform token[] xformOpOrder = ["xformOp:translate"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.08
+point3f physics:centerOfMass = (-0.0141875, -0.00225, -0.021625)
+float3 physics:diagonalInertia = (2.4325298302e-05, 7.41496519473e-05, 8.46594247507e-05)
+quatf physics:principalAxes = (0.462052871287, 0.412711305507, 0.616161798751, -0.486334411904)
+def Cube "gun_valve_body" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.012, 0, 0)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/gun_material>
+double size = 1
+double3 xformOp:scale = (0.052, 0.03, 0.034)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "gun_handle" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.02, 0, -0.04)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/gun_material>
+double size = 1
+double3 xformOp:scale = (0.022, 0.03, 0.067)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cylinder "gun_nozzle" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.03, 0, 0.01)
+quatf xformOp:orient = (0.707106781186, 0, 0.707106781187, 0)
+color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/gun_material>
+double radius = 0.004
+double height = 0.036
+uniform token axis = "Z"
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+def Cylinder "gun_side_cap" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.02, -0.018, 0)
+quatf xformOp:orient = (0.707106781186, -0.707106781187, 0, 0)
+color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/gun_material>
+double radius = 0.017
+double height = 0.009
+uniform token axis = "Z"
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+def Cylinder "gun_hose_connector" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.017, 0, -0.076)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/gun_material>
+double radius = 0.007
+double height = 0.012
+uniform token axis = "Z"
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+}
+def Xform "gun_trigger" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+double3 xformOp:translate = (0.008, 0, -0.034)
+uniform token[] xformOpOrder = ["xformOp:translate"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.004
+point3f physics:centerOfMass = (0, 0, 0)
+float3 physics:diagonalInertia = (2.08333333333e-07, 1.25666666667e-06, 1.43233333333e-06)
+quatf physics:principalAxes = (0.707106781187, 0, 0.707106781187, -0)
+def Cube "gun_squeeze_trigger" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/gun_material>
+double size = 1
+double3 xformOp:scale = (0.007, 0.024, 0.061)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+}
+def PhysicsPrismaticJoint "gun_trigger_slide" (prepend apiSchemas = ["PhysicsDriveAPI:linear"]) {
+rel physics:body0 = </Asset/blow_gun>
+rel physics:body1 = </Asset/gun_trigger>
+point3f physics:localPos0 = (0.008, 0, -0.034)
+point3f physics:localPos1 = (0, 0, 0)
+quatf physics:localRot0 = (0.707106781187, 0, -0.707106781187, 0)
+quatf physics:localRot1 = (0.707106781187, 0, -0.707106781187, 0)
+uniform token physics:axis = "Z"
+float physics:lowerLimit = 0
+float physics:upperLimit = 0.004
+bool physics:collisionEnabled = false
+uniform token drive:linear:physics:type = "force"
+float drive:linear:physics:stiffness = 1000
+float drive:linear:physics:damping = 2
+float drive:linear:physics:maxForce = 8
+float drive:linear:physics:targetPosition = 0
+float drive:linear:physics:targetVelocity = 0
+}
+
+}

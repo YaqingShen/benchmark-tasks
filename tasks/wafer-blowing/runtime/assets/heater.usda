@@ -1,0 +1,32 @@
+#usda 1.0
+(
+ defaultPrim = "Asset"
+ metersPerUnit = 1
+ upAxis = "Z"
+)
+def Xform "Asset" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = true
+bool physxRigidBody:disableGravity = true
+bool physxRigidBody:enableCCD = false
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+def Material "heater_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.3
+float physics:dynamicFriction = 0.3
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Cylinder "heater" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.65, 0.65, 0.65)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/heater_material>
+double radius = 0.075
+double height = 0.02
+uniform token axis = "Z"
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+}
