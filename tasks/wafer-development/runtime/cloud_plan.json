@@ -1,0 +1,390 @@
+{
+  "model_source_sha256": "73515405dc814f059fbc3e0c7e9ac2d7d9db5aa1a366ce4b2c2826fe17411b91",
+  "settings_sha256": "1ce3176c57c3b3e5160a8e2d9ac5349b7e0c2761c8962dabe3862435e9542ea0",
+  "jam_guard_sha256": "d0d747c63375b24c7ad4ffbabd7910c6ae3fa7f30e8eb693ebdef0c66a703fc0",
+  "yam_checks_sha256": "0df4ccb6ef8fe77c19aee2e27eabe3eebd2db828b24b22ce9a645299253c2ffa",
+  "pad_yam_checks_sha256": "d9e8e4e52fabbeb8f4a8bc0df84463dfd461659fa8e22954c8f31bb0098e1c44",
+  "hinge_guard_sha256": "4132e329a17af427603eea02b268faf994a900cd2ac6f0865e8ca2c235a2c3f7",
+  "previous_yam_checks_sha256": "5822694df4b5e3de9ce5413cd9d7f949d90fccd333e93ac15ff0e2ab64fa2a41",
+  "pad_guard_sha256": "a4c01e1f7efff03c3ccfdd51f8340d8c65bb7774d259349cf2b4fc33af311248",
+  "base_yam_checks_sha256": "58c5ef32364b31a2b3a219445bf3ea2e7b3e8b8db57f27eaef6fe9fb2858c9b3",
+  "adapter_sha256": "671c22645549e8831f617bb3f69ccd1edbcd0ab447cefed77837d49816cfd7a2",
+  "finger_preload_controller_sha256": "eda6ba6e6a40f6e19748b76a54cb49464c8df477440dbe47f8f853859ae39186",
+  "protocol_sha256": "c7bee231bb98cbc3684efaac7b49cb7f4a6e123cdcf794860cea5f0a7ff13ea2",
+  "tcp_feedback_sha256": "e06b01223810912ee16c9e0b639119d18abc72b1b310631c417d4bd0ab706a92",
+  "robot_bridge_sha256": "0b7d3dcd87e595e4c605c88b9999eef5a9fa7747b0e9ca88c80759e289bf81d7",
+  "version": 3,
+  "mechanism_source_module": "wafer_retention_candidate_v12",
+  "model_dependency_sha256": {
+    "mechanism": "73515405dc814f059fbc3e0c7e9ac2d7d9db5aa1a366ce4b2c2826fe17411b91",
+    "retention_parent": "b26a326119e0fea08a0399b3fead2bba56e4bb7e441586023993a920f4a89f56",
+    "passive_base": "2ea2322cfdb1a4b25ff2cd3b381d9ce212770e1f2c5a335338365dec84ceef6f",
+    "design": "30f8c76291d2f715c4c4b1b4fe7612d60ecbf871c3dd4f717b1e61a5f97e0d42",
+    "settings": "1ce3176c57c3b3e5160a8e2d9ac5349b7e0c2761c8962dabe3862435e9542ea0"
+  },
+  "jam_guard_profile": {
+    "revision": "retention_v2_finger_load_diagnostic_v1",
+    "maximum_per_finger_N": 20.0,
+    "comparison": "strictly_greater_than",
+    "checked_at": "Every physics sample after the violating measurement has been saved",
+    "consequence": "Stop the new v2 trial immediately and retain FAILED evidence",
+    "scope": "Prospective simulation jam diagnostic only; not a hardware load rating or change to wafer criteria."
+  },
+  "pad_guard_profile": {
+    "revision": "passive_pad_diagnostic_v6_1",
+    "maximum_absolute_speed_m_s": 0.05,
+    "maximum_absolute_unconstrained_spring_force_N": 4.0,
+    "comparison": "strictly_greater_than",
+    "checked_at": "Every physics sample after the violating measurement has been saved",
+    "force_definition": "-stiffness_N_m*(q_m-rest_m)-damping_N_s_m*qdot_m_s; never a clipped actuator readback",
+    "scope": "Passive-mechanism diagnostic for the shared declared pad profile; native8N cap remains separate from4N diagnostic, not a hardware rating or change to wafer acceptance criteria."
+  },
+  "hinge_guard_profile": {
+    "revision": "passive_hinge_torque_045",
+    "maximum_absolute_unconstrained_torque_Nm": 0.3,
+    "comparison": "strictly_greater_than",
+    "checked_at": "Every saved physics sample, using actual joint velocity",
+    "torque_definition": "-0.45*(hinge_angle_rad+0.2)-0.2*hinge_velocity_rad_s",
+    "scope": "Prospective mechanical-damper diagnostic; unchanged0.3Nm native cap, not calibrated hardware torque or a relaxed wafer criterion."
+  },
+  "export_manifest": {
+    "path": "assets/export_manifest.json",
+    "sha256": "2a1a7166181a1ce862544763c6c156e91a59b4d5b2e21b372fe8628b872a5755"
+  },
+  "model_files": {
+    "clamp": {
+      "path": "assets/clamp.usda",
+      "sha256": "90844d64933f2918f440a39a6874ccbb7e5e6031ecf4466a0256f85776260f98"
+    },
+    "wafer": {
+      "path": "assets/wafer.usda",
+      "sha256": "7b513091319ab7154c2ee051032b0869e521e538fd372d804ad6d9540f488878"
+    },
+    "heater": {
+      "path": "assets/heater.usda",
+      "sha256": "7a2bd8ac2df267e2c2825af43119f9b9f66c16544e24fbfd95eb4d35a5831b1c"
+    },
+    "pillar_0": {
+      "path": "assets/pillar_0.usda",
+      "sha256": "6410e7d7174ad1141ff015d1ff271f0b67526ef5d304d8f714cc30a32a89bd83"
+    },
+    "pillar_1": {
+      "path": "assets/pillar_1.usda",
+      "sha256": "282095d047062fa76f3848df3680e8b3d7774c695965b89cffa52d81b31cc195"
+    },
+    "pillar_2": {
+      "path": "assets/pillar_2.usda",
+      "sha256": "8207ab852ddd4b0a3d45540d794126e25d877016de29bc59c9f34680a003fe17"
+    },
+    "pedestal": {
+      "path": "assets/pedestal.usda",
+      "sha256": "e637ff0426ad4a0c5f0d109b2dccc85e0a3852a7475ac0aeee1bb364e8b1abbd"
+    }
+  },
+  "initial_left_q_rad": [
+    -0.8755527535503398,
+    2.3727674498947335,
+    0.9578725216050794,
+    1.4138930044879015,
+    -0.8779068315079432,
+    -1.5388325963222962
+  ],
+  "seated_left_q_rad": [
+    -0.8755527535503398,
+    2.3727674498947335,
+    0.9578725216050794,
+    1.4138930044879015,
+    -0.8779068315079432,
+    -1.5388325963222962
+  ],
+  "final_left_q_rad": [
+    -0.8755527391288601,
+    2.2985212891263753,
+    0.9452142154539555,
+    1.352305670248398,
+    -0.8779066236549675,
+    -1.5388320787547236
+  ],
+  "right_q_rad": [
+    1.0953174712434104,
+    1.0077839948875675,
+    0.1410087862620621,
+    0.07211387541873597,
+    0.9369832866448735,
+    0.6873237341559366
+  ],
+  "initial_finger_q_m": -0.0245,
+  "initial_finger_state_q_m": -0.035,
+  "finger_open_q_m": -0.0245,
+  "finger_closed_q_m": -0.021500000000000002,
+  "native_finger_open_q_m": -0.04695,
+  "control_hz": 20,
+  "phases": [
+    [
+      "settle",
+      1.5
+    ],
+    [
+      "close",
+      4.5
+    ],
+    [
+      "grip_hold",
+      8.0
+    ],
+    [
+      "lift",
+      2.5
+    ],
+    [
+      "lift_hold",
+      3.5
+    ]
+  ],
+  "world_translation_m": [
+    0.42,
+    -0.14,
+    0.7725
+  ],
+  "world_yaw_deg": 270.0,
+  "pedestal_height_m": 0.025,
+  "cycle_layout": {
+    "revision": "left_side_180_v3",
+    "world_yaw_deg": 270.0,
+    "center_xy_m": [
+      0.42,
+      -0.14
+    ],
+    "handle_remap": "Opposite-side grip; mirrored lateral guides and rear stop. Passive jaws unchanged."
+  },
+  "arm_gains": [
+    {
+      "joint": "joint1",
+      "stiffness": 160.0,
+      "damping": 10.0,
+      "force_range": [
+        -27.0,
+        27.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint2",
+      "stiffness": 160.0,
+      "damping": 10.0,
+      "force_range": [
+        -27.0,
+        27.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint3",
+      "stiffness": 160.0,
+      "damping": 10.0,
+      "force_range": [
+        -27.0,
+        27.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint4",
+      "stiffness": 30.0,
+      "damping": 2.6,
+      "force_range": [
+        -7.0,
+        7.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint5",
+      "stiffness": 30.0,
+      "damping": 2.6,
+      "force_range": [
+        -7.0,
+        7.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint6",
+      "stiffness": 30.0,
+      "damping": 2.6,
+      "force_range": [
+        -7.0,
+        7.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint7",
+      "stiffness": 5000.0,
+      "damping": 100.0,
+      "force_range": [
+        -5.0,
+        5.0
+      ],
+      "force_unit": "N"
+    },
+    {
+      "joint": "joint8",
+      "stiffness": 5000.0,
+      "damping": 100.0,
+      "force_range": [
+        -5.0,
+        5.0
+      ],
+      "force_unit": "N"
+    }
+  ],
+  "right_arm_gains": [
+    {
+      "joint": "joint1",
+      "stiffness": 160.0,
+      "damping": 10.0,
+      "force_range": [
+        -27.0,
+        27.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint2",
+      "stiffness": 160.0,
+      "damping": 10.0,
+      "force_range": [
+        -27.0,
+        27.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint3",
+      "stiffness": 160.0,
+      "damping": 10.0,
+      "force_range": [
+        -27.0,
+        27.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint4",
+      "stiffness": 10.0,
+      "damping": 1.5,
+      "force_range": [
+        -7.0,
+        7.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint5",
+      "stiffness": 10.0,
+      "damping": 1.5,
+      "force_range": [
+        -7.0,
+        7.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint6",
+      "stiffness": 10.0,
+      "damping": 1.5,
+      "force_range": [
+        -7.0,
+        7.0
+      ],
+      "force_unit": "Nm"
+    },
+    {
+      "joint": "joint7",
+      "stiffness": 5000.0,
+      "damping": 100.0,
+      "force_range": [
+        -5.0,
+        5.0
+      ],
+      "force_unit": "N"
+    },
+    {
+      "joint": "joint8",
+      "stiffness": 5000.0,
+      "damping": 100.0,
+      "force_range": [
+        -5.0,
+        5.0
+      ],
+      "force_unit": "N"
+    }
+  ],
+  "tcp_feedback": {
+    "enabled": true,
+    "profile": {
+      "command_hz": 20,
+      "integral_gain_per_command": 0.2,
+      "maximum_translation_correction_m": 0.006,
+      "maximum_rotation_correction_rad": 0.03490658503988659,
+      "maximum_translation_increment_m": 0.00015,
+      "maximum_rotation_increment_rad": 0.0006981317007977319,
+      "maximum_joint_increment_rad": 0.017453292519943295,
+      "maximum_ik_position_residual_m": 2e-05,
+      "maximum_ik_rotation_residual_rad": 0.00017453292519943296,
+      "translation_deadband_m": 1e-05,
+      "rotation_deadband_rad": 8.726646259971648e-05
+    },
+    "integrating_phases": [
+      "settle",
+      "grip_hold",
+      "lift_hold"
+    ]
+  },
+  "finger_preload": {
+    "enabled": true,
+    "profile": {
+      "revision": "shared_compliant_pad_preload",
+      "command_hz": 20,
+      "physics_dt_s": 0.0005,
+      "pad_stiffness_N_m": 2000.0,
+      "pad_damping_N_s_m": 20.0,
+      "target_mean_static_preload_N": 1.3,
+      "preload_deadband_N": 0.1,
+      "maximum_pad_static_preload_opening_priority_N": 2.5,
+      "maximum_dynamic_force_opening_priority_N": 3.0,
+      "maximum_dynamic_force_closing_inhibit_N": 2.5,
+      "gain_m_per_N_per_command": 1.5e-05,
+      "precontact_maximum_closing_step_m": 2.5e-05,
+      "contacted_maximum_absolute_step_m": 1e-05,
+      "bilateral_mean_force_for_fine_closing_N": 0.05,
+      "fine_maximum_closing_step_m": 5e-06,
+      "maximum_tracking_lag_for_closing_m": 0.001,
+      "prelift_positive_closing_inhibit_s": 2.0,
+      "contact_onset_normal_force_N": 0.005,
+      "contact_onset_compression_m": 6.905e-05,
+      "target_lower_bound_m": -0.0245,
+      "target_upper_bound_m": -0.0215,
+      "finger_order": [
+        "tip_left",
+        "tip_right"
+      ],
+      "pad_order": [
+        "lower_pad",
+        "upper_pad"
+      ],
+      "native_gripper_action_dimension": 1,
+      "symmetric_targets": true,
+      "contact_latch": "Either pad triggers one retained latch for all subsequent active phases, including contact dropouts.",
+      "sensor_scope": "Exact completed preceding physics interval; mean positive K*q, full-interval static/dynamic peaks, and wafer-to-pad forces. K*q is not contact-force calibration; tracking lag is not measured actuator force.",
+      "physical_scope": "Draft measured-preload controller. No internal jaw drive, attachment, actuator-cap increase or acceptance-threshold change."
+    }
+  },
+  "scope": "Shared physical configuration for an explicitly unqualified full-workflow cloud test.",
+  "local_validation": {
+    "policy": "user_requested_full_development_v1",
+    "qualification_complete": false,
+    "user_steering": "User requested the unused gun and its stand removed from the timed wafer-development task; validate this revised native scene."
+  }
+}
