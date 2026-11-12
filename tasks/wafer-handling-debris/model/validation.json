@@ -1,0 +1,37 @@
+{
+  "classification": "VALID_DREAM_TASK_FAILURE",
+  "score": 0.0,
+  "termination": [
+    "invalid_task_state"
+  ],
+  "steps": 1570,
+  "simulation_seconds": 78.5,
+  "dream_requests": 33,
+  "dry_run": false,
+  "model": "dreamlabs/dream-1-beta",
+  "model_arm_target_change_rad": 2.408041917334695,
+  "model_gripper_target_change": 0.7410304383935686,
+  "nonzero_model_target_change": true,
+  "measured_arm_change_rad": 2.363019552256816,
+  "guard_modified_steps": 481,
+  "independent_score_matches": true,
+  "bound_physical_files": 53,
+  "full_task_pass": false,
+  "invalid_task_reasons": [
+    "robot_collision"
+  ],
+  "camera_frames_per_stream": 1571,
+  "cameras": [
+    "top_cam",
+    "left_cam",
+    "right_cam"
+  ],
+  "frame_size": [
+    320,
+    176
+  ],
+  "log_sha256": "dc8c16a88874c708d1990ca1cc6e237e2c32e83b5d77c661318b559d7cc9afad",
+  "frame_inventory_sha256": "bb248536620d34df8c7b1066ea0c2c2f02bed89092b485ae71787709a64b883e",
+  "trace_sha256": "d7d40cd5af6a2b5a803d17b34da0f023064e7a4a202b2b802ec96722c7283205",
+  "scope": "Saved model transcript, actions, three-camera RGB and source-bound native evidence. Camera contract is verified, not a network packet capture; no simulation or rerun."
+}

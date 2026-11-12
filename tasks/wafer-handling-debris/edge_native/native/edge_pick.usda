@@ -1,0 +1,415 @@
+#usda 1.0
+(
+    defaultPrim = "Asset"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Asset" (
+    prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+)
+{
+    custom bool physxArticulation:enabledSelfCollisions = 1
+
+    def Xform "base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (-0.034318626, -1.1751901e-19, -0.0026245099)
+        float3 physics:diagonalInertia = (0.00009717331, 0.00009133509, 0.000006706778)
+        bool physics:kinematicEnabled = 0
+        float physics:mass = 0.051
+        quatf physics:principalAxes = (2.5298115e-17, 0.6942109, -2.1462343e-17, 0.7197717)
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cube "base_rail_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_base_rail_0>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.128, 0.003, 0.006)
+            double3 xformOp:translate = (-0.033, -0.01275, -0.001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "base_rail_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_base_rail_1>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.128, 0.003, 0.006)
+            double3 xformOp:translate = (-0.033, 0.01275, -0.001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "fixed_handle" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_fixed_handle>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.2, 0.22, 0.25)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.07, 0.026, 0.006)
+            double3 xformOp:translate = (-0.065, 0, -0.007)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "lower_bridge" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_lower_bridge>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.007, 0.0325, 0.0015)
+            double3 xformOp:translate = (0.0335, 0, -0.00025)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "lower_jaw_housing" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_lower_jaw_housing>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.005, 0.0325, 0.0019)
+            double3 xformOp:translate = (0.0365, 0, 0.00005)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "lower_land" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_lower_land>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.2, 0.2, 0.22)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.001, 0.0325, 0.001)
+            double3 xformOp:translate = (0.03825, 0, 0.0015)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Material "material_base_rail_0" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_base_rail_1" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_fixed_handle" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_lower_bridge" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_lower_jaw_housing" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_lower_land" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "jaw" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (-0.017739583, 0, 0.003)
+        float3 physics:diagonalInertia = (0.00003908053, 0.00003844361, 0.000001154583)
+        bool physics:kinematicEnabled = 0
+        float physics:mass = 0.024
+        quatf physics:principalAxes = (2.1181938e-17, 0.7311947, 1.7955274e-17, 0.68216884)
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0, 0, 0.0030000000000000027)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cube "jaw_lever" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_jaw_lever>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.104, 0.018, 0.003)
+            double3 xformOp:translate = (-0.015, 0, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "upper_jaw_housing" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_upper_jaw_housing>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.003, 0.0325, 0.0014)
+            double3 xformOp:translate = (0.0355, 0, 0.001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "upper_land" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_upper_land>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.2, 0.2, 0.22)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.001, 0.0325, 0.001)
+            double3 xformOp:translate = (0.03475, 0, -0.0005)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "release_trigger" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_release_trigger>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.75, 0.4, 0.13)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.026, 0.02, 0.003)
+            double3 xformOp:translate = (-0.07, 0, 0.012)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Cube "trigger_post" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_trigger_post>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.6, 0.6, 0.6)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.002, 0.008, 0.0082)
+            double3 xformOp:translate = (-0.062, 0, 0.0065)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Material "material_jaw_lever" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_upper_jaw_housing" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_upper_land" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_release_trigger" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Material "material_trigger_post" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "squeeze_slider" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (5.7666665e-7, 0.0000024433334, 0.0000029933333)
+        bool physics:kinematicEnabled = 0
+        float physics:mass = 0.01
+        quatf physics:principalAxes = (1, 0, 0, 0)
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (-0.065, 0, 0.020000000000000004)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cube "upper_handle" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_upper_handle>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.2, 0.22, 0.25)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.054, 0.026, 0.004)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Material "material_upper_handle" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def PhysicsRevoluteJoint "jaw_hinge" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 0.00005235988
+        float drive:angular:physics:maxForce = inf
+        float drive:angular:physics:stiffness = 0.0017453292
+        float drive:angular:physics:targetPosition = 57.29578
+        float drive:angular:physics:targetVelocity = 0
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Asset/base>
+        rel physics:body1 = </Asset/jaw>
+        bool physics:collisionEnabled = 1
+        point3f physics:localPos0 = (0, 0, 0.003)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (-0.5, 0.5, 0.5, 0.5)
+        quatf physics:localRot1 = (-0.5, 0.5, 0.5, 0.5)
+        float physics:lowerLimit = -4.2971835
+        float physics:upperLimit = 0
+    }
+
+    def PhysicsPrismaticJoint "squeeze_travel" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 1
+        float drive:linear:physics:maxForce = inf
+        float drive:linear:physics:stiffness = 10
+        float drive:linear:physics:targetPosition = 0.16
+        float drive:linear:physics:targetVelocity = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Asset/base>
+        rel physics:body1 = </Asset/squeeze_slider>
+        bool physics:collisionEnabled = 1
+        point3f physics:localPos0 = (-0.065, 0, 0.02)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.014
+        float physics:upperLimit = 0.001
+    }
+}
+

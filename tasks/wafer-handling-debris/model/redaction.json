@@ -1,0 +1,187 @@
+{
+  "kind": "public_identifier_and_path_redaction_only",
+  "original_archive_sha256": "e6fde9191cac472392d5a48f447c9d7a926fd5a578a46552fddddc701775082c",
+  "original_inspect_sha256": "dc8c16a88874c708d1990ca1cc6e237e2c32e83b5d77c661318b559d7cc9afad",
+  "public_inspect_sha256": "a66b4f1187db3aa74cea4e15de4b7eb542dca0debcdea4011df3343524fdde0c",
+  "unchanged_files": {
+    "validation.json": "bb37466a88a91e146ed29dae2f31cb191ac6c08fdf0921e4bd8db2dc00f8a7f7"
+  },
+  "redactions": [
+    {
+      "field": "/stats/frames_dir",
+      "original_value_sha256": "8004fd59416867c0f6fe7e0d8ca287541dc936205bf255246fdf332f21b65966",
+      "public_value": "frames/20261112_222359_4059e983"
+    },
+    {
+      "field": "/stats/records_dir",
+      "original_value_sha256": "677a279f5df0e5e0da507051018c09213e2a6ffb509f9bf8844531bda9bc7069",
+      "public_value": "records/20261112_222359_4059e983"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/0/session_id",
+      "original_value_sha256": "bd365dd57f58fcb1add61ccc0f8a9cac1b04696194005bb7513fed50efb13938",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/1/session_id",
+      "original_value_sha256": "07e9f6e198507927d067442d4ce4a88fd92a31777d3cc261459c7650fcbe3d55",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/2/session_id",
+      "original_value_sha256": "b664af0d48300bb3aafae8b23bc1e07746304a5b340564ddd6013f0fb100d5d1",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/3/session_id",
+      "original_value_sha256": "1f060c645eb77a526c31745ef29d1ed68078789900ba700f723874ec5f859bfa",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/4/session_id",
+      "original_value_sha256": "49ddde9c5fe14337691e5e886a3fd3dd5552bab4e800226f2ef40ff1b8e6e9d5",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/5/session_id",
+      "original_value_sha256": "e49638e452867c1d7e8764004453a91a89b59cfa96643317a02171952abf3818",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/6/session_id",
+      "original_value_sha256": "e9328f388b5fc57675134ff03968ded34c59f8943c7e60a3bb31dbc0fbe9b325",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/7/session_id",
+      "original_value_sha256": "4aef754d0749b674406b8caf7e96b9e25e9f62b75229d358c5c9cc338d6e70ae",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/8/session_id",
+      "original_value_sha256": "b40cad45973db523e6a4ffbc2c7729585ca1d80ecb08c7d3519ea1f8f3416139",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/9/session_id",
+      "original_value_sha256": "5ede72a2fdfff2b0f753a4275eefd61083928cd973f4ab97895ccbe64c238626",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/10/session_id",
+      "original_value_sha256": "b405f2adc9cd6f6bde03948953576f1f935f7865ed3ca8d28b131c57937259c0",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/11/session_id",
+      "original_value_sha256": "77607a467a960b44cbe0c1813d57f64368815f752b0155cf0a769aae52a155bc",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/12/session_id",
+      "original_value_sha256": "096278f02f9269c97c0e6265f44b95ff1dbec12d5449ad35255e346da6474cc5",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/13/session_id",
+      "original_value_sha256": "d4221f76459746b19b34061a36c31fb4c131672c77553dbb57ca6401a9d8798d",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/14/session_id",
+      "original_value_sha256": "37d00f1469e2b338fab90adf9d4a319fe5c7d1d5ecfba9f28ddaf24a44686ea3",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/15/session_id",
+      "original_value_sha256": "b9b84a1c7f23118b830d45f98ae494e29ea9b003f1b6df44cf3415cca23dd145",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/16/session_id",
+      "original_value_sha256": "550a0346ec7c31be557e73f2abd20bc01e966e67876e9cf2c7b3c2255fcd9de6",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/17/session_id",
+      "original_value_sha256": "08cf8c5bcebddda6d88dd1eff6a736efed49a509628548f5f07ee34720ed5c61",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/18/session_id",
+      "original_value_sha256": "578acbcedb823658d523cb009340a596c22d2b5fcbe5163fc4e1471e2691d10d",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/19/session_id",
+      "original_value_sha256": "91d549077e3b5db0bfd205ebe6ae54ddc6e48f4bba677b6f87675df87ed0c927",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/20/session_id",
+      "original_value_sha256": "0cb0d1a2c27a5784c2a73306d35a46ab0d56e10f98239c89249b47c6cf88c3c0",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/21/session_id",
+      "original_value_sha256": "6485eddc83a2537d2af8879603246f6e4d0efa7c73dea185efeba3922024627b",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/22/session_id",
+      "original_value_sha256": "96971fe96886381503ae2cb74b104d551fe864f43004a38627afbf552381ab09",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/23/session_id",
+      "original_value_sha256": "2d0475c274c58b129809b6b239cba9afc156ade0e6cb682145515656c6dbcbce",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/24/session_id",
+      "original_value_sha256": "432c559a3b9de1e126e7f82aec20368f17cb1a202617e3c7addfe3c53243325e",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/25/session_id",
+      "original_value_sha256": "a04ebddf25d3a78b6eebe1756566a658b0eaf53427212c021b2d1a1d2c783729",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/26/session_id",
+      "original_value_sha256": "95ad54b7aebe249b057cc4f263d28878d3045e7f36d8ae86eec568721fd8c590",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/27/session_id",
+      "original_value_sha256": "533e2f84de17ba37cececdb5805fef8a5b018a1d13b69741a37ff1f470237163",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/28/session_id",
+      "original_value_sha256": "bb015e9d6ddac8820da9ee91ab0cda273f6e37908e8f83d6a4222a197906f24e",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/29/session_id",
+      "original_value_sha256": "d7246a95744ad48f5716586560d32459e96c6cd6fbf8894af5be31ec95bdd7e9",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/30/session_id",
+      "original_value_sha256": "96860f3e3ca130779266a6f1336720a44afa5de32732a2ad12720b50ee401b48",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/31/session_id",
+      "original_value_sha256": "3f64a5a1a69d6bb3510e56556c7c9f81103560ebaaac1bf7a27608f49fe784bd",
+      "public_value": "REDACTED"
+    },
+    {
+      "field": "/samples/0/policy_transcripts/0/requests/32/session_id",
+      "original_value_sha256": "1cc1cd2c446abbf818a43c88851ffeec1fb5100e54bd78a1ab1506bcde3ad93a",
+      "public_value": "REDACTED"
+    }
+  ],
+  "scope": "Only native Inspect sidecar directory strings and Dream session identifiers were redacted. Model checkpoint, instruction, request chronology/counts, dry-run flag, tracking diagnostics, scores and termination are unchanged. validation.json is the unchanged validation of the original closed log; its log_sha256 is the original_inspect_sha256 above. Raw model/applied/native actions and measured trace remain in the preserved original evidence archive, not duplicated in this public task."
+}

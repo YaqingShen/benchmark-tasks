@@ -1,0 +1,33 @@
+#usda 1.0
+(defaultPrim = "Asset"
+ metersPerUnit = 1
+ upAxis = "Z")
+def Xform "Asset" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+ bool physics:rigidBodyEnabled = true
+ bool physics:kinematicEnabled = false
+ bool physxRigidBody:disableGravity = false
+ bool physxRigidBody:enableCCD = true
+ int physxRigidBody:solverPositionIterationCount = 64
+ int physxRigidBody:solverVelocityIterationCount = 4
+ float physics:mass = 0.000001
+ point3f physics:centerOfMass = (0, 0, 0)
+ def Material "Material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+  float physics:staticFriction = 0.4
+  float physics:dynamicFriction = 0.4
+  float physics:restitution = 0
+  token physxMaterial:frictionCombineMode = "max"
+ }
+ def Mesh "Particle" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+  point3f[] points = [(-0.5, 0.5, 0), (-0.5, 0.25, 0.5), (-0.5, -0.25, 0.5), (-0.5, -0.5, 0), (-0.5, -0.25, -0.5), (-0.5, 0.25, -0.5), (0.5, 0.5, 0), (0.5, 0.25, 0.5), (0.5, -0.25, 0.5), (0.5, -0.5, 0), (0.5, -0.25, -0.5), (0.5, 0.25, -0.5)]
+  int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+  int[] faceVertexIndices = [0, 1, 7, 0, 5, 1, 0, 6, 11, 0, 7, 6, 0, 11, 5, 1, 2, 7, 1, 3, 2, 1, 4, 3, 1, 5, 4, 2, 3, 9, 2, 8, 7, 2, 9, 8, 3, 4, 9, 4, 5, 11, 4, 10, 9, 4, 11, 10, 6, 7, 9, 6, 9, 11, 7, 8, 9, 9, 10, 11]
+  token subdivisionScheme = "none"
+  token orientation = "rightHanded"
+  token physics:approximation = "convexHull"
+  bool physics:collisionEnabled = true
+  color3f[] primvars:displayColor = [(0.78000000000000003, 0.76000000000000001, 0.67000000000000004)]
+  float physxCollision:contactOffset = 0.00001
+  float physxCollision:restOffset = 0
+  rel material:binding:physics = </Asset/Material>
+ }
+}

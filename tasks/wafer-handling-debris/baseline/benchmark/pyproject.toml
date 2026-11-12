@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wafer-blow-benchmark"
+version = "0.6.0"
+description = "MCP2 mixed cleanroom-surrogate debris benchmark for Inspect Robots and Isaac Lab Arena"
+requires-python = ">=3.12"
+dependencies = ["inspect-robots==1.0.0", "inspect-robots-yam==0.38.0", "numpy>=1.26", "scipy>=1.11"]
+
+[project.entry-points."inspect_robots.embodiments"]
+wafer_blow_arena = "wafer_benchmark:wafer_blow_arena"
+
+[project.entry-points."inspect_robots.policies"]
+wafer_blow_scripted = "wafer_benchmark:wafer_blow_scripted"
+wafer_blow_hold = "wafer_benchmark:wafer_blow_hold"
+
+[project.entry-points."inspect_robots.scorers"]
+wafer_blow_score = "wafer_benchmark:wafer_blow_score"
+
+[tool.setuptools]
+py-modules = ["wafer_benchmark", "wafer_benchmark_backend"]

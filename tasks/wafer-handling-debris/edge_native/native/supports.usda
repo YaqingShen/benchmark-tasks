@@ -1,0 +1,274 @@
+#usda 1.0
+(
+    defaultPrim = "Asset"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Asset"
+{
+    def Xform "pedestal" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0, 0, 0.0125)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cylinder "pedestal" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.025
+            custom rel material:binding:physics = </Asset/material_pedestal>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.45, 0.45, 0.48)]
+            float[] primvars:displayOpacity = [1]
+            double radius = 0.075
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def Material "material_pedestal" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "heater" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0, 0, 0.035)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cylinder "heater" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.02
+            custom rel material:binding:physics = </Asset/material_heater>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.65, 0.65, 0.68)]
+            float[] primvars:displayOpacity = [1]
+            double radius = 0.075
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def Material "material_heater" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "pillar_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0.0320025254212, 0, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cylinder "pillar_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.02
+            custom rel material:binding:physics = </Asset/material_pillar_0>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.45, 0.45, 0.45)]
+            float[] primvars:displayOpacity = [1]
+            double radius = 0.0005
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def Material "material_pillar_0" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "pillar_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (-0.0160012627106, 0.027715, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cylinder "pillar_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.02
+            custom rel material:binding:physics = </Asset/material_pillar_1>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.45, 0.45, 0.45)]
+            float[] primvars:displayOpacity = [1]
+            double radius = 0.0005
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def Material "material_pillar_1" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "pillar_2" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (-0.0160012627106, -0.027715, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cylinder "pillar_2" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.02
+            custom rel material:binding:physics = </Asset/material_pillar_2>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.45, 0.45, 0.45)]
+            float[] primvars:displayOpacity = [1]
+            double radius = 0.0005
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def Material "material_pillar_2" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "tool_stand_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (-0.0812857007984, 0.15, 0.0295)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cube "tool_stand_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_tool_stand_0>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.25, 0.25, 0.27)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.008, 0.04, 0.059)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Material "material_tool_stand_0" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+
+    def Xform "tool_stand_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI"]
+    )
+    {
+        bool physics:kinematicEnabled = 1
+        bool physics:rigidBodyEnabled = 1
+        quatd xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (-0.179285700798, 0.15, 0.0265)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+
+        def Cube "tool_stand_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding:physics = </Asset/material_tool_stand_1>
+            bool physics:collisionEnabled = 1
+            custom float physxCollision:contactOffset = 0.0001
+            custom float physxCollision:restOffset = 0
+            color3f[] primvars:displayColor = [(0.25, 0.25, 0.27)]
+            float[] primvars:displayOpacity = [1]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (0.008, 0.04, 0.053)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+
+    def Material "material_tool_stand_1" (
+        prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]
+    )
+    {
+        float physics:dynamicFriction = 0.5
+        float physics:staticFriction = 0.5
+        custom token physxMaterial:frictionCombineMode = "max"
+    }
+}
+

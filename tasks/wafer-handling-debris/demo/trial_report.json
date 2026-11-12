@@ -1,0 +1,60 @@
+{
+  "result": "FULL_DEMONSTRATION_SUCCEEDED",
+  "stage": "full",
+  "wall_seconds": 1925.657240872999,
+  "simulation_seconds": 102.55000000000001,
+  "control_actions": 2051,
+  "task_score": {
+    "rubric": "visible_debris_practical_v6",
+    "score": 1.0,
+    "success": true,
+    "checks": {
+      "wafer_lift": true,
+      "gun_operation": true,
+      "marker_removal": 1.0,
+      "wafer_return": true,
+      "gun_return": true
+    },
+    "removed_markers": 12,
+    "total_markers": 12,
+    "cleared_marker_ids": [
+      "dust_00",
+      "dust_01",
+      "dust_02",
+      "dust_03",
+      "dust_04",
+      "dust_05",
+      "dust_06",
+      "dust_07",
+      "dust_08",
+      "dust_09",
+      "dust_10",
+      "dust_11"
+    ],
+    "invalid_reasons": [],
+    "evidence_complete": true,
+    "observed_samples": 2052,
+    "observation_dt_s": 0.05,
+    "elapsed_s": 102.55000000000001,
+    "completion_time_s": 102.55000000000001,
+    "tool_return_settling": false,
+    "measurements": {
+      "wafer_held": false,
+      "wafer_tilt_deg": 8.537736462515939e-07,
+      "wafer_speed_m_s": 0.0,
+      "wafer_angular_speed_deg_s": 0.0,
+      "aimed_trigger_operation": false,
+      "nozzle_surface_distance_m": 24999.81189698291,
+      "pliers_retained": true,
+      "gun_retained": false,
+      "wafer_return_position_error_m": 0.0001588114427240976,
+      "wafer_return_angle_deg": 0.22760813944860284,
+      "pads_clear": true,
+      "pads_withdrawn": true,
+      "pillar_support_geometry": true,
+      "shared_pad_pillar_support": false,
+      "gun_stand_geometry": true
+    },
+    "scope": "Visible specified-marker removal and handling at 20 Hz. Geometry does not prove contact force or sub-frame causality. No nanoscale cleanliness, drying, force, jet-impulse or coverage-grid score."
+  }
+}

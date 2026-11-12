@@ -1,0 +1,1486 @@
+{
+  "version": 2,
+  "task_qualification": {
+    "version": "measured_full_task_v1",
+    "task_score_required": 1.0,
+    "legacy_paddle_torque_warning_Nm": 0.025,
+    "legacy_warning_effect": "Diagnostic only; actual joint, speed and drive-cap bounds remain mandatory."
+  },
+  "tool_pickup": {
+    "profile": {
+      "revision": "opposed_handle_seats_v28",
+      "stand_offset_world_m": [
+        0.11,
+        0.08,
+        0.0
+      ],
+      "paddle_base_size_m": [
+        0.034,
+        0.03,
+        0.002
+      ],
+      "axial_shoulder_centers_xy_m": [
+        [
+          0.004,
+          0.004
+        ],
+        [
+          0.016,
+          0.008
+        ]
+      ],
+      "axial_shoulder_size_m": [
+        0.002,
+        0.003,
+        0.005
+      ],
+      "opposing_shoulder_centers_xy_m": [
+        null,
+        [
+          -0.0055,
+          0.012
+        ]
+      ],
+      "opposing_shoulder_size_m": [
+        0.002,
+        0.003,
+        0.004
+      ],
+      "alignment_integral_gain": 0.12,
+      "alignment_proportional_gain": 0.1,
+      "handle_paddle_stiffness_Nm_rad": 0.8,
+      "handle_paddle_rest_rad": 0.03,
+      "handle_paddle_pivot_shift_m": [
+        0.01,
+        -0.005
+      ],
+      "lower_backing_extension_m": 0.008,
+      "upper_paddle_joint_anchor_local_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "handle_contact_land_size_m": [
+        0.016,
+        0.006,
+        0.001
+      ],
+      "handle_contact_land_x_m": [
+        -0.005,
+        0.005
+      ],
+      "handle_contact_land_y_m": [
+        0.0,
+        0.008
+      ],
+      "upper_fore_aft_shoulder_center_body_m": [
+        0.011,
+        0.004,
+        -0.0009
+      ],
+      "upper_fore_aft_shoulder_size_m": [
+        0.002,
+        0.003,
+        0.0008
+      ],
+      "finger_seat_endstop_y_m": 0.0145,
+      "finger_seat_endstop_size_m": [
+        0.012,
+        0.001,
+        0.002
+      ],
+      "handle_center_shift_tool_m": [
+        0.0144,
+        -0.006,
+        0.0
+      ],
+      "approach_distance_m": 0.05,
+      "lift_m": 0.04,
+      "behind_flat_m": 0.025,
+      "open_finger_m": -0.035,
+      "transport_finger_m": -0.0245,
+      "handoff_finger_m": -0.0245,
+      "minimum_transport_gap_m": 0.002,
+      "maximum_relative_slip_m": 0.002,
+      "maximum_relative_rotation_deg": 3.0,
+      "minimum_finger_contact_N": 0.05,
+      "maximum_unexpected_contact_N": 1.0,
+      "maximum_docking_angle_deg": 2.0,
+      "minimum_50ms_mean_finger_force_N": 0.75,
+      "maximum_contact_gap_s": 0.001,
+      "maximum_feedback_rotation_deg": 4.0,
+      "alignment_hold_s": 6.0,
+      "close_duration_s": 8.0,
+      "minimum_insertion_clearance_m": 0.0001,
+      "translation_only_phases": [],
+      "maximum_translation_correction_m": 0.01,
+      "alignment_orientation_settle_s": 0.75,
+      "docking_acceptance": "measured_open_jaw_clearance_v1",
+      "maximum_docking_tangential_error_m": 0.001
+    },
+    "timing_profile": {
+      "revision": "full_workflow_120s_tool_v1",
+      "phases_s": {
+        "tool_settle": 1.5,
+        "tool_approach": 1.5,
+        "tool_close": 4.5,
+        "tool_grip_hold": 1.0,
+        "tool_lift": 1.5,
+        "tool_lift_hold": 1.0,
+        "tool_transport": 2.0,
+        "tool_transport_hold": 1.0,
+        "tool_lower_behind": 1.5,
+        "tool_realign": 0.0,
+        "tool_align_hold": 2.0,
+        "tool_insert": 2.0,
+        "tool_dock": 2.0
+      },
+      "closure": {
+        "free_travel_s": 1.5,
+        "baseline_duration_s": 8.0,
+        "baseline_tail_start_s": 5.0
+      },
+      "acceptance_hold_s": 1.0,
+      "scope": "Faster clear-space motion; the original final three seconds of finger closure are unchanged."
+    },
+    "target_tool_pose_world": [
+      0.42,
+      -0.045714299201600014,
+      0.813,
+      0.0,
+      0.0,
+      -0.7071067811865478,
+      0.7071067811865475
+    ],
+    "target_tcp_position_world_m": [
+      0.41404154035277463,
+      0.012342979722710335,
+      0.8130141066719403
+    ],
+    "target_tcp_rotation": [
+      [
+        5.7403194107050345e-05,
+        -0.00017412811423128972,
+        0.9999999831921365
+      ],
+      [
+        2.6568106375923404e-08,
+        -0.9999999848396993,
+        -0.0001741281160433927
+      ],
+      [
+        0.9999999983524362,
+        3.656361584271524e-08,
+        -5.7403188610599136e-05
+      ]
+    ],
+    "stand_grasp_arm_q_rad": [
+      -0.5403519714619501,
+      2.4323375271375496,
+      1.11263689909998,
+      1.3196298049241724,
+      -0.5401687511863376,
+      -1.5708322383528213
+    ],
+    "start_arm_q_rad": [
+      -0.6096546622981475,
+      2.363019478277372,
+      0.9143183275737828,
+      1.4486271982430294,
+      -0.6094713216763424,
+      -1.5708380700471507
+    ],
+    "wafer_arm_q_rad": [
+      -0.8379185194616724,
+      2.367474863167824,
+      0.9280324103045322,
+      1.4393520177205172,
+      -0.8377351878453022,
+      -1.5708630630621805
+    ],
+    "initial_tool_pose_world": [
+      0.53,
+      0.03428570079839999,
+      0.813,
+      -0.00045961937540639003,
+      -0.00045961937540639003,
+      0.7071066318102454,
+      -0.7071066318102454
+    ],
+    "stand_geoms": [
+      "tool_stand_hinge",
+      "tool_stand_handle"
+    ],
+    "initial_empty_hand_contact_force_N": [
+      0.0,
+      0.0
+    ],
+    "initial_passive_hinge_rad": -0.04,
+    "stand_shapes": [
+      {
+        "name": "tool_stand_hinge",
+        "type": "cylinder",
+        "position_world_m": [
+          0.53,
+          0.0342857007984,
+          0.77775
+        ],
+        "size_m": [
+          0.007,
+          0.03025
+        ]
+      },
+      {
+        "name": "tool_stand_handle",
+        "type": "box",
+        "position_world_m": [
+          0.522,
+          0.159285700798,
+          0.766671515653
+        ],
+        "size_m": [
+          0.008,
+          0.002,
+          0.0191715156533
+        ]
+      }
+    ],
+    "post_start_pose_write_count": 0,
+    "stage_clock": "Global physics time is continuous; handoff uses a declared stage-local clock.",
+    "initial_joint_positions": {
+      "pliers_hinge": -0.04,
+      "lower_pad_compression": 0.0,
+      "upper_pad_compression": 0.0,
+      "lower_grip_paddle_pitch": 0.03,
+      "upper_grip_paddle_pitch": 0.03
+    },
+    "result": {
+      "result": "TOOL_PICKUP_AND_DOCK_PASSED",
+      "passed": true,
+      "errors": [],
+      "checks": {
+        "passive_handle_paddles": {
+          "passed": true,
+          "maximum_absolute_pitch_rad": [
+            0.03,
+            0.030083661328900394
+          ],
+          "maximum_absolute_speed_rad_s": [
+            5.215794469907361,
+            1.1629270837734944
+          ],
+          "maximum_absolute_passive_torque_Nm": [
+            0.016341618198977587,
+            0.012212302140757716
+          ],
+          "acceptance_profile": "passive_drive_operating_envelope_v2"
+        },
+        "fresh_empty_hand_start": {
+          "passed": true,
+          "initial_handle_force_N": [
+            0.0,
+            0.0
+          ]
+        },
+        "tool_stand_settled": {
+          "passed": true,
+          "minimum_settled_support_force_N": 1.4631717630518284
+        },
+        "complete_tool_stage": {
+          "passed": true,
+          "duration_s": 21.499999999995243
+        },
+        "tool_retention": {
+          "passed": true,
+          "maximum_grasp_point_translation_m": 0.0005106162037807309,
+          "maximum_relative_rotation_deg": 0.7568140148671384,
+          "maximum_root_displacement_m": 0.0005223228428350255,
+          "checked_grasp_point_tool_m": [
+            -0.058057278924310354,
+            -0.005958459647225397,
+            1.4106671940350424e-05
+          ]
+        },
+        "bilateral_handle_contact": {
+          "passed": true,
+          "minimum_50ms_mean_finger_force_N": 1.3300865721760784,
+          "maximum_contact_gap_s": 0.0,
+          "minimum_instantaneous_force_N": 1.3118511465207305
+        },
+        "open_jaw_transport": {
+          "passed": true,
+          "minimum_gap_m": 0.0032854196312901095
+        },
+        "free_tool_lift": {
+          "passed": true,
+          "minimum_root_rise_m": 0.033369968092267444
+        },
+        "collision_and_wafer_clearance": {
+          "passed": true,
+          "maximum_unexpected_robot_contact_N": 0.0,
+          "maximum_unexpected_tool_environment_contact_N": 0,
+          "maximum_early_pad_wafer_force_N": 0.0
+        },
+        "insertion_sweep": {
+          "passed": true,
+          "lower_face_z_range_wafer_m": [
+            -0.0024252494416078002,
+            -0.0018290893509878092
+          ],
+          "upper_face_z_range_wafer_m": [
+            0.0009980381548909682,
+            0.0014178848725351146
+          ],
+          "lower_clearance_m": 0.0013290893509878092,
+          "upper_clearance_m": 0.0004980381548909682,
+          "required_clearance_m": 0.0001,
+          "swept_part_bounds": [
+            {
+              "name": "lower_front_lever",
+              "separating_axis_clearance_m": 0.008195674296673873
+            },
+            {
+              "name": "lower_rear_lever",
+              "separating_axis_clearance_m": 0.04486942260227747
+            },
+            {
+              "name": "lower_handle_backing",
+              "separating_axis_clearance_m": 0.09065602787822999
+            },
+            {
+              "name": "lower_curved_jaw_housing",
+              "separating_axis_clearance_m": 0.0025113749058683784
+            },
+            {
+              "name": "lower_contact_pad",
+              "separating_axis_clearance_m": 0.0013290893509878092
+            },
+            {
+              "name": "upper_front_lever",
+              "separating_axis_clearance_m": 0.008184599793763382
+            },
+            {
+              "name": "upper_rear_lever",
+              "separating_axis_clearance_m": 0.044916687110871295
+            },
+            {
+              "name": "upper_handle_backing",
+              "separating_axis_clearance_m": 0.09892617951430072
+            },
+            {
+              "name": "upper_curved_jaw_housing",
+              "separating_axis_clearance_m": 0.0017602494758721331
+            },
+            {
+              "name": "upper_contact_pad",
+              "separating_axis_clearance_m": 0.0004980381548909682
+            },
+            {
+              "name": "pliers_pivot",
+              "separating_axis_clearance_m": 0.04197189273978688
+            },
+            {
+              "name": "lower_handle_rib_1",
+              "separating_axis_clearance_m": 0.13627607226784472
+            },
+            {
+              "name": "lower_robot_handle",
+              "separating_axis_clearance_m": 0.07798482575984403
+            },
+            {
+              "name": "lower_handle_side_rail_0",
+              "separating_axis_clearance_m": 0.09597719097396981
+            },
+            {
+              "name": "lower_handle_side_rail_1",
+              "separating_axis_clearance_m": 0.09599472236269072
+            },
+            {
+              "name": "lower_handle_endstop",
+              "separating_axis_clearance_m": 0.09396075229742937
+            },
+            {
+              "name": "lower_handle_axial_stop",
+              "separating_axis_clearance_m": 0.08990982323948887
+            },
+            {
+              "name": "upper_robot_handle",
+              "separating_axis_clearance_m": 0.09329763220523876
+            },
+            {
+              "name": "upper_handle_side_rail_0",
+              "separating_axis_clearance_m": 0.10137951368854708
+            },
+            {
+              "name": "upper_handle_side_rail_1",
+              "separating_axis_clearance_m": 0.10139704507726799
+            },
+            {
+              "name": "upper_handle_rib_0",
+              "separating_axis_clearance_m": 0.09839288367348611
+            },
+            {
+              "name": "upper_handle_endstop",
+              "separating_axis_clearance_m": 0.09938809758600331
+            },
+            {
+              "name": "upper_handle_axial_stop",
+              "separating_axis_clearance_m": 0.09337429621946422
+            },
+            {
+              "name": "upper_handle_opposing_stop",
+              "separating_axis_clearance_m": 0.11437384182747101
+            }
+          ],
+          "scope": "Conservative wafer-frame AABBs for straight translation with current hinge and orientation; actual motion remains contact-guarded."
+        },
+        "docked_jaw_centering": {
+          "passed": true,
+          "absolute_error_m": 6.533077924864396e-05,
+          "maximum_error_m": 0.00015
+        },
+        "wafer_stage_docking": {
+          "passed": true,
+          "position_error_m": 0.00040843663473035826,
+          "orientation_error_deg": 0.6866824537144526,
+          "commanded_target_readback_tolerance_m": 1e-12,
+          "target_tolerance_scope": "Native float32 target representation only; no motion/contact tolerance changes."
+        }
+      },
+      "legacy_handle_paddle_torque_diagnostic": {
+        "acceptance_criterion": false,
+        "limits_Nm": [
+          0.025,
+          0.025
+        ],
+        "maximum_absolute_torque_Nm": [
+          0.016341618198977587,
+          0.012212302140757716
+        ],
+        "exceeded_sample_count": [
+          0,
+          0
+        ]
+      },
+      "failed_checks": [],
+      "free_lift": true,
+      "docked": true,
+      "maximum_relative_slip_m": 0.0005106162037807309,
+      "maximum_relative_rotation_deg": 0.7568140148671384,
+      "maximum_root_displacement_m": 0.0005223228428350255,
+      "checked_grasp_point_tool_m": [
+        -0.058057278924310354,
+        -0.005958459647225397,
+        1.4106671940350424e-05
+      ],
+      "minimum_50ms_mean_finger_force_N": 1.3300865721760784,
+      "maximum_contact_gap_s": 0.0,
+      "bilateral_contact_passed": true,
+      "maximum_unexpected_robot_contact_N": 0.0,
+      "minimum_transport_gap_m": 0.0032854196312901095,
+      "minimum_finger_contact_N": 1.3118511465207305,
+      "docking_position_error_m": 0.00040843663473035826,
+      "docking_angle_error_deg": 0.6866824537144526,
+      "physics_sample_count": 43001,
+      "final_time_s": 21.499999999995243,
+      "post_start_pose_write_count": 0,
+      "scope": "Recorded contact-held passive pliers; no motorized jaw or attachment.",
+      "insertion_clearance": {
+        "passed": true,
+        "lower_face_z_range_wafer_m": [
+          -0.0024252494416078002,
+          -0.0018290893509878092
+        ],
+        "upper_face_z_range_wafer_m": [
+          0.0009980381548909682,
+          0.0014178848725351146
+        ],
+        "lower_clearance_m": 0.0013290893509878092,
+        "upper_clearance_m": 0.0004980381548909682,
+        "required_clearance_m": 0.0001,
+        "swept_part_bounds": [
+          {
+            "name": "lower_front_lever",
+            "separating_axis_clearance_m": 0.008195674296673873
+          },
+          {
+            "name": "lower_rear_lever",
+            "separating_axis_clearance_m": 0.04486942260227747
+          },
+          {
+            "name": "lower_handle_backing",
+            "separating_axis_clearance_m": 0.09065602787822999
+          },
+          {
+            "name": "lower_curved_jaw_housing",
+            "separating_axis_clearance_m": 0.0025113749058683784
+          },
+          {
+            "name": "lower_contact_pad",
+            "separating_axis_clearance_m": 0.0013290893509878092
+          },
+          {
+            "name": "upper_front_lever",
+            "separating_axis_clearance_m": 0.008184599793763382
+          },
+          {
+            "name": "upper_rear_lever",
+            "separating_axis_clearance_m": 0.044916687110871295
+          },
+          {
+            "name": "upper_handle_backing",
+            "separating_axis_clearance_m": 0.09892617951430072
+          },
+          {
+            "name": "upper_curved_jaw_housing",
+            "separating_axis_clearance_m": 0.0017602494758721331
+          },
+          {
+            "name": "upper_contact_pad",
+            "separating_axis_clearance_m": 0.0004980381548909682
+          },
+          {
+            "name": "pliers_pivot",
+            "separating_axis_clearance_m": 0.04197189273978688
+          },
+          {
+            "name": "lower_handle_rib_1",
+            "separating_axis_clearance_m": 0.13627607226784472
+          },
+          {
+            "name": "lower_robot_handle",
+            "separating_axis_clearance_m": 0.07798482575984403
+          },
+          {
+            "name": "lower_handle_side_rail_0",
+            "separating_axis_clearance_m": 0.09597719097396981
+          },
+          {
+            "name": "lower_handle_side_rail_1",
+            "separating_axis_clearance_m": 0.09599472236269072
+          },
+          {
+            "name": "lower_handle_endstop",
+            "separating_axis_clearance_m": 0.09396075229742937
+          },
+          {
+            "name": "lower_handle_axial_stop",
+            "separating_axis_clearance_m": 0.08990982323948887
+          },
+          {
+            "name": "upper_robot_handle",
+            "separating_axis_clearance_m": 0.09329763220523876
+          },
+          {
+            "name": "upper_handle_side_rail_0",
+            "separating_axis_clearance_m": 0.10137951368854708
+          },
+          {
+            "name": "upper_handle_side_rail_1",
+            "separating_axis_clearance_m": 0.10139704507726799
+          },
+          {
+            "name": "upper_handle_rib_0",
+            "separating_axis_clearance_m": 0.09839288367348611
+          },
+          {
+            "name": "upper_handle_endstop",
+            "separating_axis_clearance_m": 0.09938809758600331
+          },
+          {
+            "name": "upper_handle_axial_stop",
+            "separating_axis_clearance_m": 0.09337429621946422
+          },
+          {
+            "name": "upper_handle_opposing_stop",
+            "separating_axis_clearance_m": 0.11437384182747101
+          }
+        ],
+        "scope": "Conservative wafer-frame AABBs for straight translation with current hinge and orientation; actual motion remains contact-guarded."
+      },
+      "error": null
+    }
+  },
+  "tool_stand_export": {
+    "models": {
+      "tool_stand_hinge": "assets/tool_stand_hinge.usda",
+      "tool_stand_handle": "assets/tool_stand_handle.usda"
+    },
+    "initial_world_poses": {
+      "tool_stand_hinge": [
+        0.53,
+        0.0342857007984,
+        0.77775,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tool_stand_handle": [
+        0.522,
+        0.159285700798,
+        0.766671515653,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "shapes": {
+      "tool_stand_hinge": {
+        "type": "cylinder",
+        "half_sizes_m": [
+          0.007,
+          0.03025
+        ]
+      },
+      "tool_stand_handle": {
+        "type": "box",
+        "half_sizes_m": [
+          0.008,
+          0.002,
+          0.0191715156533
+        ]
+      }
+    }
+  },
+  "gun_return_profile": {
+    "revision": "gun_stand_return_v21",
+    "clear_height_m": 0.975,
+    "seat_depth_m": 0.00025,
+    "maximum_position_error_m": 0.002,
+    "maximum_rotation_error_deg": 2.0,
+    "maximum_linear_speed_m_s": 0.001,
+    "maximum_angular_speed_rad_s": 0.02,
+    "raw_velocity_acceptance": false,
+    "maximum_position_excursion_m": 0.00025,
+    "maximum_orientation_excursion_deg": 0.25,
+    "maximum_absolute_foot_gap_m": 0.0005,
+    "minimum_support_margin_m": 0.002,
+    "minimum_seat_weight_fraction": 0.2,
+    "minimum_free_weight_fraction": 0.8,
+    "maximum_support_force_N": 3.0,
+    "maximum_released_finger_force_N": 0.005,
+    "load_force_band_N": [
+      0.45,
+      0.65
+    ],
+    "load_step_m": 4e-05,
+    "maximum_load_command_shift_m": 0.002,
+    "final_window_s": 1.0,
+    "support_force_window_s": 0.05,
+    "release_clear_window_s": 0.05,
+    "minimum_hand_retreat_m": 0.04,
+    "close_target_m": -0.0198,
+    "seat_target_m": -0.02,
+    "partial_open_target_m": -0.0216,
+    "open_target_m": -0.035,
+    "release_intermediate_target_m": -0.0225,
+    "release_intermediate_fraction": 0.75,
+    "release_clearance_drop_m": 0.015,
+    "release_first_drop_fraction": 0.3333333333333333,
+    "seat_center_gain": 0.2,
+    "seat_center_step_m": 2e-05,
+    "seat_center_deadband_m": 0.0003
+  },
+  "gun": {
+    "mass_kg": 0.08,
+    "trigger_mass_kg": 0.004,
+    "trigger_stiffness_N_m": 1000.0,
+    "trigger_damping_N_s_m": 2.0,
+    "trigger_travel_m": 0.004,
+    "air_on_compression_m": 0.0022,
+    "grip_local_m": [
+      -0.00975,
+      0,
+      -0.051
+    ],
+    "nozzle_local_m": [
+      0.048,
+      0,
+      0.01
+    ],
+    "initial_position_m": [
+      0.27,
+      -0.175,
+      0.84
+    ],
+    "friction": 0.6,
+    "handle_width_m": 0.03,
+    "trigger_width_m": 0.024,
+    "initial_rotation": [
+      [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "grasp_q_rad": [
+      0.8021238007420871,
+      1.4552167062053043,
+      0.12333179137322656,
+      0.7410349500035347,
+      0.7095453329391499,
+      0.412001795795817
+    ],
+    "approach_q_rad": [
+      1.0953174712434104,
+      1.0077839948875675,
+      0.1410087862620621,
+      0.07211387541873597,
+      0.9369832866448735,
+      0.6873237341559366
+    ],
+    "scope": "Unmeasured low-mass mechanical draft; passive trigger, no attachment or hose forces."
+  },
+  "gun_export": {
+    "initial_world_poses": {
+      "gun": [
+        0.27,
+        -0.175,
+        0.84,
+        0.0,
+        0.0,
+        0.7071067811874525,
+        0.7071067811856425
+      ],
+      "gun_stand": [
+        0.27,
+        -0.19,
+        0.75275,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "passive_spring": {
+      "mode": "constant_passive_spring",
+      "joint_name": "gun_trigger_slide",
+      "joint_type": "slide",
+      "stiffness": 1000.0,
+      "damping": 2.0,
+      "constant_target": 0.0,
+      "effort_limit": 8.0,
+      "velocity_limit": 1.0,
+      "position_unit": "m",
+      "effort_unit": "N",
+      "authored_usd_drive": true,
+      "usd_drive": {
+        "instance": "linear",
+        "type": "force",
+        "stiffness": 1000.0,
+        "damping": 2.0,
+        "maxForce": 8.0,
+        "targetPosition": 0.0,
+        "targetVelocity": 0.0,
+        "position_unit": "m",
+        "stiffness_unit": "N/m",
+        "damping_unit": "N*s/m",
+        "effort_unit": "N"
+      }
+    },
+    "inertials": {
+      "blow_gun": {
+        "mass_kg": 0.08,
+        "center_of_mass_local_m": [
+          -0.014187500000000002,
+          -0.00225,
+          -0.021625000000000002
+        ],
+        "diagonal_inertia_kg_m2": [
+          2.4325298301985234e-05,
+          7.414965194734126e-05,
+          8.465942475068078e-05
+        ],
+        "principal_axes_xyzw": [
+          0.4127113055071638,
+          0.6161617987507336,
+          -0.48633441190443844,
+          0.4620528712868225
+        ],
+        "inertia_tensor_local_kg_m2": [
+          [
+            7.175625000000011e-05,
+            -1.0462500000000001e-06,
+            -1.1415624999999337e-05
+          ],
+          [
+            -1.0462500000000001e-06,
+            8.40834375000037e-05,
+            3.892499999999162e-06
+          ],
+          [
+            -1.1415624999999337e-05,
+            3.892499999999162e-06,
+            2.729468750000346e-05
+          ]
+        ]
+      },
+      "gun_trigger": {
+        "mass_kg": 0.004,
+        "center_of_mass_local_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diagonal_inertia_kg_m2": [
+          2.0833333333333339e-07,
+          1.2566666666666666e-06,
+          1.4323333333333332e-06
+        ],
+        "principal_axes_xyzw": [
+          0.0,
+          0.7071067811865475,
+          -0.0,
+          0.7071067811865476
+        ],
+        "inertia_tensor_local_kg_m2": [
+          [
+            1.4323333333333332e-06,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.2566666666666666e-06,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            2.0833333333333339e-07
+          ]
+        ]
+      }
+    },
+    "support_geometry": {
+      "gun_hose_connector": {
+        "local_position_m": [
+          -0.017,
+          0.0,
+          -0.076
+        ],
+        "local_rotation": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "radius_m": 0.007,
+        "halfheight_m": 0.006
+      },
+      "gun_stand": {
+        "half_sizes_m": [
+          0.03,
+          0.03,
+          0.00525
+        ]
+      }
+    },
+    "models": {
+      "gun": "assets/gun.usda",
+      "gun_stand": "assets/gun_stand.usda"
+    }
+  },
+  "gun_schema_check": {
+    "status": "USD_SCHEMA_CHECKED",
+    "scope": "Geometry and passive drive only; native contact motion untested."
+  },
+  "scan": {
+    "rows": 18,
+    "standoff_m": 0.08,
+    "tilt_deg": 45.0,
+    "speed_m_s": 0.025,
+    "footprint_radius_m": 0.005,
+    "minimum_exposure_s": 0.05,
+    "grid_pitch_m": 0.002,
+    "protected_flat_strip_m": 0.015,
+    "scope": "Geometric air exposure only; no calibrated drying or cleaning physics."
+  },
+  "gun_retention": {
+    "revision": "impulse_and_measured_pose_v1",
+    "window_s": 0.05,
+    "minimum_mean_finger_force_N": 0.75,
+    "maximum_contact_gap_s": 0.001,
+    "maximum_grip_translation_m": 0.0015,
+    "maximum_relative_rotation_deg": 2.0
+  },
+  "full_workflow_timing_profile": {
+    "version": "complete_workflow_120s_v4",
+    "maximum_simulation_seconds": 120.0,
+    "control_hz": 20,
+    "wafer_prefix_phases": [
+      [
+        "settle",
+        1.5
+      ],
+      [
+        "close",
+        4.5
+      ],
+      [
+        "grip_hold",
+        8.0
+      ],
+      [
+        "lift",
+        2.5
+      ],
+      [
+        "lift_hold",
+        3.5
+      ]
+    ],
+    "wafer_return_phases": [
+      [
+        "lower",
+        3.0
+      ],
+      [
+        "return_hold",
+        1.5
+      ],
+      [
+        "release",
+        2.0
+      ],
+      [
+        "retreat",
+        1.0
+      ],
+      [
+        "retreat",
+        1.5
+      ],
+      [
+        "unassisted_hold",
+        1.5
+      ]
+    ],
+    "stage_budgets_s": {
+      "tool_pickup": 21.5,
+      "wafer_prefix": 20.0,
+      "wafer_return": 10.5,
+      "right_hand": 68.0,
+      "reserve": 0.0
+    },
+    "acceptance_window_s": 1.0,
+    "scope": "Full workflow only; unchanged measured readiness and physical limits."
+  },
+  "local_contact_solver_profile": {
+    "revision": "full_workflow_verified_baseline_v2",
+    "impratio": 10.0,
+    "noslip_iterations": 0,
+    "scope": "Restores the numerical settings of the completed v12 pickup and 150-second loaded hold. Geometry, friction coefficients, springs, actuator limits and timestep are unchanged; PhysX retains its own solver.",
+    "engine": "MuJoCo",
+    "engine_version": "3.3.7",
+    "noslip_tolerance": 1e-06,
+    "timestep_s": 0.0005,
+    "parent_noslip_iterations": 0
+  },
+  "native_contact_solver_scope": "Native PhysX contact solver; local MuJoCo numerical settings are not claimed equivalent.",
+  "initial_empty_hand_geometry": {
+    "left_minimum_tool_gap_m": 0.009194256182477212,
+    "right_minimum_tool_gap_m": 0.02386233207239513
+  },
+  "full_cycle_handle_geometry": {
+    "revision": "opposed_handle_seats_v28",
+    "removed_geoms": [
+      "lower_handle_side_rail_0",
+      "lower_handle_side_rail_1",
+      "upper_handle_side_rail_0",
+      "upper_handle_side_rail_1"
+    ],
+    "mass_redistribution": [
+      {
+        "body": "lower_half",
+        "mass_to_broad_handle_kg": 0.00044203340471666083
+      },
+      {
+        "body": "upper_half",
+        "mass_to_broad_handle_kg": 0.00043773613626583936
+      }
+    ],
+    "total_mass_kg": 0.15,
+    "mass_rule": "Lateral-guide mass redistributed into each physical broad handle; COM and inertia recomputed.",
+    "backing_depth_m": 0.002,
+    "paddle_mass_from_each_backing_kg": 0.01,
+    "lower_backing_extension_m": 0.008,
+    "paddle_pivot_shift_m": [
+      0.01,
+      -0.005
+    ],
+    "sizing": "Connected edge and axial shoulders locate the fingers. Each paddle retains 10 g distributed by physical volume.",
+    "topology": "Two unpowered pitch hinges on physical handle paddles; robot fingers provide all squeezing force."
+  },
+  "handle_paddles": [
+    {
+      "body_name": "lower_grip_paddle",
+      "joint_name": "lower_grip_paddle_pitch",
+      "parent_body": "lower_half",
+      "collider_name": "lower_robot_handle",
+      "collider_names": [
+        "lower_robot_handle",
+        "lower_handle_side_rail_0",
+        "lower_handle_side_rail_1",
+        "lower_handle_endstop",
+        "lower_handle_axial_stop"
+      ],
+      "base_size_m": [
+        0.034,
+        0.03,
+        0.002
+      ],
+      "base_center_body_m": [
+        0.0,
+        0.0,
+        -0.0005
+      ],
+      "contact_land_size_m": [
+        0.016,
+        0.006,
+        0.001
+      ],
+      "contact_land_centers_body_m": [
+        [
+          -0.005,
+          0.0,
+          0.001
+        ],
+        [
+          -0.005,
+          0.008,
+          0.001
+        ]
+      ],
+      "registration_shoulders": [
+        {
+          "name": "lower_handle_endstop",
+          "center_body_m": [
+            -0.005,
+            0.0145,
+            0.0015
+          ],
+          "size_m": [
+            0.012,
+            0.001,
+            0.004
+          ]
+        },
+        {
+          "name": "lower_handle_axial_stop",
+          "center_body_m": [
+            0.004,
+            0.004,
+            0.002
+          ],
+          "size_m": [
+            0.002,
+            0.003,
+            0.005
+          ]
+        }
+      ],
+      "position_parent_m": [
+        -0.048057278924310366,
+        -0.006,
+        0.0237
+      ],
+      "joint_anchor_local_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion_parent_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_local": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "limits_rad": [
+        -0.08,
+        0.08
+      ],
+      "stiffness_Nm_rad": 0.8,
+      "damping_Nms_rad": 0.001,
+      "rest_rad": 0.03,
+      "mass_kg": 0.01,
+      "size_m": [
+        0.034,
+        0.03,
+        0.003
+      ],
+      "force_cap_Nm": 0.1,
+      "operating_torque_guard_Nm": 0.06,
+      "torque_guard_Nm": 0.025,
+      "velocity_guard_rad_s": 10.0,
+      "velocity_limit_rad_s": 20.0
+    },
+    {
+      "body_name": "upper_grip_paddle",
+      "joint_name": "upper_grip_paddle_pitch",
+      "parent_body": "upper_half",
+      "collider_name": "upper_robot_handle",
+      "collider_names": [
+        "upper_robot_handle",
+        "upper_handle_side_rail_0",
+        "upper_handle_side_rail_1",
+        "upper_handle_rib_0",
+        "upper_handle_endstop",
+        "upper_handle_axial_stop",
+        "upper_handle_opposing_stop"
+      ],
+      "base_size_m": [
+        0.034,
+        0.03,
+        0.002
+      ],
+      "base_center_body_m": [
+        0.0,
+        0.0,
+        0.0005
+      ],
+      "contact_land_size_m": [
+        0.016,
+        0.006,
+        0.001
+      ],
+      "contact_land_centers_body_m": [
+        [
+          0.005,
+          0.0,
+          -0.001
+        ],
+        [
+          0.005,
+          0.008,
+          -0.001
+        ]
+      ],
+      "registration_shoulders": [
+        {
+          "name": "upper_handle_rib_0",
+          "center_body_m": [
+            0.011,
+            0.004,
+            -0.0009
+          ],
+          "size_m": [
+            0.002,
+            0.003,
+            0.0008
+          ]
+        },
+        {
+          "name": "upper_handle_endstop",
+          "center_body_m": [
+            0.005,
+            0.0145,
+            -0.0015
+          ],
+          "size_m": [
+            0.012,
+            0.001,
+            0.004
+          ]
+        },
+        {
+          "name": "upper_handle_axial_stop",
+          "center_body_m": [
+            0.016,
+            0.008,
+            -0.002
+          ],
+          "size_m": [
+            0.002,
+            0.003,
+            0.005
+          ]
+        },
+        {
+          "name": "upper_handle_opposing_stop",
+          "center_body_m": [
+            -0.005500000000000005,
+            0.012,
+            -0.0015000000000000013
+          ],
+          "size_m": [
+            0.002,
+            0.003,
+            0.004
+          ]
+        }
+      ],
+      "position_parent_m": [
+        -0.06305727892431037,
+        -0.006,
+        -0.0237
+      ],
+      "joint_anchor_local_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "quaternion_parent_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_local": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "limits_rad": [
+        -0.08,
+        0.08
+      ],
+      "stiffness_Nm_rad": 0.8,
+      "damping_Nms_rad": 0.001,
+      "rest_rad": 0.03,
+      "mass_kg": 0.01,
+      "size_m": [
+        0.034,
+        0.03,
+        0.003
+      ],
+      "force_cap_Nm": 0.1,
+      "operating_torque_guard_Nm": 0.06,
+      "torque_guard_Nm": 0.025,
+      "velocity_guard_rad_s": 10.0,
+      "velocity_limit_rad_s": 20.0
+    }
+  ],
+  "full_workflow_no_wafer_side_cradle": true,
+  "export_manifest": {
+    "path": "assets/export_manifest.json",
+    "sha256": "02bd04d7adfbb9a25d7a512a5610cc07ba9f7b9a14a09f423ed40c6f23b4aa8a"
+  },
+  "files": {
+    "wafer_finger_preload_v12.py": "eda6ba6e6a40f6e19748b76a54cb49464c8df477440dbe47f8f853859ae39186",
+    "run_wafer_cycle_cloud.py": "d2fe2eee2fbd5a35cb0b0cf4b909c3cf1a3112f841db403c1dd71f3ef78454da",
+    "wafer_grasp_settings.py": "1ce3176c57c3b3e5160a8e2d9ac5349b7e0c2761c8962dabe3862435e9542ea0",
+    "wafer_passive_pad_guard_v6.py": "a4c01e1f7efff03c3ccfdd51f8340d8c65bb7774d259349cf2b4fc33af311248",
+    "wafer_cycle_isaac.py": "65034da9978b1ab98ba45857201d41ccb4d7a6b7dbe0ab51dcbd9b50e0e1ea8c",
+    "wafer_retention_checks_v11.py": "0df4ccb6ef8fe77c19aee2e27eabe3eebd2db828b24b22ce9a645299253c2ffa",
+    "cloud_plan.json": "c7c63c743fa9d19101d06910fc5c708483c9f7fa8b15c7521ef468a34856ae68",
+    "wafer_tool_return.py": "d8b32c5582c9fe06ba87504fef1f8c4b811cdb319debf9a585b53ba296d3367e",
+    "wafer_tool_pickup.py": "0b7abc3766fe6d3c681103e24d43f7d7eb8dbfe05521c625761078b380e54a0f",
+    "wafer_retention_isaac_v12.py": "407c0d25ccbfc758b7dab3df500aa0ee3d409607678ed94c51773d1111f9283c",
+    "wafer_retention_checks.py": "58c5ef32364b31a2b3a219445bf3ea2e7b3e8b8db57f27eaef6fe9fb2858c9b3",
+    "local_reference.json": "39d9de388b0285bf9728d5f7a6b16f3b26ecf913c063233a4612be4cb7db6dc0",
+    "wafer_retention_checks_v2.py": "5822694df4b5e3de9ce5413cd9d7f949d90fccd333e93ac15ff0e2ab64fa2a41",
+    "wafer_retention_jam_guard_v2.py": "d0d747c63375b24c7ad4ffbabd7910c6ae3fa7f30e8eb693ebdef0c66a703fc0",
+    "wafer_cycle_protocol.py": "040565673378bffeb2043969fd5aed0e77c2647c0be948075a1e1a7a412d871e",
+    "wafer_retention_checks_v6.py": "d9e8e4e52fabbeb8f4a8bc0df84463dfd461659fa8e22954c8f31bb0098e1c44",
+    "wafer_retention_usd_v12.py": "c47b56fd022ed6728d4dba69226687c28adf7ff5ffd3edd901417f59241d8902",
+    "wafer_full_cycle_isaac.py": "0525860e13d3156d46f4a714c7d164743803a5d81fbe5a2250155d686d840ff7",
+    "wafer_trace_rows.py": "32844af8245458c35e54015b2be036bf9ac9562df8bfd35358133834166e95ff",
+    "wafer_grasp_protocol.py": "c7bee231bb98cbc3684efaac7b49cb7f4a6e123cdcf794860cea5f0a7ff13ea2",
+    "wafer_hinge_guard_v11.py": "4132e329a17af427603eea02b268faf994a900cd2ac6f0865e8ca2c235a2c3f7",
+    "wafer_grasp_feedback.py": "e06b01223810912ee16c9e0b639119d18abc72b1b310631c417d4bd0ab706a92",
+    "benchmark/wafer_benchmark_backend.py": "9f4861b10f24ed5754d53698f38ba5febfcd4dc51299d4acb9c3e4abf7b77b70",
+    "benchmark/collision_geometry.py": "f95bb6026de25914d18c20693fd30ecf64c9780511021a0833b987725a45a607",
+    "benchmark/wafer_task_score.py": "9a49de8b61d246a516b83626fef552b800e666438df02e15f45e97155e138809",
+    "benchmark/wafer_robot_geometry.py": "a16c2574deaded7f6e34f642eafe8900df51b56a9f87f259efa0a4845593ad22",
+    "assets/clamp.usda": "32e49406129b5a150e1a32b2446690435505e99c03868baf51478235ad240611",
+    "assets/gun_stand.usda": "11ee4060f7f736ed6f361f94efdee1acdbe62499a0132108c35c0ec03329fbbb",
+    "assets/wafer.usda": "7b513091319ab7154c2ee051032b0869e521e538fd372d804ad6d9540f488878",
+    "assets/pillar_2.usda": "8207ab852ddd4b0a3d45540d794126e25d877016de29bc59c9f34680a003fe17",
+    "assets/gun.usda": "b4fafb1e8d5501f42fdac375fe1cf599b8816382afd12e846c4f7947e0eae390",
+    "assets/heater.usda": "7a2bd8ac2df267e2c2825af43119f9b9f66c16544e24fbfd95eb4d35a5831b1c",
+    "assets/tool_stand_handle.usda": "41ed98e6172d19529157650bd5bc3b2d11ad9d29011d2db828520f7a18abfd0d",
+    "assets/pillar_0.usda": "6410e7d7174ad1141ff015d1ff271f0b67526ef5d304d8f714cc30a32a89bd83",
+    "assets/pedestal.usda": "e637ff0426ad4a0c5f0d109b2dccc85e0a3852a7475ac0aeee1bb364e8b1abbd",
+    "assets/pillar_1.usda": "282095d047062fa76f3848df3680e8b3d7774c695965b89cffa52d81b31cc195",
+    "assets/tool_stand_hinge.usda": "f34c382233495f15b4b05367cf2ac1d6f203f91d28f70b2bb36791dcbbaa294b",
+    "assets/export_manifest.json": "02bd04d7adfbb9a25d7a512a5610cc07ba9f7b9a14a09f423ed40c6f23b4aa8a",
+    "wafer_two_tasks.py": "f9199fdcf790554cf168fd37304cc9c2acc5f1a9ee64211502bf22f8ae598f42",
+    "wafer_dust.py": "b59b5fcb758be6dfd873578f475319105d58f6caf62242fb1b25140f0b42d759",
+    "wafer_dust_isaac.py": "f6cf0ba9c3843b148c4ade6d36d55c58cfccb88398389bd4470494873ad1adb9",
+    "assets/dust.usda": "27b1339b1d69fe70d6cbf00abd752bfd4b0227a97e687d66970e904da21458a4"
+  },
+  "robot_collision_assets_sha256": "dea8f89539d8cadbd5af53c3332757e669a48313f92d529b079df9386642c164",
+  "local_scene_sha256": "da4e125ef61dbbfda7936f9c1f14c749399ff7c2068cc9ab41aca490e27765bf",
+  "local_metadata_sha256": "1e62727f228362151ebb88b55be4e0439d3b72fc55a1a6b3c195f7eb7638568e",
+  "local_gate": {
+    "policy": "user_requested_full_development_v1",
+    "qualification_complete": false,
+    "attempted": 0,
+    "passed": 0,
+    "nominal_passed": false,
+    "cases": [],
+    "source_sha256": {
+      "wafer_finger_preload_v12.py": "eda6ba6e6a40f6e19748b76a54cb49464c8df477440dbe47f8f853859ae39186",
+      "run_wafer_cycle_cloud.py": "d2fe2eee2fbd5a35cb0b0cf4b909c3cf1a3112f841db403c1dd71f3ef78454da",
+      "wafer_grasp_settings.py": "1ce3176c57c3b3e5160a8e2d9ac5349b7e0c2761c8962dabe3862435e9542ea0",
+      "wafer_passive_pad_guard_v6.py": "a4c01e1f7efff03c3ccfdd51f8340d8c65bb7774d259349cf2b4fc33af311248",
+      "wafer_cycle_isaac.py": "65034da9978b1ab98ba45857201d41ccb4d7a6b7dbe0ab51dcbd9b50e0e1ea8c",
+      "wafer_retention_checks_v11.py": "0df4ccb6ef8fe77c19aee2e27eabe3eebd2db828b24b22ce9a645299253c2ffa",
+      "cloud_plan.json": "c7c63c743fa9d19101d06910fc5c708483c9f7fa8b15c7521ef468a34856ae68",
+      "wafer_tool_return.py": "d8b32c5582c9fe06ba87504fef1f8c4b811cdb319debf9a585b53ba296d3367e",
+      "wafer_tool_pickup.py": "0b7abc3766fe6d3c681103e24d43f7d7eb8dbfe05521c625761078b380e54a0f",
+      "wafer_retention_isaac_v12.py": "407c0d25ccbfc758b7dab3df500aa0ee3d409607678ed94c51773d1111f9283c",
+      "wafer_retention_checks.py": "58c5ef32364b31a2b3a219445bf3ea2e7b3e8b8db57f27eaef6fe9fb2858c9b3",
+      "local_reference.json": "39d9de388b0285bf9728d5f7a6b16f3b26ecf913c063233a4612be4cb7db6dc0",
+      "wafer_retention_checks_v2.py": "5822694df4b5e3de9ce5413cd9d7f949d90fccd333e93ac15ff0e2ab64fa2a41",
+      "wafer_retention_jam_guard_v2.py": "d0d747c63375b24c7ad4ffbabd7910c6ae3fa7f30e8eb693ebdef0c66a703fc0",
+      "wafer_cycle_protocol.py": "040565673378bffeb2043969fd5aed0e77c2647c0be948075a1e1a7a412d871e",
+      "wafer_retention_checks_v6.py": "d9e8e4e52fabbeb8f4a8bc0df84463dfd461659fa8e22954c8f31bb0098e1c44",
+      "wafer_retention_usd_v12.py": "c47b56fd022ed6728d4dba69226687c28adf7ff5ffd3edd901417f59241d8902",
+      "wafer_full_cycle_isaac.py": "0525860e13d3156d46f4a714c7d164743803a5d81fbe5a2250155d686d840ff7",
+      "wafer_trace_rows.py": "32844af8245458c35e54015b2be036bf9ac9562df8bfd35358133834166e95ff",
+      "wafer_grasp_protocol.py": "c7bee231bb98cbc3684efaac7b49cb7f4a6e123cdcf794860cea5f0a7ff13ea2",
+      "wafer_hinge_guard_v11.py": "4132e329a17af427603eea02b268faf994a900cd2ac6f0865e8ca2c235a2c3f7",
+      "wafer_grasp_feedback.py": "e06b01223810912ee16c9e0b639119d18abc72b1b310631c417d4bd0ab706a92",
+      "benchmark/wafer_benchmark_backend.py": "9f4861b10f24ed5754d53698f38ba5febfcd4dc51299d4acb9c3e4abf7b77b70",
+      "benchmark/collision_geometry.py": "f95bb6026de25914d18c20693fd30ecf64c9780511021a0833b987725a45a607",
+      "benchmark/wafer_task_score.py": "9a49de8b61d246a516b83626fef552b800e666438df02e15f45e97155e138809",
+      "benchmark/wafer_robot_geometry.py": "a16c2574deaded7f6e34f642eafe8900df51b56a9f87f259efa0a4845593ad22",
+      "assets/clamp.usda": "32e49406129b5a150e1a32b2446690435505e99c03868baf51478235ad240611",
+      "assets/gun_stand.usda": "11ee4060f7f736ed6f361f94efdee1acdbe62499a0132108c35c0ec03329fbbb",
+      "assets/wafer.usda": "7b513091319ab7154c2ee051032b0869e521e538fd372d804ad6d9540f488878",
+      "assets/pillar_2.usda": "8207ab852ddd4b0a3d45540d794126e25d877016de29bc59c9f34680a003fe17",
+      "assets/gun.usda": "b4fafb1e8d5501f42fdac375fe1cf599b8816382afd12e846c4f7947e0eae390",
+      "assets/heater.usda": "7a2bd8ac2df267e2c2825af43119f9b9f66c16544e24fbfd95eb4d35a5831b1c",
+      "assets/tool_stand_handle.usda": "41ed98e6172d19529157650bd5bc3b2d11ad9d29011d2db828520f7a18abfd0d",
+      "assets/pillar_0.usda": "6410e7d7174ad1141ff015d1ff271f0b67526ef5d304d8f714cc30a32a89bd83",
+      "assets/pedestal.usda": "e637ff0426ad4a0c5f0d109b2dccc85e0a3852a7475ac0aeee1bb364e8b1abbd",
+      "assets/pillar_1.usda": "282095d047062fa76f3848df3680e8b3d7774c695965b89cffa52d81b31cc195",
+      "assets/tool_stand_hinge.usda": "f34c382233495f15b4b05367cf2ac1d6f203f91d28f70b2bb36791dcbbaa294b",
+      "assets/export_manifest.json": "02bd04d7adfbb9a25d7a512a5610cc07ba9f7b9a14a09f423ed40c6f23b4aa8a",
+      "wafer_two_tasks.py": "f9199fdcf790554cf168fd37304cc9c2acc5f1a9ee64211502bf22f8ae598f42",
+      "wafer_dust.py": "b59b5fcb758be6dfd873578f475319105d58f6caf62242fb1b25140f0b42d759",
+      "wafer_dust_isaac.py": "f6cf0ba9c3843b148c4ade6d36d55c58cfccb88398389bd4470494873ad1adb9",
+      "assets/dust.usda": "27b1339b1d69fe70d6cbf00abd752bfd4b0227a97e687d66970e904da21458a4"
+    }
+  },
+  "scope": "Unqualified continuous native particle workflow with reduced opening resistance and wider contact lands.",
+  "native_mechanical_revision": {
+    "name": "passive_opening_045_wide_handle_lands",
+    "parameter": "opening stiffness, Nm/rad",
+    "previous": 0.6,
+    "current": 0.45,
+    "reason": "Reduce opening resistance with wider handle lands; unchanged finger force limits.",
+    "geometry_changed": true,
+    "acceptance_changed": true,
+    "qualification": "NOT_TESTED",
+    "contact_land_width_m": {
+      "previous": 0.008,
+      "current": 0.016
+    },
+    "upper_opposing_stop_clearance_change_m": 0.0005,
+    "tool_feedback_correction_cap_m": {
+      "previous": 0.006,
+      "current": 0.01
+    },
+    "handle_contact_compliance": {
+      "stiffness_N_m": 50000.0,
+      "damping_N_s_m": 20.0,
+      "acceleration_spring": false,
+      "scope": "Draft elastic handle lining; 5 N corresponds to 0.1 mm static indentation per contact. Not calibrated hardware."
+    },
+    "docking_hold_controller": {
+      "acquire_position_m": 0.0008,
+      "acquire_angle_deg": 0.5,
+      "acquire_center_m": 0.00012,
+      "resume_position_m": 0.0009,
+      "resume_angle_deg": 0.8,
+      "resume_center_m": 0.00014,
+      "scope": "Hold the last arm command once aligned; resume on measured drift. Controller targets remain distinct from the clearance readiness check."
+    },
+    "alignment": "Measured open-jaw clearance governs docking readiness; centering error remains diagnostic.",
+    "handoff_finger_q_m": -0.0245,
+    "jaw_center_feedback_deadband_m": 5e-05,
+    "retention_frame": "Actual finger-contact paddles; unchanged instantaneous 2 mm / 3 deg limits.",
+    "acceptance_thresholds_changed": true,
+    "acceptance_change_scope": "User-authorized open-jaw clearance readiness replaces exact normal centering; physical grip, retention and collision limits remain unchanged. Future runs only. Whole-wafer stillness is diagnostic; secure retained lifting and placement remain required.",
+    "stationary_hold_controller": "After one second on target, latch arm targets; resume correction if measured jaw error exceeds 1.5 mm or 0.75 degrees. Acceptance limits unchanged.",
+    "evaluation_optimization": "Use existing compact evaluator fields for the prefix; complete recorded trace and all checks retained.",
+    "native_solver_contact_order": {
+      "solver_type": "PGS",
+      "solve_articulation_contact_last": false,
+      "scope": "Native PGS solver comparison; unchanged geometry, friction, drives, timestep and acceptance."
+    },
+    "docking_acceptance_change": {
+      "revision": "measured_open_jaw_clearance_v1",
+      "authorization": "User requested successful pickup and holding without unnecessary precision on 2026-11-11.",
+      "required_clearance_m": 0.0001,
+      "maximum_tangential_error_m": 0.001,
+      "maximum_angle_deg": 2.0,
+      "center_and_full_3d_error": "Diagnostic only; measured face and housing clearance governs wafer-normal readiness.",
+      "retained": "Bilateral contact, pickup, load, collision, wafer retention, hold and return checks.",
+      "historical_results": "Unchanged; this policy applies to future runs."
+    },
+    "hold_acceptance": {
+      "revision": "secure_retention_v1",
+      "scope": "Whole-wafer stillness is diagnostic. Lift height, pillar clearance, tilt, jaw engagement, bilateral contact, relative slip, release and stable placement remain acceptance criteria.",
+      "historical_results": "Unchanged; applies only to future runs."
+    },
+    "particle_scan": {
+      "azimuth_world_deg": 160.0,
+      "gun_roll_deg": 0.0,
+      "rows": 18,
+      "row_order": "positive to negative wafer y",
+      "row_transverse_calibration_m": 0.002,
+      "edge_sweep": false,
+      "scan_speed_m_s": 0.1,
+      "transport_nominal_joint_step_deg": 1.3,
+      "transport_maximum_joint_step_deg": 1.6,
+      "scan_maximum_joint_step_deg": 1.0,
+      "scope": "No-roll sweep with retimed transport; spray, contact, force, retention and scoring limits unchanged.",
+      "qualification": "NOT_FULL_WORKFLOW_TESTED"
+    },
+    "gun_seating_controller": {
+      "hold_s": 4.0,
+      "load_step_m": 4e-05,
+      "centering_deadband_m": 0.0003,
+      "release_clearance_drop_m": 0.015,
+      "retreat": "Backward/upward after release; preserve the previous final parked pose.",
+      "reason": "Acquire support load, settle, then withdraw downward while opening to clear the gun body; force/travel bounds unchanged."
+    },
+    "gun_settling_acceptance": {
+      "revision": "supported_pose_window_v1",
+      "position_excursion_m": 0.00025,
+      "orientation_excursion_deg": 0.25,
+      "gun_centering_tolerance_m": 0.002,
+      "placement_basis": "60 mm stand with required 2 mm footprint margin; wafer centering remains 1 mm.",
+      "raw_velocity": "Diagnostic only; every measured pose in the existing hold window is checked.",
+      "retained": "Absolute placement, orientation, support load, support margin, contact, release, air-off and free-standing checks.",
+      "historical_results": "Unchanged; prospective controller and evaluation revision."
+    },
+    "gun_support_handoff": "Recognize measured stand support during unilateral finger contact; final release, trigger-off and free-standing requirements remain unchanged.",
+    "online_gun_retention_guard": "Stop on the existing 1.5 mm or 2 degree retention limits before intentional release; original scored limits unchanged.",
+    "evaluation_storage": "Reuse compact prefix fields and a bounded 256-block stage cache; every physics sample and acceptance check is retained.",
+    "particle_contact_classification": "Filter all 12 named particles on each tool body. Permit these identified contacts only after air starts; preserve unknown/fixture/gun contact guards and final all-clear requirement.",
+    "particle_completion_order": "Require all particles clear for one second before wafer lowering starts, and clear at task end. Removal caused only by placing the wafer cannot pass."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "public_path_redaction_only",
+  "original_archive_sha256": "539e81eabaca1d44340866c90049093f0d060ed54a4dc7e9360f99356bd6fe8e",
+  "original_metadata_sha256": "72f1e932fb04afdcc2f913dfd6ba662cddca579669f32b158057a16e0eae7a6f",
+  "original_audit_sha256": "aefd96169906ce0ab9a350b90bb5c9383c7c72506f729543efabaa52229980b5",
+  "original_inspect_sha256": "f88f008dd645214a89af7ea6215a2464c6786d62e1ebc086bf5219b6770a2063",
+  "redactions": [
+    {
+      "file": "metadata.json",
+      "field": "/baseline_root",
+      "original_value_sha256": "d37498448d68310a084d569f85eedd8025c26f480d338f8fdb4f8174c40ef7ad",
+      "public_value": "baseline"
+    },
+    {
+      "file": "inspect.json",
+      "field": "/stats/frames_dir",
+      "original_value_sha256": "02297741334ba9a56e6712335a9b4ec0ca18d7073ec0bbf488b3bfbf0b9cfb46",
+      "public_value": "frames/20261112_215120_374ffbc9"
+    },
+    {
+      "file": "inspect.json",
+      "field": "/stats/records_dir",
+      "original_value_sha256": "b35cebc3e78d202ae80727edf23ca913e9e94bdddb709ef3e6c9a60b7be2d083",
+      "public_value": "records/20261112_215120_374ffbc9"
+    }
+  ],
+  "unchanged_files": {
+    "trial_report.json": "84f294836b36b5f0155f51338e0de124674edf52578ca25c31d2a0c5ca116b0a",
+    "commands.jsonl": "ba8a0daa83e6cf44a4dcd35a0f38d355decbea67d24cdc14be567fd8831e6668",
+    "observations.jsonl.gz": "a0a9db8a677ce8b9c81339e6fb7472b0b429358d0630b9f68e97fb8bd4e1a548"
+  },
+  "scope": "Only one native metadata path and two Inspect sidecar paths were replaced. Commands, measured observations, geometry, scores and trial report are unchanged. Frame and record sidecars are not included in this compact package. The original private evidence remains preserved; the public metadata receives a fresh independent audit."
+}
