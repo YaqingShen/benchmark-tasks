@@ -1,0 +1,20 @@
+{
+  "title": "Clean a wafer with a blow gun",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "wafer handling",
+    "tool use",
+    "air jet",
+    "surface debris"
+  ],
+  "instruction": "Use the left gripper to pick up the pliers and lift the wafer from its three support pins. Hold the wafer while the right gripper sweeps the blow gun across its exposed face and removes all twelve red particles. Then place the wafer back on the pins, release it, and return the gun to its stand with the trigger off. Keep the pliers held and the fixtures in place.",
+  "context": "Wafer cleaning is a necessary step in nanofabrication because particles can cause defects in later processing. This task models that handling step: one arm holds a wafer with pliers while the other removes particles with a blow gun.",
+  "setup": "Two YAM arms with parallel grippers start empty. A silicon wafer surrogate (100 mm diameter, 1 mm thick, 20 g, 32.5 mm flat) rests on three metal pins (1 mm diameter, 20 mm high). Twelve red plastic 1 mm cubes, 1 mg each, represent surface particles in a fixed seed-0 layout. Plastic pliers have rubber contact pads (12 × 32.5 × 1 mm) and total mass 150 g. The plastic blow gun has an 80 g body, 4 g trigger and 30 mm handle width. Metal pliers supports are a 14 mm diameter × 60.5 mm cylinder and a 16 × 4 × 38.343 mm block. The metal gun stand is 60 × 60 × 10.5 mm. The inactive round heater fixture and pedestal are 150 mm diameter, respectively 20 and 25 mm high. Exact tool geometry and starting poses are in the scene files. Contact parameters are assigned rather than calibrated to these materials.",
+  "scoring": "Score 1 only if the complete sequence and all particle checks pass; otherwise 0. Lift the pliers 30 mm, the wafer 10 mm with 5 mm pin clearance, and the gun 20 mm. Sweep the exposed wafer with a 5 mm radius footprint: each 2 mm grid point needs 50 ms exposure at 50–110 mm nozzle distance and 30–60° incidence. Exclude the outer 1 mm rim and 15 mm clamp strip. All twelve particles must receive jet impulse and stay clear for 1 s before the lifted wafer recontacts a pin. Return and release the wafer within 1 mm/2° and the gun within 2 mm/2° of their start poses, with 1 s stable support and trigger off. Retreat the pliers 20 mm from the released wafer and the right gripper 40 mm from the gun. Keep the pliers held. Drops, premature particle loss, forbidden contacts, changed geometry or incomplete evidence score 0. Handling progress is reported separately. README lists contact and stability tolerances.",
+  "run_limit": "120 seconds of simulated time: at most 2,400 actions at 20 Hz. Physics step: 0.5 ms.",
+  "reset_notes": "Reload the scene in a fresh process. Restore both empty grippers, the wafer, tools and twelve particles. Use particle seed 0 and the fixed starting layout.",
+  "fidelity": "The simulation uses rigid-body contacts, passive tool springs and a trigger-controlled gas jet. Visible millimetre-scale particles use an assumed drag-and-adhesion model. It does not predict nanoscale cleanliness, drying, chemical cleaning, heating or wafer damage. The demonstration replays measured states from an audited native run. Hardware performance and repeatability are not established.",
+  "scores": "PENDING — Demo: 1.0, verified against the complete recorded trace. Dream-1 has not yet been evaluated.",
+  "media": ""
+}
