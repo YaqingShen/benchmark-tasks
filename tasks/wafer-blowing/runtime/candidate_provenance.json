@@ -1,0 +1,44 @@
+{
+  "status": "UNTESTED_POLICY_CANDIDATE",
+  "baseline_source_archive_sha256": "66c906d90897aefe31fa6f1290fa4e36721c829eb12e257f8f759f22a92c62ec",
+  "baseline_plan_revision": "5a3fcc025d4948f05acfdeb16d492fbd696394f88bd8e5c8af79dd38877ee105",
+  "changed_files": {
+    "benchmark/pyproject.toml": {
+      "baseline": null,
+      "candidate": "49f1f5dedba1e6c77484c105f14d4e340267e69d16614f6412eccb337609d0e9"
+    },
+    "benchmark/wafer_benchmark.py": {
+      "baseline": null,
+      "candidate": "23f920c5d1da537f6e20d8fa6bf5db71ffee6b2267d5aca57d4a68a46a0a1085"
+    },
+    "benchmark/wafer_benchmark_backend.py": {
+      "baseline": "9f4861b10f24ed5754d53698f38ba5febfcd4dc51299d4acb9c3e4abf7b77b70",
+      "candidate": "dc8cb27f2e2edd00e4b4797d0e3565a39a1e320bf0cbdcec1d172fdcdedd66e6"
+    },
+    "benchmark/wafer_policy_provenance.py": {
+      "baseline": null,
+      "candidate": "45c6251ac09b1458e9a3d09779df81b47fee936edd1583d34986db9675c81252"
+    },
+    "benchmark/wafer_policy_score.py": {
+      "baseline": null,
+      "candidate": "823c7ddd7c20ceb945ccec376d072ef9ffd93626319cf78b0316aa059d2891c2"
+    },
+    "benchmark/wafer_robot_geometry.py": {
+      "baseline": "a16c2574deaded7f6e34f642eafe8900df51b56a9f87f259efa0a4845593ad22",
+      "candidate": "fe07a3f8eaaa69fb248371e6163c5c35ac86ddf433706072bbbeb0ffec2e64d3"
+    },
+    "full_workflow_plan.json": {
+      "baseline": "623186e0b7726c4de00d2374aee74fbdc190ea42b6aea7737609a2d394f367e7",
+      "candidate": "c514f23fcd12ae34a0faf3a6599c2ac4b22005f94f217b1f2d5408b7236ea91f"
+    },
+    "wafer_dust.py": {
+      "baseline": "48afe3f15eb9f77a1981aff35005ee0b11fd99f3db191cc4e08fe8f94a0bf1d4",
+      "candidate": "1a4494883bc9e35338a32deb1e5de21fd38ca17cd36084321f992086f8ff925d"
+    },
+    "wafer_dust_isaac.py": {
+      "baseline": "113d7e733883e6db20f081c36d9fb83db0ddabbbf452dbe620aa012b658735fb",
+      "candidate": "b07d4d802912af972be45bb7e5b6efb3bcb3661d3f0a1c521c2ef2df858e7581"
+    }
+  },
+  "scope": "Policy stepping, measured return detection and binary score. Original revision036 remains unchanged."
+}
