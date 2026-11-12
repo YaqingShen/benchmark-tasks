@@ -2,7 +2,7 @@
 
 Wafer cleaning is a necessary step in nanofabrication because surface particles can cause defects in later processing. One arm holds the wafer with passive pliers while the other sweeps a blow gun across its exposed face. The wafer and gun then return to their supports.
 
-**Validation: the scripted demo scores 1.0. The policy interface passed a native 20-step smoke test and independent evidence audit. Dream-1 evaluation is queued; its result and media ID will be added before the upstream submission.**
+**Validation: Dream-1 scores 0.0; the scripted demo scores 1.0. Both results match independent evidence audits. Dream-1 stopped during tool pickup on unexpected robot-environment contact.**
 
 ## Environment and installation
 
@@ -24,6 +24,8 @@ python tools/run_policy.py --policy dream --steps 2400 --output runs/dream-001
 ```
 
 The wrapper reads the exact instruction from `task.json`, records three 320 × 176 RGB cameras, and sends measured 14-dimensional joint states at 20 Hz. It exposes no object poses or scripted phase labels to the policy. The budget is 2,400 control steps (120 simulated seconds); physics runs at 0.5 ms per step. The `development=true` option permits this task's limited qualification scope while retaining source, state, contact, geometry and evidence checks.
+
+The submitted Dream-1 trial used `dreamlabs/dream-1-beta` and the 2,400-step budget. It ended on a measured contact violation after 45 control steps: 32 startup steps and 13 model-action steps. The native trace spans 2.2085 simulated seconds; the 46-frame video lasts 2.3 seconds at 20 fps. The independent audit checks all 4,418 physics samples. The evaluation took 74.6 wall-clock seconds; scoring and video collection finished within 85.4 seconds total. No runtime error was recorded. See `evidence/dream-1-result.json` and `evidence/dream-1-audit.json`.
 
 For a short local interface check, use `--policy hold --steps 20`. It holds the measured starting joint positions and makes no model call; its expected task score is 0.
 

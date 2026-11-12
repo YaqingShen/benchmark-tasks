@@ -15,6 +15,6 @@
   "run_limit": "120 seconds of simulated time: at most 2,400 actions at 20 Hz. Physics step: 0.5 ms.",
   "reset_notes": "Reload the scene in a fresh process. Restore both empty grippers, the wafer, tools and twelve particles. Use particle seed 0 and the fixed starting layout.",
   "fidelity": "The simulation uses rigid-body contacts, passive tool springs and a trigger-controlled gas jet. Visible millimetre-scale particles use an assumed drag-and-adhesion model. It does not predict nanoscale cleanliness, drying, chemical cleaning, heating or wafer damage. The demonstration replays measured states from an audited native run. Hardware performance and repeatability are not established.",
-  "scores": "PENDING — Demo: 1.0, verified against the complete recorded trace. Dream-1 has not yet been evaluated.",
-  "media": ""
+  "scores": "Dream-1: 0.0; scripted demo: 1.0. Dream-1 stopped on unexpected robot-environment contact during tool pickup after 45 control steps (32 startup steps and 13 model-action steps). Both scores were independently audited.",
+  "media": "M-N3JKH4"
 }
