@@ -1,0 +1,40 @@
+{
+  "rubric": "wafer_development_practical_v1",
+  "score": 0,
+  "success": false,
+  "checks": {
+    "pickup": false,
+    "full_immersion": false,
+    "timer_operation": false,
+    "immersion_time": false,
+    "withdrawal": false,
+    "unassisted_return": false
+  },
+  "tool_return_settling": false,
+  "invalid_reasons": [],
+  "evidence_complete": true,
+  "observed_samples": 2401,
+  "observation_dt_s": 0.05,
+  "elapsed_s": 120.0,
+  "immersion_start_s": null,
+  "immersion_end_s": null,
+  "immersion_duration_s": null,
+  "timer_button_events_s": [],
+  "measurements": {
+    "return_position_error_m": 0.00019997358322143555,
+    "return_orientation_error_deg": 6.000906816667194e-08,
+    "fully_immersed": false,
+    "wafer_held_by_pad_geometry": false,
+    "pillar_support_geometry": true,
+    "pads_clear": true
+  },
+  "scope": "New submission rubric, sampled geometry and mechanical-button motion at 20 Hz. No force magnitudes, controller phase, OCR claim or chemical-quality measurement. Strict engineering audits remain separate.",
+  "provenance": {
+    "evaluated_trace_sha256": "81fe90cb11add93a2e981ae32ea4d12470aeb969c12401227ef98b81fa3574c9",
+    "metadata_sha256": "a61ffd4333017a26326dfccd1e70024478b977fe98aa6ef978593f7675d66203",
+    "scorer_sha256": "159fe1d2fb85bd49eaa04c20d39fe45c8abba482762cf89519bbd457c64a28e9",
+    "sampled_robot_geometry_recomputed": true,
+    "selected_rows": 2401,
+    "note": "Prospective submission rubric applied to saved measurements; original native reports are unchanged."
+  }
+}

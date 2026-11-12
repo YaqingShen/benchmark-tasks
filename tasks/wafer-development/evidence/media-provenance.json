@@ -1,0 +1,15 @@
+{
+  "demo.mp4": {
+    "sha256": "cbf4e5b443c7be7eb07d8d99de91104aba9582a3c30767c3ec81844e79b40d02",
+    "bytes": 9257855
+  },
+  "model_run.mp4": {
+    "sha256": "0ea5b18c752c0db19624b218e177899333cdab26a47643a71cfdfec8ae7e998f",
+    "bytes": 4143753
+  },
+  "setup.png": {
+    "sha256": "f4bead2310f30468b4bb1033a30f9a8a14022ba5965b31b2bfb7fabdb30cded8",
+    "bytes": 141873
+  },
+  "note": "Both videos are stream-copy remuxes with fast-start metadata; their decoded frames are unchanged. Demo: verified native-pose replay. Model: completed Dream-1 trial. Setup: native replay at time zero."
+}

@@ -1,0 +1,11 @@
+{
+  "model": "dreamlabs/dream-1-beta",
+  "status": "success",
+  "error": null,
+  "score": 0,
+  "control_actions": 2400,
+  "simulation_seconds": 120.0,
+  "wall_time_seconds": 2176.2070275280003,
+  "instruction": "Use the pliers to process the exposed wafer in the bath and return it released and stable on all three heater pins. Keep the entire wafer vertically immersed for one uninterrupted 28\u201332 second interval. Use the right hand to start the 30-second countdown only after the wafer is fully submerged, withdraw when the countdown finishes, and stop the timer after withdrawal. While over the bath, keep both robot hands and the plier handles at least 10 mm above the liquid; the jaw tips may enter it. Keep fixtures in place, do not drop the wafer or pliers, and finish within 120 seconds.",
+  "instruction_sha256": "d1f350455d9db32940f792d83147b70663bdf906e33bbeaa32dd388e702d19df"
+}

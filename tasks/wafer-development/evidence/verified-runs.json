@@ -1,0 +1,26 @@
+{
+  "revision": "gun-free-v3",
+  "source_files_verified": 63,
+  "native": {
+    "state": "PASSED",
+    "native_score": 1.0,
+    "practical_score": 1.0,
+    "audit_passed": true,
+    "audit_checks": 21,
+    "simulation_seconds": 119.65,
+    "immersion_seconds": 31.6,
+    "video_available": true
+  },
+  "dream": {
+    "state": "FINISHED",
+    "model": "dreamlabs/dream-1-beta",
+    "benchmark_score": 0,
+    "independent_score": 0,
+    "evaluation_completed": true,
+    "evaluation_error": null,
+    "simulation_seconds": 120.0,
+    "policy_steps": 2400,
+    "video_available": true
+  },
+  "render_note": "Measured-pose replay, with no physics advance. Review export: 960x360, 20 fps, eight path-tracing samples per pixel; no added captions."
+}
