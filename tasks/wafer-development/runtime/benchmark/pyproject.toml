@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wafer-develop-benchmark"
+version = "0.1.0"
+description = "Timed wafer-development task for Inspect Robots and Isaac Lab Arena"
+requires-python = ">=3.12"
+dependencies = ["inspect-robots==1.0.0", "inspect-robots-yam==0.38.0", "numpy>=1.26"]
+
+[project.optional-dependencies]
+dream = ["inspect-robots-dream==0.1.0"]
+
+[project.entry-points."inspect_robots.embodiments"]
+wafer_develop_arena = "wafer_develop_benchmark:wafer_develop_arena"
+
+[project.entry-points."inspect_robots.policies"]
+wafer_develop_hold = "wafer_develop_benchmark:wafer_develop_hold"
+
+[project.entry-points."inspect_robots.scorers"]
+wafer_develop_score = "wafer_develop_benchmark:wafer_develop_score"
+
+[tool.setuptools]
+py-modules = ["wafer_develop_benchmark", "wafer_develop_backend", "wafer_develop_score"]
