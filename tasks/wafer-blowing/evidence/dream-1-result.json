@@ -1,0 +1,29 @@
+{
+  "model": "dreamlabs/dream-1-beta",
+  "score": 0.0,
+  "success": false,
+  "action_budget": 2400,
+  "control_steps": 45,
+  "preroll_steps": 32,
+  "model_action_steps": 13,
+  "model_requests": 1,
+  "simulation_duration_seconds": 2.2085,
+  "video_duration_seconds": 2.3,
+  "video_frames": 46,
+  "video_fps": 20,
+  "wall_runtime_seconds": 74.62495733500054,
+  "termination": "invalid_task_state",
+  "reason": "Unexpected robot-environment contact during tool pickup.",
+  "exact_invalid_reasons": [
+    "Unexpected contact: unexpected_robot_environment_contact_normal_force_N"
+  ],
+  "runtime_error": null,
+  "particles_removed": 0,
+  "physics_samples": 4418,
+  "independent_audit_matches": true,
+  "evidence_complete": true,
+  "trace_sha256": "ce4b5a4e53863f6e84121cd8041d425c1db9f9c5da0e06952697af9c0253c42d",
+  "video_sha256": "9d6950dbca2fe894345bfe47c850b6117975015e363b6c5e19d148495d7a1aeb",
+  "started_at": "2026-11-12T03:23:01.884263+00:00",
+  "completed_at": "2026-11-12T03:24:16.509213+00:00"
+}
