@@ -1,0 +1,383 @@
+#usda 1.0
+(defaultPrim = "Asset"
+ metersPerUnit = 1
+ upAxis = "Z")
+
+def Xform "Asset" (prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]) {
+bool physxArticulation:enabledSelfCollisions = false
+int physxArticulation:solverPositionIterationCount = 64
+int physxArticulation:solverVelocityIterationCount = 4
+def Material "Body" {
+ token outputs:surface.connect = </Asset/Body/Surface.outputs:surface>
+ def Shader "Surface" {
+  uniform token info:id = "UsdPreviewSurface"
+  color3f inputs:diffuseColor = (0.88, 0.9, 0.91)
+  float inputs:opacity = 1.0
+  float inputs:roughness = 0.35
+  token outputs:surface
+ }
+}
+def Material "Screen" {
+ token outputs:surface.connect = </Asset/Screen/Surface.outputs:surface>
+ def Shader "Surface" {
+  uniform token info:id = "UsdPreviewSurface"
+  color3f inputs:diffuseColor = (0.012, 0.02, 0.025)
+  float inputs:opacity = 1.0
+  float inputs:roughness = 0.35
+  token outputs:surface
+ }
+}
+def Material "Button" {
+ token outputs:surface.connect = </Asset/Button/Surface.outputs:surface>
+ def Shader "Surface" {
+  uniform token info:id = "UsdPreviewSurface"
+  color3f inputs:diffuseColor = (0.08, 0.65, 0.18)
+  float inputs:opacity = 1.0
+  float inputs:roughness = 0.35
+  token outputs:surface
+ }
+}
+def Material "Digits" {
+ token outputs:surface.connect = </Asset/Digits/Surface.outputs:surface>
+ def Shader "Surface" {
+  uniform token info:id = "UsdPreviewSurface"
+  color3f inputs:diffuseColor = (0.3, 1, 0.5)
+  float inputs:opacity = 1.0
+  float inputs:roughness = 0.35
+  token outputs:surface
+ }
+}
+def Xform "timer_base" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]) {
+ bool physics:rigidBodyEnabled = true
+ bool physics:kinematicEnabled = false
+ float physics:mass = 0.25
+ point3f physics:centerOfMass = (0,0,0.015)
+ float3 physics:diagonalInertia = (0.0001208333,0.0002270833,0.0003104167)
+def Cube "housing" (prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0, 0, 0.015)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.1, 0.07, 0.03)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+ rel material:binding = </Asset/Body>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "screen_hinge_support" (prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.013, -0.0045, 0.032)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.06, 0.012, 0.008)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+ rel material:binding = </Asset/Body>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Xform "screen_panel" {
+ double3 xformOp:translate = (-0.013,0.008,0.055)
+ double xformOp:rotateX = 60.0
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX"]
+def Cube "screen_frame" (prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0, 0, 0)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.065, 0.05, 0.003)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.88, 0.9, 0.91)]
+ rel material:binding = </Asset/Body>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "display" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0, 0, 0.0017)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.059, 0.046, 0.0004)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.012, 0.02, 0.025)]
+ rel material:binding = </Asset/Screen>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_0" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.018, 0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_1" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.012, 0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_2" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.012, -0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_3" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.018, -0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_4" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.024, -0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_5" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.024, 0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_0_6" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.018, 0, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_0" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0, 0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_1" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.006, 0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_2" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.006, -0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_3" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0, -0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_4" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.006, -0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_5" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (-0.006, 0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_1_6" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0, 0, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_0" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.018, 0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_1" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.024, 0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_2" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.024, -0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_3" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.018, -0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_4" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.012, -0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_5" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.012, 0.0065, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.011, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "digit_2_6" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.018, 0, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.011, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+def Cube "decimal" (prepend apiSchemas = ["MaterialBindingAPI"]) {
+ double size = 1
+ double3 xformOp:translate = (0.01, -0.013, 0.0021)
+ double xformOp:rotateZ = 0.0
+ double3 xformOp:scale = (0.0016, 0.0016, 0.0002)
+ uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ", "xformOp:scale"]
+ color3f[] primvars:displayColor = [(0.3, 1, 0.5)]
+ rel material:binding = </Asset/Digits>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+}
+}
+def Xform "timer_button" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]) {
+ double3 xformOp:translate = (0.032,-0.020,0.034)
+ uniform token[] xformOpOrder = ["xformOp:translate"]
+ bool physics:rigidBodyEnabled = true
+ bool physics:kinematicEnabled = false
+ float physics:mass = 0.002
+ point3f physics:centerOfMass = (0,0,0)
+ float3 physics:diagonalInertia = (0.000000055,0.000000055,0.0000001)
+def Cylinder "button_cap" (prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]) {
+ double radius = 0.01
+ double height = 0.006
+ uniform token axis = "Z"
+ double3 xformOp:translate = (0, 0, 0)
+ uniform token[] xformOpOrder = ["xformOp:translate"]
+ color3f[] primvars:displayColor = [(0.08, 0.65, 0.18)]
+ rel material:binding = </Asset/Button>
+ float physxCollision:contactOffset = 0.0001
+ float physxCollision:restOffset = 0
+}
+}
+def PhysicsPrismaticJoint "timer_button_slide" (prepend apiSchemas = ["PhysicsDriveAPI:linear"]) {
+ rel physics:body0 = </Asset/timer_base>
+ rel physics:body1 = </Asset/timer_button>
+ token physics:axis = "Z"
+ point3f physics:localPos0 = (0.032,-0.020,0.034)
+ point3f physics:localPos1 = (0,0,0)
+ float physics:lowerLimit = -0.003
+ float physics:upperLimit = 0
+ float drive:linear:physics:stiffness = 400
+ float drive:linear:physics:damping = 1
+ float drive:linear:physics:maxForce = 4
+ float drive:linear:physics:targetPosition = 0
+ float drive:linear:physics:targetVelocity = 0
+ token drive:linear:physics:type = "force"
+}
+}

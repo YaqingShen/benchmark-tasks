@@ -1,0 +1,673 @@
+#usda 1.0
+(
+ defaultPrim = "Asset"
+ metersPerUnit = 1
+ upAxis = "Z"
+)
+def Xform "Asset" (prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]) {
+bool physxArticulation:enabledSelfCollisions = true
+int physxArticulation:solverPositionIterationCount = 64
+int physxArticulation:solverVelocityIterationCount = 4
+def Material "lower_front_lever_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_rear_lever_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_backing_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_curved_jaw_housing_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "pliers_pivot_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_rib_1_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_front_lever_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_rear_lever_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_backing_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_curved_jaw_housing_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_contact_pad_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.3
+float physics:dynamicFriction = 0.3
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_contact_pad_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physics:staticFriction = 0.3
+float physics:dynamicFriction = 0.3
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_robot_handle_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_side_rail_0_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_side_rail_1_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_endstop_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_axial_stop_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "lower_handle_opposing_stop_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_robot_handle_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_side_rail_0_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_side_rail_1_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_rib_0_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_endstop_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_axial_stop_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Material "upper_handle_opposing_stop_material" (prepend apiSchemas = ["PhysicsMaterialAPI", "PhysxMaterialAPI"]) {
+float physxMaterial:compliantContactStiffness = 50000
+float physxMaterial:compliantContactDamping = 20
+bool physxMaterial:compliantContactAccelerationSpring = false
+float physics:staticFriction = 0.6
+float physics:dynamicFriction = 0.6
+float physics:restitution = 0
+token physxMaterial:frictionCombineMode = "max"
+}
+def Xform "lower_half" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "PhysicsFilteredPairsAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatd xformOp:orient = (1, 0, 0, 0)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.057499999999999975
+point3f physics:centerOfMass = (-0.0717027951043, -0.00680970323246, 0.0163324595236)
+float3 physics:diagonalInertia = (9.68078692013e-06, 0.000107782475044, 0.000116137682351)
+quatf physics:principalAxes = (0.0114699717764, 0.996442484136, 0.0272008030326, -0.078936251947)
+rel physics:filteredPairs = [</Asset/lower_pad>, </Asset/upper_half>]
+def Cube "lower_front_lever" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.0185, -0.004, -0.00225)
+quatf xformOp:orient = (0.998169610169, 0, 0.0604766842318, 0)
+color3f[] primvars:displayColor = [(0.7, 0.73, 0.76)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_front_lever_material>
+double size = 1
+double3 xformOp:scale = (0.040272644124, 0.006, 0.005)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "lower_rear_lever" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.03425, -0.004, 0.0095)
+quatf xformOp:orient = (0.134872883009, -0, -0.990862909503, -0)
+color3f[] primvars:displayColor = [(0.7, 0.73, 0.76)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_rear_lever_material>
+double size = 1
+double3 xformOp:scale = (0.07408621526, 0.006, 0.005)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Mesh "lower_handle_backing" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI", "PhysicsMeshCollisionAPI"]) {
+double3 xformOp:translate = (-0.0917247380317, -0.008, 0.0197645967096)
+quatf xformOp:orient = (0.999800006667, 0, 0.0199986666933, 0)
+color3f[] primvars:displayColor = [(0.78, 0.3, 0.09)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_backing_material>
+uniform token subdivisionScheme = "none"
+uniform token physics:approximation = "convexHull"
+point3f[] points = [(0.048, 0.0156666666667, -0.001), (0.0468284271247, 0.021205669786, -0.001), (0.044, 0.0235, -0.001), (-0.036, 0.0235, -0.001), (-0.0388284271247, 0.021205669786, -0.001), (-0.04, 0.0156666666667, -0.001), (-0.04, -0.0156666666667, -0.001), (-0.0388284271247, -0.021205669786, -0.001), (-0.036, -0.0235, -0.001), (0.044, -0.0235, -0.001), (0.0468284271247, -0.021205669786, -0.001), (0.048, -0.0156666666667, -0.001), (0.048, 0.0156666666667, 0.001), (0.0468284271247, 0.021205669786, 0.001), (0.044, 0.0235, 0.001), (-0.036, 0.0235, 0.001), (-0.0388284271247, 0.021205669786, 0.001), (-0.04, 0.0156666666667, 0.001), (-0.04, -0.0156666666667, 0.001), (-0.0388284271247, -0.021205669786, 0.001), (-0.036, -0.0235, 0.001), (0.044, -0.0235, 0.001), (0.0468284271247, -0.021205669786, 0.001), (0.048, -0.0156666666667, 0.001)]
+int[] faceVertexCounts = [12, 12, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+int[] faceVertexIndices = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 13, 12, 1, 2, 14, 13, 2, 3, 15, 14, 3, 4, 16, 15, 4, 5, 17, 16, 5, 6, 18, 17, 6, 7, 19, 18, 7, 8, 20, 19, 8, 9, 21, 20, 9, 10, 22, 21, 10, 11, 23, 22, 11, 0, 12, 23]
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+def Mesh "lower_curved_jaw_housing" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI", "PhysicsMeshCollisionAPI"]) {
+double3 xformOp:translate = (0.047, 0, -0.0045)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.065, 0.075, 0.085)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_curved_jaw_housing_material>
+uniform token subdivisionScheme = "none"
+uniform token physics:approximation = "convexHull"
+point3f[] points = [(-0.0005, -0.019, -0.0015), (-0.0005, 0.019, -0.0015), (-0.009, 0.019, -0.0015), (-0.0123333333333, 0.0126666666667, -0.0015), (-0.0143333333333, 0.00633333333333, -0.0015), (-0.015, 0, -0.0015), (-0.0143333333333, -0.00633333333333, -0.0015), (-0.0123333333333, -0.0126666666667, -0.0015), (-0.009, -0.019, -0.0015), (-0.0005, -0.019, 0.0015), (-0.0005, 0.019, 0.0015), (-0.009, 0.019, 0.0015), (-0.0123333333333, 0.0126666666667, 0.0015), (-0.0143333333333, 0.00633333333333, 0.0015), (-0.015, 0, 0.0015), (-0.0143333333333, -0.00633333333333, 0.0015), (-0.0123333333333, -0.0126666666667, 0.0015), (-0.009, -0.019, 0.0015)]
+int[] faceVertexCounts = [9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+int[] faceVertexIndices = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 1, 10, 9, 1, 2, 11, 10, 2, 3, 12, 11, 3, 4, 13, 12, 4, 5, 14, 13, 5, 6, 15, 14, 6, 7, 16, 15, 7, 8, 17, 16, 8, 0, 9, 17]
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+def Cylinder "pliers_pivot" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatf xformOp:orient = (0.707106781188, 0.707106781185, 0, 0)
+color3f[] primvars:displayColor = [(0.7, 0.73, 0.76)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/pliers_pivot_material>
+double radius = 0.005
+double height = 0.022
+uniform token axis = "Z"
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+def Cube "lower_handle_rib_1" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.0904056232515, 0, 0.0277182082287)
+quatf xformOp:orient = (0.999800006667, 0, 0.0199986666933, 0)
+color3f[] primvars:displayColor = [(0.35, 0.35, 0.35)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_rib_1_material>
+double size = 1
+double3 xformOp:scale = (0.002, 0.024, 0.004)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+}
+def Xform "upper_half" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "PhysicsFilteredPairsAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatd xformOp:orient = (1, 0, 0, 0)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.05249999999999997
+point3f physics:centerOfMass = (-0.0811318468796, -0.00675719282558, -0.0177824376407)
+float3 physics:diagonalInertia = (9.30291312818e-06, 8.01213105875e-05, 8.86212946223e-05)
+quatf physics:principalAxes = (0.99673622828, 0.0102850492744, -0.0708877962224, 0.0372294150114)
+rel physics:filteredPairs = [</Asset/upper_pad>]
+def Cube "upper_front_lever" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.0185, 0.004, 0.00225)
+quatf xformOp:orient = (0.998169610169, 0, -0.0604766842318, 0)
+color3f[] primvars:displayColor = [(0.7, 0.73, 0.76)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_front_lever_material>
+double size = 1
+double3 xformOp:scale = (0.040272644124, 0.006, 0.005)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_rear_lever" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.03425, 0.004, -0.0095)
+quatf xformOp:orient = (0.134872883009, 0, 0.990862909503, 0)
+color3f[] primvars:displayColor = [(0.7, 0.73, 0.76)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_rear_lever_material>
+double size = 1
+double3 xformOp:scale = (0.07408621526, 0.006, 0.005)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Mesh "upper_handle_backing" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI", "PhysicsMeshCollisionAPI"]) {
+double3 xformOp:translate = (-0.0917247380317, -0.008, -0.0197645967096)
+quatf xformOp:orient = (0.999800006667, 0, -0.0199986666933, 0)
+color3f[] primvars:displayColor = [(0.78, 0.3, 0.09)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_backing_material>
+uniform token subdivisionScheme = "none"
+uniform token physics:approximation = "convexHull"
+point3f[] points = [(0.04, 0.0156666666667, -0.001), (0.0388284271247, 0.021205669786, -0.001), (0.036, 0.0235, -0.001), (-0.036, 0.0235, -0.001), (-0.0388284271247, 0.021205669786, -0.001), (-0.04, 0.0156666666667, -0.001), (-0.04, -0.0156666666667, -0.001), (-0.0388284271247, -0.021205669786, -0.001), (-0.036, -0.0235, -0.001), (0.036, -0.0235, -0.001), (0.0388284271247, -0.021205669786, -0.001), (0.04, -0.0156666666667, -0.001), (0.04, 0.0156666666667, 0.001), (0.0388284271247, 0.021205669786, 0.001), (0.036, 0.0235, 0.001), (-0.036, 0.0235, 0.001), (-0.0388284271247, 0.021205669786, 0.001), (-0.04, 0.0156666666667, 0.001), (-0.04, -0.0156666666667, 0.001), (-0.0388284271247, -0.021205669786, 0.001), (-0.036, -0.0235, 0.001), (0.036, -0.0235, 0.001), (0.0388284271247, -0.021205669786, 0.001), (0.04, -0.0156666666667, 0.001)]
+int[] faceVertexCounts = [12, 12, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+int[] faceVertexIndices = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 13, 12, 1, 2, 14, 13, 2, 3, 15, 14, 3, 4, 16, 15, 4, 5, 17, 16, 5, 6, 18, 17, 6, 7, 19, 18, 7, 8, 20, 19, 8, 9, 21, 20, 9, 10, 22, 21, 10, 11, 23, 22, 11, 0, 12, 23]
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+def Mesh "upper_curved_jaw_housing" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI", "PhysicsMeshCollisionAPI"]) {
+double3 xformOp:translate = (0.047, 0, 0.0045)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.065, 0.075, 0.085)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_curved_jaw_housing_material>
+uniform token subdivisionScheme = "none"
+uniform token physics:approximation = "convexHull"
+point3f[] points = [(-0.0005, -0.019, -0.0015), (-0.0005, 0.019, -0.0015), (-0.009, 0.019, -0.0015), (-0.0123333333333, 0.0126666666667, -0.0015), (-0.0143333333333, 0.00633333333333, -0.0015), (-0.015, 0, -0.0015), (-0.0143333333333, -0.00633333333333, -0.0015), (-0.0123333333333, -0.0126666666667, -0.0015), (-0.009, -0.019, -0.0015), (-0.0005, -0.019, 0.0015), (-0.0005, 0.019, 0.0015), (-0.009, 0.019, 0.0015), (-0.0123333333333, 0.0126666666667, 0.0015), (-0.0143333333333, 0.00633333333333, 0.0015), (-0.015, 0, 0.0015), (-0.0143333333333, -0.00633333333333, 0.0015), (-0.0123333333333, -0.0126666666667, 0.0015), (-0.009, -0.019, 0.0015)]
+int[] faceVertexCounts = [9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+int[] faceVertexIndices = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 1, 10, 9, 1, 2, 11, 10, 2, 3, 12, 11, 3, 4, 13, 12, 4, 5, 14, 13, 5, 6, 15, 14, 6, 7, 16, 15, 7, 8, 17, 16, 8, 0, 9, 17]
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+}
+}
+def Xform "lower_pad" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+double3 xformOp:translate = (0.051, 0, -0.0025)
+quatd xformOp:orient = (0.999800006667, 0, 0.0199986666933, 0)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.01
+point3f physics:centerOfMass = (0, 0, 0)
+float3 physics:diagonalInertia = (1.20833333333e-07, 8.81041666667e-07, 1.00020833333e-06)
+quatf physics:principalAxes = (0.707106781187, 0, 0, -0.707106781187)
+def Cube "lower_contact_pad" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.065, 0.075, 0.085)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_contact_pad_material>
+double size = 1
+double3 xformOp:scale = (0.012, 0.0325, 0.001)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+}
+def Xform "upper_pad" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]) {
+double3 xformOp:translate = (0.051, 0, 0.0025)
+quatd xformOp:orient = (0.999800006667, 0, -0.0199986666933, 0)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.01
+point3f physics:centerOfMass = (0, 0, 0)
+float3 physics:diagonalInertia = (1.20833333333e-07, 8.81041666667e-07, 1.00020833333e-06)
+quatf physics:principalAxes = (0.707106781187, 0, 0, -0.707106781187)
+def Cube "upper_contact_pad" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0, 0, 0)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.065, 0.075, 0.085)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_contact_pad_material>
+double size = 1
+double3 xformOp:scale = (0.012, 0.0325, 0.001)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+}
+def Xform "lower_grip_paddle" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "PhysicsFilteredPairsAPI"]) {
+double3 xformOp:translate = (-0.0480572789243, -0.006, 0.0237)
+quatd xformOp:orient = (1, 0, 0, 0)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.01
+point3f physics:centerOfMass = (-0.00259504608295, 0.000718894009217, -0.000305299539171)
+float3 physics:diagonalInertia = (7.44578772078e-07, 1.16176353895e-06, 1.89328513426e-06)
+quatf physics:principalAxes = (0.999325037008, 0.0078470308225, 0.00219423634646, -0.0358201038966)
+rel physics:filteredPairs = [</Asset/lower_half>]
+def Cube "lower_robot_handle" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.00225, 0, -0.0005)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_robot_handle_material>
+double size = 1
+double3 xformOp:scale = (0.0385, 0.03, 0.002)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "lower_handle_side_rail_0" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.005, 0, 0.001)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_side_rail_0_material>
+double size = 1
+double3 xformOp:scale = (0.016, 0.006, 0.001)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "lower_handle_side_rail_1" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.005, 0.008, 0.001)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_side_rail_1_material>
+double size = 1
+double3 xformOp:scale = (0.016, 0.006, 0.001)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "lower_handle_endstop" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.005, 0.0145, 0.0015)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_endstop_material>
+double size = 1
+double3 xformOp:scale = (0.012, 0.001, 0.004)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "lower_handle_axial_stop" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.004, 0.004, 0.002)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_axial_stop_material>
+double size = 1
+double3 xformOp:scale = (0.002, 0.003, 0.005)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "lower_handle_opposing_stop" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.02, 0.012, 0.0015)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/lower_handle_opposing_stop_material>
+double size = 1
+double3 xformOp:scale = (0.002, 0.003, 0.004)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+}
+def Xform "upper_grip_paddle" (prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "PhysicsFilteredPairsAPI"]) {
+double3 xformOp:translate = (-0.0630572789243, -0.006, -0.0237)
+quatd xformOp:orient = (1, 0, 0, 0)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+bool physics:rigidBodyEnabled = true
+bool physics:kinematicEnabled = false
+bool physxRigidBody:disableGravity = false
+bool physxRigidBody:enableCCD = true
+int physxRigidBody:solverPositionIterationCount = 64
+int physxRigidBody:solverVelocityIterationCount = 4
+float physics:mass = 0.01
+point3f physics:centerOfMass = (0.000684453565931, 0.000859928168291, 0.00028034889687)
+float3 physics:diagonalInertia = (7.42075639199e-07, 9.3362506246e-07, 1.66229283379e-06)
+quatf physics:principalAxes = (0.995264685777, -0.00873697441147, 0.00654322729856, 0.096587042087)
+rel physics:filteredPairs = [</Asset/upper_half>]
+def Cube "upper_robot_handle" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0, 0, 0.0005)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_robot_handle_material>
+double size = 1
+double3 xformOp:scale = (0.034, 0.03, 0.002)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_handle_side_rail_0" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.005, 0, -0.001)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_side_rail_0_material>
+double size = 1
+double3 xformOp:scale = (0.016, 0.006, 0.001)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_handle_side_rail_1" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.005, 0.008, -0.001)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_side_rail_1_material>
+double size = 1
+double3 xformOp:scale = (0.016, 0.006, 0.001)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_handle_rib_0" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.011, 0.004, -0.0009)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_rib_0_material>
+double size = 1
+double3 xformOp:scale = (0.002, 0.003, 0.0008)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_handle_endstop" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.005, 0.0145, -0.0015)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_endstop_material>
+double size = 1
+double3 xformOp:scale = (0.012, 0.001, 0.004)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_handle_axial_stop" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (0.016, 0.008, -0.002)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_axial_stop_material>
+double size = 1
+double3 xformOp:scale = (0.002, 0.003, 0.005)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+def Cube "upper_handle_opposing_stop" (prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]) {
+double3 xformOp:translate = (-0.0055, 0.012, -0.0015)
+quatf xformOp:orient = (1, 0, 0, 0)
+color3f[] primvars:displayColor = [(0.3, 0.32, 0.34)]
+float physxCollision:contactOffset = 0.0001
+float physxCollision:restOffset = 0
+rel material:binding:physics = </Asset/upper_handle_opposing_stop_material>
+double size = 1
+double3 xformOp:scale = (0.002, 0.003, 0.004)
+uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+}
+def PhysicsRevoluteJoint "pliers_hinge" (prepend apiSchemas = ["PhysicsDriveAPI:angular"]) {
+rel physics:body0 = </Asset/lower_half>
+rel physics:body1 = </Asset/upper_half>
+point3f physics:localPos0 = (0, 0, 0)
+point3f physics:localPos1 = (0, 0, 0)
+quatf physics:localRot0 = (0.5, -0.5, -0.5, -0.5)
+quatf physics:localRot1 = (0.5, -0.5, -0.5, -0.5)
+uniform token physics:axis = "Z"
+float physics:lowerLimit = -2.29183118052
+float physics:upperLimit = 5.15662015618
+bool physics:collisionEnabled = true
+uniform token drive:angular:physics:type = "force"
+float drive:angular:physics:stiffness = 0.00785398163397
+float drive:angular:physics:damping = 0.00349065850399
+float drive:angular:physics:maxForce = 0.3
+float drive:angular:physics:targetPosition = -11.4591559026
+float drive:angular:physics:targetVelocity = 0
+}
+def PhysicsPrismaticJoint "lower_pad_compression" (prepend apiSchemas = ["PhysicsDriveAPI:linear"]) {
+rel physics:body0 = </Asset/lower_half>
+rel physics:body1 = </Asset/lower_pad>
+point3f physics:localPos0 = (0.051, 0, -0.0025)
+point3f physics:localPos1 = (0, 0, 0)
+quatf physics:localRot0 = (0.0199986666933, -0, -0.999800006667, -0)
+quatf physics:localRot1 = (0, 0, 1, 0)
+uniform token physics:axis = "Z"
+float physics:lowerLimit = 0
+float physics:upperLimit = 0.0008
+bool physics:collisionEnabled = true
+uniform token drive:linear:physics:type = "force"
+float drive:linear:physics:stiffness = 2000
+float drive:linear:physics:damping = 20
+float drive:linear:physics:maxForce = 8
+float drive:linear:physics:targetPosition = 0
+float drive:linear:physics:targetVelocity = 0
+}
+def PhysicsPrismaticJoint "upper_pad_compression" (prepend apiSchemas = ["PhysicsDriveAPI:linear"]) {
+rel physics:body0 = </Asset/upper_half>
+rel physics:body1 = </Asset/upper_pad>
+point3f physics:localPos0 = (0.051, 0, 0.0025)
+point3f physics:localPos1 = (0, 0, 0)
+quatf physics:localRot0 = (0.999800006667, 0, -0.0199986666933, 0)
+quatf physics:localRot1 = (1, 0, 0, 0)
+uniform token physics:axis = "Z"
+float physics:lowerLimit = 0
+float physics:upperLimit = 0.0008
+bool physics:collisionEnabled = true
+uniform token drive:linear:physics:type = "force"
+float drive:linear:physics:stiffness = 2000
+float drive:linear:physics:damping = 20
+float drive:linear:physics:maxForce = 8
+float drive:linear:physics:targetPosition = 0
+float drive:linear:physics:targetVelocity = 0
+}
+def PhysicsRevoluteJoint "lower_grip_paddle_pitch" (prepend apiSchemas = ["PhysicsDriveAPI:angular"]) {
+rel physics:body0 = </Asset/lower_half>
+rel physics:body1 = </Asset/lower_grip_paddle>
+point3f physics:localPos0 = (-0.0480572789243, -0.006, 0.0237)
+point3f physics:localPos1 = (0, 0, 0)
+quatf physics:localRot0 = (0.5, -0.5, -0.5, -0.5)
+quatf physics:localRot1 = (0.5, -0.5, -0.5, -0.5)
+uniform token physics:axis = "Z"
+float physics:lowerLimit = -4.58366236105
+float physics:upperLimit = 4.58366236105
+bool physics:collisionEnabled = true
+uniform token drive:angular:physics:type = "force"
+float drive:angular:physics:stiffness = 0.013962634016
+float drive:angular:physics:damping = 1.74532925199e-05
+float drive:angular:physics:maxForce = 0.1
+float drive:angular:physics:targetPosition = 1.71887338539
+float drive:angular:physics:targetVelocity = 0
+}
+def PhysicsRevoluteJoint "upper_grip_paddle_pitch" (prepend apiSchemas = ["PhysicsDriveAPI:angular"]) {
+rel physics:body0 = </Asset/upper_half>
+rel physics:body1 = </Asset/upper_grip_paddle>
+point3f physics:localPos0 = (-0.0630572789243, -0.006, -0.0237)
+point3f physics:localPos1 = (0, 0, 0)
+quatf physics:localRot0 = (0.5, -0.5, -0.5, -0.5)
+quatf physics:localRot1 = (0.5, -0.5, -0.5, -0.5)
+uniform token physics:axis = "Z"
+float physics:lowerLimit = -4.58366236105
+float physics:upperLimit = 4.58366236105
+bool physics:collisionEnabled = true
+uniform token drive:angular:physics:type = "force"
+float drive:angular:physics:stiffness = 0.013962634016
+float drive:angular:physics:damping = 1.74532925199e-05
+float drive:angular:physics:maxForce = 0.1
+float drive:angular:physics:targetPosition = 1.71887338539
+float drive:angular:physics:targetVelocity = 0
+}
+
+}
