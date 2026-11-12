@@ -1,0 +1,36 @@
+{
+  "revision": "036",
+  "source_archive_sha256": "66c906d90897aefe31fa6f1290fa4e36721c829eb12e257f8f759f22a92c62ec",
+  "source_file_count": 43,
+  "trials": [
+    {
+      "trial_id": "nominal-1",
+      "result": "FULL_WORKFLOW_SUCCEEDED_IN_THIS_SIMULATION",
+      "handling_score": 1,
+      "completion_time_s": 116.45,
+      "independent_passed": true,
+      "matches_report": true,
+      "physics_samples": 234901,
+      "source_files_sha256": {
+        "metadata.json": "bdf186b4c6c0fa062c87679aa878185fe92064a4cd37a82519a40e4980ed46bf",
+        "trial_report.json": "13e0decc6136345d70f4cac5ae6476679f55db02acc90ede9d47b6999d530f29"
+      },
+      "trace_sha256": "1b9a5791eeba621d4e281b1a52cf30a7080bf144556d25275f17bdf2c505e447"
+    },
+    {
+      "trial_id": "nominal-2",
+      "result": "FULL_WORKFLOW_SUCCEEDED_IN_THIS_SIMULATION",
+      "handling_score": 1.0,
+      "completion_time_s": 116.35000000000001,
+      "independent_passed": true,
+      "matches_report": true,
+      "physics_samples": 234601,
+      "source_files_sha256": {
+        "metadata.json": "0d8660f61a0cf32a9ca7d1823647f7bf2170531fe1556d21aba8de1035b45c9a",
+        "trial_report.json": "41ccf7cc7a5cf40d393fb3ba765448999b1ecd571b75160736af70723f2d0393"
+      },
+      "trace_sha256": "a6e6a72cdd28543de05ad335d49bd4f78d2fc4ed39db83a72749360808662ce5"
+    }
+  ],
+  "scope": "Two nominal scripted native runs; no Dream-1 result or reliability estimate."
+}

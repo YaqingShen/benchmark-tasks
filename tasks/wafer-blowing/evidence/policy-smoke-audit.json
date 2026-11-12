@@ -1,0 +1,112 @@
+{
+  "result": "INDEPENDENT_BENCHMARK_EVIDENCE_MATCH",
+  "matches_report": true,
+  "passed": false,
+  "task_score": {
+    "score": 0.0,
+    "success": false,
+    "stage": "tool_pickup",
+    "stage_progress": 0.0,
+    "maximum_simulation_seconds": 120.0,
+    "completion_time_s": null,
+    "invalid_reasons": [],
+    "diagnostics": {
+      "completed": [],
+      "diagnostic_progress": 0.0,
+      "mixed_support_samples": 0,
+      "coverage_fraction": 0.0,
+      "covered_row_bands": [],
+      "eligible_points": 1710,
+      "minimum_exposure_s": 0.0,
+      "initial_support_observed": {
+        "clamp": true,
+        "gun": true
+      },
+      "mechanism_diagnostics": [],
+      "geometry_integrity_scope": "Authored geometry and topology only; no material fracture model.",
+      "excluded_surface": "1 mm outer rim and 15 mm clamp-shadow strip.",
+      "profile": {
+        "version": "measured_task_progress_v7",
+        "stage_weight": 0.2,
+        "hold_s": 1.0,
+        "milestone_evaluation_hz": 20.0,
+        "maximum_milestone_latency_s": 0.05,
+        "support_dropout_tolerance_s": 0.1,
+        "support_force_window_s": 1.0,
+        "intermediate_hold_requires_world_static_pose": false,
+        "release_requires_prior_measured_support": true,
+        "mixed_support_window_s": 0.05,
+        "mixed_support_basis": "Signed normal force on the wafer; prior fixture contact, continuous support geometry, positive mean pad load and50ms mean signed load carrying at least80percent of weight. No completion credit.",
+        "tool_lift_m": 0.03,
+        "wafer_lift_m": 0.01,
+        "pillar_clearance_m": 0.005,
+        "gun_lift_m": 0.02,
+        "return_position_m": 0.001,
+        "gun_return_position_m": 0.002,
+        "return_angle_deg": 2.0,
+        "pose_envelope_m": 0.0005,
+        "pose_envelope_deg": 0.5,
+        "fixture_position_m": 0.0001,
+        "fixture_angle_deg": 0.05,
+        "maximum_unwanted_force_N": 0.01,
+        "minimum_grip_force_N": 0.005,
+        "minimum_support_fraction": 0.8,
+        "tool_retreat_m": 0.02,
+        "hand_retreat_m": 0.04,
+        "trigger_on_m": 0.0022,
+        "trigger_off_m": 0.001,
+        "scope": "Geometry, contact support and observed air coverage; no evaporation, contamination or material-damage model."
+      }
+    },
+    "evidence_complete": true,
+    "robot_geometry": {
+      "required_evidence": "all_physics_steps_cooked_robot_geometry_v1",
+      "first_issue": null
+    },
+    "handling_progress_score": 0.0,
+    "particle_check": {
+      "passed": false,
+      "checks": {
+        "initially_on_wafer": true,
+        "no_loss_before_air": true,
+        "all_particles_present_and_unchanged": true,
+        "all_particles_received_jet": false,
+        "all_particles_clear": false,
+        "all_clear_before_wafer_return": false,
+        "force_equations_replayed": true,
+        "wafer_reaction_replayed": true,
+        "bond_states_replayed": true,
+        "no_other_external_wrench": true,
+        "no_particle_pose_writes": true
+      },
+      "remaining": 12,
+      "clear_hold_s": 0.0,
+      "pre_return_clear_hold_s": null,
+      "first_air_s": null,
+      "samples": 2001,
+      "maximum_force_replay_error_N": 2.4530413071542558e-14,
+      "maximum_wafer_wrench_error": 5.683765353105253e-14,
+      "jet_impulse_N_s": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scope": "Millimetre surrogate debris with a breakable cohesive surface bond and quadratic jet drag. Parameters are task assumptions, not calibrated dust or CFD. Adhesion has an equal and opposite wafer wrench; no pose locks or particle deletion."
+    }
+  },
+  "physics_samples": 2001,
+  "trace_sha256": "25fa8ddb1c808d10ca3fd0c9a2e7839ff3cdb5e75ecff961408ba061e94e02d2",
+  "evidence": {
+    "complete": true,
+    "robot_geometry_version": "measured_robot_convex_geometry_v1"
+  }
+}

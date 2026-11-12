@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "selected_count": 2347,
+  "physics_samples": 234601,
+  "sample_interval_s": 0.05,
+  "original_trace_sha256": "a6e6a72cdd28543de05ad335d49bd4f78d2fc4ed39db83a72749360808662ce5",
+  "selected_trace_sha256": "8f0cf1692e1a810bed4a74e9654b7798b44b5b446e13deb6f22fba1d970c96c0",
+  "source_files": {
+    "metadata.json": "0d8660f61a0cf32a9ca7d1823647f7bf2170531fe1556d21aba8de1035b45c9a",
+    "trial_report.json": "41ccf7cc7a5cf40d393fb3ba765448999b1ecd571b75160736af70723f2d0393",
+    "independent_check.json": "b11f6727f19620b94cbb3b93f818fa1ee84561d2d265c1e0f4169774e84cef8b"
+  },
+  "exporter_sha256": "d2fe2eee2fbd5a35cb0b0cf4b909c3cf1a3112f841db403c1dd71f3ef78454da",
+  "source_start_s": 0.0,
+  "source_end_s": 117.3,
+  "scope": "Exact every-20Hz measurements from the independently accepted full physics trace; no interpolation or new simulation."
+}

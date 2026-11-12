@@ -1,0 +1,157 @@
+{
+  "scope": "Particle conditions recomputed from every physics sample; handling and geometry rely on the existing complete native audit bound to this same trace.",
+  "candidate_environment_revision": "8262a52459a53ce32b389fa9d482b437919c1ce580f656f7d9d8d5b2b577650f",
+  "task_score": {
+    "score": 1.0,
+    "success": true,
+    "stage": "complete",
+    "stage_progress": 0.0,
+    "maximum_simulation_seconds": 120.0,
+    "completion_time_s": 116.35000000000001,
+    "invalid_reasons": [],
+    "diagnostics": {
+      "completed": [
+        {
+          "stage": "tool_pickup",
+          "time_s": 10.8
+        },
+        {
+          "stage": "wafer_lift",
+          "time_s": 37.95
+        },
+        {
+          "stage": "air_coverage",
+          "time_s": 80.369
+        },
+        {
+          "stage": "wafer_return",
+          "time_s": 89.95
+        },
+        {
+          "stage": "gun_return",
+          "time_s": 116.35000000000001
+        }
+      ],
+      "diagnostic_progress": 1.0,
+      "mixed_support_samples": 4074,
+      "coverage_fraction": 1.0,
+      "covered_row_bands": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "eligible_points": 1710,
+      "minimum_exposure_s": 0.050499999999999545,
+      "initial_support_observed": {
+        "clamp": true,
+        "gun": true
+      },
+      "mechanism_diagnostics": [
+        "upper_grip_paddle_pitch: pitch -0.001258 rad, speed 0.003348 rad/s, torque 0.02500311 Nm exceeds a passive-paddle guard."
+      ],
+      "geometry_integrity_scope": "Authored geometry and topology only; no material fracture model.",
+      "excluded_surface": "1 mm outer rim and 15 mm clamp-shadow strip.",
+      "profile": {
+        "version": "measured_task_progress_v7",
+        "stage_weight": 0.2,
+        "hold_s": 1.0,
+        "milestone_evaluation_hz": 20.0,
+        "maximum_milestone_latency_s": 0.05,
+        "support_dropout_tolerance_s": 0.1,
+        "support_force_window_s": 1.0,
+        "intermediate_hold_requires_world_static_pose": false,
+        "release_requires_prior_measured_support": true,
+        "mixed_support_window_s": 0.05,
+        "mixed_support_basis": "Signed normal force on the wafer; prior fixture contact, continuous support geometry, positive mean pad load and50ms mean signed load carrying at least80percent of weight. No completion credit.",
+        "tool_lift_m": 0.03,
+        "wafer_lift_m": 0.01,
+        "pillar_clearance_m": 0.005,
+        "gun_lift_m": 0.02,
+        "return_position_m": 0.001,
+        "gun_return_position_m": 0.002,
+        "return_angle_deg": 2.0,
+        "pose_envelope_m": 0.0005,
+        "pose_envelope_deg": 0.5,
+        "fixture_position_m": 0.0001,
+        "fixture_angle_deg": 0.05,
+        "maximum_unwanted_force_N": 0.01,
+        "minimum_grip_force_N": 0.005,
+        "minimum_support_fraction": 0.8,
+        "tool_retreat_m": 0.02,
+        "hand_retreat_m": 0.04,
+        "trigger_on_m": 0.0022,
+        "trigger_off_m": 0.001,
+        "scope": "Geometry, contact support and observed air coverage; no evaporation, contamination or material-damage model."
+      }
+    },
+    "evidence_complete": true,
+    "handling_progress_score": 1.0,
+    "particle_check": {
+      "passed": true,
+      "checks": {
+        "initially_on_wafer": true,
+        "no_loss_before_air": true,
+        "all_particles_present_and_unchanged": true,
+        "all_particles_received_jet": true,
+        "all_particles_clear": true,
+        "all_clear_before_wafer_return": true,
+        "force_equations_replayed": true,
+        "wafer_reaction_replayed": true,
+        "bond_states_replayed": true,
+        "no_other_external_wrench": true,
+        "no_particle_pose_writes": true
+      },
+      "remaining": 0,
+      "clear_hold_s": 38.71950000000285,
+      "pre_return_clear_hold_s": 5.781499999999515,
+      "first_air_s": 61.901,
+      "samples": 234601,
+      "maximum_force_replay_error_N": 3.635910786315387e-12,
+      "maximum_wafer_wrench_error": 1.818919892634073e-12,
+      "jet_impulse_N_s": [
+        1.8074774184174325e-05,
+        2.5675963110243976e-05,
+        2.0475172533654142e-05,
+        2.2989401567515066e-05,
+        1.8514516908231217e-05,
+        2.180922792339965e-05,
+        2.1469841333252754e-05,
+        1.2502672194789073e-05,
+        2.2987048330986767e-05,
+        2.46254862601242e-05,
+        1.7589338168725838e-05,
+        2.7476851470315336e-05
+      ],
+      "scope": "Millimetre surrogate debris with a breakable cohesive surface bond and quadratic jet drag. Parameters are task assumptions, not calibrated dust or CFD. Adhesion has an equal and opposite wafer wrench; no pose locks or particle deletion."
+    }
+  },
+  "physics_samples": 234601,
+  "elapsed_seconds": 63.27620841190219,
+  "source_hashes": {
+    "metadata.json": "0d8660f61a0cf32a9ca7d1823647f7bf2170531fe1556d21aba8de1035b45c9a",
+    "trial_report.json": "41ccf7cc7a5cf40d393fb3ba765448999b1ecd571b75160736af70723f2d0393",
+    "independent_check.json": "b11f6727f19620b94cbb3b93f818fa1ee84561d2d265c1e0f4169774e84cef8b"
+  },
+  "trace_sha256": "a6e6a72cdd28543de05ad335d49bd4f78d2fc4ed39db83a72749360808662ce5",
+  "audit_sources": {
+    "wafer_dust.py": "1a4494883bc9e35338a32deb1e5de21fd38ca17cd36084321f992086f8ff925d",
+    "benchmark/wafer_policy_score.py": "823c7ddd7c20ceb945ccec376d072ef9ffd93626319cf78b0316aa059d2891c2",
+    "benchmark/wafer_policy_provenance.py": "45c6251ac09b1458e9a3d09779df81b47fee936edd1583d34986db9675c81252"
+  },
+  "passed": true
+}

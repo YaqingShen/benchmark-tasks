@@ -1,0 +1,16 @@
+{
+  "source_video_sha256": "f668f1b4f135afae552577a64ac0d5f22ddbca7b5d70de5d677e5d1331d93df3",
+  "review_video_sha256": "6f4fad2da9c03d641a41af28f890080f51307bb608bb91f92ed9e7c7027506d8",
+  "review_video_bytes": 4182150,
+  "source_bundle_sha256": "66c906d90897aefe31fa6f1290fa4e36721c829eb12e257f8f759f22a92c62ec",
+  "source_trial_report_sha256": "41ccf7cc7a5cf40d393fb3ba765448999b1ecd571b75160736af70723f2d0393",
+  "source_independent_audit_sha256": "b11f6727f19620b94cbb3b93f818fa1ee84561d2d265c1e0f4169774e84cef8b",
+  "source_trace_selection_sha256": "8f0cf1692e1a810bed4a74e9654b7798b44b5b446e13deb6f22fba1d970c96c0",
+  "full_trace_sha256": "a6e6a72cdd28543de05ad335d49bd4f78d2fc4ed39db83a72749360808662ce5",
+  "source_asset_hashes_verified_against_frozen_bundle": true,
+  "frame_count": 2347,
+  "fps": 20,
+  "reencoding": "H.264 libx264 CRF25, maxrate2600k, bufsize5200k, yuv420p, faststart; no cuts, resizing or frame-rate changes.",
+  "selected_trace_to_full_trace_verified": true,
+  "selection_manifest_sha256": "dd70b00c91dc076737223f891ec0c46d4ffd30005500ecaa7cd6df0e5a810f10"
+}
