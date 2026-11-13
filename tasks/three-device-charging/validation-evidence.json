@@ -1,0 +1,352 @@
+{
+  "source_revision": "charging011",
+  "source_manifest_sha256": "8ca71b2b27548128092940d15fc85c1d3f6ac74d1fe57bb8559d7ffeecb5b6eb",
+  "scripted_demonstrations": {
+    "rtx5090": {
+      "result": {
+        "steps": 1746,
+        "score": 1.0,
+        "success": true,
+        "hold_s": 11.400000000000027,
+        "charging": {
+          "iphone17": true,
+          "apple_watch": true,
+          "airpods_pro": true
+        },
+        "cue_visible_in_rgb": {
+          "iphone17": true,
+          "apple_watch": true,
+          "airpods_pro": true
+        },
+        "maximum_stand_translation_m": 0.0027545213375500797,
+        "maximum_stand_rotation_deg": 2.718904281068274
+      },
+      "metadata": {
+        "engine": "Isaac native dynamics",
+        "seed": 17,
+        "probe": null,
+        "scripted": true,
+        "dream1_run": false,
+        "physical_pose_writes_after_reset": 0,
+        "grasp_attachments": 0,
+        "magnetic_model": "uncalibrated finite paired force/torque approximation",
+        "initial_battery_percent": 30,
+        "cameras": [
+          "top_cam",
+          "left_cam",
+          "right_cam"
+        ],
+        "overlays": false,
+        "control_hz": 20,
+        "physics_hz": 1000,
+        "source_manifest_sha256": "8ca71b2b27548128092940d15fc85c1d3f6ac74d1fe57bb8559d7ffeecb5b6eb",
+        "source_revision": "charging011",
+        "versions": {
+          "isaacsim": "6.1.0.0",
+          "isaaclab": "17.0.2",
+          "inspect-robots": "1.0.0",
+          "inspect-robots-yam": "0.38.0"
+        },
+        "controller": "privileged pose alignment, native joint targets, RGB cue verification"
+      },
+      "role": "supplementary development demonstration at world seed 17"
+    },
+    "brev-l40s": {
+      "result": {
+        "steps": 1759,
+        "score": 1.0,
+        "success": true,
+        "hold_s": 11.55000000000003,
+        "charging": {
+          "iphone17": true,
+          "apple_watch": true,
+          "airpods_pro": true
+        },
+        "cue_visible_in_rgb": {
+          "iphone17": true,
+          "apple_watch": true,
+          "airpods_pro": true
+        },
+        "maximum_stand_translation_m": 0.0026259023153721965,
+        "maximum_stand_rotation_deg": 2.7270457121127882
+      },
+      "metadata": {
+        "engine": "Isaac native dynamics",
+        "seed": 17,
+        "probe": null,
+        "scripted": true,
+        "dream1_run": false,
+        "physical_pose_writes_after_reset": 0,
+        "grasp_attachments": 0,
+        "magnetic_model": "uncalibrated finite paired force/torque approximation",
+        "initial_battery_percent": 30,
+        "cameras": [
+          "top_cam",
+          "left_cam",
+          "right_cam"
+        ],
+        "overlays": false,
+        "control_hz": 20,
+        "physics_hz": 1000,
+        "source_manifest_sha256": "8ca71b2b27548128092940d15fc85c1d3f6ac74d1fe57bb8559d7ffeecb5b6eb",
+        "source_revision": "charging011",
+        "versions": {
+          "isaacsim": "6.1.0.0",
+          "isaaclab": "17.0.2",
+          "inspect-robots": "1.0.0",
+          "inspect-robots-yam": "0.38.0"
+        },
+        "controller": "privileged pose alignment, native joint targets, RGB cue verification"
+      },
+      "role": "supplementary development demonstration at world seed 17"
+    },
+    "brev-l40s-submitted": {
+      "role": "submitted full-score demonstration matching the Dream-1 initial layout",
+      "result": {
+        "steps": 1746,
+        "score": 1.0,
+        "success": true,
+        "hold_s": 11.850000000000033,
+        "charging": {
+          "iphone17": true,
+          "apple_watch": true,
+          "airpods_pro": true
+        },
+        "cue_visible_in_rgb": {
+          "iphone17": true,
+          "apple_watch": true,
+          "airpods_pro": true
+        },
+        "maximum_stand_translation_m": 0.0027901376112196715,
+        "maximum_stand_rotation_deg": 2.641894128102573
+      },
+      "metadata": {
+        "engine": "Isaac native dynamics",
+        "seed": 190145710,
+        "probe": null,
+        "scripted": true,
+        "dream1_run": false,
+        "physical_pose_writes_after_reset": 0,
+        "grasp_attachments": 0,
+        "magnetic_model": "uncalibrated finite paired force/torque approximation",
+        "initial_battery_percent": 30,
+        "cameras": [
+          "top_cam",
+          "left_cam",
+          "right_cam"
+        ],
+        "overlays": false,
+        "control_hz": 20,
+        "physics_hz": 1000,
+        "source_manifest_sha256": "8ca71b2b27548128092940d15fc85c1d3f6ac74d1fe57bb8559d7ffeecb5b6eb",
+        "source_revision": "charging011",
+        "versions": {
+          "isaacsim": "6.1.0.0",
+          "isaaclab": "17.0.2",
+          "inspect-robots": "1.0.0",
+          "inspect-robots-yam": "0.38.0"
+        },
+        "controller": "privileged pose alignment, native joint targets, RGB cue verification"
+      },
+      "entry_point_sha256": "bfa3dd75980bca8292d49f132c26b2454a61b08f9c2db5b65e945820ec9a8679"
+    }
+  },
+  "component_controls": {
+    "checks": {
+      "power-off": {
+        "passed": true,
+        "result": {
+          "steps": 100,
+          "score": 0.0,
+          "success": false,
+          "hold_s": 0.0,
+          "charging": {
+            "iphone17": false,
+            "apple_watch": false,
+            "airpods_pro": false
+          },
+          "cue_visible_in_rgb": {
+            "iphone17": false,
+            "apple_watch": false,
+            "airpods_pro": false
+          },
+          "maximum_stand_translation_m": 0.0010007181572034768,
+          "maximum_stand_rotation_deg": 0.090275472366406
+        }
+      },
+      "reversed": {
+        "passed": true,
+        "result": {
+          "steps": 100,
+          "score": 0.0,
+          "success": false,
+          "hold_s": 0.0,
+          "charging": {
+            "iphone17": false,
+            "apple_watch": false,
+            "airpods_pro": false
+          },
+          "cue_visible_in_rgb": {
+            "iphone17": false,
+            "apple_watch": false,
+            "airpods_pro": false
+          },
+          "maximum_stand_translation_m": 0.001002064363817566,
+          "maximum_stand_rotation_deg": 0.06625795429708486
+        }
+      },
+      "magnets-off": {
+        "passed": true,
+        "result": {
+          "steps": 100,
+          "score": 0.0,
+          "success": false,
+          "hold_s": 0.0,
+          "charging": {
+            "iphone17": false,
+            "apple_watch": false,
+            "airpods_pro": false
+          },
+          "cue_visible_in_rgb": {
+            "iphone17": false,
+            "apple_watch": false,
+            "airpods_pro": false
+          },
+          "maximum_stand_translation_m": 0.0010000989130696642,
+          "maximum_stand_rotation_deg": 0.014083850155780162
+        }
+      },
+      "sdk-hold": {
+        "passed": true,
+        "result": {
+          "dream1_run": false,
+          "exit_code": 0,
+          "statuses": [
+            "success"
+          ]
+        }
+      }
+    },
+    "complete": true
+  },
+  "dream1": {
+    "status": "completed",
+    "result": {
+      "steps": 6040,
+      "score": 0.0,
+      "success": false,
+      "hold_s": 0.0,
+      "charging": {
+        "iphone17": false,
+        "apple_watch": false,
+        "airpods_pro": false
+      },
+      "cue_visible_in_rgb": {
+        "iphone17": false,
+        "apple_watch": false,
+        "airpods_pro": false
+      },
+      "maximum_stand_translation_m": 0.0,
+      "maximum_stand_rotation_deg": 5.399738656763834e-06
+    },
+    "metadata": {
+      "engine": "Isaac native dynamics",
+      "seed": 190145710,
+      "probe": null,
+      "scripted": false,
+      "dream1_run": true,
+      "physical_pose_writes_after_reset": 0,
+      "grasp_attachments": 0,
+      "magnetic_model": "uncalibrated finite paired force/torque approximation",
+      "initial_battery_percent": 30,
+      "cameras": [
+        "top_cam",
+        "left_cam",
+        "right_cam"
+      ],
+      "overlays": false,
+      "control_hz": 20,
+      "physics_hz": 1000,
+      "source_manifest_sha256": "8ca71b2b27548128092940d15fc85c1d3f6ac74d1fe57bb8559d7ffeecb5b6eb",
+      "source_revision": "charging011",
+      "versions": {
+        "isaacsim": "6.1.0.0",
+        "isaaclab": "17.0.2",
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0"
+      },
+      "controller": "dream",
+      "robot_observation_only": true
+    },
+    "process": {
+      "dream1_run": true,
+      "exit_code": 0,
+      "dream_sdk": "0.1.0",
+      "statuses": [
+        "success"
+      ]
+    },
+    "official_inspect": {
+      "status": "success",
+      "error": null,
+      "model": "dreamlabs/dream-1-beta",
+      "dry_run": false,
+      "evaluation_seed": 17,
+      "total_steps": 6000,
+      "duration_s": 3011.3859307469975,
+      "started_at": "2026-11-13T19:25:29.718254+00:00",
+      "completed_at": "2026-11-13T20:15:41.104170+00:00",
+      "results": {
+        "abstentions": {},
+        "errored_trials": 0,
+        "metrics": {
+          "charging_score": 0.0
+        },
+        "total_scenes": 1,
+        "total_trials": 1
+      },
+      "termination_reasons": [
+        "truncated"
+      ],
+      "successful_action_windows": 125,
+      "windows_requiring_retry": 124,
+      "scene_resets_during_policy": 0,
+      "scripted_fallback": false
+    }
+  },
+  "submitted_world_seed": 190145710,
+  "inspect_evaluation_seed": 17,
+  "submitted_media": {
+    "dream1_video": {
+      "sha256": "b82f60765af705c488a3952ec9e4680406ded1f1af611bbdfc8a7087c164c3e6",
+      "bytes": 19363954,
+      "codec": "H.264 High",
+      "pixel_format": "yuv420p",
+      "width": 1280,
+      "height": 1080,
+      "fps": 10,
+      "duration_s": 302.0,
+      "full_decode_passed": true
+    },
+    "demo_video": {
+      "sha256": "6409298182be8dbca3c07bc03376088bf7fc07e7006421e841c1ac8c04f64d3f",
+      "bytes": 5742672,
+      "codec": "H.264 High",
+      "pixel_format": "yuv420p",
+      "width": 1280,
+      "height": 1080,
+      "fps": 10,
+      "duration_s": 87.3,
+      "full_decode_passed": true
+    },
+    "setup_screenshot": {
+      "sha256": "8721532b83882b19c9f0ce7b792b180a6c8b93ca18020e40137a5ab1881d0d17",
+      "bytes": 523396
+    }
+  },
+  "matched_initial_layout_check": {
+    "settling_step": 40,
+    "all_device_and_stand_poses_identical": true,
+    "setup_top_image_pixel_identical": true
+  }
+}

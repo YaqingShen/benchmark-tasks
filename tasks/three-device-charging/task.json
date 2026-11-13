@@ -1,0 +1,21 @@
+{
+  "title": "Charge a phone, watch and earbuds case on a three-in-one stand",
+  "category": "Societal relatability",
+  "instruction": "Place the phone, watch and closed earbuds case on their respective charging positions. All three must remain charging after release, with their charging indicators visible to a camera. Keep the charging stand within 5 mm and 5 degrees of its starting pose.",
+  "context": "Phones, watches and wireless earbuds need regular charging to stay ready for everyday use. A device can look correctly placed on a wireless charger without charging. This task tests alignment with three charging surfaces, handling a flexible watch band, and making the charging indicators visible before leaving the devices.",
+  "setup": "Two fixed YAM robot arms with parallel grippers and three RGB cameras (top and two wrists) face an oak-coloured wooden table, 1100 x 1300 x 60 mm. On the table are a metal-and-glass phone (71.5 x 149.6 x 7.95 mm, 177 g), a metal-and-glass watch case (36 x 42 x 9.7 mm, 30.3 g) with two unfastened silicone strap halves (each 72 x 20 x 2.2 mm), and a closed plastic wireless-earbuds case with both earbuds inside (60.6 x 45.2 x 21.7 mm, 61.4 g combined). A free-standing powered charger has a polymer base 118 mm across and 12 mm thick, a metal stem and crossbar, polymer charging heads, and a rubber foot. Phone and watch pads are 56 and 28 mm across, their centres are 100 mm apart; the base has a 78 mm-wide, 2 mm-deep recess for the earbuds case. A short fixed cable stub represents an already connected power lead. In the setup image, the charger is behind the three devices, phone to the left, open-band watch to the right, and closed case nearer the robot centre. All devices start face-up, screens black and case LED off, with nominal 30% charge. World seed 190145710 fixes the positions and orientations listed in the README; the pinned Inspect SDK derives it from evaluation seed 17.",
+  "scoring": "At trial end, each device earns up to 1/3 for charging on its matching pad without gripper support, including contact with the watch band. Its charging indicator must have been visible in at least one of the three camera views. Credit is (1/3) x min(d/5, 1), where d is the current uninterrupted released-charging duration in seconds; loss of charging or renewed gripper support resets that device duration to zero. The stand must stay within 5 mm translation and 5 degrees rotation of its starting pose throughout the scored trial; exceeding either limit makes the total score zero. Full score requires all three devices to meet their conditions together for 5 seconds. The earbuds LED can turn off after its initial 8-second indication while charging continues. Real-world checks use the devices' charging status, camera video, a ruler and a timer.",
+  "run_limit": "6,000 policy actions (300 seconds at 20 Hz), plus 40 reset-settling steps before policy control.",
+  "reset_notes": "Return all devices and the stand to the world-seed-190145710 layout, lay the unfastened watch straps flat, close the earbuds case and clear the charging indicators. No consumables; battery depletion is not simulated.",
+  "fidelity": "Native Isaac rigid-body contacts, 1 kHz physics and 20 Hz control. The watch strap has 16 contact-bearing segments with bend and twist joints. Phone and watch use finite paired magnetic forces and torques; the earbuds case has no magnetic retention. Objects are not teleported or attached to robot grasp joints after reset. Charging is an approximation based on power enabled, pad alignment, contact and settling, with rendered on-device indicators; electromagnetic power transfer, battery chemistry and real charging speed are not simulated. Device shapes and the Belkin-inspired stand are simplified; the wider head spacing, stand mass, magnetic forces and strap stiffness are not calibrated to a commercial unit. Common friction parameters approximate the materials. Indicator visibility is checked from RGB near the projected cue, not proof that the policy understood it.",
+  "scores": "Dream-1 run: 0.0 (6,000 actions); demo: 1.0 (same initial layout).",
+  "media": "M-BSKBR3",
+  "keywords": [
+    "wireless charging",
+    "magnetic alignment",
+    "flexible watch strap",
+    "visual feedback",
+    "bimanual",
+    "consumer electronics"
+  ]
+}
