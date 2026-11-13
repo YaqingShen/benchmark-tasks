@@ -1,13 +1,11 @@
 {
-  "revision": "revision065-package1",
+  "revision": "revision065-package2",
   "files": {
     "assets/mechanisms/beaker.usda": "d1183ac34f795035551540119368cfb319efcfd43e26f01f0541d2d507033147",
     "assets/mechanisms/bottle_A.usda": "d9ffcbbd8d25278895bce15e03e2d1cfa60cdbf082d3050c0c082cfdcff54f26",
     "assets/mechanisms/bottle_A_cap.usda": "0d5ced16aa0b5ef14d787ca329e5fe05dc5f97be85a903ebd330344885514cbc",
     "assets/mechanisms/bottle_B.usda": "2a9eb184d06250384f4275fca623f31f9fa4f2af967f83ab2fbf820248a0a083",
     "assets/mechanisms/bottle_B_cap.usda": "916e9ae37985eb5f6810440785f62418cd55c923b39aa5eb088aa8fbdf270911",
-    "assets/mechanisms/cylinder_A.usda": "4596bc99fd8f4cbf888f055ba3d0602d9d8e1b1f271a0d7deeb538c8cb6529ed",
-    "assets/mechanisms/cylinder_B.usda": "89fcc63f98a8df03b3e4b236fbbe248b7a04a6ba3c111b6ce829c83b4d8553d3",
     "assets/mechanisms/digital_balance.usda": "538281ba3c37323db2f7b0ae37d64f50b870f6a766513780168d6a712c14410d",
     "assets/mechanisms/native-assets.json": "8a911d388c50ee652900f908fe98bf6246436294eb7c6404722aaf7c3cfc0e43",
     "assets/mechanisms/pipette_A.usda": "d5d20ab58ebf24162e9916b2079cb311055c8389cecf812e338db3a5cda31512",
