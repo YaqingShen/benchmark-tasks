@@ -1,0 +1,71 @@
+{
+  "status": "native Isaac charging prototype; full scripted and Dream validation in progress",
+  "engine_required_by_user": "Isaac on 5090; do not use MuJoCo",
+  "devices": {
+    "iphone17": {
+      "battery_percent": 30,
+      "initial_display": "black standby",
+      "charging_feedback": "on-device ring and lightning animation",
+      "attachment_requirement": "Align rear magnetic charging region, then support released phone through finite magnetic forces and physical contacts; no pose snapping"
+    },
+    "airpods_pro": {
+      "case_closed": true,
+      "earbuds_inside": true,
+      "case_battery_percent": 30,
+      "earbud_battery_percent": 30,
+      "initial_led": "off",
+      "charging_feedback": "physical case status light; not a permanent LED",
+      "attachment_requirement": "Case supported by bottom pad; no strong magnetic retention"
+    },
+    "apple_watch": {
+      "battery_percent": 30,
+      "initial_display": "black standby",
+      "band": "flexible and contact-bearing; may obstruct charger",
+      "charging_feedback": "on-device charging symbol",
+      "attachment_requirement": "Magnetic attachment and back contact; flexible band must not obstruct charging surface"
+    }
+  },
+  "charger": {
+    "reference": "Belkin WIZ023-inspired; user-requested wider head spacing and physical shallow recess; internal dimensions approximate",
+    "free_rigid_body": true,
+    "power_connected_at_start": true,
+    "phone_watch_lateral_center_spacing_mm": 100,
+    "airpods_recess": {
+      "floor_diameter_mm": 78,
+      "depth_mm": 2,
+      "center_xy_m": [
+        -0.012,
+        0
+      ],
+      "native_concave_collision": "96 convex rim sectors above a solid lower floor"
+    }
+  },
+  "initial_layout": "random non-overlapping tabletop positions and yaw; seed saved",
+  "robot": {
+    "embodiment": "native dual YAM",
+    "cameras": [
+      "top_cam",
+      "left_cam",
+      "right_cam"
+    ],
+    "right_arm_roles": [
+      "observe through wrist camera",
+      "stabilize stand",
+      "assist band clearance"
+    ],
+    "mandatory_action_order": null,
+    "charging_verification": "Observe on-device phone/watch charging cues and AirPods case status light through original cameras"
+  },
+  "success_requested": "all three devices charging correctly; stand remains near its original pose",
+  "provisional_thresholds": {
+    "simultaneous_charge_seconds": 5,
+    "maximum_stand_translation_m": 0.005,
+    "maximum_stand_rotation_degrees": 5
+  },
+  "partial_credit_proposal": "Each device earns up to one third after charging with no gripper contact (including watch band), visible RGB feedback and five seconds of released stability. Stand stability required.",
+  "validation_boundary": "Finite paired magnetic forces and contact/coil alignment gate a reduced charging proxy. Green phone/watch startup animation and amber case LED are simulated feedback, not independent proof of electromagnetic power transfer. Forces, strap stiffness and charger internal geometry require hardware calibration.",
+  "media": {
+    "three_original_cameras_only": true,
+    "external_text_overlays": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "revision": "charging011",
+  "status": "development candidate; see run evidence for validation",
+  "files": {
+    "assets/airpods_pro.usda": "76e992a32c81a86a9a38b4899c2f203b5c7224433e217fa5057cf95d121a4e4a",
+    "assets/apple_watch.usda": "b4ef0a38c8c62de2e41227bbaad7127ab471f48fed21f384e0ca92fa221479fe",
+    "assets/apple_watch_screen.png": "53b2d19dc14c2a9c6c82fda92f3a96aac4a52b2c239b86640f7a2c07865f0dd0",
+    "assets/belkin.usda": "b5e053c03527a0a11f0a6521dc4c63f98a4b10ac02355e4c8331d3e09689c237",
+    "assets/iphone17.usda": "1576a435f3a50854f8f0b78d50bbd078fe90c8662909970e7222829cbf145b2d",
+    "assets/iphone17_screen.png": "003d7e778281ca6073799ab4173159e0521f87928b0c9861df572b9211242c69",
+    "assets/manifest.json": "4ac036d7a5732bc555816913b2313f3f1d42ace8e73f18c4df6360e198620493",
+    "build_assets.py": "74960200b0571983e64047dad81cf9cd26d2f9b2226c6d06a2837badf3408c22",
+    "charging_benchmark.py": "116fb0d6970c9ca7871329e7ee0c1e6c460eff82b7f9e392965cacdcca8f2710",
+    "charging_physics.py": "ad0ac5c13dae47af1014619216fa0fc07e1826315017acf91f13a33525c9df43",
+    "charging_world.py": "9691ea6009f74aa62fd47b963fffc06823fc0e81398b4ba0bbe76c1af880bb7f",
+    "check_geometry.py": "ddc4a6fa5744e58222bfdfca46229ddfecf4376c516ea84dede9c567218bb034",
+    "freeze_source.py": "84a7e364e8085569683407e676701dd1b13b1b8c3e586a34adb496ff5cb6b1bb",
+    "preflight_support.py": "bd4aeb7e168a6e5632d6405b5b3772dd73fdd3ac3ad5a835f27656234bc4278f",
+    "render_isaac.py": "6edb042be28fd418686b576b6894a214146bf69f279473d3bb58296b1ea4fb9a",
+    "run_charging.py": "e79800066642aa76877b0b3874ec4d20e277342be5818ac82321a1eb27a622db",
+    "run_policy.py": "831e8b0511c45e9b70d067986a808c61fa18851d45b9085327c76043b1a67db7",
+    "scripted_charging.py": "ac2c21e546c9a8c24dd485759bd4dc93f039a5e24e2ef259d12c7db54e510828",
+    "task_spec.json": "95f931537ddc0af2df2291212f18c442db716bc0ab07139012c1109a033dc854"
+  },
+  "model_limitations": [
+    "Charger dimensions, magnetic force curves and strap stiffness are not measured hardware calibrations",
+    "Charging is a geometry/contact/dwell proxy; no electromagnetic or battery model"
+  ],
+  "policy_inputs": [
+    "three original RGB cameras",
+    "14 measured robot joint positions"
+  ],
+  "no_object_pose_writes_after_reset": true,
+  "no_grasp_attachment_joints": true
+}
