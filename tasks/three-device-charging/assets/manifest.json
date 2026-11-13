@@ -1,0 +1,129 @@
+{
+  "seed": 17,
+  "table_top_m": 0.7475,
+  "assets": {
+    "belkin": {
+      "position_xyz": [
+        0.51,
+        0,
+        0.7485
+      ],
+      "rotation_xyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "object_type": "RIGID",
+      "path": "belkin.usda"
+    },
+    "iphone17": {
+      "position_xyz": [
+        0.3324226925407245,
+        0.14779503128208785,
+        0.7575000000000001
+      ],
+      "object_type": "RIGID",
+      "path": "iphone17.usda",
+      "rotation_xyzw": [
+        0,
+        0,
+        0.037525143449174514,
+        0.9992956837738862
+      ],
+      "initial_battery_percent": 30
+    },
+    "airpods_pro": {
+      "position_xyz": [
+        0.28525087789991377,
+        -0.03526208931177634,
+        0.7615000000000001
+      ],
+      "object_type": "RIGID",
+      "path": "airpods_pro.usda",
+      "rotation_xyzw": [
+        0,
+        0,
+        -0.07414626833000616,
+        0.9972473769796212
+      ],
+      "initial_battery_percent": 30
+    },
+    "apple_watch": {
+      "position_xyz": [
+        0.3674139219673699,
+        -0.1759916480940367,
+        0.7565000000000001
+      ],
+      "object_type": "ARTICULATION",
+      "path": "apple_watch.usda",
+      "rotation_xyzw": [
+        0,
+        0,
+        0.1530469496731853,
+        0.9882189186590862
+      ],
+      "initial_battery_percent": 30
+    }
+  },
+  "status": "scene-preview-only",
+  "sources": {
+    "iphone": "https://www.apple.com/iphone-17/specs/",
+    "airpods": "https://support.apple.com/en-us/111834",
+    "watch": "https://support.apple.com/en-ie/125093",
+    "charger": "https://www.belkin.com/support-article/?articleNum=336338"
+  },
+  "geometry": {
+    "device_envelopes_mm": {
+      "iphone17": [
+        71.5,
+        149.6,
+        7.95
+      ],
+      "airpods_pro": [
+        60.6,
+        45.2,
+        21.7
+      ],
+      "apple_watch_case": [
+        36,
+        42,
+        9.7
+      ]
+    },
+    "charger_base_diameter_mm": 118,
+    "phone_watch_lateral_center_spacing_mm": 100,
+    "phone_puck_center_m": [
+      0.023,
+      0.05,
+      0.096
+    ],
+    "watch_puck_center_m": [
+      0.028,
+      -0.05,
+      0.092
+    ],
+    "puck_normal": [
+      -0.8660254038,
+      0,
+      0.5
+    ],
+    "airpods_recess": {
+      "center_xy_m": [
+        -0.012,
+        0
+      ],
+      "floor_z_m": 0.01,
+      "floor_diameter_mm": 78,
+      "depth_mm": 2,
+      "collision_sectors": 96
+    },
+    "charger_internal_dimensions_status": "user-adjusted approximate geometry, not manufacturer measurements"
+  },
+  "approximations": [
+    "Belkin-inspired widened support: internal dimensions, mass and friction need measurement",
+    "32-DOF articulated silicone band; stiffness is provisional",
+    "Black standby screens; 30 percent battery is internal state only",
+    "No charging or magnetic interaction implemented in this layout preview"
+  ]
+}

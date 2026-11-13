@@ -1,0 +1,1785 @@
+#usda 1.0
+(
+    defaultPrim = "belkin"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "belkin" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+)
+{
+    float physics:mass = 0.55
+    bool physics:rigidBodyEnabled = 1
+    bool physxRigidBody:enableCCD = 1
+    float physxRigidBody:maxDepenetrationVelocity = 0.5
+    int physxRigidBody:solverPositionIterationCount = 32
+    int physxRigidBody:solverVelocityIterationCount = 8
+    double3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def "Looks"
+    {
+        def Material "physics" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.5
+            float physics:restitution = 0
+            float physics:staticFriction = 0.65
+        }
+
+        def Material "white"
+        {
+            token outputs:surface.connect = </belkin/Looks/white/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.88, 0.89, 0.9)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "black"
+        {
+            token outputs:surface.connect = </belkin/Looks/black/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.009, 0.012, 0.016)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "silver"
+        {
+            token outputs:surface.connect = </belkin/Looks/silver/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.55, 0.58, 0.6)
+                float inputs:metallic = 0.7
+                float inputs:roughness = 0.28
+                token outputs:surface
+            }
+        }
+
+        def Material "blue"
+        {
+            token outputs:surface.connect = </belkin/Looks/blue/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.4, 0.51, 0.63)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "band"
+        {
+            token outputs:surface.connect = </belkin/Looks/band/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.018, 0.035, 0.05)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "sensor"
+        {
+            token outputs:surface.connect = </belkin/Looks/sensor/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.025, 0.03, 0.025)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "seam"
+        {
+            token outputs:surface.connect = </belkin/Looks/seam/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.35, 0.37, 0.39)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.55
+                token outputs:surface
+            }
+        }
+
+        def Material "recess"
+        {
+            token outputs:surface.connect = </belkin/Looks/recess/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.78, 0.79, 0.8)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+    }
+
+    def Mesh "base" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.059, 0, -0.005), (0.0587159, 0.005783011, -0.005), (0.05786633, 0.011510329, -0.005), (0.05645948, 0.017126797, -0.005), (0.05450889, 0.022578323, -0.005), (0.052033354, 0.027812408, -0.005), (0.04905671, 0.032778643, -0.005), (0.045607615, 0.037429202, -0.005), (0.0417193, 0.0417193, -0.005), (0.037429202, 0.045607615, -0.005), (0.032778643, 0.04905671, -0.005), (0.027812408, 0.052033354, -0.005), (0.022578323, 0.05450889, -0.005), (0.017126797, 0.05645948, -0.005), (0.011510329, 0.05786633, -0.005), (0.005783011, 0.0587159, -0.005), (3.612708e-18, 0.059, -0.005), (-0.005783011, 0.0587159, -0.005), (-0.011510329, 0.05786633, -0.005), (-0.017126797, 0.05645948, -0.005), (-0.022578323, 0.05450889, -0.005), (-0.027812408, 0.052033354, -0.005), (-0.032778643, 0.04905671, -0.005), (-0.037429202, 0.045607615, -0.005), (-0.0417193, 0.0417193, -0.005), (-0.045607615, 0.037429202, -0.005), (-0.04905671, 0.032778643, -0.005), (-0.052033354, 0.027812408, -0.005), (-0.05450889, 0.022578323, -0.005), (-0.05645948, 0.017126797, -0.005), (-0.05786633, 0.011510329, -0.005), (-0.0587159, 0.005783011, -0.005), (-0.059, 7.225416e-18, -0.005), (-0.0587159, -0.005783011, -0.005), (-0.05786633, -0.011510329, -0.005), (-0.05645948, -0.017126797, -0.005), (-0.05450889, -0.022578323, -0.005), (-0.052033354, -0.027812408, -0.005), (-0.04905671, -0.032778643, -0.005), (-0.045607615, -0.037429202, -0.005), (-0.0417193, -0.0417193, -0.005), (-0.037429202, -0.045607615, -0.005), (-0.032778643, -0.04905671, -0.005), (-0.027812408, -0.052033354, -0.005), (-0.022578323, -0.05450889, -0.005), (-0.017126797, -0.05645948, -0.005), (-0.011510329, -0.05786633, -0.005), (-0.005783011, -0.0587159, -0.005), (-1.0838124e-17, -0.059, -0.005), (0.005783011, -0.0587159, -0.005), (0.011510329, -0.05786633, -0.005), (0.017126797, -0.05645948, -0.005), (0.022578323, -0.05450889, -0.005), (0.027812408, -0.052033354, -0.005), (0.032778643, -0.04905671, -0.005), (0.037429202, -0.045607615, -0.005), (0.0417193, -0.0417193, -0.005), (0.045607615, -0.037429202, -0.005), (0.04905671, -0.032778643, -0.005), (0.052033354, -0.027812408, -0.005), (0.05450889, -0.022578323, -0.005), (0.05645948, -0.017126797, -0.005), (0.05786633, -0.011510329, -0.005), (0.0587159, -0.005783011, -0.005), (0.059, 0, 0.005), (0.0587159, 0.005783011, 0.005), (0.05786633, 0.011510329, 0.005), (0.05645948, 0.017126797, 0.005), (0.05450889, 0.022578323, 0.005), (0.052033354, 0.027812408, 0.005), (0.04905671, 0.032778643, 0.005), (0.045607615, 0.037429202, 0.005), (0.0417193, 0.0417193, 0.005), (0.037429202, 0.045607615, 0.005), (0.032778643, 0.04905671, 0.005), (0.027812408, 0.052033354, 0.005), (0.022578323, 0.05450889, 0.005), (0.017126797, 0.05645948, 0.005), (0.011510329, 0.05786633, 0.005), (0.005783011, 0.0587159, 0.005), (3.612708e-18, 0.059, 0.005), (-0.005783011, 0.0587159, 0.005), (-0.011510329, 0.05786633, 0.005), (-0.017126797, 0.05645948, 0.005), (-0.022578323, 0.05450889, 0.005), (-0.027812408, 0.052033354, 0.005), (-0.032778643, 0.04905671, 0.005), (-0.037429202, 0.045607615, 0.005), (-0.0417193, 0.0417193, 0.005), (-0.045607615, 0.037429202, 0.005), (-0.04905671, 0.032778643, 0.005), (-0.052033354, 0.027812408, 0.005), (-0.05450889, 0.022578323, 0.005), (-0.05645948, 0.017126797, 0.005), (-0.05786633, 0.011510329, 0.005), (-0.0587159, 0.005783011, 0.005), (-0.059, 7.225416e-18, 0.005), (-0.0587159, -0.005783011, 0.005), (-0.05786633, -0.011510329, 0.005), (-0.05645948, -0.017126797, 0.005), (-0.05450889, -0.022578323, 0.005), (-0.052033354, -0.027812408, 0.005), (-0.04905671, -0.032778643, 0.005), (-0.045607615, -0.037429202, 0.005), (-0.0417193, -0.0417193, 0.005), (-0.037429202, -0.045607615, 0.005), (-0.032778643, -0.04905671, 0.005), (-0.027812408, -0.052033354, 0.005), (-0.022578323, -0.05450889, 0.005), (-0.017126797, -0.05645948, 0.005), (-0.011510329, -0.05786633, 0.005), (-0.005783011, -0.0587159, 0.005), (-1.0838124e-17, -0.059, 0.005), (0.005783011, -0.0587159, 0.005), (0.011510329, -0.05786633, 0.005), (0.017126797, -0.05645948, 0.005), (0.022578323, -0.05450889, 0.005), (0.027812408, -0.052033354, 0.005), (0.032778643, -0.04905671, 0.005), (0.037429202, -0.045607615, 0.005), (0.0417193, -0.0417193, 0.005), (0.045607615, -0.037429202, 0.005), (0.04905671, -0.032778643, 0.005), (0.052033354, -0.027812408, 0.005), (0.05450889, -0.022578323, 0.005), (0.05645948, -0.017126797, 0.005), (0.05786633, -0.011510329, 0.005), (0.0587159, -0.005783011, 0.005)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0, 0, 0.005)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "deck_sector_000" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.027, 0, 0.01), (0.059, 0, 0.01), (0.058873676, 0.0038587847, 0.01), (0.026916498, 0.002550722, 0.01), (0.028, 0, 0.012), (0.059, 0, 0.012), (0.058873676, 0.0038587847, 0.012), (0.027914356, 0.0026161252, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_001" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.026916498, 0.002550722, 0.01), (0.058873676, 0.0038587847, 0.01), (0.058495246, 0.0077010454, 0.01), (0.026666349, 0.0050905216, 0.01), (0.027914356, 0.0026161252, 0.012), (0.058873676, 0.0038587847, 0.012), (0.058495246, 0.0077010454, 0.012), (0.027657794, 0.005221048, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_002" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.026666349, 0.0050905216, 0.01), (0.058495246, 0.0077010454, 0.01), (0.05786633, 0.011510329, 0.01), (0.026250625, 0.0076085227, 0.01), (0.027657794, 0.005221048, 0.012), (0.058495246, 0.0077010454, 0.012), (0.05786633, 0.011510329, 0.012), (0.027231412, 0.007803613, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_003" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.026250625, 0.0076085227, 0.01), (0.05786633, 0.011510329, 0.01), (0.056989625, 0.0152703235, 0.01), (0.025671108, 0.010093943, 0.01), (0.027231412, 0.007803613, 0.012), (0.05786633, 0.011510329, 0.012), (0.056989625, 0.0152703235, 0.012), (0.026637033, 0.0103527615, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_004" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.025671108, 0.010093943, 0.01), (0.056989625, 0.0152703235, 0.01), (0.05586888, 0.018964928, 0.01), (0.024930276, 0.012536139, 0.01), (0.026637033, 0.0103527615, 0.012), (0.056989625, 0.0152703235, 0.012), (0.05586888, 0.018964928, 0.012), (0.025877206, 0.012857579, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_005" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.024930276, 0.012536139, 0.01), (0.05586888, 0.018964928, 0.01), (0.05450889, 0.022578323, 0.01), (0.024031302, 0.014924654, 0.01), (0.025877206, 0.012857579, 0.012), (0.05586888, 0.018964928, 0.012), (0.05450889, 0.022578323, 0.012), (0.024955181, 0.015307337, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_006" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.024031302, 0.014924654, 0.01), (0.05450889, 0.022578323, 0.01), (0.05291549, 0.026095033, 0.01), (0.022978038, 0.017249258, 0.01), (0.024955181, 0.015307337, 0.012), (0.05450889, 0.022578323, 0.012), (0.05291549, 0.026095033, 0.012), (0.02387491, 0.017691547, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_007" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.022978038, 0.017249258, 0.01), (0.05291549, 0.026095033, 0.01), (0.0510955, 0.0295, 0.01), (0.02177499, 0.0195, 0.01), (0.02387491, 0.017691547, 0.012), (0.05291549, 0.026095033, 0.012), (0.0510955, 0.0295, 0.012), (0.022641016, 0.02, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_008" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.02177499, 0.0195, 0.01), (0.0510955, 0.0295, 0.01), (0.04905671, 0.032778643, 0.01), (0.020427315, 0.021667238, 0.01), (0.022641016, 0.02, 0.012), (0.0510955, 0.0295, 0.012), (0.04905671, 0.032778643, 0.012), (0.021258784, 0.02222281, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_009" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.020427315, 0.021667238, 0.01), (0.04905671, 0.032778643, 0.01), (0.046807848, 0.035916924, 0.01), (0.01894078, 0.023741696, 0.01), (0.021258784, 0.02222281, 0.012), (0.04905671, 0.032778643, 0.012), (0.046807848, 0.035916924, 0.012), (0.019734133, 0.024350457, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_010" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.01894078, 0.023741696, 0.01), (0.046807848, 0.035916924, 0.01), (0.044358548, 0.038901404, 0.01), (0.017321752, 0.025714487, 0.01), (0.019734133, 0.024350457, 0.012), (0.046807848, 0.035916924, 0.012), (0.044358548, 0.038901404, 0.012), (0.018073592, 0.026373833, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_011" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.017321752, 0.025714487, 0.01), (0.044358548, 0.038901404, 0.01), (0.0417193, 0.0417193, 0.01), (0.0155771645, 0.027577164, 0.01), (0.018073592, 0.026373833, 0.012), (0.044358548, 0.038901404, 0.012), (0.0417193, 0.0417193, 0.012), (0.016284272, 0.02828427, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_012" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0155771645, 0.027577164, 0.01), (0.0417193, 0.0417193, 0.01), (0.038901404, 0.044358548, 0.01), (0.013714487, 0.029321752, 0.01), (0.016284272, 0.02828427, 0.012), (0.0417193, 0.0417193, 0.012), (0.038901404, 0.044358548, 0.012), (0.014373832, 0.030073592, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_013" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.013714487, 0.029321752, 0.01), (0.038901404, 0.044358548, 0.01), (0.035916924, 0.046807848, 0.01), (0.011741696, 0.03094078, 0.01), (0.014373832, 0.030073592, 0.012), (0.038901404, 0.044358548, 0.012), (0.035916924, 0.046807848, 0.012), (0.012350457, 0.031734135, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_014" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.011741696, 0.03094078, 0.01), (0.035916924, 0.046807848, 0.01), (0.032778643, 0.04905671, 0.01), (0.009667239, 0.032427315, 0.01), (0.012350457, 0.031734135, 0.012), (0.035916924, 0.046807848, 0.012), (0.032778643, 0.04905671, 0.012), (0.010222809, 0.033258785, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_015" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.009667239, 0.032427315, 0.01), (0.032778643, 0.04905671, 0.01), (0.0295, 0.0510955, 0.01), (0.0075, 0.03377499, 0.01), (0.010222809, 0.033258785, 0.012), (0.032778643, 0.04905671, 0.012), (0.0295, 0.0510955, 0.012), (0.008, 0.034641016, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_016" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0075, 0.03377499, 0.01), (0.0295, 0.0510955, 0.01), (0.026095033, 0.05291549, 0.01), (0.005249259, 0.034978036, 0.01), (0.008, 0.034641016, 0.012), (0.0295, 0.0510955, 0.012), (0.026095033, 0.05291549, 0.012), (0.0056915474, 0.03587491, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_017" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.005249259, 0.034978036, 0.01), (0.026095033, 0.05291549, 0.01), (0.022578323, 0.05450889, 0.01), (0.002924654, 0.036031302, 0.01), (0.0056915474, 0.03587491, 0.012), (0.026095033, 0.05291549, 0.012), (0.022578323, 0.05450889, 0.012), (0.0033073374, 0.03695518, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_018" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.002924654, 0.036031302, 0.01), (0.022578323, 0.05450889, 0.01), (0.018964928, 0.05586888, 0.01), (0.0005361391, 0.036930274, 0.01), (0.0033073374, 0.03695518, 0.012), (0.022578323, 0.05450889, 0.012), (0.018964928, 0.05586888, 0.012), (0.0008575786, 0.037877206, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_019" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0005361391, 0.036930274, 0.01), (0.018964928, 0.05586888, 0.01), (0.0152703235, 0.056989625, 0.01), (-0.0019060572, 0.037671108, 0.01), (0.0008575786, 0.037877206, 0.012), (0.018964928, 0.05586888, 0.012), (0.0152703235, 0.056989625, 0.012), (-0.0016472382, 0.038637035, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_020" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0019060572, 0.037671108, 0.01), (0.0152703235, 0.056989625, 0.01), (0.011510329, 0.05786633, 0.01), (-0.0043914774, 0.038250625, 0.01), (-0.0016472382, 0.038637035, 0.012), (0.0152703235, 0.056989625, 0.012), (0.011510329, 0.05786633, 0.012), (-0.0041963872, 0.039231412, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_021" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0043914774, 0.038250625, 0.01), (0.011510329, 0.05786633, 0.01), (0.0077010454, 0.058495246, 0.01), (-0.0069094785, 0.03866635, 0.01), (-0.0041963872, 0.039231412, 0.012), (0.011510329, 0.05786633, 0.012), (0.0077010454, 0.058495246, 0.012), (-0.006778952, 0.039657794, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_022" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0069094785, 0.03866635, 0.01), (0.0077010454, 0.058495246, 0.01), (0.0038587847, 0.058873676, 0.01), (-0.009449278, 0.0389165, 0.01), (-0.006778952, 0.039657794, 0.012), (0.0077010454, 0.058495246, 0.012), (0.0038587847, 0.058873676, 0.012), (-0.009383875, 0.03991436, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_023" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.009449278, 0.0389165, 0.01), (0.0038587847, 0.058873676, 0.01), (3.612708e-18, 0.059, 0.01), (-0.012, 0.039, 0.01), (-0.009383875, 0.03991436, 0.012), (0.0038587847, 0.058873676, 0.012), (3.612708e-18, 0.059, 0.012), (-0.012, 0.04, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_024" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.012, 0.039, 0.01), (3.612708e-18, 0.059, 0.01), (-0.0038587847, 0.058873676, 0.01), (-0.014550722, 0.0389165, 0.01), (-0.012, 0.04, 0.012), (3.612708e-18, 0.059, 0.012), (-0.0038587847, 0.058873676, 0.012), (-0.014616125, 0.03991436, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_025" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.014550722, 0.0389165, 0.01), (-0.0038587847, 0.058873676, 0.01), (-0.0077010454, 0.058495246, 0.01), (-0.017090522, 0.03866635, 0.01), (-0.014616125, 0.03991436, 0.012), (-0.0038587847, 0.058873676, 0.012), (-0.0077010454, 0.058495246, 0.012), (-0.017221048, 0.039657794, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_026" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.017090522, 0.03866635, 0.01), (-0.0077010454, 0.058495246, 0.01), (-0.011510329, 0.05786633, 0.01), (-0.019608522, 0.038250625, 0.01), (-0.017221048, 0.039657794, 0.012), (-0.0077010454, 0.058495246, 0.012), (-0.011510329, 0.05786633, 0.012), (-0.019803613, 0.039231412, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_027" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.019608522, 0.038250625, 0.01), (-0.011510329, 0.05786633, 0.01), (-0.0152703235, 0.056989625, 0.01), (-0.022093942, 0.037671108, 0.01), (-0.019803613, 0.039231412, 0.012), (-0.011510329, 0.05786633, 0.012), (-0.0152703235, 0.056989625, 0.012), (-0.022352763, 0.038637035, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_028" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.022093942, 0.037671108, 0.01), (-0.0152703235, 0.056989625, 0.01), (-0.018964928, 0.05586888, 0.01), (-0.024536138, 0.036930274, 0.01), (-0.022352763, 0.038637035, 0.012), (-0.0152703235, 0.056989625, 0.012), (-0.018964928, 0.05586888, 0.012), (-0.024857579, 0.037877206, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_029" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.024536138, 0.036930274, 0.01), (-0.018964928, 0.05586888, 0.01), (-0.022578323, 0.05450889, 0.01), (-0.026924653, 0.036031302, 0.01), (-0.024857579, 0.037877206, 0.012), (-0.018964928, 0.05586888, 0.012), (-0.022578323, 0.05450889, 0.012), (-0.027307337, 0.03695518, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_030" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.026924653, 0.036031302, 0.01), (-0.022578323, 0.05450889, 0.01), (-0.026095033, 0.05291549, 0.01), (-0.029249258, 0.034978036, 0.01), (-0.027307337, 0.03695518, 0.012), (-0.022578323, 0.05450889, 0.012), (-0.026095033, 0.05291549, 0.012), (-0.029691547, 0.03587491, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_031" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.029249258, 0.034978036, 0.01), (-0.026095033, 0.05291549, 0.01), (-0.0295, 0.0510955, 0.01), (-0.0315, 0.03377499, 0.01), (-0.029691547, 0.03587491, 0.012), (-0.026095033, 0.05291549, 0.012), (-0.0295, 0.0510955, 0.012), (-0.032, 0.034641016, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_032" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0315, 0.03377499, 0.01), (-0.0295, 0.0510955, 0.01), (-0.032778643, 0.04905671, 0.01), (-0.03366724, 0.032427315, 0.01), (-0.032, 0.034641016, 0.012), (-0.0295, 0.0510955, 0.012), (-0.032778643, 0.04905671, 0.012), (-0.034222808, 0.033258785, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_033" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.03366724, 0.032427315, 0.01), (-0.032778643, 0.04905671, 0.01), (-0.035916924, 0.046807848, 0.01), (-0.035741694, 0.03094078, 0.01), (-0.034222808, 0.033258785, 0.012), (-0.032778643, 0.04905671, 0.012), (-0.035916924, 0.046807848, 0.012), (-0.03635046, 0.031734135, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_034" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.035741694, 0.03094078, 0.01), (-0.035916924, 0.046807848, 0.01), (-0.038901404, 0.044358548, 0.01), (-0.037714485, 0.029321752, 0.01), (-0.03635046, 0.031734135, 0.012), (-0.035916924, 0.046807848, 0.012), (-0.038901404, 0.044358548, 0.012), (-0.03837383, 0.030073592, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_035" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.037714485, 0.029321752, 0.01), (-0.038901404, 0.044358548, 0.01), (-0.0417193, 0.0417193, 0.01), (-0.039577164, 0.027577164, 0.01), (-0.03837383, 0.030073592, 0.012), (-0.038901404, 0.044358548, 0.012), (-0.0417193, 0.0417193, 0.012), (-0.040284272, 0.02828427, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_036" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.039577164, 0.027577164, 0.01), (-0.0417193, 0.0417193, 0.01), (-0.044358548, 0.038901404, 0.01), (-0.04132175, 0.025714487, 0.01), (-0.040284272, 0.02828427, 0.012), (-0.0417193, 0.0417193, 0.012), (-0.044358548, 0.038901404, 0.012), (-0.042073593, 0.026373833, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_037" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.04132175, 0.025714487, 0.01), (-0.044358548, 0.038901404, 0.01), (-0.046807848, 0.035916924, 0.01), (-0.04294078, 0.023741696, 0.01), (-0.042073593, 0.026373833, 0.012), (-0.044358548, 0.038901404, 0.012), (-0.046807848, 0.035916924, 0.012), (-0.043734133, 0.024350457, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_038" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.04294078, 0.023741696, 0.01), (-0.046807848, 0.035916924, 0.01), (-0.04905671, 0.032778643, 0.01), (-0.044427317, 0.021667238, 0.01), (-0.043734133, 0.024350457, 0.012), (-0.046807848, 0.035916924, 0.012), (-0.04905671, 0.032778643, 0.012), (-0.045258783, 0.02222281, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_039" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.044427317, 0.021667238, 0.01), (-0.04905671, 0.032778643, 0.01), (-0.0510955, 0.0295, 0.01), (-0.045774993, 0.0195, 0.01), (-0.045258783, 0.02222281, 0.012), (-0.04905671, 0.032778643, 0.012), (-0.0510955, 0.0295, 0.012), (-0.046641015, 0.02, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_040" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.045774993, 0.0195, 0.01), (-0.0510955, 0.0295, 0.01), (-0.05291549, 0.026095033, 0.01), (-0.046978038, 0.017249258, 0.01), (-0.046641015, 0.02, 0.012), (-0.0510955, 0.0295, 0.012), (-0.05291549, 0.026095033, 0.012), (-0.04787491, 0.017691547, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_041" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.046978038, 0.017249258, 0.01), (-0.05291549, 0.026095033, 0.01), (-0.05450889, 0.022578323, 0.01), (-0.0480313, 0.014924654, 0.01), (-0.04787491, 0.017691547, 0.012), (-0.05291549, 0.026095033, 0.012), (-0.05450889, 0.022578323, 0.012), (-0.04895518, 0.015307337, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_042" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0480313, 0.014924654, 0.01), (-0.05450889, 0.022578323, 0.01), (-0.05586888, 0.018964928, 0.01), (-0.048930276, 0.012536139, 0.01), (-0.04895518, 0.015307337, 0.012), (-0.05450889, 0.022578323, 0.012), (-0.05586888, 0.018964928, 0.012), (-0.049877204, 0.012857579, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_043" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.048930276, 0.012536139, 0.01), (-0.05586888, 0.018964928, 0.01), (-0.056989625, 0.0152703235, 0.01), (-0.049671106, 0.010093943, 0.01), (-0.049877204, 0.012857579, 0.012), (-0.05586888, 0.018964928, 0.012), (-0.056989625, 0.0152703235, 0.012), (-0.050637033, 0.0103527615, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_044" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.049671106, 0.010093943, 0.01), (-0.056989625, 0.0152703235, 0.01), (-0.05786633, 0.011510329, 0.01), (-0.050250627, 0.0076085227, 0.01), (-0.050637033, 0.0103527615, 0.012), (-0.056989625, 0.0152703235, 0.012), (-0.05786633, 0.011510329, 0.012), (-0.05123141, 0.007803613, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_045" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.050250627, 0.0076085227, 0.01), (-0.05786633, 0.011510329, 0.01), (-0.058495246, 0.0077010454, 0.01), (-0.05066635, 0.0050905216, 0.01), (-0.05123141, 0.007803613, 0.012), (-0.05786633, 0.011510329, 0.012), (-0.058495246, 0.0077010454, 0.012), (-0.051657796, 0.005221048, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_046" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.05066635, 0.0050905216, 0.01), (-0.058495246, 0.0077010454, 0.01), (-0.058873676, 0.0038587847, 0.01), (-0.050916497, 0.002550722, 0.01), (-0.051657796, 0.005221048, 0.012), (-0.058495246, 0.0077010454, 0.012), (-0.058873676, 0.0038587847, 0.012), (-0.051914357, 0.0026161252, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_047" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.050916497, 0.002550722, 0.01), (-0.058873676, 0.0038587847, 0.01), (-0.059, 7.225416e-18, 0.01), (-0.051, 4.7761227e-18, 0.01), (-0.051914357, 0.0026161252, 0.012), (-0.058873676, 0.0038587847, 0.012), (-0.059, 7.225416e-18, 0.012), (-0.052, 4.898587e-18, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_048" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.051, 4.7761227e-18, 0.01), (-0.059, 7.225416e-18, 0.01), (-0.058873676, -0.0038587847, 0.01), (-0.050916497, -0.002550722, 0.01), (-0.052, 4.898587e-18, 0.012), (-0.059, 7.225416e-18, 0.012), (-0.058873676, -0.0038587847, 0.012), (-0.051914357, -0.0026161252, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_049" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.050916497, -0.002550722, 0.01), (-0.058873676, -0.0038587847, 0.01), (-0.058495246, -0.0077010454, 0.01), (-0.05066635, -0.0050905216, 0.01), (-0.051914357, -0.0026161252, 0.012), (-0.058873676, -0.0038587847, 0.012), (-0.058495246, -0.0077010454, 0.012), (-0.051657796, -0.005221048, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_050" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.05066635, -0.0050905216, 0.01), (-0.058495246, -0.0077010454, 0.01), (-0.05786633, -0.011510329, 0.01), (-0.050250627, -0.0076085227, 0.01), (-0.051657796, -0.005221048, 0.012), (-0.058495246, -0.0077010454, 0.012), (-0.05786633, -0.011510329, 0.012), (-0.05123141, -0.007803613, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_051" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.050250627, -0.0076085227, 0.01), (-0.05786633, -0.011510329, 0.01), (-0.056989625, -0.0152703235, 0.01), (-0.049671106, -0.010093943, 0.01), (-0.05123141, -0.007803613, 0.012), (-0.05786633, -0.011510329, 0.012), (-0.056989625, -0.0152703235, 0.012), (-0.050637033, -0.0103527615, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_052" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.049671106, -0.010093943, 0.01), (-0.056989625, -0.0152703235, 0.01), (-0.05586888, -0.018964928, 0.01), (-0.048930276, -0.012536139, 0.01), (-0.050637033, -0.0103527615, 0.012), (-0.056989625, -0.0152703235, 0.012), (-0.05586888, -0.018964928, 0.012), (-0.049877204, -0.012857579, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_053" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.048930276, -0.012536139, 0.01), (-0.05586888, -0.018964928, 0.01), (-0.05450889, -0.022578323, 0.01), (-0.0480313, -0.014924654, 0.01), (-0.049877204, -0.012857579, 0.012), (-0.05586888, -0.018964928, 0.012), (-0.05450889, -0.022578323, 0.012), (-0.04895518, -0.015307337, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_054" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0480313, -0.014924654, 0.01), (-0.05450889, -0.022578323, 0.01), (-0.05291549, -0.026095033, 0.01), (-0.046978038, -0.017249258, 0.01), (-0.04895518, -0.015307337, 0.012), (-0.05450889, -0.022578323, 0.012), (-0.05291549, -0.026095033, 0.012), (-0.04787491, -0.017691547, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_055" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.046978038, -0.017249258, 0.01), (-0.05291549, -0.026095033, 0.01), (-0.0510955, -0.0295, 0.01), (-0.045774993, -0.0195, 0.01), (-0.04787491, -0.017691547, 0.012), (-0.05291549, -0.026095033, 0.012), (-0.0510955, -0.0295, 0.012), (-0.046641015, -0.02, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_056" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.045774993, -0.0195, 0.01), (-0.0510955, -0.0295, 0.01), (-0.04905671, -0.032778643, 0.01), (-0.044427317, -0.021667238, 0.01), (-0.046641015, -0.02, 0.012), (-0.0510955, -0.0295, 0.012), (-0.04905671, -0.032778643, 0.012), (-0.045258783, -0.02222281, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_057" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.044427317, -0.021667238, 0.01), (-0.04905671, -0.032778643, 0.01), (-0.046807848, -0.035916924, 0.01), (-0.04294078, -0.023741696, 0.01), (-0.045258783, -0.02222281, 0.012), (-0.04905671, -0.032778643, 0.012), (-0.046807848, -0.035916924, 0.012), (-0.043734133, -0.024350457, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_058" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.04294078, -0.023741696, 0.01), (-0.046807848, -0.035916924, 0.01), (-0.044358548, -0.038901404, 0.01), (-0.04132175, -0.025714487, 0.01), (-0.043734133, -0.024350457, 0.012), (-0.046807848, -0.035916924, 0.012), (-0.044358548, -0.038901404, 0.012), (-0.042073593, -0.026373833, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_059" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.04132175, -0.025714487, 0.01), (-0.044358548, -0.038901404, 0.01), (-0.0417193, -0.0417193, 0.01), (-0.039577164, -0.027577164, 0.01), (-0.042073593, -0.026373833, 0.012), (-0.044358548, -0.038901404, 0.012), (-0.0417193, -0.0417193, 0.012), (-0.040284272, -0.02828427, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_060" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.039577164, -0.027577164, 0.01), (-0.0417193, -0.0417193, 0.01), (-0.038901404, -0.044358548, 0.01), (-0.037714485, -0.029321752, 0.01), (-0.040284272, -0.02828427, 0.012), (-0.0417193, -0.0417193, 0.012), (-0.038901404, -0.044358548, 0.012), (-0.03837383, -0.030073592, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_061" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.037714485, -0.029321752, 0.01), (-0.038901404, -0.044358548, 0.01), (-0.035916924, -0.046807848, 0.01), (-0.035741694, -0.03094078, 0.01), (-0.03837383, -0.030073592, 0.012), (-0.038901404, -0.044358548, 0.012), (-0.035916924, -0.046807848, 0.012), (-0.03635046, -0.031734135, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_062" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.035741694, -0.03094078, 0.01), (-0.035916924, -0.046807848, 0.01), (-0.032778643, -0.04905671, 0.01), (-0.03366724, -0.032427315, 0.01), (-0.03635046, -0.031734135, 0.012), (-0.035916924, -0.046807848, 0.012), (-0.032778643, -0.04905671, 0.012), (-0.034222808, -0.033258785, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_063" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.03366724, -0.032427315, 0.01), (-0.032778643, -0.04905671, 0.01), (-0.0295, -0.0510955, 0.01), (-0.0315, -0.03377499, 0.01), (-0.034222808, -0.033258785, 0.012), (-0.032778643, -0.04905671, 0.012), (-0.0295, -0.0510955, 0.012), (-0.032, -0.034641016, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_064" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0315, -0.03377499, 0.01), (-0.0295, -0.0510955, 0.01), (-0.026095033, -0.05291549, 0.01), (-0.029249258, -0.034978036, 0.01), (-0.032, -0.034641016, 0.012), (-0.0295, -0.0510955, 0.012), (-0.026095033, -0.05291549, 0.012), (-0.029691547, -0.03587491, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_065" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.029249258, -0.034978036, 0.01), (-0.026095033, -0.05291549, 0.01), (-0.022578323, -0.05450889, 0.01), (-0.026924653, -0.036031302, 0.01), (-0.029691547, -0.03587491, 0.012), (-0.026095033, -0.05291549, 0.012), (-0.022578323, -0.05450889, 0.012), (-0.027307337, -0.03695518, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_066" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.026924653, -0.036031302, 0.01), (-0.022578323, -0.05450889, 0.01), (-0.018964928, -0.05586888, 0.01), (-0.024536138, -0.036930274, 0.01), (-0.027307337, -0.03695518, 0.012), (-0.022578323, -0.05450889, 0.012), (-0.018964928, -0.05586888, 0.012), (-0.024857579, -0.037877206, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_067" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.024536138, -0.036930274, 0.01), (-0.018964928, -0.05586888, 0.01), (-0.0152703235, -0.056989625, 0.01), (-0.022093942, -0.037671108, 0.01), (-0.024857579, -0.037877206, 0.012), (-0.018964928, -0.05586888, 0.012), (-0.0152703235, -0.056989625, 0.012), (-0.022352763, -0.038637035, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_068" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.022093942, -0.037671108, 0.01), (-0.0152703235, -0.056989625, 0.01), (-0.011510329, -0.05786633, 0.01), (-0.019608522, -0.038250625, 0.01), (-0.022352763, -0.038637035, 0.012), (-0.0152703235, -0.056989625, 0.012), (-0.011510329, -0.05786633, 0.012), (-0.019803613, -0.039231412, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_069" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.019608522, -0.038250625, 0.01), (-0.011510329, -0.05786633, 0.01), (-0.0077010454, -0.058495246, 0.01), (-0.017090522, -0.03866635, 0.01), (-0.019803613, -0.039231412, 0.012), (-0.011510329, -0.05786633, 0.012), (-0.0077010454, -0.058495246, 0.012), (-0.017221048, -0.039657794, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_070" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.017090522, -0.03866635, 0.01), (-0.0077010454, -0.058495246, 0.01), (-0.0038587847, -0.058873676, 0.01), (-0.014550722, -0.0389165, 0.01), (-0.017221048, -0.039657794, 0.012), (-0.0077010454, -0.058495246, 0.012), (-0.0038587847, -0.058873676, 0.012), (-0.014616125, -0.03991436, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_071" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.014550722, -0.0389165, 0.01), (-0.0038587847, -0.058873676, 0.01), (-1.0838124e-17, -0.059, 0.01), (-0.012, -0.039, 0.01), (-0.014616125, -0.03991436, 0.012), (-0.0038587847, -0.058873676, 0.012), (-1.0838124e-17, -0.059, 0.012), (-0.012, -0.04, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_072" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.012, -0.039, 0.01), (-1.0838124e-17, -0.059, 0.01), (0.0038587847, -0.058873676, 0.01), (-0.009449278, -0.0389165, 0.01), (-0.012, -0.04, 0.012), (-1.0838124e-17, -0.059, 0.012), (0.0038587847, -0.058873676, 0.012), (-0.009383875, -0.03991436, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_073" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.009449278, -0.0389165, 0.01), (0.0038587847, -0.058873676, 0.01), (0.0077010454, -0.058495246, 0.01), (-0.0069094785, -0.03866635, 0.01), (-0.009383875, -0.03991436, 0.012), (0.0038587847, -0.058873676, 0.012), (0.0077010454, -0.058495246, 0.012), (-0.006778952, -0.039657794, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_074" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0069094785, -0.03866635, 0.01), (0.0077010454, -0.058495246, 0.01), (0.011510329, -0.05786633, 0.01), (-0.0043914774, -0.038250625, 0.01), (-0.006778952, -0.039657794, 0.012), (0.0077010454, -0.058495246, 0.012), (0.011510329, -0.05786633, 0.012), (-0.0041963872, -0.039231412, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_075" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0043914774, -0.038250625, 0.01), (0.011510329, -0.05786633, 0.01), (0.0152703235, -0.056989625, 0.01), (-0.0019060572, -0.037671108, 0.01), (-0.0041963872, -0.039231412, 0.012), (0.011510329, -0.05786633, 0.012), (0.0152703235, -0.056989625, 0.012), (-0.0016472382, -0.038637035, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_076" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(-0.0019060572, -0.037671108, 0.01), (0.0152703235, -0.056989625, 0.01), (0.018964928, -0.05586888, 0.01), (0.0005361391, -0.036930274, 0.01), (-0.0016472382, -0.038637035, 0.012), (0.0152703235, -0.056989625, 0.012), (0.018964928, -0.05586888, 0.012), (0.0008575786, -0.037877206, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_077" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0005361391, -0.036930274, 0.01), (0.018964928, -0.05586888, 0.01), (0.022578323, -0.05450889, 0.01), (0.002924654, -0.036031302, 0.01), (0.0008575786, -0.037877206, 0.012), (0.018964928, -0.05586888, 0.012), (0.022578323, -0.05450889, 0.012), (0.0033073374, -0.03695518, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_078" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.002924654, -0.036031302, 0.01), (0.022578323, -0.05450889, 0.01), (0.026095033, -0.05291549, 0.01), (0.005249259, -0.034978036, 0.01), (0.0033073374, -0.03695518, 0.012), (0.022578323, -0.05450889, 0.012), (0.026095033, -0.05291549, 0.012), (0.0056915474, -0.03587491, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_079" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.005249259, -0.034978036, 0.01), (0.026095033, -0.05291549, 0.01), (0.0295, -0.0510955, 0.01), (0.0075, -0.03377499, 0.01), (0.0056915474, -0.03587491, 0.012), (0.026095033, -0.05291549, 0.012), (0.0295, -0.0510955, 0.012), (0.008, -0.034641016, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_080" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0075, -0.03377499, 0.01), (0.0295, -0.0510955, 0.01), (0.032778643, -0.04905671, 0.01), (0.009667239, -0.032427315, 0.01), (0.008, -0.034641016, 0.012), (0.0295, -0.0510955, 0.012), (0.032778643, -0.04905671, 0.012), (0.010222809, -0.033258785, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_081" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.009667239, -0.032427315, 0.01), (0.032778643, -0.04905671, 0.01), (0.035916924, -0.046807848, 0.01), (0.011741696, -0.03094078, 0.01), (0.010222809, -0.033258785, 0.012), (0.032778643, -0.04905671, 0.012), (0.035916924, -0.046807848, 0.012), (0.012350457, -0.031734135, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_082" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.011741696, -0.03094078, 0.01), (0.035916924, -0.046807848, 0.01), (0.038901404, -0.044358548, 0.01), (0.013714487, -0.029321752, 0.01), (0.012350457, -0.031734135, 0.012), (0.035916924, -0.046807848, 0.012), (0.038901404, -0.044358548, 0.012), (0.014373832, -0.030073592, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_083" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.013714487, -0.029321752, 0.01), (0.038901404, -0.044358548, 0.01), (0.0417193, -0.0417193, 0.01), (0.0155771645, -0.027577164, 0.01), (0.014373832, -0.030073592, 0.012), (0.038901404, -0.044358548, 0.012), (0.0417193, -0.0417193, 0.012), (0.016284272, -0.02828427, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_084" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0155771645, -0.027577164, 0.01), (0.0417193, -0.0417193, 0.01), (0.044358548, -0.038901404, 0.01), (0.017321752, -0.025714487, 0.01), (0.016284272, -0.02828427, 0.012), (0.0417193, -0.0417193, 0.012), (0.044358548, -0.038901404, 0.012), (0.018073592, -0.026373833, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_085" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.017321752, -0.025714487, 0.01), (0.044358548, -0.038901404, 0.01), (0.046807848, -0.035916924, 0.01), (0.01894078, -0.023741696, 0.01), (0.018073592, -0.026373833, 0.012), (0.044358548, -0.038901404, 0.012), (0.046807848, -0.035916924, 0.012), (0.019734133, -0.024350457, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_086" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.01894078, -0.023741696, 0.01), (0.046807848, -0.035916924, 0.01), (0.04905671, -0.032778643, 0.01), (0.020427315, -0.021667238, 0.01), (0.019734133, -0.024350457, 0.012), (0.046807848, -0.035916924, 0.012), (0.04905671, -0.032778643, 0.012), (0.021258784, -0.02222281, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_087" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.020427315, -0.021667238, 0.01), (0.04905671, -0.032778643, 0.01), (0.0510955, -0.0295, 0.01), (0.02177499, -0.0195, 0.01), (0.021258784, -0.02222281, 0.012), (0.04905671, -0.032778643, 0.012), (0.0510955, -0.0295, 0.012), (0.022641016, -0.02, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_088" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.02177499, -0.0195, 0.01), (0.0510955, -0.0295, 0.01), (0.05291549, -0.026095033, 0.01), (0.022978038, -0.017249258, 0.01), (0.022641016, -0.02, 0.012), (0.0510955, -0.0295, 0.012), (0.05291549, -0.026095033, 0.012), (0.02387491, -0.017691547, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_089" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.022978038, -0.017249258, 0.01), (0.05291549, -0.026095033, 0.01), (0.05450889, -0.022578323, 0.01), (0.024031302, -0.014924654, 0.01), (0.02387491, -0.017691547, 0.012), (0.05291549, -0.026095033, 0.012), (0.05450889, -0.022578323, 0.012), (0.024955181, -0.015307337, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_090" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.024031302, -0.014924654, 0.01), (0.05450889, -0.022578323, 0.01), (0.05586888, -0.018964928, 0.01), (0.024930276, -0.012536139, 0.01), (0.024955181, -0.015307337, 0.012), (0.05450889, -0.022578323, 0.012), (0.05586888, -0.018964928, 0.012), (0.025877206, -0.012857579, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_091" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.024930276, -0.012536139, 0.01), (0.05586888, -0.018964928, 0.01), (0.056989625, -0.0152703235, 0.01), (0.025671108, -0.010093943, 0.01), (0.025877206, -0.012857579, 0.012), (0.05586888, -0.018964928, 0.012), (0.056989625, -0.0152703235, 0.012), (0.026637033, -0.0103527615, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_092" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.025671108, -0.010093943, 0.01), (0.056989625, -0.0152703235, 0.01), (0.05786633, -0.011510329, 0.01), (0.026250625, -0.0076085227, 0.01), (0.026637033, -0.0103527615, 0.012), (0.056989625, -0.0152703235, 0.012), (0.05786633, -0.011510329, 0.012), (0.027231412, -0.007803613, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_093" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.026250625, -0.0076085227, 0.01), (0.05786633, -0.011510329, 0.01), (0.058495246, -0.0077010454, 0.01), (0.026666349, -0.0050905216, 0.01), (0.027231412, -0.007803613, 0.012), (0.05786633, -0.011510329, 0.012), (0.058495246, -0.0077010454, 0.012), (0.027657794, -0.005221048, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_094" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.026666349, -0.0050905216, 0.01), (0.058495246, -0.0077010454, 0.01), (0.058873676, -0.0038587847, 0.01), (0.026916498, -0.002550722, 0.01), (0.027657794, -0.005221048, 0.012), (0.058495246, -0.0077010454, 0.012), (0.058873676, -0.0038587847, 0.012), (0.027914356, -0.0026161252, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "deck_sector_095" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [3, 2, 1, 0, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.026916498, -0.002550722, 0.01), (0.058873676, -0.0038587847, 0.01), (0.059, -1.4450832e-17, 0.01), (0.027, -9.552245e-18, 0.01), (0.027914356, -0.0026161252, 0.012), (0.058873676, -0.0038587847, 0.012), (0.059, -1.4450832e-17, 0.012), (0.028, -9.797174e-18, 0.012)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "recess_surface" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/recess>
+        point3f[] points = [(0.039, 0, -0.00001), (0.038812205, 0.0038226685, -0.00001), (0.038250625, 0.0076085227, -0.00001), (0.037320673, 0.011321102, -0.00001), (0.036031302, 0.014924654, -0.00001), (0.03439493, 0.018384473, -0.00001), (0.032427315, 0.021667238, -0.00001), (0.030147407, 0.024741339, -0.00001), (0.027577164, 0.027577164, -0.00001), (0.024741339, 0.030147407, -0.00001), (0.021667238, 0.032427315, -0.00001), (0.018384473, 0.03439493, -0.00001), (0.014924654, 0.036031302, -0.00001), (0.011321102, 0.037320673, -0.00001), (0.0076085227, 0.038250625, -0.00001), (0.0038226685, 0.038812205, -0.00001), (2.3880613e-18, 0.039, -0.00001), (-0.0038226685, 0.038812205, -0.00001), (-0.0076085227, 0.038250625, -0.00001), (-0.011321102, 0.037320673, -0.00001), (-0.014924654, 0.036031302, -0.00001), (-0.018384473, 0.03439493, -0.00001), (-0.021667238, 0.032427315, -0.00001), (-0.024741339, 0.030147407, -0.00001), (-0.027577164, 0.027577164, -0.00001), (-0.030147407, 0.024741339, -0.00001), (-0.032427315, 0.021667238, -0.00001), (-0.03439493, 0.018384473, -0.00001), (-0.036031302, 0.014924654, -0.00001), (-0.037320673, 0.011321102, -0.00001), (-0.038250625, 0.0076085227, -0.00001), (-0.038812205, 0.0038226685, -0.00001), (-0.039, 4.7761227e-18, -0.00001), (-0.038812205, -0.0038226685, -0.00001), (-0.038250625, -0.0076085227, -0.00001), (-0.037320673, -0.011321102, -0.00001), (-0.036031302, -0.014924654, -0.00001), (-0.03439493, -0.018384473, -0.00001), (-0.032427315, -0.021667238, -0.00001), (-0.030147407, -0.024741339, -0.00001), (-0.027577164, -0.027577164, -0.00001), (-0.024741339, -0.030147407, -0.00001), (-0.021667238, -0.032427315, -0.00001), (-0.018384473, -0.03439493, -0.00001), (-0.014924654, -0.036031302, -0.00001), (-0.011321102, -0.037320673, -0.00001), (-0.0076085227, -0.038250625, -0.00001), (-0.0038226685, -0.038812205, -0.00001), (-7.164184e-18, -0.039, -0.00001), (0.0038226685, -0.038812205, -0.00001), (0.0076085227, -0.038250625, -0.00001), (0.011321102, -0.037320673, -0.00001), (0.014924654, -0.036031302, -0.00001), (0.018384473, -0.03439493, -0.00001), (0.021667238, -0.032427315, -0.00001), (0.024741339, -0.030147407, -0.00001), (0.027577164, -0.027577164, -0.00001), (0.030147407, -0.024741339, -0.00001), (0.032427315, -0.021667238, -0.00001), (0.03439493, -0.018384473, -0.00001), (0.036031302, -0.014924654, -0.00001), (0.037320673, -0.011321102, -0.00001), (0.038250625, -0.0076085227, -0.00001), (0.038812205, -0.0038226685, -0.00001), (0.039, 0, 0.00001), (0.038812205, 0.0038226685, 0.00001), (0.038250625, 0.0076085227, 0.00001), (0.037320673, 0.011321102, 0.00001), (0.036031302, 0.014924654, 0.00001), (0.03439493, 0.018384473, 0.00001), (0.032427315, 0.021667238, 0.00001), (0.030147407, 0.024741339, 0.00001), (0.027577164, 0.027577164, 0.00001), (0.024741339, 0.030147407, 0.00001), (0.021667238, 0.032427315, 0.00001), (0.018384473, 0.03439493, 0.00001), (0.014924654, 0.036031302, 0.00001), (0.011321102, 0.037320673, 0.00001), (0.0076085227, 0.038250625, 0.00001), (0.0038226685, 0.038812205, 0.00001), (2.3880613e-18, 0.039, 0.00001), (-0.0038226685, 0.038812205, 0.00001), (-0.0076085227, 0.038250625, 0.00001), (-0.011321102, 0.037320673, 0.00001), (-0.014924654, 0.036031302, 0.00001), (-0.018384473, 0.03439493, 0.00001), (-0.021667238, 0.032427315, 0.00001), (-0.024741339, 0.030147407, 0.00001), (-0.027577164, 0.027577164, 0.00001), (-0.030147407, 0.024741339, 0.00001), (-0.032427315, 0.021667238, 0.00001), (-0.03439493, 0.018384473, 0.00001), (-0.036031302, 0.014924654, 0.00001), (-0.037320673, 0.011321102, 0.00001), (-0.038250625, 0.0076085227, 0.00001), (-0.038812205, 0.0038226685, 0.00001), (-0.039, 4.7761227e-18, 0.00001), (-0.038812205, -0.0038226685, 0.00001), (-0.038250625, -0.0076085227, 0.00001), (-0.037320673, -0.011321102, 0.00001), (-0.036031302, -0.014924654, 0.00001), (-0.03439493, -0.018384473, 0.00001), (-0.032427315, -0.021667238, 0.00001), (-0.030147407, -0.024741339, 0.00001), (-0.027577164, -0.027577164, 0.00001), (-0.024741339, -0.030147407, 0.00001), (-0.021667238, -0.032427315, 0.00001), (-0.018384473, -0.03439493, 0.00001), (-0.014924654, -0.036031302, 0.00001), (-0.011321102, -0.037320673, 0.00001), (-0.0076085227, -0.038250625, 0.00001), (-0.0038226685, -0.038812205, 0.00001), (-7.164184e-18, -0.039, 0.00001), (0.0038226685, -0.038812205, 0.00001), (0.0076085227, -0.038250625, 0.00001), (0.011321102, -0.037320673, 0.00001), (0.014924654, -0.036031302, 0.00001), (0.018384473, -0.03439493, 0.00001), (0.021667238, -0.032427315, 0.00001), (0.024741339, -0.030147407, 0.00001), (0.027577164, -0.027577164, 0.00001), (0.030147407, -0.024741339, 0.00001), (0.032427315, -0.021667238, 0.00001), (0.03439493, -0.018384473, 0.00001), (0.036031302, -0.014924654, 0.00001), (0.037320673, -0.011321102, 0.00001), (0.038250625, -0.0076085227, 0.00001), (0.038812205, -0.0038226685, 0.00001)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (-0.012, 0, 0.01001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "foot" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/black>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.055, 0, -0.0005), (0.05473516, 0.0053909426, -0.0005), (0.05394319, 0.010729968, -0.0005), (0.052631717, 0.015965657, -0.0005), (0.050813373, 0.021047588, -0.0005), (0.04850567, 0.025926821, -0.0005), (0.04573083, 0.030556362, -0.0005), (0.042515576, 0.03489163, -0.0005), (0.038890872, 0.038890872, -0.0005), (0.03489163, 0.042515576, -0.0005), (0.030556362, 0.04573083, -0.0005), (0.025926821, 0.04850567, -0.0005), (0.021047588, 0.050813373, -0.0005), (0.015965657, 0.052631717, -0.0005), (0.010729968, 0.05394319, -0.0005), (0.0053909426, 0.05473516, -0.0005), (3.3677786e-18, 0.055, -0.0005), (-0.0053909426, 0.05473516, -0.0005), (-0.010729968, 0.05394319, -0.0005), (-0.015965657, 0.052631717, -0.0005), (-0.021047588, 0.050813373, -0.0005), (-0.025926821, 0.04850567, -0.0005), (-0.030556362, 0.04573083, -0.0005), (-0.03489163, 0.042515576, -0.0005), (-0.038890872, 0.038890872, -0.0005), (-0.042515576, 0.03489163, -0.0005), (-0.04573083, 0.030556362, -0.0005), (-0.04850567, 0.025926821, -0.0005), (-0.050813373, 0.021047588, -0.0005), (-0.052631717, 0.015965657, -0.0005), (-0.05394319, 0.010729968, -0.0005), (-0.05473516, 0.0053909426, -0.0005), (-0.055, 6.735557e-18, -0.0005), (-0.05473516, -0.0053909426, -0.0005), (-0.05394319, -0.010729968, -0.0005), (-0.052631717, -0.015965657, -0.0005), (-0.050813373, -0.021047588, -0.0005), (-0.04850567, -0.025926821, -0.0005), (-0.04573083, -0.030556362, -0.0005), (-0.042515576, -0.03489163, -0.0005), (-0.038890872, -0.038890872, -0.0005), (-0.03489163, -0.042515576, -0.0005), (-0.030556362, -0.04573083, -0.0005), (-0.025926821, -0.04850567, -0.0005), (-0.021047588, -0.050813373, -0.0005), (-0.015965657, -0.052631717, -0.0005), (-0.010729968, -0.05394319, -0.0005), (-0.0053909426, -0.05473516, -0.0005), (-1.0103336e-17, -0.055, -0.0005), (0.0053909426, -0.05473516, -0.0005), (0.010729968, -0.05394319, -0.0005), (0.015965657, -0.052631717, -0.0005), (0.021047588, -0.050813373, -0.0005), (0.025926821, -0.04850567, -0.0005), (0.030556362, -0.04573083, -0.0005), (0.03489163, -0.042515576, -0.0005), (0.038890872, -0.038890872, -0.0005), (0.042515576, -0.03489163, -0.0005), (0.04573083, -0.030556362, -0.0005), (0.04850567, -0.025926821, -0.0005), (0.050813373, -0.021047588, -0.0005), (0.052631717, -0.015965657, -0.0005), (0.05394319, -0.010729968, -0.0005), (0.05473516, -0.0053909426, -0.0005), (0.055, 0, 0.0005), (0.05473516, 0.0053909426, 0.0005), (0.05394319, 0.010729968, 0.0005), (0.052631717, 0.015965657, 0.0005), (0.050813373, 0.021047588, 0.0005), (0.04850567, 0.025926821, 0.0005), (0.04573083, 0.030556362, 0.0005), (0.042515576, 0.03489163, 0.0005), (0.038890872, 0.038890872, 0.0005), (0.03489163, 0.042515576, 0.0005), (0.030556362, 0.04573083, 0.0005), (0.025926821, 0.04850567, 0.0005), (0.021047588, 0.050813373, 0.0005), (0.015965657, 0.052631717, 0.0005), (0.010729968, 0.05394319, 0.0005), (0.0053909426, 0.05473516, 0.0005), (3.3677786e-18, 0.055, 0.0005), (-0.0053909426, 0.05473516, 0.0005), (-0.010729968, 0.05394319, 0.0005), (-0.015965657, 0.052631717, 0.0005), (-0.021047588, 0.050813373, 0.0005), (-0.025926821, 0.04850567, 0.0005), (-0.030556362, 0.04573083, 0.0005), (-0.03489163, 0.042515576, 0.0005), (-0.038890872, 0.038890872, 0.0005), (-0.042515576, 0.03489163, 0.0005), (-0.04573083, 0.030556362, 0.0005), (-0.04850567, 0.025926821, 0.0005), (-0.050813373, 0.021047588, 0.0005), (-0.052631717, 0.015965657, 0.0005), (-0.05394319, 0.010729968, 0.0005), (-0.05473516, 0.0053909426, 0.0005), (-0.055, 6.735557e-18, 0.0005), (-0.05473516, -0.0053909426, 0.0005), (-0.05394319, -0.010729968, 0.0005), (-0.052631717, -0.015965657, 0.0005), (-0.050813373, -0.021047588, 0.0005), (-0.04850567, -0.025926821, 0.0005), (-0.04573083, -0.030556362, 0.0005), (-0.042515576, -0.03489163, 0.0005), (-0.038890872, -0.038890872, 0.0005), (-0.03489163, -0.042515576, 0.0005), (-0.030556362, -0.04573083, 0.0005), (-0.025926821, -0.04850567, 0.0005), (-0.021047588, -0.050813373, 0.0005), (-0.015965657, -0.052631717, 0.0005), (-0.010729968, -0.05394319, 0.0005), (-0.0053909426, -0.05473516, 0.0005), (-1.0103336e-17, -0.055, 0.0005), (0.0053909426, -0.05473516, 0.0005), (0.010729968, -0.05394319, 0.0005), (0.015965657, -0.052631717, 0.0005), (0.021047588, -0.050813373, 0.0005), (0.025926821, -0.04850567, 0.0005), (0.030556362, -0.04573083, 0.0005), (0.03489163, -0.042515576, 0.0005), (0.038890872, -0.038890872, 0.0005), (0.042515576, -0.03489163, 0.0005), (0.04573083, -0.030556362, 0.0005), (0.04850567, -0.025926821, 0.0005), (0.050813373, -0.021047588, 0.0005), (0.052631717, -0.015965657, 0.0005), (0.05394319, -0.010729968, 0.0005), (0.05473516, -0.0053909426, 0.0005)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (1, 0, 0, 0)
+        double3 xformOp:translate = (0, 0, 0.0005)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "stem" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/silver>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.005, 0, -0.039028835), (0.004975924, 0.0004900857, -0.039028835), (0.0049039265, 0.0009754516, -0.039028835), (0.004784702, 0.0014514234, -0.039028835), (0.0046193977, 0.0019134171, -0.039028835), (0.004409606, 0.0023569837, -0.039028835), (0.004157348, 0.0027778512, -0.039028835), (0.0038650522, 0.0031719664, -0.039028835), (0.0035355338, 0.0035355338, -0.039028835), (0.0031719664, 0.0038650522, -0.039028835), (0.0027778512, 0.004157348, -0.039028835), (0.0023569837, 0.004409606, -0.039028835), (0.0019134171, 0.0046193977, -0.039028835), (0.0014514234, 0.004784702, -0.039028835), (0.0009754516, 0.0049039265, -0.039028835), (0.0004900857, 0.004975924, -0.039028835), (3.061617e-19, 0.005, -0.039028835), (-0.0004900857, 0.004975924, -0.039028835), (-0.0009754516, 0.0049039265, -0.039028835), (-0.0014514234, 0.004784702, -0.039028835), (-0.0019134171, 0.0046193977, -0.039028835), (-0.0023569837, 0.004409606, -0.039028835), (-0.0027778512, 0.004157348, -0.039028835), (-0.0031719664, 0.0038650522, -0.039028835), (-0.0035355338, 0.0035355338, -0.039028835), (-0.0038650522, 0.0031719664, -0.039028835), (-0.004157348, 0.0027778512, -0.039028835), (-0.004409606, 0.0023569837, -0.039028835), (-0.0046193977, 0.0019134171, -0.039028835), (-0.004784702, 0.0014514234, -0.039028835), (-0.0049039265, 0.0009754516, -0.039028835), (-0.004975924, 0.0004900857, -0.039028835), (-0.005, 6.123234e-19, -0.039028835), (-0.004975924, -0.0004900857, -0.039028835), (-0.0049039265, -0.0009754516, -0.039028835), (-0.004784702, -0.0014514234, -0.039028835), (-0.0046193977, -0.0019134171, -0.039028835), (-0.004409606, -0.0023569837, -0.039028835), (-0.004157348, -0.0027778512, -0.039028835), (-0.0038650522, -0.0031719664, -0.039028835), (-0.0035355338, -0.0035355338, -0.039028835), (-0.0031719664, -0.0038650522, -0.039028835), (-0.0027778512, -0.004157348, -0.039028835), (-0.0023569837, -0.004409606, -0.039028835), (-0.0019134171, -0.0046193977, -0.039028835), (-0.0014514234, -0.004784702, -0.039028835), (-0.0009754516, -0.0049039265, -0.039028835), (-0.0004900857, -0.004975924, -0.039028835), (-9.184851e-19, -0.005, -0.039028835), (0.0004900857, -0.004975924, -0.039028835), (0.0009754516, -0.0049039265, -0.039028835), (0.0014514234, -0.004784702, -0.039028835), (0.0019134171, -0.0046193977, -0.039028835), (0.0023569837, -0.004409606, -0.039028835), (0.0027778512, -0.004157348, -0.039028835), (0.0031719664, -0.0038650522, -0.039028835), (0.0035355338, -0.0035355338, -0.039028835), (0.0038650522, -0.0031719664, -0.039028835), (0.004157348, -0.0027778512, -0.039028835), (0.004409606, -0.0023569837, -0.039028835), (0.0046193977, -0.0019134171, -0.039028835), (0.004784702, -0.0014514234, -0.039028835), (0.0049039265, -0.0009754516, -0.039028835), (0.004975924, -0.0004900857, -0.039028835), (0.005, 0, 0.039028835), (0.004975924, 0.0004900857, 0.039028835), (0.0049039265, 0.0009754516, 0.039028835), (0.004784702, 0.0014514234, 0.039028835), (0.0046193977, 0.0019134171, 0.039028835), (0.004409606, 0.0023569837, 0.039028835), (0.004157348, 0.0027778512, 0.039028835), (0.0038650522, 0.0031719664, 0.039028835), (0.0035355338, 0.0035355338, 0.039028835), (0.0031719664, 0.0038650522, 0.039028835), (0.0027778512, 0.004157348, 0.039028835), (0.0023569837, 0.004409606, 0.039028835), (0.0019134171, 0.0046193977, 0.039028835), (0.0014514234, 0.004784702, 0.039028835), (0.0009754516, 0.0049039265, 0.039028835), (0.0004900857, 0.004975924, 0.039028835), (3.061617e-19, 0.005, 0.039028835), (-0.0004900857, 0.004975924, 0.039028835), (-0.0009754516, 0.0049039265, 0.039028835), (-0.0014514234, 0.004784702, 0.039028835), (-0.0019134171, 0.0046193977, 0.039028835), (-0.0023569837, 0.004409606, 0.039028835), (-0.0027778512, 0.004157348, 0.039028835), (-0.0031719664, 0.0038650522, 0.039028835), (-0.0035355338, 0.0035355338, 0.039028835), (-0.0038650522, 0.0031719664, 0.039028835), (-0.004157348, 0.0027778512, 0.039028835), (-0.004409606, 0.0023569837, 0.039028835), (-0.0046193977, 0.0019134171, 0.039028835), (-0.004784702, 0.0014514234, 0.039028835), (-0.0049039265, 0.0009754516, 0.039028835), (-0.004975924, 0.0004900857, 0.039028835), (-0.005, 6.123234e-19, 0.039028835), (-0.004975924, -0.0004900857, 0.039028835), (-0.0049039265, -0.0009754516, 0.039028835), (-0.004784702, -0.0014514234, 0.039028835), (-0.0046193977, -0.0019134171, 0.039028835), (-0.004409606, -0.0023569837, 0.039028835), (-0.004157348, -0.0027778512, 0.039028835), (-0.0038650522, -0.0031719664, 0.039028835), (-0.0035355338, -0.0035355338, 0.039028835), (-0.0031719664, -0.0038650522, 0.039028835), (-0.0027778512, -0.004157348, 0.039028835), (-0.0023569837, -0.004409606, 0.039028835), (-0.0019134171, -0.0046193977, 0.039028835), (-0.0014514234, -0.004784702, 0.039028835), (-0.0009754516, -0.0049039265, 0.039028835), (-0.0004900857, -0.004975924, 0.039028835), (-9.184851e-19, -0.005, 0.039028835), (0.0004900857, -0.004975924, 0.039028835), (0.0009754516, -0.0049039265, 0.039028835), (0.0014514234, -0.004784702, 0.039028835), (0.0019134171, -0.0046193977, 0.039028835), (0.0023569837, -0.004409606, 0.039028835), (0.0027778512, -0.004157348, 0.039028835), (0.0031719664, -0.0038650522, 0.039028835), (0.0035355338, -0.0035355338, 0.039028835), (0.0038650522, -0.0031719664, 0.039028835), (0.004157348, -0.0027778512, 0.039028835), (0.004409606, -0.0023569837, 0.039028835), (0.0046193977, -0.0019134171, 0.039028835), (0.004784702, -0.0014514234, 0.039028835), (0.0049039265, -0.0009754516, 0.039028835), (0.004975924, -0.0004900857, 0.039028835)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.9998153, 0, 0.019220112, 0)
+        double3 xformOp:translate = (0.035500000000000004, 0, 0.051)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "crossbar" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/silver>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.004, 0, -0.05), (0.003980739, 0.00039206856, -0.05), (0.003923141, 0.0007803613, -0.05), (0.0038277614, 0.0011611388, -0.05), (0.0036955182, 0.0015307338, -0.05), (0.003527685, 0.001885587, -0.05), (0.0033258784, 0.002222281, -0.05), (0.0030920417, 0.0025375732, -0.05), (0.0028284271, 0.0028284271, -0.05), (0.0025375732, 0.0030920417, -0.05), (0.002222281, 0.0033258784, -0.05), (0.001885587, 0.003527685, -0.05), (0.0015307338, 0.0036955182, -0.05), (0.0011611388, 0.0038277614, -0.05), (0.0007803613, 0.003923141, -0.05), (0.00039206856, 0.003980739, -0.05), (2.4492937e-19, 0.004, -0.05), (-0.00039206856, 0.003980739, -0.05), (-0.0007803613, 0.003923141, -0.05), (-0.0011611388, 0.0038277614, -0.05), (-0.0015307338, 0.0036955182, -0.05), (-0.001885587, 0.003527685, -0.05), (-0.002222281, 0.0033258784, -0.05), (-0.0025375732, 0.0030920417, -0.05), (-0.0028284271, 0.0028284271, -0.05), (-0.0030920417, 0.0025375732, -0.05), (-0.0033258784, 0.002222281, -0.05), (-0.003527685, 0.001885587, -0.05), (-0.0036955182, 0.0015307338, -0.05), (-0.0038277614, 0.0011611388, -0.05), (-0.003923141, 0.0007803613, -0.05), (-0.003980739, 0.00039206856, -0.05), (-0.004, 4.8985874e-19, -0.05), (-0.003980739, -0.00039206856, -0.05), (-0.003923141, -0.0007803613, -0.05), (-0.0038277614, -0.0011611388, -0.05), (-0.0036955182, -0.0015307338, -0.05), (-0.003527685, -0.001885587, -0.05), (-0.0033258784, -0.002222281, -0.05), (-0.0030920417, -0.0025375732, -0.05), (-0.0028284271, -0.0028284271, -0.05), (-0.0025375732, -0.0030920417, -0.05), (-0.002222281, -0.0033258784, -0.05), (-0.001885587, -0.003527685, -0.05), (-0.0015307338, -0.0036955182, -0.05), (-0.0011611388, -0.0038277614, -0.05), (-0.0007803613, -0.003923141, -0.05), (-0.00039206856, -0.003980739, -0.05), (-7.3478805e-19, -0.004, -0.05), (0.00039206856, -0.003980739, -0.05), (0.0007803613, -0.003923141, -0.05), (0.0011611388, -0.0038277614, -0.05), (0.0015307338, -0.0036955182, -0.05), (0.001885587, -0.003527685, -0.05), (0.002222281, -0.0033258784, -0.05), (0.0025375732, -0.0030920417, -0.05), (0.0028284271, -0.0028284271, -0.05), (0.0030920417, -0.0025375732, -0.05), (0.0033258784, -0.002222281, -0.05), (0.003527685, -0.001885587, -0.05), (0.0036955182, -0.0015307338, -0.05), (0.0038277614, -0.0011611388, -0.05), (0.003923141, -0.0007803613, -0.05), (0.003980739, -0.00039206856, -0.05), (0.004, 0, 0.05), (0.003980739, 0.00039206856, 0.05), (0.003923141, 0.0007803613, 0.05), (0.0038277614, 0.0011611388, 0.05), (0.0036955182, 0.0015307338, 0.05), (0.003527685, 0.001885587, 0.05), (0.0033258784, 0.002222281, 0.05), (0.0030920417, 0.0025375732, 0.05), (0.0028284271, 0.0028284271, 0.05), (0.0025375732, 0.0030920417, 0.05), (0.002222281, 0.0033258784, 0.05), (0.001885587, 0.003527685, 0.05), (0.0015307338, 0.0036955182, 0.05), (0.0011611388, 0.0038277614, 0.05), (0.0007803613, 0.003923141, 0.05), (0.00039206856, 0.003980739, 0.05), (2.4492937e-19, 0.004, 0.05), (-0.00039206856, 0.003980739, 0.05), (-0.0007803613, 0.003923141, 0.05), (-0.0011611388, 0.0038277614, 0.05), (-0.0015307338, 0.0036955182, 0.05), (-0.001885587, 0.003527685, 0.05), (-0.002222281, 0.0033258784, 0.05), (-0.0025375732, 0.0030920417, 0.05), (-0.0028284271, 0.0028284271, 0.05), (-0.0030920417, 0.0025375732, 0.05), (-0.0033258784, 0.002222281, 0.05), (-0.003527685, 0.001885587, 0.05), (-0.0036955182, 0.0015307338, 0.05), (-0.0038277614, 0.0011611388, 0.05), (-0.003923141, 0.0007803613, 0.05), (-0.003980739, 0.00039206856, 0.05), (-0.004, 4.8985874e-19, 0.05), (-0.003980739, -0.00039206856, 0.05), (-0.003923141, -0.0007803613, 0.05), (-0.0038277614, -0.0011611388, 0.05), (-0.0036955182, -0.0015307338, 0.05), (-0.003527685, -0.001885587, 0.05), (-0.0033258784, -0.002222281, 0.05), (-0.0030920417, -0.0025375732, 0.05), (-0.0028284271, -0.0028284271, 0.05), (-0.0025375732, -0.0030920417, 0.05), (-0.002222281, -0.0033258784, 0.05), (-0.001885587, -0.003527685, 0.05), (-0.0015307338, -0.0036955182, 0.05), (-0.0011611388, -0.0038277614, 0.05), (-0.0007803613, -0.003923141, 0.05), (-0.00039206856, -0.003980739, 0.05), (-7.3478805e-19, -0.004, 0.05), (0.00039206856, -0.003980739, 0.05), (0.0007803613, -0.003923141, 0.05), (0.0011611388, -0.0038277614, 0.05), (0.0015307338, -0.0036955182, 0.05), (0.001885587, -0.003527685, 0.05), (0.002222281, -0.0033258784, 0.05), (0.0025375732, -0.0030920417, 0.05), (0.0028284271, -0.0028284271, 0.05), (0.0030920417, -0.0025375732, 0.05), (0.0033258784, -0.002222281, 0.05), (0.003527685, -0.001885587, 0.05), (0.0036955182, -0.0015307338, 0.05), (0.0038277614, -0.0011611388, 0.05), (0.003923141, -0.0007803613, 0.05), (0.003980739, -0.00039206856, 0.05)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.70710677, -0.70710677, 0, 0)
+        double3 xformOp:translate = (0.037, 0, 0.09)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "phone_mount" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/silver>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0035, 0, -0.005881741), (0.0034831464, 0.00034306, -0.005881741), (0.0034327484, 0.00068281614, -0.005881741), (0.0033492912, 0.0010159963, -0.005881741), (0.0032335783, 0.001339392, -0.005881741), (0.0030867243, 0.0016498886, -0.005881741), (0.0029101437, 0.0019444958, -0.005881741), (0.0027055365, 0.0022203764, -0.005881741), (0.0024748738, 0.0024748738, -0.005881741), (0.0022203764, 0.0027055365, -0.005881741), (0.0019444958, 0.0029101437, -0.005881741), (0.0016498886, 0.0030867243, -0.005881741), (0.001339392, 0.0032335783, -0.005881741), (0.0010159963, 0.0033492912, -0.005881741), (0.00068281614, 0.0034327484, -0.005881741), (0.00034306, 0.0034831464, -0.005881741), (2.1431319e-19, 0.0035, -0.005881741), (-0.00034306, 0.0034831464, -0.005881741), (-0.00068281614, 0.0034327484, -0.005881741), (-0.0010159963, 0.0033492912, -0.005881741), (-0.001339392, 0.0032335783, -0.005881741), (-0.0016498886, 0.0030867243, -0.005881741), (-0.0019444958, 0.0029101437, -0.005881741), (-0.0022203764, 0.0027055365, -0.005881741), (-0.0024748738, 0.0024748738, -0.005881741), (-0.0027055365, 0.0022203764, -0.005881741), (-0.0029101437, 0.0019444958, -0.005881741), (-0.0030867243, 0.0016498886, -0.005881741), (-0.0032335783, 0.001339392, -0.005881741), (-0.0033492912, 0.0010159963, -0.005881741), (-0.0034327484, 0.00068281614, -0.005881741), (-0.0034831464, 0.00034306, -0.005881741), (-0.0035, 4.2862638e-19, -0.005881741), (-0.0034831464, -0.00034306, -0.005881741), (-0.0034327484, -0.00068281614, -0.005881741), (-0.0033492912, -0.0010159963, -0.005881741), (-0.0032335783, -0.001339392, -0.005881741), (-0.0030867243, -0.0016498886, -0.005881741), (-0.0029101437, -0.0019444958, -0.005881741), (-0.0027055365, -0.0022203764, -0.005881741), (-0.0024748738, -0.0024748738, -0.005881741), (-0.0022203764, -0.0027055365, -0.005881741), (-0.0019444958, -0.0029101437, -0.005881741), (-0.0016498886, -0.0030867243, -0.005881741), (-0.001339392, -0.0032335783, -0.005881741), (-0.0010159963, -0.0033492912, -0.005881741), (-0.00068281614, -0.0034327484, -0.005881741), (-0.00034306, -0.0034831464, -0.005881741), (-6.4293957e-19, -0.0035, -0.005881741), (0.00034306, -0.0034831464, -0.005881741), (0.00068281614, -0.0034327484, -0.005881741), (0.0010159963, -0.0033492912, -0.005881741), (0.001339392, -0.0032335783, -0.005881741), (0.0016498886, -0.0030867243, -0.005881741), (0.0019444958, -0.0029101437, -0.005881741), (0.0022203764, -0.0027055365, -0.005881741), (0.0024748738, -0.0024748738, -0.005881741), (0.0027055365, -0.0022203764, -0.005881741), (0.0029101437, -0.0019444958, -0.005881741), (0.0030867243, -0.0016498886, -0.005881741), (0.0032335783, -0.001339392, -0.005881741), (0.0033492912, -0.0010159963, -0.005881741), (0.0034327484, -0.00068281614, -0.005881741), (0.0034831464, -0.00034306, -0.005881741), (0.0035, 0, 0.005881741), (0.0034831464, 0.00034306, 0.005881741), (0.0034327484, 0.00068281614, 0.005881741), (0.0033492912, 0.0010159963, 0.005881741), (0.0032335783, 0.001339392, 0.005881741), (0.0030867243, 0.0016498886, 0.005881741), (0.0029101437, 0.0019444958, 0.005881741), (0.0027055365, 0.0022203764, 0.005881741), (0.0024748738, 0.0024748738, 0.005881741), (0.0022203764, 0.0027055365, 0.005881741), (0.0019444958, 0.0029101437, 0.005881741), (0.0016498886, 0.0030867243, 0.005881741), (0.001339392, 0.0032335783, 0.005881741), (0.0010159963, 0.0033492912, 0.005881741), (0.00068281614, 0.0034327484, 0.005881741), (0.00034306, 0.0034831464, 0.005881741), (2.1431319e-19, 0.0035, 0.005881741), (-0.00034306, 0.0034831464, 0.005881741), (-0.00068281614, 0.0034327484, 0.005881741), (-0.0010159963, 0.0033492912, 0.005881741), (-0.001339392, 0.0032335783, 0.005881741), (-0.0016498886, 0.0030867243, 0.005881741), (-0.0019444958, 0.0029101437, 0.005881741), (-0.0022203764, 0.0027055365, 0.005881741), (-0.0024748738, 0.0024748738, 0.005881741), (-0.0027055365, 0.0022203764, 0.005881741), (-0.0029101437, 0.0019444958, 0.005881741), (-0.0030867243, 0.0016498886, 0.005881741), (-0.0032335783, 0.001339392, 0.005881741), (-0.0033492912, 0.0010159963, 0.005881741), (-0.0034327484, 0.00068281614, 0.005881741), (-0.0034831464, 0.00034306, 0.005881741), (-0.0035, 4.2862638e-19, 0.005881741), (-0.0034831464, -0.00034306, 0.005881741), (-0.0034327484, -0.00068281614, 0.005881741), (-0.0033492912, -0.0010159963, 0.005881741), (-0.0032335783, -0.001339392, 0.005881741), (-0.0030867243, -0.0016498886, 0.005881741), (-0.0029101437, -0.0019444958, 0.005881741), (-0.0027055365, -0.0022203764, 0.005881741), (-0.0024748738, -0.0024748738, 0.005881741), (-0.0022203764, -0.0027055365, 0.005881741), (-0.0019444958, -0.0029101437, 0.005881741), (-0.0016498886, -0.0030867243, 0.005881741), (-0.001339392, -0.0032335783, 0.005881741), (-0.0010159963, -0.0033492912, 0.005881741), (-0.00068281614, -0.0034327484, 0.005881741), (-0.00034306, -0.0034831464, 0.005881741), (-6.4293957e-19, -0.0035, 0.005881741), (0.00034306, -0.0034831464, 0.005881741), (0.00068281614, -0.0034327484, 0.005881741), (0.0010159963, -0.0033492912, 0.005881741), (0.001339392, -0.0032335783, 0.005881741), (0.0016498886, -0.0030867243, 0.005881741), (0.0019444958, -0.0029101437, 0.005881741), (0.0022203764, -0.0027055365, 0.005881741), (0.0024748738, -0.0024748738, 0.005881741), (0.0027055365, -0.0022203764, 0.005881741), (0.0029101437, -0.0019444958, 0.005881741), (0.0030867243, -0.0016498886, 0.005881741), (0.0032335783, -0.001339392, 0.005881741), (0.0033492912, -0.0010159963, 0.005881741), (0.0034327484, -0.00068281614, 0.005881741), (0.0034831464, -0.00034306, 0.005881741)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.8250114, 0, -0.5651161, 0)
+        double3 xformOp:translate = (0.03151554445665, 0.05, 0.092125)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "phone_puck" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.028, 0, -0.0035), (0.027865171, 0.00274448, -0.0035), (0.027461987, 0.005462529, -0.0035), (0.02679433, 0.008127971, -0.0035), (0.025868626, 0.010715136, -0.0035), (0.024693795, 0.013199109, -0.0035), (0.02328115, 0.015555967, -0.0035), (0.021644292, 0.017763011, -0.0035), (0.01979899, 0.01979899, -0.0035), (0.017763011, 0.021644292, -0.0035), (0.015555967, 0.02328115, -0.0035), (0.013199109, 0.024693795, -0.0035), (0.010715136, 0.025868626, -0.0035), (0.008127971, 0.02679433, -0.0035), (0.005462529, 0.027461987, -0.0035), (0.00274448, 0.027865171, -0.0035), (1.7145055e-18, 0.028, -0.0035), (-0.00274448, 0.027865171, -0.0035), (-0.005462529, 0.027461987, -0.0035), (-0.008127971, 0.02679433, -0.0035), (-0.010715136, 0.025868626, -0.0035), (-0.013199109, 0.024693795, -0.0035), (-0.015555967, 0.02328115, -0.0035), (-0.017763011, 0.021644292, -0.0035), (-0.01979899, 0.01979899, -0.0035), (-0.021644292, 0.017763011, -0.0035), (-0.02328115, 0.015555967, -0.0035), (-0.024693795, 0.013199109, -0.0035), (-0.025868626, 0.010715136, -0.0035), (-0.02679433, 0.008127971, -0.0035), (-0.027461987, 0.005462529, -0.0035), (-0.027865171, 0.00274448, -0.0035), (-0.028, 3.429011e-18, -0.0035), (-0.027865171, -0.00274448, -0.0035), (-0.027461987, -0.005462529, -0.0035), (-0.02679433, -0.008127971, -0.0035), (-0.025868626, -0.010715136, -0.0035), (-0.024693795, -0.013199109, -0.0035), (-0.02328115, -0.015555967, -0.0035), (-0.021644292, -0.017763011, -0.0035), (-0.01979899, -0.01979899, -0.0035), (-0.017763011, -0.021644292, -0.0035), (-0.015555967, -0.02328115, -0.0035), (-0.013199109, -0.024693795, -0.0035), (-0.010715136, -0.025868626, -0.0035), (-0.008127971, -0.02679433, -0.0035), (-0.005462529, -0.027461987, -0.0035), (-0.00274448, -0.027865171, -0.0035), (-5.1435166e-18, -0.028, -0.0035), (0.00274448, -0.027865171, -0.0035), (0.005462529, -0.027461987, -0.0035), (0.008127971, -0.02679433, -0.0035), (0.010715136, -0.025868626, -0.0035), (0.013199109, -0.024693795, -0.0035), (0.015555967, -0.02328115, -0.0035), (0.017763011, -0.021644292, -0.0035), (0.01979899, -0.01979899, -0.0035), (0.021644292, -0.017763011, -0.0035), (0.02328115, -0.015555967, -0.0035), (0.024693795, -0.013199109, -0.0035), (0.025868626, -0.010715136, -0.0035), (0.02679433, -0.008127971, -0.0035), (0.027461987, -0.005462529, -0.0035), (0.027865171, -0.00274448, -0.0035), (0.028, 0, 0.0035), (0.027865171, 0.00274448, 0.0035), (0.027461987, 0.005462529, 0.0035), (0.02679433, 0.008127971, 0.0035), (0.025868626, 0.010715136, 0.0035), (0.024693795, 0.013199109, 0.0035), (0.02328115, 0.015555967, 0.0035), (0.021644292, 0.017763011, 0.0035), (0.01979899, 0.01979899, 0.0035), (0.017763011, 0.021644292, 0.0035), (0.015555967, 0.02328115, 0.0035), (0.013199109, 0.024693795, 0.0035), (0.010715136, 0.025868626, 0.0035), (0.008127971, 0.02679433, 0.0035), (0.005462529, 0.027461987, 0.0035), (0.00274448, 0.027865171, 0.0035), (1.7145055e-18, 0.028, 0.0035), (-0.00274448, 0.027865171, 0.0035), (-0.005462529, 0.027461987, 0.0035), (-0.008127971, 0.02679433, 0.0035), (-0.010715136, 0.025868626, 0.0035), (-0.013199109, 0.024693795, 0.0035), (-0.015555967, 0.02328115, 0.0035), (-0.017763011, 0.021644292, 0.0035), (-0.01979899, 0.01979899, 0.0035), (-0.021644292, 0.017763011, 0.0035), (-0.02328115, 0.015555967, 0.0035), (-0.024693795, 0.013199109, 0.0035), (-0.025868626, 0.010715136, 0.0035), (-0.02679433, 0.008127971, 0.0035), (-0.027461987, 0.005462529, 0.0035), (-0.027865171, 0.00274448, 0.0035), (-0.028, 3.429011e-18, 0.0035), (-0.027865171, -0.00274448, 0.0035), (-0.027461987, -0.005462529, 0.0035), (-0.02679433, -0.008127971, 0.0035), (-0.025868626, -0.010715136, 0.0035), (-0.024693795, -0.013199109, 0.0035), (-0.02328115, -0.015555967, 0.0035), (-0.021644292, -0.017763011, 0.0035), (-0.01979899, -0.01979899, 0.0035), (-0.017763011, -0.021644292, 0.0035), (-0.015555967, -0.02328115, 0.0035), (-0.013199109, -0.024693795, 0.0035), (-0.010715136, -0.025868626, 0.0035), (-0.008127971, -0.02679433, 0.0035), (-0.005462529, -0.027461987, 0.0035), (-0.00274448, -0.027865171, 0.0035), (-5.1435166e-18, -0.028, 0.0035), (0.00274448, -0.027865171, 0.0035), (0.005462529, -0.027461987, 0.0035), (0.008127971, -0.02679433, 0.0035), (0.010715136, -0.025868626, 0.0035), (0.013199109, -0.024693795, 0.0035), (0.015555967, -0.02328115, 0.0035), (0.017763011, -0.021644292, 0.0035), (0.01979899, -0.01979899, 0.0035), (0.021644292, -0.017763011, 0.0035), (0.02328115, -0.015555967, 0.0035), (0.024693795, -0.013199109, 0.0035), (0.025868626, -0.010715136, 0.0035), (0.02679433, -0.008127971, 0.0035), (0.027461987, -0.005462529, 0.0035), (0.027865171, -0.00274448, 0.0035)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.8660254, 0, -0.5, 0)
+        double3 xformOp:translate = (0.023, 0.05, 0.096)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "phone_face" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/white>
+        point3f[] points = [(0.0265, 0, -0.0001), (0.026372395, 0.0025974542, -0.0001), (0.02599081, 0.0051698936, -0.0001), (0.025358919, 0.007692544, -0.0001), (0.024482807, 0.010141111, -0.0001), (0.023370914, 0.012492013, -0.0001), (0.022033945, 0.014722611, -0.0001), (0.020484777, 0.016811421, -0.0001), (0.01873833, 0.01873833, -0.0001), (0.016811421, 0.020484777, -0.0001), (0.014722611, 0.022033945, -0.0001), (0.012492013, 0.023370914, -0.0001), (0.010141111, 0.024482807, -0.0001), (0.007692544, 0.025358919, -0.0001), (0.0051698936, 0.02599081, -0.0001), (0.0025974542, 0.026372395, -0.0001), (1.622657e-18, 0.0265, -0.0001), (-0.0025974542, 0.026372395, -0.0001), (-0.0051698936, 0.02599081, -0.0001), (-0.007692544, 0.025358919, -0.0001), (-0.010141111, 0.024482807, -0.0001), (-0.012492013, 0.023370914, -0.0001), (-0.014722611, 0.022033945, -0.0001), (-0.016811421, 0.020484777, -0.0001), (-0.01873833, 0.01873833, -0.0001), (-0.020484777, 0.016811421, -0.0001), (-0.022033945, 0.014722611, -0.0001), (-0.023370914, 0.012492013, -0.0001), (-0.024482807, 0.010141111, -0.0001), (-0.025358919, 0.007692544, -0.0001), (-0.02599081, 0.0051698936, -0.0001), (-0.026372395, 0.0025974542, -0.0001), (-0.0265, 3.245314e-18, -0.0001), (-0.026372395, -0.0025974542, -0.0001), (-0.02599081, -0.0051698936, -0.0001), (-0.025358919, -0.007692544, -0.0001), (-0.024482807, -0.010141111, -0.0001), (-0.023370914, -0.012492013, -0.0001), (-0.022033945, -0.014722611, -0.0001), (-0.020484777, -0.016811421, -0.0001), (-0.01873833, -0.01873833, -0.0001), (-0.016811421, -0.020484777, -0.0001), (-0.014722611, -0.022033945, -0.0001), (-0.012492013, -0.023370914, -0.0001), (-0.010141111, -0.024482807, -0.0001), (-0.007692544, -0.025358919, -0.0001), (-0.0051698936, -0.02599081, -0.0001), (-0.0025974542, -0.026372395, -0.0001), (-4.867971e-18, -0.0265, -0.0001), (0.0025974542, -0.026372395, -0.0001), (0.0051698936, -0.02599081, -0.0001), (0.007692544, -0.025358919, -0.0001), (0.010141111, -0.024482807, -0.0001), (0.012492013, -0.023370914, -0.0001), (0.014722611, -0.022033945, -0.0001), (0.016811421, -0.020484777, -0.0001), (0.01873833, -0.01873833, -0.0001), (0.020484777, -0.016811421, -0.0001), (0.022033945, -0.014722611, -0.0001), (0.023370914, -0.012492013, -0.0001), (0.024482807, -0.010141111, -0.0001), (0.025358919, -0.007692544, -0.0001), (0.02599081, -0.0051698936, -0.0001), (0.026372395, -0.0025974542, -0.0001), (0.0265, 0, 0.0001), (0.026372395, 0.0025974542, 0.0001), (0.02599081, 0.0051698936, 0.0001), (0.025358919, 0.007692544, 0.0001), (0.024482807, 0.010141111, 0.0001), (0.023370914, 0.012492013, 0.0001), (0.022033945, 0.014722611, 0.0001), (0.020484777, 0.016811421, 0.0001), (0.01873833, 0.01873833, 0.0001), (0.016811421, 0.020484777, 0.0001), (0.014722611, 0.022033945, 0.0001), (0.012492013, 0.023370914, 0.0001), (0.010141111, 0.024482807, 0.0001), (0.007692544, 0.025358919, 0.0001), (0.0051698936, 0.02599081, 0.0001), (0.0025974542, 0.026372395, 0.0001), (1.622657e-18, 0.0265, 0.0001), (-0.0025974542, 0.026372395, 0.0001), (-0.0051698936, 0.02599081, 0.0001), (-0.007692544, 0.025358919, 0.0001), (-0.010141111, 0.024482807, 0.0001), (-0.012492013, 0.023370914, 0.0001), (-0.014722611, 0.022033945, 0.0001), (-0.016811421, 0.020484777, 0.0001), (-0.01873833, 0.01873833, 0.0001), (-0.020484777, 0.016811421, 0.0001), (-0.022033945, 0.014722611, 0.0001), (-0.023370914, 0.012492013, 0.0001), (-0.024482807, 0.010141111, 0.0001), (-0.025358919, 0.007692544, 0.0001), (-0.02599081, 0.0051698936, 0.0001), (-0.026372395, 0.0025974542, 0.0001), (-0.0265, 3.245314e-18, 0.0001), (-0.026372395, -0.0025974542, 0.0001), (-0.02599081, -0.0051698936, 0.0001), (-0.025358919, -0.007692544, 0.0001), (-0.024482807, -0.010141111, 0.0001), (-0.023370914, -0.012492013, 0.0001), (-0.022033945, -0.014722611, 0.0001), (-0.020484777, -0.016811421, 0.0001), (-0.01873833, -0.01873833, 0.0001), (-0.016811421, -0.020484777, 0.0001), (-0.014722611, -0.022033945, 0.0001), (-0.012492013, -0.023370914, 0.0001), (-0.010141111, -0.024482807, 0.0001), (-0.007692544, -0.025358919, 0.0001), (-0.0051698936, -0.02599081, 0.0001), (-0.0025974542, -0.026372395, 0.0001), (-4.867971e-18, -0.0265, 0.0001), (0.0025974542, -0.026372395, 0.0001), (0.0051698936, -0.02599081, 0.0001), (0.007692544, -0.025358919, 0.0001), (0.010141111, -0.024482807, 0.0001), (0.012492013, -0.023370914, 0.0001), (0.014722611, -0.022033945, 0.0001), (0.016811421, -0.020484777, 0.0001), (0.01873833, -0.01873833, 0.0001), (0.020484777, -0.016811421, 0.0001), (0.022033945, -0.014722611, 0.0001), (0.023370914, -0.012492013, 0.0001), (0.024482807, -0.010141111, 0.0001), (0.025358919, -0.007692544, 0.0001), (0.02599081, -0.0051698936, 0.0001), (0.026372395, -0.0025974542, 0.0001)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.8660254, 0, -0.5, 0)
+        double3 xformOp:translate = (0.01988230854632, 0.05, 0.0978)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "watch_mount" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/silver>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.0035, 0, -0.0032107097), (0.0034831464, 0.00034306, -0.0032107097), (0.0034327484, 0.00068281614, -0.0032107097), (0.0033492912, 0.0010159963, -0.0032107097), (0.0032335783, 0.001339392, -0.0032107097), (0.0030867243, 0.0016498886, -0.0032107097), (0.0029101437, 0.0019444958, -0.0032107097), (0.0027055365, 0.0022203764, -0.0032107097), (0.0024748738, 0.0024748738, -0.0032107097), (0.0022203764, 0.0027055365, -0.0032107097), (0.0019444958, 0.0029101437, -0.0032107097), (0.0016498886, 0.0030867243, -0.0032107097), (0.001339392, 0.0032335783, -0.0032107097), (0.0010159963, 0.0033492912, -0.0032107097), (0.00068281614, 0.0034327484, -0.0032107097), (0.00034306, 0.0034831464, -0.0032107097), (2.1431319e-19, 0.0035, -0.0032107097), (-0.00034306, 0.0034831464, -0.0032107097), (-0.00068281614, 0.0034327484, -0.0032107097), (-0.0010159963, 0.0033492912, -0.0032107097), (-0.001339392, 0.0032335783, -0.0032107097), (-0.0016498886, 0.0030867243, -0.0032107097), (-0.0019444958, 0.0029101437, -0.0032107097), (-0.0022203764, 0.0027055365, -0.0032107097), (-0.0024748738, 0.0024748738, -0.0032107097), (-0.0027055365, 0.0022203764, -0.0032107097), (-0.0029101437, 0.0019444958, -0.0032107097), (-0.0030867243, 0.0016498886, -0.0032107097), (-0.0032335783, 0.001339392, -0.0032107097), (-0.0033492912, 0.0010159963, -0.0032107097), (-0.0034327484, 0.00068281614, -0.0032107097), (-0.0034831464, 0.00034306, -0.0032107097), (-0.0035, 4.2862638e-19, -0.0032107097), (-0.0034831464, -0.00034306, -0.0032107097), (-0.0034327484, -0.00068281614, -0.0032107097), (-0.0033492912, -0.0010159963, -0.0032107097), (-0.0032335783, -0.001339392, -0.0032107097), (-0.0030867243, -0.0016498886, -0.0032107097), (-0.0029101437, -0.0019444958, -0.0032107097), (-0.0027055365, -0.0022203764, -0.0032107097), (-0.0024748738, -0.0024748738, -0.0032107097), (-0.0022203764, -0.0027055365, -0.0032107097), (-0.0019444958, -0.0029101437, -0.0032107097), (-0.0016498886, -0.0030867243, -0.0032107097), (-0.001339392, -0.0032335783, -0.0032107097), (-0.0010159963, -0.0033492912, -0.0032107097), (-0.00068281614, -0.0034327484, -0.0032107097), (-0.00034306, -0.0034831464, -0.0032107097), (-6.4293957e-19, -0.0035, -0.0032107097), (0.00034306, -0.0034831464, -0.0032107097), (0.00068281614, -0.0034327484, -0.0032107097), (0.0010159963, -0.0033492912, -0.0032107097), (0.001339392, -0.0032335783, -0.0032107097), (0.0016498886, -0.0030867243, -0.0032107097), (0.0019444958, -0.0029101437, -0.0032107097), (0.0022203764, -0.0027055365, -0.0032107097), (0.0024748738, -0.0024748738, -0.0032107097), (0.0027055365, -0.0022203764, -0.0032107097), (0.0029101437, -0.0019444958, -0.0032107097), (0.0030867243, -0.0016498886, -0.0032107097), (0.0032335783, -0.001339392, -0.0032107097), (0.0033492912, -0.0010159963, -0.0032107097), (0.0034327484, -0.00068281614, -0.0032107097), (0.0034831464, -0.00034306, -0.0032107097), (0.0035, 0, 0.0032107097), (0.0034831464, 0.00034306, 0.0032107097), (0.0034327484, 0.00068281614, 0.0032107097), (0.0033492912, 0.0010159963, 0.0032107097), (0.0032335783, 0.001339392, 0.0032107097), (0.0030867243, 0.0016498886, 0.0032107097), (0.0029101437, 0.0019444958, 0.0032107097), (0.0027055365, 0.0022203764, 0.0032107097), (0.0024748738, 0.0024748738, 0.0032107097), (0.0022203764, 0.0027055365, 0.0032107097), (0.0019444958, 0.0029101437, 0.0032107097), (0.0016498886, 0.0030867243, 0.0032107097), (0.001339392, 0.0032335783, 0.0032107097), (0.0010159963, 0.0033492912, 0.0032107097), (0.00068281614, 0.0034327484, 0.0032107097), (0.00034306, 0.0034831464, 0.0032107097), (2.1431319e-19, 0.0035, 0.0032107097), (-0.00034306, 0.0034831464, 0.0032107097), (-0.00068281614, 0.0034327484, 0.0032107097), (-0.0010159963, 0.0033492912, 0.0032107097), (-0.001339392, 0.0032335783, 0.0032107097), (-0.0016498886, 0.0030867243, 0.0032107097), (-0.0019444958, 0.0029101437, 0.0032107097), (-0.0022203764, 0.0027055365, 0.0032107097), (-0.0024748738, 0.0024748738, 0.0032107097), (-0.0027055365, 0.0022203764, 0.0032107097), (-0.0029101437, 0.0019444958, 0.0032107097), (-0.0030867243, 0.0016498886, 0.0032107097), (-0.0032335783, 0.001339392, 0.0032107097), (-0.0033492912, 0.0010159963, 0.0032107097), (-0.0034327484, 0.00068281614, 0.0032107097), (-0.0034831464, 0.00034306, 0.0032107097), (-0.0035, 4.2862638e-19, 0.0032107097), (-0.0034831464, -0.00034306, 0.0032107097), (-0.0034327484, -0.00068281614, 0.0032107097), (-0.0033492912, -0.0010159963, 0.0032107097), (-0.0032335783, -0.001339392, 0.0032107097), (-0.0030867243, -0.0016498886, 0.0032107097), (-0.0029101437, -0.0019444958, 0.0032107097), (-0.0027055365, -0.0022203764, 0.0032107097), (-0.0024748738, -0.0024748738, 0.0032107097), (-0.0022203764, -0.0027055365, 0.0032107097), (-0.0019444958, -0.0029101437, 0.0032107097), (-0.0016498886, -0.0030867243, 0.0032107097), (-0.001339392, -0.0032335783, 0.0032107097), (-0.0010159963, -0.0033492912, 0.0032107097), (-0.00068281614, -0.0034327484, 0.0032107097), (-0.00034306, -0.0034831464, 0.0032107097), (-6.4293957e-19, -0.0035, 0.0032107097), (0.00034306, -0.0034831464, 0.0032107097), (0.00068281614, -0.0034327484, 0.0032107097), (0.0010159963, -0.0033492912, 0.0032107097), (0.001339392, -0.0032335783, 0.0032107097), (0.0016498886, -0.0030867243, 0.0032107097), (0.0019444958, -0.0029101437, 0.0032107097), (0.0022203764, -0.0027055365, 0.0032107097), (0.0024748738, -0.0024748738, 0.0032107097), (0.0027055365, -0.0022203764, 0.0032107097), (0.0029101437, -0.0019444958, 0.0032107097), (0.0030867243, -0.0016498886, 0.0032107097), (0.0032335783, -0.001339392, 0.0032107097), (0.0033492912, -0.0010159963, 0.0032107097), (0.0034327484, -0.00068281614, 0.0032107097), (0.0034831464, -0.00034306, 0.0032107097)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.73412, 0, -0.67901975, 0)
+        double3 xformOp:translate = (0.0337990381057, -0.05, 0.09025)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "watch_puck" (
+        prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysicsMeshCollisionAPI", "PhysxCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/white>
+        rel material:binding:physics = </belkin/Looks/physics>
+        uniform token physics:approximation = "convexHull"
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        point3f[] points = [(0.014, 0, -0.003), (0.013932586, 0.00137224, -0.003), (0.0137309935, 0.0027312646, -0.003), (0.013397165, 0.0040639853, -0.003), (0.012934313, 0.005357568, -0.003), (0.012346897, 0.0065995543, -0.003), (0.011640575, 0.0077779833, -0.003), (0.010822146, 0.008881506, -0.003), (0.009899495, 0.009899495, -0.003), (0.008881506, 0.010822146, -0.003), (0.0077779833, 0.011640575, -0.003), (0.0065995543, 0.012346897, -0.003), (0.005357568, 0.012934313, -0.003), (0.0040639853, 0.013397165, -0.003), (0.0027312646, 0.0137309935, -0.003), (0.00137224, 0.013932586, -0.003), (8.5725276e-19, 0.014, -0.003), (-0.00137224, 0.013932586, -0.003), (-0.0027312646, 0.0137309935, -0.003), (-0.0040639853, 0.013397165, -0.003), (-0.005357568, 0.012934313, -0.003), (-0.0065995543, 0.012346897, -0.003), (-0.0077779833, 0.011640575, -0.003), (-0.008881506, 0.010822146, -0.003), (-0.009899495, 0.009899495, -0.003), (-0.010822146, 0.008881506, -0.003), (-0.011640575, 0.0077779833, -0.003), (-0.012346897, 0.0065995543, -0.003), (-0.012934313, 0.005357568, -0.003), (-0.013397165, 0.0040639853, -0.003), (-0.0137309935, 0.0027312646, -0.003), (-0.013932586, 0.00137224, -0.003), (-0.014, 1.7145055e-18, -0.003), (-0.013932586, -0.00137224, -0.003), (-0.0137309935, -0.0027312646, -0.003), (-0.013397165, -0.0040639853, -0.003), (-0.012934313, -0.005357568, -0.003), (-0.012346897, -0.0065995543, -0.003), (-0.011640575, -0.0077779833, -0.003), (-0.010822146, -0.008881506, -0.003), (-0.009899495, -0.009899495, -0.003), (-0.008881506, -0.010822146, -0.003), (-0.0077779833, -0.011640575, -0.003), (-0.0065995543, -0.012346897, -0.003), (-0.005357568, -0.012934313, -0.003), (-0.0040639853, -0.013397165, -0.003), (-0.0027312646, -0.0137309935, -0.003), (-0.00137224, -0.013932586, -0.003), (-2.5717583e-18, -0.014, -0.003), (0.00137224, -0.013932586, -0.003), (0.0027312646, -0.0137309935, -0.003), (0.0040639853, -0.013397165, -0.003), (0.005357568, -0.012934313, -0.003), (0.0065995543, -0.012346897, -0.003), (0.0077779833, -0.011640575, -0.003), (0.008881506, -0.010822146, -0.003), (0.009899495, -0.009899495, -0.003), (0.010822146, -0.008881506, -0.003), (0.011640575, -0.0077779833, -0.003), (0.012346897, -0.0065995543, -0.003), (0.012934313, -0.005357568, -0.003), (0.013397165, -0.0040639853, -0.003), (0.0137309935, -0.0027312646, -0.003), (0.013932586, -0.00137224, -0.003), (0.014, 0, 0.003), (0.013932586, 0.00137224, 0.003), (0.0137309935, 0.0027312646, 0.003), (0.013397165, 0.0040639853, 0.003), (0.012934313, 0.005357568, 0.003), (0.012346897, 0.0065995543, 0.003), (0.011640575, 0.0077779833, 0.003), (0.010822146, 0.008881506, 0.003), (0.009899495, 0.009899495, 0.003), (0.008881506, 0.010822146, 0.003), (0.0077779833, 0.011640575, 0.003), (0.0065995543, 0.012346897, 0.003), (0.005357568, 0.012934313, 0.003), (0.0040639853, 0.013397165, 0.003), (0.0027312646, 0.0137309935, 0.003), (0.00137224, 0.013932586, 0.003), (8.5725276e-19, 0.014, 0.003), (-0.00137224, 0.013932586, 0.003), (-0.0027312646, 0.0137309935, 0.003), (-0.0040639853, 0.013397165, 0.003), (-0.005357568, 0.012934313, 0.003), (-0.0065995543, 0.012346897, 0.003), (-0.0077779833, 0.011640575, 0.003), (-0.008881506, 0.010822146, 0.003), (-0.009899495, 0.009899495, 0.003), (-0.010822146, 0.008881506, 0.003), (-0.011640575, 0.0077779833, 0.003), (-0.012346897, 0.0065995543, 0.003), (-0.012934313, 0.005357568, 0.003), (-0.013397165, 0.0040639853, 0.003), (-0.0137309935, 0.0027312646, 0.003), (-0.013932586, 0.00137224, 0.003), (-0.014, 1.7145055e-18, 0.003), (-0.013932586, -0.00137224, 0.003), (-0.0137309935, -0.0027312646, 0.003), (-0.013397165, -0.0040639853, 0.003), (-0.012934313, -0.005357568, 0.003), (-0.012346897, -0.0065995543, 0.003), (-0.011640575, -0.0077779833, 0.003), (-0.010822146, -0.008881506, 0.003), (-0.009899495, -0.009899495, 0.003), (-0.008881506, -0.010822146, 0.003), (-0.0077779833, -0.011640575, 0.003), (-0.0065995543, -0.012346897, 0.003), (-0.005357568, -0.012934313, 0.003), (-0.0040639853, -0.013397165, 0.003), (-0.0027312646, -0.0137309935, 0.003), (-0.00137224, -0.013932586, 0.003), (-2.5717583e-18, -0.014, 0.003), (0.00137224, -0.013932586, 0.003), (0.0027312646, -0.0137309935, 0.003), (0.0040639853, -0.013397165, 0.003), (0.005357568, -0.012934313, 0.003), (0.0065995543, -0.012346897, 0.003), (0.0077779833, -0.011640575, 0.003), (0.008881506, -0.010822146, 0.003), (0.009899495, -0.009899495, 0.003), (0.010822146, -0.008881506, 0.003), (0.011640575, -0.0077779833, 0.003), (0.012346897, -0.0065995543, 0.003), (0.012934313, -0.005357568, 0.003), (0.013397165, -0.0040639853, 0.003), (0.0137309935, -0.0027312646, 0.003), (0.013932586, -0.00137224, 0.003)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.8660254, 0, -0.5, 0)
+        double3 xformOp:translate = (0.028, -0.05, 0.092)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "watch_face" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/white>
+        point3f[] points = [(0.0125, 0, -0.0001), (0.012439809, 0.0012252142, -0.0001), (0.012259816, 0.002438629, -0.0001), (0.011961754, 0.0036285585, -0.0001), (0.011548494, 0.004783543, -0.0001), (0.011024016, 0.0058924593, -0.0001), (0.01039337, 0.006944628, -0.0001), (0.009662631, 0.0079299165, -0.0001), (0.008838835, 0.008838835, -0.0001), (0.0079299165, 0.009662631, -0.0001), (0.006944628, 0.01039337, -0.0001), (0.0058924593, 0.011024016, -0.0001), (0.004783543, 0.011548494, -0.0001), (0.0036285585, 0.011961754, -0.0001), (0.002438629, 0.012259816, -0.0001), (0.0012252142, 0.012439809, -0.0001), (7.6540423e-19, 0.0125, -0.0001), (-0.0012252142, 0.012439809, -0.0001), (-0.002438629, 0.012259816, -0.0001), (-0.0036285585, 0.011961754, -0.0001), (-0.004783543, 0.011548494, -0.0001), (-0.0058924593, 0.011024016, -0.0001), (-0.006944628, 0.01039337, -0.0001), (-0.0079299165, 0.009662631, -0.0001), (-0.008838835, 0.008838835, -0.0001), (-0.009662631, 0.0079299165, -0.0001), (-0.01039337, 0.006944628, -0.0001), (-0.011024016, 0.0058924593, -0.0001), (-0.011548494, 0.004783543, -0.0001), (-0.011961754, 0.0036285585, -0.0001), (-0.012259816, 0.002438629, -0.0001), (-0.012439809, 0.0012252142, -0.0001), (-0.0125, 1.5308085e-18, -0.0001), (-0.012439809, -0.0012252142, -0.0001), (-0.012259816, -0.002438629, -0.0001), (-0.011961754, -0.0036285585, -0.0001), (-0.011548494, -0.004783543, -0.0001), (-0.011024016, -0.0058924593, -0.0001), (-0.01039337, -0.006944628, -0.0001), (-0.009662631, -0.0079299165, -0.0001), (-0.008838835, -0.008838835, -0.0001), (-0.0079299165, -0.009662631, -0.0001), (-0.006944628, -0.01039337, -0.0001), (-0.0058924593, -0.011024016, -0.0001), (-0.004783543, -0.011548494, -0.0001), (-0.0036285585, -0.011961754, -0.0001), (-0.002438629, -0.012259816, -0.0001), (-0.0012252142, -0.012439809, -0.0001), (-2.2962128e-18, -0.0125, -0.0001), (0.0012252142, -0.012439809, -0.0001), (0.002438629, -0.012259816, -0.0001), (0.0036285585, -0.011961754, -0.0001), (0.004783543, -0.011548494, -0.0001), (0.0058924593, -0.011024016, -0.0001), (0.006944628, -0.01039337, -0.0001), (0.0079299165, -0.009662631, -0.0001), (0.008838835, -0.008838835, -0.0001), (0.009662631, -0.0079299165, -0.0001), (0.01039337, -0.006944628, -0.0001), (0.011024016, -0.0058924593, -0.0001), (0.011548494, -0.004783543, -0.0001), (0.011961754, -0.0036285585, -0.0001), (0.012259816, -0.002438629, -0.0001), (0.012439809, -0.0012252142, -0.0001), (0.0125, 0, 0.0001), (0.012439809, 0.0012252142, 0.0001), (0.012259816, 0.002438629, 0.0001), (0.011961754, 0.0036285585, 0.0001), (0.011548494, 0.004783543, 0.0001), (0.011024016, 0.0058924593, 0.0001), (0.01039337, 0.006944628, 0.0001), (0.009662631, 0.0079299165, 0.0001), (0.008838835, 0.008838835, 0.0001), (0.0079299165, 0.009662631, 0.0001), (0.006944628, 0.01039337, 0.0001), (0.0058924593, 0.011024016, 0.0001), (0.004783543, 0.011548494, 0.0001), (0.0036285585, 0.011961754, 0.0001), (0.002438629, 0.012259816, 0.0001), (0.0012252142, 0.012439809, 0.0001), (7.6540423e-19, 0.0125, 0.0001), (-0.0012252142, 0.012439809, 0.0001), (-0.002438629, 0.012259816, 0.0001), (-0.0036285585, 0.011961754, 0.0001), (-0.004783543, 0.011548494, 0.0001), (-0.0058924593, 0.011024016, 0.0001), (-0.006944628, 0.01039337, 0.0001), (-0.0079299165, 0.009662631, 0.0001), (-0.008838835, 0.008838835, 0.0001), (-0.009662631, 0.0079299165, 0.0001), (-0.01039337, 0.006944628, 0.0001), (-0.011024016, 0.0058924593, 0.0001), (-0.011548494, 0.004783543, 0.0001), (-0.011961754, 0.0036285585, 0.0001), (-0.012259816, 0.002438629, 0.0001), (-0.012439809, 0.0012252142, 0.0001), (-0.0125, 1.5308085e-18, 0.0001), (-0.012439809, -0.0012252142, 0.0001), (-0.012259816, -0.002438629, 0.0001), (-0.011961754, -0.0036285585, 0.0001), (-0.011548494, -0.004783543, 0.0001), (-0.011024016, -0.0058924593, 0.0001), (-0.01039337, -0.006944628, 0.0001), (-0.009662631, -0.0079299165, 0.0001), (-0.008838835, -0.008838835, 0.0001), (-0.0079299165, -0.009662631, 0.0001), (-0.006944628, -0.01039337, 0.0001), (-0.0058924593, -0.011024016, 0.0001), (-0.004783543, -0.011548494, 0.0001), (-0.0036285585, -0.011961754, 0.0001), (-0.002438629, -0.012259816, 0.0001), (-0.0012252142, -0.012439809, 0.0001), (-2.2962128e-18, -0.0125, 0.0001), (0.0012252142, -0.012439809, 0.0001), (0.002438629, -0.012259816, 0.0001), (0.0036285585, -0.011961754, 0.0001), (0.004783543, -0.011548494, 0.0001), (0.0058924593, -0.011024016, 0.0001), (0.006944628, -0.01039337, 0.0001), (0.0079299165, -0.009662631, 0.0001), (0.008838835, -0.008838835, 0.0001), (0.009662631, -0.0079299165, 0.0001), (0.01039337, -0.006944628, 0.0001), (0.011024016, -0.0058924593, 0.0001), (0.011548494, -0.004783543, 0.0001), (0.011961754, -0.0036285585, 0.0001), (0.012259816, -0.002438629, 0.0001), (0.012439809, -0.0012252142, 0.0001)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.8660254, 0, -0.5, 0)
+        double3 xformOp:translate = (0.025315321248220002, -0.05, 0.09355)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+
+    def Mesh "cable_stub" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [64, 64, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 0, 1, 65, 64, 1, 2, 66, 65, 2, 3, 67, 66, 3, 4, 68, 67, 4, 5, 69, 68, 5, 6, 70, 69, 6, 7, 71, 70, 7, 8, 72, 71, 8, 9, 73, 72, 9, 10, 74, 73, 10, 11, 75, 74, 11, 12, 76, 75, 12, 13, 77, 76, 13, 14, 78, 77, 14, 15, 79, 78, 15, 16, 80, 79, 16, 17, 81, 80, 17, 18, 82, 81, 18, 19, 83, 82, 19, 20, 84, 83, 20, 21, 85, 84, 21, 22, 86, 85, 22, 23, 87, 86, 23, 24, 88, 87, 24, 25, 89, 88, 25, 26, 90, 89, 26, 27, 91, 90, 27, 28, 92, 91, 28, 29, 93, 92, 29, 30, 94, 93, 30, 31, 95, 94, 31, 32, 96, 95, 32, 33, 97, 96, 33, 34, 98, 97, 34, 35, 99, 98, 35, 36, 100, 99, 36, 37, 101, 100, 37, 38, 102, 101, 38, 39, 103, 102, 39, 40, 104, 103, 40, 41, 105, 104, 41, 42, 106, 105, 42, 43, 107, 106, 43, 44, 108, 107, 44, 45, 109, 108, 45, 46, 110, 109, 46, 47, 111, 110, 47, 48, 112, 111, 48, 49, 113, 112, 49, 50, 114, 113, 50, 51, 115, 114, 51, 52, 116, 115, 52, 53, 117, 116, 53, 54, 118, 117, 54, 55, 119, 118, 55, 56, 120, 119, 56, 57, 121, 120, 57, 58, 122, 121, 58, 59, 123, 122, 59, 60, 124, 123, 60, 61, 125, 124, 61, 62, 126, 125, 62, 63, 127, 126, 63, 0, 64, 127]
+        rel material:binding = </belkin/Looks/white>
+        point3f[] points = [(0.0017, 0, -0.0255), (0.001691814, 0.00016662914, -0.0255), (0.0016673349, 0.00033165354, -0.0255), (0.0016267985, 0.00049348397, -0.0255), (0.0015705952, 0.0006505618, -0.0255), (0.0014992661, 0.00080137444, -0.0255), (0.0014134983, 0.0009444694, -0.0255), (0.0013141178, 0.0010784686, -0.0255), (0.0012020816, 0.0012020816, -0.0255), (0.0010784686, 0.0013141178, -0.0255), (0.0009444694, 0.0014134983, -0.0255), (0.00080137444, 0.0014992661, -0.0255), (0.0006505618, 0.0015705952, -0.0255), (0.00049348397, 0.0016267985, -0.0255), (0.00033165354, 0.0016673349, -0.0255), (0.00016662914, 0.001691814, -0.0255), (1.0409498e-19, 0.0017, -0.0255), (-0.00016662914, 0.001691814, -0.0255), (-0.00033165354, 0.0016673349, -0.0255), (-0.00049348397, 0.0016267985, -0.0255), (-0.0006505618, 0.0015705952, -0.0255), (-0.00080137444, 0.0014992661, -0.0255), (-0.0009444694, 0.0014134983, -0.0255), (-0.0010784686, 0.0013141178, -0.0255), (-0.0012020816, 0.0012020816, -0.0255), (-0.0013141178, 0.0010784686, -0.0255), (-0.0014134983, 0.0009444694, -0.0255), (-0.0014992661, 0.00080137444, -0.0255), (-0.0015705952, 0.0006505618, -0.0255), (-0.0016267985, 0.00049348397, -0.0255), (-0.0016673349, 0.00033165354, -0.0255), (-0.001691814, 0.00016662914, -0.0255), (-0.0017, 2.0818996e-19, -0.0255), (-0.001691814, -0.00016662914, -0.0255), (-0.0016673349, -0.00033165354, -0.0255), (-0.0016267985, -0.00049348397, -0.0255), (-0.0015705952, -0.0006505618, -0.0255), (-0.0014992661, -0.00080137444, -0.0255), (-0.0014134983, -0.0009444694, -0.0255), (-0.0013141178, -0.0010784686, -0.0255), (-0.0012020816, -0.0012020816, -0.0255), (-0.0010784686, -0.0013141178, -0.0255), (-0.0009444694, -0.0014134983, -0.0255), (-0.00080137444, -0.0014992661, -0.0255), (-0.0006505618, -0.0015705952, -0.0255), (-0.00049348397, -0.0016267985, -0.0255), (-0.00033165354, -0.0016673349, -0.0255), (-0.00016662914, -0.001691814, -0.0255), (-3.1228493e-19, -0.0017, -0.0255), (0.00016662914, -0.001691814, -0.0255), (0.00033165354, -0.0016673349, -0.0255), (0.00049348397, -0.0016267985, -0.0255), (0.0006505618, -0.0015705952, -0.0255), (0.00080137444, -0.0014992661, -0.0255), (0.0009444694, -0.0014134983, -0.0255), (0.0010784686, -0.0013141178, -0.0255), (0.0012020816, -0.0012020816, -0.0255), (0.0013141178, -0.0010784686, -0.0255), (0.0014134983, -0.0009444694, -0.0255), (0.0014992661, -0.00080137444, -0.0255), (0.0015705952, -0.0006505618, -0.0255), (0.0016267985, -0.00049348397, -0.0255), (0.0016673349, -0.00033165354, -0.0255), (0.001691814, -0.00016662914, -0.0255), (0.0017, 0, 0.0255), (0.001691814, 0.00016662914, 0.0255), (0.0016673349, 0.00033165354, 0.0255), (0.0016267985, 0.00049348397, 0.0255), (0.0015705952, 0.0006505618, 0.0255), (0.0014992661, 0.00080137444, 0.0255), (0.0014134983, 0.0009444694, 0.0255), (0.0013141178, 0.0010784686, 0.0255), (0.0012020816, 0.0012020816, 0.0255), (0.0010784686, 0.0013141178, 0.0255), (0.0009444694, 0.0014134983, 0.0255), (0.00080137444, 0.0014992661, 0.0255), (0.0006505618, 0.0015705952, 0.0255), (0.00049348397, 0.0016267985, 0.0255), (0.00033165354, 0.0016673349, 0.0255), (0.00016662914, 0.001691814, 0.0255), (1.0409498e-19, 0.0017, 0.0255), (-0.00016662914, 0.001691814, 0.0255), (-0.00033165354, 0.0016673349, 0.0255), (-0.00049348397, 0.0016267985, 0.0255), (-0.0006505618, 0.0015705952, 0.0255), (-0.00080137444, 0.0014992661, 0.0255), (-0.0009444694, 0.0014134983, 0.0255), (-0.0010784686, 0.0013141178, 0.0255), (-0.0012020816, 0.0012020816, 0.0255), (-0.0013141178, 0.0010784686, 0.0255), (-0.0014134983, 0.0009444694, 0.0255), (-0.0014992661, 0.00080137444, 0.0255), (-0.0015705952, 0.0006505618, 0.0255), (-0.0016267985, 0.00049348397, 0.0255), (-0.0016673349, 0.00033165354, 0.0255), (-0.001691814, 0.00016662914, 0.0255), (-0.0017, 2.0818996e-19, 0.0255), (-0.001691814, -0.00016662914, 0.0255), (-0.0016673349, -0.00033165354, 0.0255), (-0.0016267985, -0.00049348397, 0.0255), (-0.0015705952, -0.0006505618, 0.0255), (-0.0014992661, -0.00080137444, 0.0255), (-0.0014134983, -0.0009444694, 0.0255), (-0.0013141178, -0.0010784686, 0.0255), (-0.0012020816, -0.0012020816, 0.0255), (-0.0010784686, -0.0013141178, 0.0255), (-0.0009444694, -0.0014134983, 0.0255), (-0.00080137444, -0.0014992661, 0.0255), (-0.0006505618, -0.0015705952, 0.0255), (-0.00049348397, -0.0016267985, 0.0255), (-0.00033165354, -0.0016673349, 0.0255), (-0.00016662914, -0.001691814, 0.0255), (-3.1228493e-19, -0.0017, 0.0255), (0.00016662914, -0.001691814, 0.0255), (0.00033165354, -0.0016673349, 0.0255), (0.00049348397, -0.0016267985, 0.0255), (0.0006505618, -0.0015705952, 0.0255), (0.00080137444, -0.0014992661, 0.0255), (0.0009444694, -0.0014134983, 0.0255), (0.0010784686, -0.0013141178, 0.0255), (0.0012020816, -0.0012020816, 0.0255), (0.0013141178, -0.0010784686, 0.0255), (0.0014134983, -0.0009444694, 0.0255), (0.0014992661, -0.00080137444, 0.0255), (0.0015705952, -0.0006505618, 0.0255), (0.0016267985, -0.00049348397, 0.0255), (0.0016673349, -0.00033165354, 0.0255), (0.001691814, -0.00016662914, 0.0255)]
+        uniform token subdivisionScheme = "none"
+        quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+        double3 xformOp:translate = (0.0795, 0, 0.006)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+    }
+}
+
