@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "dream1_run": true,
+  "note": "Process completion alone is not task success; inspect the native and SDK results.",
+  "log_count": 1,
+  "statuses": [
+    "success"
+  ]
+}

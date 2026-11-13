@@ -1,0 +1,35 @@
+{
+  "dream": {
+    "file": "dream-three-cameras.mp4",
+    "bytes": 20921762,
+    "sha256": "08e12983f7dc3c654a94ac4440dd35e076b99654bc973135a9b1c7504b52bedb",
+    "cameras": [
+      "top_cam",
+      "left_cam",
+      "right_cam"
+    ],
+    "overlays": false
+  },
+  "add": {
+    "file": "add-three-cameras.mp4",
+    "bytes": 15032614,
+    "sha256": "9ef85b0dfe35d95bf575c6b8329838af0615129ef7d0ff7be71be77b2665f2b7",
+    "cameras": [
+      "top_cam",
+      "left_cam",
+      "right_cam"
+    ],
+    "overlays": false
+  },
+  "remove": {
+    "file": "remove-three-cameras.mp4",
+    "bytes": 10791072,
+    "sha256": "398013cace7e17e252ac79b57ec54855309eed099a808ef4e1416a85b5c535c1",
+    "cameras": [
+      "top_cam",
+      "left_cam",
+      "right_cam"
+    ],
+    "overlays": false
+  }
+}

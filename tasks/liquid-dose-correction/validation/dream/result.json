@@ -1,0 +1,16 @@
+{
+  "score": 0.0,
+  "success": false,
+  "initial_mass_g": 9.543,
+  "final_mass_g": 9.543,
+  "balance_g": 995.7634576372311,
+  "error_g": 0.45700000000000074,
+  "mass_quality": 0.0,
+  "settled": false,
+  "pipette_used": false,
+  "pipette_disposed": false,
+  "violations": [
+    "beaker moved over 5 mm from its support"
+  ],
+  "spill_g": 0.0
+}

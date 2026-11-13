@@ -1,0 +1,14 @@
+{
+  "score": 1.0,
+  "success": true,
+  "initial_mass_g": 8.6,
+  "final_mass_g": 10.000181758834039,
+  "balance_g": 10.000041891478716,
+  "error_g": 0.0001817588340387033,
+  "mass_quality": 1.0,
+  "settled": true,
+  "pipette_used": true,
+  "pipette_disposed": true,
+  "violations": [],
+  "spill_g": 9.043410484271628e-05
+}

@@ -1,0 +1,24 @@
+{
+  "source_revision": "revision065",
+  "source_manifest_sha256": "f9dd0930c6d3bcef4c160f267b2ca34d1847fc300801db936b913bfca4594ac3",
+  "camera": "top_cam",
+  "overlays": false,
+  "initial_mass_g": 9.543,
+  "hold_steps": 400,
+  "cover_only": true,
+  "task_success_claimed": false,
+  "result": {
+    "score": 0.0,
+    "success": false,
+    "initial_mass_g": 9.543,
+    "final_mass_g": 9.543,
+    "balance_g": 9.543006612632539,
+    "error_g": 0.45700000000000074,
+    "mass_quality": 0.0,
+    "settled": true,
+    "pipette_used": false,
+    "pipette_disposed": false,
+    "violations": [],
+    "spill_g": 0.0
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "status": "UNVALIDATED_CONTACT_MECHANISM_CANDIDATE",
+  "mechanisms_ready": false,
+  "limitations": [
+    "Physical thread contacts and passive bulb springs need native validation.",
+    "Pipette bulb is a two-slider approximation, not a calibrated deformable polymer.",
+    "Reduced liquid coupling and force-based balance are implemented; full robot validation is pending."
+  ],
+  "table_top_m": 0.7475,
+  "assets": {
+    "bottle_A": {
+      "path": "bottle_A.usda",
+      "sha256": "d9ffcbbd8d25278895bce15e03e2d1cfa60cdbf082d3050c0c082cfdcff54f26",
+      "mass_kg_initial": 0.326,
+      "dynamic": true,
+      "colliders": 313,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.24,
+        0.25,
+        0.7475
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ],
+      "thread_contact_segments": 192,
+      "object_type": "RIGID",
+      "rigid_bodies": [
+        "/bottle_A"
+      ],
+      "joints": []
+    },
+    "bottle_A_cap": {
+      "path": "bottle_A_cap.usda",
+      "sha256": "0d5ced16aa0b5ef14d787ca329e5fe05dc5f97be85a903ebd330344885514cbc",
+      "mass_kg_initial": 0.005,
+      "dynamic": true,
+      "colliders": 29,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.2,
+        -0.04,
+        0.835
+      ],
+      "rotation_xyzw": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "thread_contact_segments": 3,
+      "object_type": "RIGID",
+      "rigid_bodies": [
+        "/bottle_A_cap"
+      ],
+      "joints": []
+    },
+    "pipette_A": {
+      "path": "pipette_A.usda",
+      "sha256": "d5d20ab58ebf24162e9916b2079cb311055c8389cecf812e338db3a5cda31512",
+      "mass_kg_initial": 0.0037,
+      "dynamic": true,
+      "colliders": 4,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        -0.03,
+        0.16,
+        0.7645
+      ],
+      "rotation_xyzw": [
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "passive_springs": [
+        {
+          "joint_name": "squeeze_left",
+          "stiffness": 500.0,
+          "damping": 0.25,
+          "effort_limit": 3.0,
+          "velocity_limit": 0.1,
+          "target": 0.0
+        },
+        {
+          "joint_name": "squeeze_right",
+          "stiffness": 500.0,
+          "damping": 0.25,
+          "effort_limit": 3.0,
+          "velocity_limit": 0.1,
+          "target": 0.0
+        }
+      ],
+      "object_type": "ARTICULATION",
+      "root_body": "stem",
+      "stroke_per_side_m": 0.0058,
+      "stem_length_m": 0.164,
+      "bulb_center_m": 0.195,
+      "rigid_bodies": [
+        "/pipette_A/stem",
+        "/pipette_A/bulb_left",
+        "/pipette_A/bulb_right"
+      ],
+      "joints": [
+        "/pipette_A/squeeze_left",
+        "/pipette_A/squeeze_right"
+      ]
+    },
+    "beaker": {
+      "path": "beaker.usda",
+      "sha256": "d1183ac34f795035551540119368cfb319efcfd43e26f01f0541d2d507033147",
+      "mass_kg_initial": 0.12,
+      "dynamic": true,
+      "colliders": 25,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.42,
+        0,
+        0.7995
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ],
+      "object_type": "RIGID",
+      "rigid_bodies": [
+        "/beaker"
+      ],
+      "joints": []
+    },
+    "digital_balance": {
+      "path": "digital_balance.usda",
+      "sha256": "538281ba3c37323db2f7b0ae37d64f50b870f6a766513780168d6a712c14410d",
+      "mass_kg_initial": 1.0,
+      "dynamic": false,
+      "colliders": 3,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.407,
+        0,
+        0.7475
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ],
+      "object_type": "RIGID",
+      "rigid_bodies": [
+        "/digital_balance"
+      ],
+      "joints": []
+    },
+    "waste": {
+      "path": "waste.usda",
+      "sha256": "9554376b078fe41055de18df04509ce6d4ca379585da2fc37588eb108104275f",
+      "mass_kg_initial": 0.06,
+      "dynamic": false,
+      "colliders": 25,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.3,
+        -0.16,
+        0.7475
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ],
+      "object_type": "RIGID",
+      "rigid_bodies": [
+        "/waste"
+      ],
+      "joints": []
+    },
+    "trash_bin": {
+      "path": "trash_bin.usda",
+      "sha256": "ecb21b72bc97b1108e7cdc8e4f77a08b308300ab7b6f05a7622ba4dcf0180b18",
+      "mass_kg_initial": 0.1,
+      "dynamic": false,
+      "colliders": 5,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.35,
+        0.18,
+        0.7475
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ],
+      "interior_bounds_m": {
+        "half_x": 0.0459999999050051,
+        "half_y": 0.040999999905005094,
+        "floor_z": 0.008000000189989805,
+        "rim_z": 0.23999999731779098
+      },
+      "object_type": "RIGID",
+      "rigid_bodies": [
+        "/trash_bin"
+      ],
+      "joints": []
+    },
+    "station_fixtures": {
+      "path": "station_fixtures.usda",
+      "sha256": "cc2af48545caef71e27e6d5041263b1d26a7cecd5042a1f36e203ee1e68dda36",
+      "mass_kg_initial": 0.1,
+      "dynamic": false,
+      "object_type": "RIGID",
+      "position_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "colliders": 4,
+      "rigid_bodies": [
+        "/station_fixtures"
+      ],
+      "joints": [],
+      "cap_rest_centers": {
+        "A": [
+          0.2,
+          -0.04,
+          0.8075000000000001
+        ]
+      }
+    }
+  },
+  "thread_geometry": {
+    "pitch_m": 0.003,
+    "male_start_z": 0.182,
+    "male_turns": 3.0,
+    "female_start_z": 0.0015,
+    "female_lug_spacing_turns": 0.3333333333333333,
+    "initial_cap_z": 0.185,
+    "radial_overlap_m": 0.0007,
+    "half_thread_width_m": 0.00045,
+    "male_crest_radius_m": 0.0225,
+    "female_crest_radius_m": 0.0218,
+    "cap_bore_radius_m": 0.0232,
+    "female_model": "three rounded contact lugs",
+    "female_lug_radius_m": 0.0008,
+    "female_lug_center_radius_m": 0.0226
+  },
+  "layout": "Open-bottle fine weighing; retain pipette bin and place waste beaker to the right"
+}

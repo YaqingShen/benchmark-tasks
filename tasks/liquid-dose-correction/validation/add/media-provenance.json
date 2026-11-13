@@ -1,0 +1,49 @@
+{
+  "cameras": [
+    "top_cam",
+    "left_cam",
+    "right_cam"
+  ],
+  "fps": 5,
+  "overlays": false,
+  "custom_cameras": false,
+  "cover": "setup.png",
+  "dream1_run": false,
+  "controller": "scripted simulator-pose alignment and force-balance feedback",
+  "robot_observation_only": false,
+  "task_score": 1.0,
+  "full_task_demo": true,
+  "source_revision": "revision065",
+  "source_manifest_sha256": "f9dd0930c6d3bcef4c160f267b2ca34d1847fc300801db936b913bfca4594ac3",
+  "result_sha256": "32649a482903ebc12e21142e71e2ce6d46cb9d535b162ef5aad08ad56b6103ec",
+  "first_frame_time_s": 0.2,
+  "source": "original station cameras",
+  "frame_count": 1436,
+  "video_files": {
+    "top_cam.mp4": {
+      "bytes": 10310128,
+      "duration_s": 287.2,
+      "width": 1280,
+      "height": 704
+    },
+    "left_cam.mp4": {
+      "bytes": 9379616,
+      "duration_s": 287.2,
+      "width": 1280,
+      "height": 704
+    },
+    "right_cam.mp4": {
+      "bytes": 7322222,
+      "duration_s": 287.2,
+      "width": 1280,
+      "height": 704
+    },
+    "three-cameras.mp4": {
+      "bytes": 15032614,
+      "duration_s": 287.2,
+      "width": 1280,
+      "height": 1056
+    }
+  },
+  "cover_source": "unmodified native setup.png"
+}

@@ -1,0 +1,66 @@
+{
+  "version": "prototype-004-dose-correction",
+  "task": "Correct the liquid dose to 10 g with a pipette and discard the pipette",
+  "status": "component prototype; no robot evaluation",
+  "visual_style": "simplified geometric models",
+  "measurement_method": "net mass on a digital balance",
+  "cylinder_graduation_ml": 1.0,
+  "cylinder_reading_increment_ml": 0.5,
+  "scale_in_task": true,
+  "cap_handling": "None. Bottle A starts open; cap handling and recapping are outside the task.",
+  "density_g_ml": {
+    "A": 1.03,
+    "B": 1.0
+  },
+  "ingredient_labels": {
+    "A": "A substitute",
+    "B": "B substitute"
+  },
+  "density_status": "A is a generic nonreactive substitute with user-specified density 1.03 g/mL. B is retained only as a contamination identity in the reusable liquid ledger; it has no scene objects.",
+  "balance_resolution_g": 0.001,
+  "pipette_capacity_ml": 5.0,
+  "cylinder_nominal_ml": 50.0,
+  "cylinder_brim_ml": 68.0,
+  "cylinders": [],
+  "cylinder_retained_film_ml": 0.15,
+  "cylinder_unrecoverable_film_ml": 0.03,
+  "max_spill_g": 0.1,
+  "return_radius_m": 0.025,
+  "max_return_tilt_deg": 5.0,
+  "cap_required_turns": 1.5,
+  "cap_pitch_m": 0.003,
+  "preview_seed": 0,
+  "category_draft": "Other",
+  "targets_g": {
+    "A": 10.0
+  },
+  "full_tolerance_g": 0.05,
+  "zero_credit_error_g": {
+    "A": 2.0
+  },
+  "cylinders_in_task": false,
+  "require_recap": false,
+  "require_bottle_home": false,
+  "minimum_pipette_correction_g": 0.01,
+  "objective": "correct_existing_dose",
+  "starting_masses_g": [
+    8.6,
+    10.5
+  ],
+  "starting_condition": "Beaker prefilled to a seeded random mass from 8.50 to 11.50 g, excluding 9.85 to 10.15 g. Original empty-beaker tare retained. Stock bottle starts open.",
+  "reset_notes": "Restore the selected beaker mass and original empty-beaker tare, refill the open stock bottle, empty waste and replace the pipette.",
+  "initial_bottle_open": true,
+  "random_start": {
+    "range_g": [
+      8.5,
+      11.5
+    ],
+    "excluded_interval_g": [
+      9.85,
+      10.15
+    ],
+    "seeded": true,
+    "equal_probability_add_remove": true
+  },
+  "trash_bin_in_task": true
+}

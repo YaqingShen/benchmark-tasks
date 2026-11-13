@@ -1,0 +1,22 @@
+{
+  "source_revision": "revision065",
+  "source_manifest_sha256": "f9dd0930c6d3bcef4c160f267b2ca34d1847fc300801db936b913bfca4594ac3",
+  "seed": 3750648859,
+  "initial_mass_g": 9.543,
+  "cameras": [
+    "top_cam",
+    "left_cam",
+    "right_cam"
+  ],
+  "policy_inputs": [
+    "RGB images",
+    "14-D measured joint positions"
+  ],
+  "control_hz": 20,
+  "physics_hz": 1000,
+  "frame_rate": 5,
+  "overlays": false,
+  "liquid_model": "uncalibrated reduced pneumatic and quasi-static flow model",
+  "post_reset_object_pose_writes": 0,
+  "max_steps": 12000
+}

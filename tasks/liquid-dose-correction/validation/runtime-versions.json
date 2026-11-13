@@ -1,0 +1,57 @@
+{
+  "inspect-robots": {
+    "version": "1.0.0",
+    "license": null,
+    "license_expression": "MIT",
+    "urls": [
+      "Homepage, https://github.com/robocurve/inspect-robots",
+      "Documentation, https://github.com/robocurve/inspect-robots/tree/main/docs",
+      "Repository, https://github.com/robocurve/inspect-robots",
+      "Issues, https://github.com/robocurve/inspect-robots/issues"
+    ]
+  },
+  "inspect-robots-yam": {
+    "version": "0.38.0",
+    "license": null,
+    "license_expression": "MIT",
+    "urls": [
+      "Homepage, https://github.com/robocurve/inspect-robots-yam",
+      "Framework, https://github.com/robocurve/inspect-robots",
+      "Collection, https://github.com/robocurve/worldevals"
+    ]
+  },
+  "inspect-robots-dream": {
+    "version": "0.1.0",
+    "license": null,
+    "license_expression": "MIT",
+    "urls": [
+      "Repository, https://github.com/kairosiann/inspect-robots-dream",
+      "Issues, https://github.com/kairosiann/inspect-robots-dream/issues"
+    ]
+  },
+  "isaaclab": {
+    "version": "17.0.2",
+    "license": "BSD-3-Clause",
+    "license_expression": null,
+    "urls": [
+      "Homepage, https://github.com/isaac-sim/IsaacLab",
+      "Repository, https://github.com/isaac-sim/IsaacLab"
+    ]
+  },
+  "isaacsim": {
+    "version": "6.1.0.0",
+    "license": "NVIDIA Proprietary Software",
+    "license_expression": null,
+    "urls": [
+      "Home page, https://developer.nvidia.com/isaac-sim",
+      "Documentation, https://docs.isaacsim.omniverse.nvidia.com",
+      "Forum, https://forums.developer.nvidia.com/c/omniverse/simulation/69"
+    ]
+  },
+  "isaaclab-arena": {
+    "version": "0.3.0",
+    "license": "Apache-2.0",
+    "license_expression": null,
+    "urls": null
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "status": "EXPORTED_RIGID_ASSETS_ONLY",
+  "mechanisms_ready": false,
+  "limitations": [
+    "Cap threading/attachment not implemented in these assets.",
+    "Pipettes are rigid proxies; squeeze physics pending.",
+    "Liquid mass is initial only; runtime update pending.",
+    "Collider proxies are unvalidated in PhysX."
+  ],
+  "table_top_m": 0.7475,
+  "assets": {
+    "bottle_A": {
+      "path": "bottle_A.usda",
+      "sha256": "fa5d42365255df55aa27bfa79612b07913563145f15bd05aae99b77396388415",
+      "mass_kg_initial": 0.326,
+      "dynamic": true,
+      "colliders": 73,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.46000000834465027,
+        0.2549999952316284,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "bottle_B": {
+      "path": "bottle_B.usda",
+      "sha256": "dfc3be077e4b5216a84355bf9bb3241e1ca1a122a75f302a116441afdd46764a",
+      "mass_kg_initial": 0.32,
+      "dynamic": true,
+      "colliders": 73,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.5499999523162842,
+        0.14499999582767487,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "bottle_A_cap": {
+      "path": "bottle_A_cap.usda",
+      "sha256": "bbfeb1944d25f2a2c3a56f74cc159052257563c0b4a144747849d3576dfb0113",
+      "mass_kg_initial": 0.005,
+      "dynamic": true,
+      "colliders": 25,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.46000000834465027,
+        0.2549999952316284,
+        0.9325000047683716
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "bottle_B_cap": {
+      "path": "bottle_B_cap.usda",
+      "sha256": "003b21b18365fc73afc4c9278de3fe2943e6d0315adf4c91ef677f46a3cc1d80",
+      "mass_kg_initial": 0.005,
+      "dynamic": true,
+      "colliders": 25,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.5499999523162842,
+        0.14499999582767487,
+        0.9325000047683716
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "cylinder_A": {
+      "path": "cylinder_A.usda",
+      "sha256": "eca4f51a25535cf72e25731f3bbc07d7fe81c9554ee5ad3ed9265c4de9226e0c",
+      "mass_kg_initial": 0.045,
+      "dynamic": true,
+      "colliders": 26,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.41499999165534973,
+        0.03500000014901161,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "cylinder_B": {
+      "path": "cylinder_B.usda",
+      "sha256": "10d72af5d4aa4397646c29b0ad3bdc76fd3735f4f98607d3c25728f7cfeb876c",
+      "mass_kg_initial": 0.045,
+      "dynamic": true,
+      "colliders": 26,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.5499999523162842,
+        -0.04500000923871994,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "pipette_A": {
+      "path": "pipette_A.usda",
+      "sha256": "f99aa52196aed9479c54a382715e66c4a18be3c72d9f844f6a7c4e735fa9199e",
+      "mass_kg_initial": 0.003,
+      "dynamic": true,
+      "colliders": 2,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.30000001192092896,
+        0.23000000417232513,
+        0.7634999752044678
+      ],
+      "rotation_xyzw": [
+        0.5,
+        0.5,
+        -0.5,
+        0.5
+      ]
+    },
+    "pipette_B": {
+      "path": "pipette_B.usda",
+      "sha256": "bac36ed9980adad52cb20d3a5bee091be767799d71a43fc04f4aaab856a7f162",
+      "mass_kg_initial": 0.003,
+      "dynamic": true,
+      "colliders": 2,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.25999999046325684,
+        0.23000000417232513,
+        0.7634999752044678
+      ],
+      "rotation_xyzw": [
+        0.5,
+        0.5,
+        -0.5,
+        0.5
+      ]
+    },
+    "beaker": {
+      "path": "beaker.usda",
+      "sha256": "abdfdc83a7f8a0500fe134abbfaf2a4e36a8497c66e7524983515a834069ceda",
+      "mass_kg_initial": 0.12,
+      "dynamic": true,
+      "colliders": 25,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.437999963760376,
+        -0.18000000715255737,
+        0.7994999885559082
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "digital_balance": {
+      "path": "digital_balance.usda",
+      "sha256": "42d140bad450d437aa34034aadf7c8cf40734f4126d07540366861743d0e232f",
+      "mass_kg_initial": 1.0,
+      "dynamic": false,
+      "colliders": 2,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.42499998211860657,
+        -0.18000000715255737,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "waste": {
+      "path": "waste.usda",
+      "sha256": "b7f803b8e2ab54cd09916b34c97343768cd667a30a2231ed9d7df129ae2ea2f7",
+      "mass_kg_initial": 0.06,
+      "dynamic": false,
+      "colliders": 25,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.34999996423721313,
+        -0.33000001311302185,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    },
+    "trash_bin": {
+      "path": "trash_bin.usda",
+      "sha256": "82fea1d4b1140828cf26ba4c9db31fc814d31d61972ce34879782d8e302e739f",
+      "mass_kg_initial": 0.1,
+      "dynamic": false,
+      "colliders": 5,
+      "referenced_materials_verified": true,
+      "position_xyz": [
+        0.5899999737739563,
+        -0.3199999928474426,
+        0.7475000023841858
+      ],
+      "rotation_xyzw": [
+        -0.0,
+        -0.0,
+        -0.7071067690849304,
+        0.7071067690849304
+      ]
+    }
+  }
+}

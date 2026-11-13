@@ -1,0 +1,19 @@
+{
+  "evaluated_revision": "revision065",
+  "evaluated_archive_sha256": "a5a48b3b98dc11d94575a178104fdf5c148fecce2aa573a10000c6f239a28466",
+  "evaluated_manifest_sha256": "f9dd0930c6d3bcef4c160f267b2ca34d1847fc300801db936b913bfca4594ac3",
+  "packaged_revision": "revision065-package1",
+  "packaged_manifest_sha256": "7f401137d4325ac268ed63b5212a491d5a0106999c78d7291562d53a3b613f5d",
+  "omitted_working_documents": [
+    "README.md",
+    "build_review.py",
+    "media-preferences.json",
+    "pipeline-status.json"
+  ],
+  "changed_metadata": {
+    "submission-draft.json": "Retains only the exact evaluated policy instruction; removes outdated working notes and machine paths."
+  },
+  "unchanged_files": 76,
+  "executable_source_assets_config_unchanged": true,
+  "policy_instruction_unchanged": true
+}
