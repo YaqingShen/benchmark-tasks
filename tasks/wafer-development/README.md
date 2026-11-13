@@ -1,8 +1,16 @@
-# Timed wafer immersion with a manual countdown
+# Develop an exposed wafer using a manual countdown
 
-The task tests passive-tool handling and timed immersion while the other hand operates a physical timer. The pattern is an elapsed-time surrogate, not a prediction of photoresist chemistry. Category: **Other — cleanroom-inspired manipulation**.
+The task represents **photoresist development after exposure**, a critical pattern-forming step in photolithography. The robot handles the wafer with passive pliers and controls its immersion time while the other hand operates a physical countdown timer. Category: **Other**.
 
 The goal and constraints in `task.json` are the instruction given to Dream-1. The scripted strategy uses the left hand for the pliers; its intermediate waypoints and phase names are not scoring requirements. The timer responds to right-finger presses. The pliers may be held by either hand. This revision passed native validation on Brev, including all 21 independent checks. Dream-1 completed the full evaluation with a score of 0.0.
+
+## Photolithography application
+
+Exposure creates a latent image in the resist; development selectively dissolves the exposed regions of a positive resist to form the physical mask. Residual resist can block intended openings, while excessive development can erode features that should remain. The developed mask defines where subsequent etching or electroplating can form structures. Development therefore determines whether the exposure pattern becomes a usable fabrication mask. See [MicroChemicals' development guide](https://www.microchemicals.com/dokumente/application_notes/development_photoresist.pdf) and the [Merck AZ P4000 technical datasheet](https://www.microchemicals.com/dokumente/datenblaetter/tds/merck/en/tds_az_p4000_series.pdf).
+
+The author-provided reference process is an exposed wafer coated with approximately **1 micrometre of AZ P4110**, developed with **AZ 400K:water = 1:3** for a nominal **30 seconds**. The Merck datasheet lists AZ P4110 for 1–3 micrometre films, immersion development, and AZ 400K as a companion developer; it recommends 1:4 for improved selectivity in thinner films. The stated 1:3 dilution and 30-second duration are the author's reference conditions, not a universal manufacturer recipe. The existing **28–32 second** acceptance window is a benchmark specification, not a measured chemical process window.
+
+The evaluated segment is the handling and timed immersion used for development: pick up the exposed wafer, immerse it vertically, operate the countdown, withdraw it and return it to its supports. The lines-and-cross pattern represents the time-dependent outcome for this benchmark; resist dissolution, feature dimensions and fabrication yield are not predicted. Rinsing, drying and downstream pattern transfer are outside this sequence. The application clarification changes no robot actions, geometry, scoring, evaluated instruction or recorded evidence.
 
 ## Run
 
