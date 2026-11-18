@@ -1,0 +1,70 @@
+{
+  "demo": {
+    "score": 1.0,
+    "steps": 1518,
+    "termination": "success",
+    "wall_s": 167.3,
+    "video_frames": 1519,
+    "video_seconds": 75.95
+  },
+  "dream": {
+    "score": 0.1,
+    "steps": 2400,
+    "termination": "max_steps",
+    "wall_s": 294.9,
+    "video_frames": 2401,
+    "video_seconds": 120.05
+  },
+  "final_demo_state": {
+    "step": 1518,
+    "cup_position": [
+      0.2992859184741974,
+      0.1990659534931183,
+      0.8875003457069397
+    ],
+    "cup_tilt_deg": 0.0,
+    "lever_deg": -15.0,
+    "opening": 0.0,
+    "checks": {
+      "cup_on_serve_stand": true,
+      "cup_upright": true,
+      "fill_reached": true,
+      "spill_below_5pct": true,
+      "released_and_resting": true,
+      "tap_closed": true
+    },
+    "passed": true,
+    "milestones": {
+      "cup_lifted": true,
+      "cup_on_tray": true,
+      "tap_opened": true,
+      "fill_reached_ever": true,
+      "max_in_cup_ml": 348.42406791687034,
+      "max_lever_open_deg": 54.36732482910156
+    },
+    "score": 1.0,
+    "hopper_empty": false,
+    "in_cup_ml": 348.42406791687034,
+    "emitted_ml": 348.42406791687034,
+    "spill_ml": 0.0,
+    "airborne_ml": 0,
+    "spill_fraction": 0.0,
+    "fill_fraction": 0.7272006433758641,
+    "cup_capacity_ml": 479.1305825850079,
+    "hand_clearance_m": 0.006907406435156582,
+    "cup_resting": true
+  },
+  "source_sha256": {
+    "assets/cup.usda": "f66305a8d5c5649c74080153ec465274d52b1be9f006e7965cb622564bb19154",
+    "assets/cupstand.usda": "0ba335983f53ae41595f0d60d4ef1a8f0174f1c7a84ec51b5b777cfe97c6035e",
+    "assets/slush_machine.usda": "80b0e845b953e615022532cea531b6a8062487f28df1c429b3293937ab548729",
+    "check_fill.py": "322a812aee2ccdc6c274fc271997078151828ba8cdb5410170404cc44bb5990c",
+    "cup_geometry.py": "17ecd3e31cc4d911d37bae4d2da52a2697fcebf01be2a34cf15696ff7968971c",
+    "fill_model.py": "6ac2bc1091c893bb00407909f0671ec8fedc27b55989c55c4e79df69f2f26707",
+    "fill_visual.py": "e94f3b72400545ee4b57d6ae11b933435a42035cf5753bd8350f828ff1b113cb",
+    "hand_geometry.py": "3ceea288bd633fe3feee1cbf7ca31188b62a30a54bf602bcd24a87bdfea507d9",
+    "run_replay.py": "d28ed2bdd1f5dfda6288357941444f7233d873f61b410302c2f26cf5a5eb08df",
+    "slushie_runtime.py": "49f8b257ee6c14d57829ccf4b455ae04bd2b8d37ffeea4d1ead974ea58cdd7d9",
+    "task.py": "531db70ff8f14074e47e7b6952b4788ae95db324b7dd6c5c50551260b200aab5"
+  }
+}

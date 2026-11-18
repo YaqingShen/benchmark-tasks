@@ -1,0 +1,230 @@
+#usda 1.0
+(
+    defaultPrim = "SoftServe"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "SoftServe"
+{
+    def "Looks"
+    {
+        def Material "stainless_cabinet"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/stainless_cabinet/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.52, 0.55, 0.57)
+                float inputs:metallic = 0.75
+                float inputs:roughness = 0.3
+                token outputs:surface
+            }
+        }
+
+        def Material "charcoal_control_panel"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/charcoal_control_panel/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.065, 0.075, 0.085)
+                float inputs:metallic = 0.15
+                float inputs:roughness = 0.38
+                token outputs:surface
+            }
+        }
+
+        def Material "food_grade_white_polymer"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/food_grade_white_polymer/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.79, 0.81, 0.79)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "brushed_steel"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/brushed_steel/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.43, 0.46, 0.48)
+                float inputs:metallic = 0.7
+                float inputs:roughness = 0.33
+                token outputs:surface
+            }
+        }
+
+        def Material "dark_polymer"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/dark_polymer/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.025, 0.032, 0.035)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "ready_indicator"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/ready_indicator/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.04, 0.65, 0.18)
+                color3f inputs:emissiveColor = (0.02, 0.325, 0.09)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "ivory_paper"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/ivory_paper/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoat = 0
+                color3f inputs:diffuseColor = (0.91, 0.895, 0.85)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                color3f inputs:specularColor = (0.012, 0.01, 0.008)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:surface
+            }
+        }
+
+        def Material "paper_fold"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/paper_fold/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.73, 0.65, 0.51)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.9
+                token outputs:surface
+            }
+        }
+
+        def Material "baked_wafer"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/baked_wafer/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoat = 0
+                color3f inputs:diffuseColor = (0.64, 0.41, 0.19)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                color3f inputs:specularColor = (0.012, 0.01, 0.008)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:surface
+            }
+        }
+
+        def Material "waffle_ridge"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/waffle_ridge/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoat = 0
+                color3f inputs:diffuseColor = (0.68, 0.46, 0.23)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.98
+                color3f inputs:specularColor = (0.012, 0.01, 0.008)
+                int inputs:useSpecularWorkflow = 1
+                token outputs:surface
+            }
+        }
+
+        def Material "vanilla_soft_serve"
+        {
+            token outputs:surface.connect = </SoftServe/Looks/vanilla_soft_serve/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.98, 0.93, 0.81)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.3
+                token outputs:surface
+            }
+        }
+
+        def Material "contact" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.65
+            float physics:restitution = 0
+            float physics:staticFriction = 0.75
+        }
+    }
+
+    def Cube "Base" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </SoftServe/Looks/brushed_steel>
+        rel material:binding:physics = </SoftServe/Looks/contact>
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        double size = 1
+        float3 xformOp:scale = (0.13, 0.13, 0.012)
+        double3 xformOp:translate = (0.3, 0.2, 0.7535000000000001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cylinder "Pedestal" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.12200000000000001
+        rel material:binding = </SoftServe/Looks/brushed_steel>
+        rel material:binding:physics = </SoftServe/Looks/contact>
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        double radius = 0.012
+        double3 xformOp:translate = (0.3, 0.2, 0.8205000000000001)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Cylinder "ReceivingPlatform" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "MaterialBindingAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.006
+        rel material:binding = </SoftServe/Looks/brushed_steel>
+        rel material:binding:physics = </SoftServe/Looks/contact>
+        float physxCollision:contactOffset = 0.0001
+        float physxCollision:restOffset = 0
+        double radius = 0.036
+        double3 xformOp:translate = (0.3, 0.2, 0.8845000000000001)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+}
+
