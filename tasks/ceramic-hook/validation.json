@@ -1,0 +1,32 @@
+{
+  "task_source_sha256": "72123ff8fecf125589d3ae18424b6e6dfbe2dd0fab8e283f2a4eb0875dd3fe6c",
+  "scoring_geometry_sha256": "706c5ac062f9d98f57351777264ca01748ae741c36e4d8ffbfd6a548e171fa6b",
+  "environment_id": "isaaclab-arena-0.3.1-yam-bimanual-station-calibrated-task-task",
+  "inspect_robots_version": "1.0.0",
+  "instruction": "Take the ceramic hook off the wall without letting it fall. Put the hook, its screw and its washer in the padded tray, and put the screwdriver back in its stand.",
+  "seed": 0,
+  "object_jitter": 0,
+  "control_hz": 20,
+  "demo": {
+    "policy": "yam_scripted",
+    "score": 1.0,
+    "termination": "success",
+    "steps": 718,
+    "simulated_time_s": 35.9,
+    "recorded_video_s": 35.95,
+    "evaluated_revision": "72123ff8fecf"
+  },
+  "regression_tests": {
+    "passed": 10,
+    "total": 10
+  },
+  "model_run": {
+    "policy": "dream",
+    "checkpoint": "dreamlabs/dream-1-beta",
+    "score": 0.0,
+    "termination": "max_steps",
+    "steps": 2400,
+    "simulated_time_s": 120.0,
+    "evaluated_revision": "72123ff8fecf"
+  }
+}
