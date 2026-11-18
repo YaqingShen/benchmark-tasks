@@ -37,6 +37,10 @@ The damage flag is deliberately a conservative operational proxy: downward hook 
 - `labkit.py` builds multi-shape bodies and installs task hooks. `arena_assets_fix.py` redirects library assets to the production asset bucket; this scene uses no downloaded library objects.
 - Optional `HOOK_DEBUG=1` emits mechanism progress. `HOOK_AUDIT_PATH=/absolute/path/states.jsonl` records native states and scoring predicates every ten steps for audit, without changing actions or physics. Keep these local paths and logs out of blind-review media.
 
+### Detailed fidelity note
+
+The wall thread is a coded axial constraint: the screw backs out only with the driver tip within 2.5 mm radially, -3 to +1.5 mm axially and 10 degrees of the screw axis, with withdrawal capped at 2.8 mm/s; 10 mm releases it to rigid-body dynamics. The push-to-start motor is assumed; no trigger, visible rotation, torque, thread contact, paint adhesion or thread-locker is simulated. Native rigid-body contacts move the hook, washer and driver; there are no grasp attachments. The ceramic does not fracture and the foam is rigid; the stated damage flag is a conservative velocity/table-proximity proxy, not free-fall or impact-force measurement. Hook collisions are overlapping boxes; washer collision is a square ring. Native robot link poses and conservative gripper collision bounding boxes provide the hand-clearance check, not contact-force sensing. This demonstrates coordinated support, tool alignment, controlled withdrawal and collection, not physical unscrewing torque or fracture resistance.
+
 ## Evaluation evidence
 
 Both recorded trials used the same instruction and final task/scorer revision, with seed 0 and no layout jitter:
