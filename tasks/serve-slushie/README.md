@@ -4,6 +4,12 @@ A worker serving slush at a concession counter has to stop the flow at the reque
 
 In the scripted trial, the robot served 348.4 mL with zero simulated spill. It released the cup and met all six final conditions for one second. The trial ended successfully at step 1,518 (75.9 s). Dream-1 earned 0.10 for lifting the cup and reached the 2,400-step limit without opening the tap. Both recordings use seed 0 and the same instruction, scene and scorer.
 
+## Reproduce a physical trial
+
+The [physical trial protocol](physical-trial.md) specifies one 14% sucrose recipe, a serving range of −1.7 to −1.2 °C, and the reset between trials. It identifies a $162.99 retail dispenser and gives a $45–85 gravity-feed build for labs with a freezer. Before using either rig, check the tap travel, flow at five lever angles and the 25 mm clearance above the cup rim. These are qualification targets for a physical build. The scores above and in `validation.json` refer to the simulated task.
+
+For each trial, measure source mass loss and cup mass gain, and weigh the tray and grate, secondary pan, covers and wipes separately. The protocol gives the volume conversion, a mass-balance example, the procedure for a borderline result and how to protect shared equipment from sticky spills.
+
 ## Reproduce the evaluations
 
 Use the calibrated YAM station for Isaac Lab-Arena 0.3.1 and Inspect Robots 1.0.0, with a configured Dream-1 account for the model run. From this task directory in the configured environment, run the following commands. Use a fresh output directory for each replay.
