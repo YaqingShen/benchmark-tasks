@@ -1,7 +1,9 @@
 """Install the rigid-body scene, metered dispenser, free-surface rendering and task scorer."""
 from __future__ import annotations
 import importlib.abc, importlib.util, json, os, sys, pathlib
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+from instruments import Instruments, DENSITY_G_ML
+from trial_setup import prepare_batch, install_sleeve_contact, add_secondary_pan
 import numpy as np
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -37,6 +39,7 @@ class Runtime:
         self.env = None; self.base = None; self.slush = None; self.surface = None
         self.ticks = 0; self.render_clock = 0.; self.steps = 0; self.metrics = {}; self.flags = {}
         self.auger = []; self.trace = None
+        self.instrument_view = None
         self.reset_milestones()
 
     def reset_milestones(self):
@@ -58,14 +61,23 @@ class Runtime:
     def new_material(self):
         from fill_model import Dispenser
         self.slush = Dispenser()
+        self.batch = prepare_batch()
+        self.instruments = Instruments(initial_c=self.batch['serving_c'])
+        self.last_payload_ml = None
+        self.success_hold_steps = 0
 
     def attach(self, emb):
         import torch, omni.usd
         from fill_visual import FillVisual
+        from instrument_visual import InstrumentVisual
         self.env = emb._env; self.base = self.env.unwrapped
         self._machine_target(torch)
         self.auger = [p for p in omni.usd.get_context().get_stage().Traverse() if p.GetName() == 'Auger' and 'slush_machine' in str(p.GetPath())]
-        self.surface = FillVisual(omni.usd.get_context().get_stage()); self.new_material()
+        stage = omni.usd.get_context().get_stage()
+        self.surface = FillVisual(stage)
+        self.instrument_view = InstrumentVisual(stage)
+        add_secondary_pan(stage)
+        self.new_material()
 
     def _machine_target(self, torch):
         m = self.base.scene['slush_machine']
@@ -80,17 +92,30 @@ class Runtime:
             ops = UsdGeom.Xformable(p).GetOrderedXformOps()
             if len(ops) > 1: ops[1].Set(float((self.steps*.05*180.) % 360.))
 
+    def apply_payload(self):
+        if self.env is None or self.last_payload_ml == self.slush.inside:
+            return
+        import warp as wp
+        view = self.base.scene['cup'].root_view
+        mass = (.012 + self.slush.inside * DENSITY_G_ML / 1000.)
+        view.set_masses(wp.full((1, 1), mass, dtype=wp.float32, device="cpu"),
+                        wp.array([0], dtype=wp.int32, device="cpu"))
+        self.last_payload_ml = self.slush.inside
+
     # ---- scoring
     def update_metrics(self):
         self.steps += 1; self.spin_auger()
         cup = self.cup_pose(); lever = self.lever_deg()
         from hand_geometry import hand_bounds, separation
+        hands = hand_bounds(self.env)
+        self.slush.cover_bounds = [box for i,box in enumerate(hands) if i % 3 != 0]
         self.slush.advance(cup, opening_from_angle(lever), float(self.base.step_dt))
+        self.apply_payload()
         self.surface.draw(cup,self.slush)
         q = self.slush.metrics()
         centre=cup[:3,3]+cup[:3,2]*.055
         half=np.abs(cup[:3,:3])@np.array([.0465,.0465,.055])
-        clearance=min(separation((centre-half,centre+half), hand) for hand in hand_bounds(self.env))
+        clearance=min(separation((centre-half,centre+half), hand) for hand in hands)
         motion=_arr(self.base.scene['cup'].data.root_link_vel_w)[0]
         released=clearance>=.005
         resting=np.linalg.norm(motion[:3])<.01 and np.linalg.norm(motion[3:])<.5
@@ -98,6 +123,14 @@ class Runtime:
         tilt = float(np.degrees(np.arccos(np.clip(cup[2, 2], -1, 1))))
         on_stand = bool(np.linalg.norm(cup[:2, 3]-STAND_CENTER[:2]) < .015 and abs(cup[2, 3]-STAND_CENTER[2]) < .004)
         on_tray = bool(np.linalg.norm(cup[:2, 3]-FILL_POSITION[:2]) < .015 and abs(cup[2, 3]-FILL_POSITION[2]) < .006)
+        readings = self.instruments.advance(float(self.base.step_dt), self.slush, on_stand, resting, released)
+        q['simulated_instruments'] = readings
+        q['batch'] = self.batch
+        q['payload_g'] = 12. + self.slush.inside * DENSITY_G_ML
+        q['closed_drips_ml'] = self.slush.closed_drips_ml
+        q['mass_closure_g'] = (self.slush.emitted - self.slush.inside - self.slush.spill - q['airborne_ml']) * DENSITY_G_ML
+        if self.instrument_view is not None:
+            self.instrument_view.draw(readings)
         fill = q.get('fill_fraction', 0.); spill = q.get('spill_fraction', 0.)
         f = self.flags
         f['cup_lifted'] |= bool(cup[2, 3]-STAND_CENTER[2] > .008)
@@ -117,6 +150,23 @@ class Runtime:
                         'opening': opening_from_angle(lever), 'checks': checks, 'passed': bool(all(checks.values()) and all(f[k] for k in ('cup_lifted','cup_on_tray','tap_opened'))),
                         'milestones': dict(f), 'score': score, 'hopper_empty': self.slush.emitted >= 900.,
                         **{k: v for k, v in q.items() if k != 'cup_tilt_deg'}}
+        self.success_hold_steps = self.success_hold_steps + 1 if self.metrics['passed'] else 0
+        self.metrics['equipment_stop'] = self.slush.equipment_exposed
+        if self.slush.equipment_exposed:
+            self.metrics['passed'] = False
+        if self.success_hold_steps >= 20 or self.steps >= 2400 or self.slush.equipment_exposed:
+            from copy import deepcopy
+            collector = deepcopy(self.slush)
+            for _ in range(100):
+                collector.advance(cup, opening_from_angle(lever), .05)
+            self.metrics['five_second_collection'] = {
+                'method': 'fixed endpoint pose and lever, fluid model advanced by 5 s after scoring',
+                'additional_emitted_ml': collector.emitted - self.slush.emitted,
+                'additional_tray_ml': collector.tray_spill - self.slush.tray_spill,
+                'additional_spill_ml': collector.spill - self.slush.spill,
+                'spill_ml_including_window': collector.spill,
+                'recovered_ml_including_window': collector.tray_spill + collector.pan_spill + collector.cover_spill,
+            }
         if TRACE:
             if self.trace is None: self.trace = open(TRACE, 'a')
             self.trace.write(json.dumps(self.metrics)+'\n')
@@ -165,7 +215,9 @@ def _patch_scene(scene):
     def build_task_environment(embodiment, task, control_hz=None):
         for side in ['left', 'right']:  # as run_slushie.py (grasp of a 12 g thin PET cup)
             cfg = getattr(embodiment.scene_config, side+'_robot')
-            cfg.actuators['gripper'].joint_effort_limit = 3.0
+            cfg.actuators['gripper'].joint_effort_limit = 8.0
+            cfg.spawn.make_uninstanceable = True
+            install_sleeve_contact(cfg)
             if cfg.spawn.collision_props is None:  # run_slushie.py: robot_contact_offset=.0001 (yam_arm_cfg)
                 from yam_arena.robot import PhysxCollisionPropertiesCfg
                 cfg.spawn.collision_props = PhysxCollisionPropertiesCfg(contact_offset=.0001, rest_offset=0.)
@@ -204,6 +256,8 @@ def _patch_embodiment(module):
         import torch
         RT._machine_target(torch)
         RT.new_material()
+        RT.apply_payload()
+        RT.instrument_view.draw(RT.instruments.advance(0., RT.slush, True, True, True))
         RT.metrics = {}
         RT.surface.draw(RT.cup_pose(), RT.slush)
         RT.reset_milestones(); RT.steps = 0
@@ -211,7 +265,11 @@ def _patch_embodiment(module):
 
     def _task_step(self, *a, **k):
         RT.update_metrics()
-        return base_step(self, *a, **k)
+        result = base_step(self, *a, **k)
+        if RT.slush.equipment_exposed:
+            return replace(result, terminated=True, termination_reason='simulated_equipment_exposure',
+                           info={**result.info, 'success': False, 'equipment_stop': True})
+        return result
 
     cls._ensure_sim, cls.reset, cls._task_step = _ensure_sim, reset, _task_step
     cls._slushie = True

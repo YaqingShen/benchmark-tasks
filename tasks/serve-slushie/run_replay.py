@@ -25,7 +25,7 @@ from cup_geometry import FILL_POSITION, GRASP_HEIGHT, outer_radius, cavity_volum
 OPEN_GAP = .0939; GRASP_GAP = float(2*outer_radius(GRASP_HEIGHT)-.002); LEVER_GRIP_GAP = .021
 IK_ROT_WEIGHT, IK_POS_TOL, IK_ROT_TOL = .1, .004, .25
 LEVER_CLOSED_DEG, LEVER_OPEN_DEG = srt.LEVER_CLOSED_DEG, srt.LEVER_OPEN_DEG
-ARGS = dict(target_fill=.66, max_dispense_seconds=8., settle_seconds=1., carry_seconds=8., front_exit_x=.29, filled_slowdown=1.5)
+ARGS = dict(target_fill=float(os.environ.get('SLUSH_TARGET', '.66')), max_dispense_seconds=8., settle_seconds=1., carry_seconds=8., front_exit_x=.29, filled_slowdown=1.5)
 RT = srt.RT
 
 
@@ -82,11 +82,14 @@ class Driver:
         yield from self.move('left', np.asarray(target)+offset+lag, None, seconds, label)
 
     def side_grasp(self, label):
-        tz = self.rot['left'][:, 2]; grip = RT.cup_pose()[:3, 3]+[0., 0., GRASP_HEIGHT]
+        loaded = RT.slush.inside > 0.
+        grasp_height = float(os.environ.get('SLUSH_GRASP_HEIGHT', '.060')) if loaded else GRASP_HEIGHT
+        tz = self.rot['left'][:, 2]; grip = RT.cup_pose()[:3, 3]+[0., 0., grasp_height]
         yield from self.move('left', grip-.09*tz+[0, 0, .04], OPEN_GAP, 2., f'{label}: pre-grasp')
         yield from self.move('left', grip-.09*tz, OPEN_GAP, 1.5, f'{label}: lower beside cup')
         yield from self.move('left', grip, OPEN_GAP, 2., f'{label}: slide fingers around cup')
-        yield from self.move('left', grip, GRASP_GAP, 1.2, f'{label}: close gripper'); yield from self.hold(.4, f'{label}: settle grasp')
+        grasp_gap = 2*outer_radius(grasp_height) - float(os.environ.get('SLUSH_SQUEEZE', '.016')) if loaded else GRASP_GAP
+        yield from self.move('left', grip, grasp_gap, 1.2, f'{label}: close gripper'); yield from self.hold(.4, f'{label}: settle grasp')
 
     def side_release(self, label, park):
         tz = self.rot['left'][:, 2]; h = self.hand(commanded=True)
@@ -120,19 +123,26 @@ def demonstrate(d):
     yield from d.lever(LEVER_OPEN_DEG, 2., 'pull tap handle down'); n = 0
     while RT.metrics.get('in_cup_ml', 0.)+RT.metrics.get('airborne_ml', 0.) < target_ml and n < A['max_dispense_seconds']*20:
         yield from d.lever(LEVER_OPEN_DEG, .05, 'hold handle down'); n += 1
-    yield from d.lever(LEVER_CLOSED_DEG, 1.2, 'let handle return up')
     h = d.hand('right', commanded=True)
-    yield from d.move('right', h, OPEN_GAP, .8, 'release tap handle'); yield from d.move('right', h-r[:, 2]*.10, None, 1.5, 'withdraw right hand')
+    print('RELEASE_START', RT.steps, RT.lever_deg(), flush=True)
+    yield from d.move('right', h, OPEN_GAP, .45, 'open fingers at the full-open tap')
+    yield from d.hold(1., 'spring returns tap without assistance')
+    print('RELEASE_END', RT.steps, RT.lever_deg(), flush=True)
+    yield from d.move('right', pt-r[:, 2]*.07, OPEN_GAP, 1.4, 'withdraw to reachable pre-grasp waypoint')
     yield from d.move('right', np.array([.20, -.25, 1.15]), None, 2., 'park right arm')
     yield from d.hold(A['settle_seconds'], 'slushie settles')
     yield from d.side_grasp('pick filled cup'); k = A['filled_slowdown']
     yield from d.move_cup(RT.cup_pose()[:3, 3]+[0, 0, .012], 1.2*k, 'lift cup off tray')
+    for _ in range(3):
+        if RT.cup_pose()[2, 3] >= FILL_POSITION[2] + .006:
+            break
+        yield from d.move_cup(FILL_POSITION+[0, 0, .012], .75, 'compensate for loaded grasp settling')
     clear = np.array([A['front_exit_x'], FILL_POSITION[1], FILL_POSITION[2]+.016])
     yield from d.move_cup(clear, 3.*k, 'pull cup straight out from under tap')
     yield from d.move_cup([clear[0], clear[1], stand[2]+.012], 1.5*k, 'raise to stand height')
     yield from d.move_cup(stand+[0, 0, .012], A['carry_seconds'], 'carry cup to serve stand')
     yield from d.move_cup(stand+[0, 0, -.001], 1.5*k, 'set cup on serve stand')
-    yield from d.side_release('serve', park_left)
+    yield from d.side_release('serve', np.array([.21, .26, 1.10]))
     print('PHASE scripted sequence done; holding', flush=True)
 
 
@@ -165,4 +175,6 @@ except BaseException:
 result['final_slushie_state'] = RT.metrics
 (a.output/'replay_result.json').write_text(json.dumps(result, indent=2, default=str)); print('RESULT', json.dumps({k: result.get(k) for k in ['statuses', 'error']}, default=str)[:2000], flush=True)
 print('FINAL', json.dumps({k: RT.metrics.get(k) for k in ['score', 'passed', 'checks', 'in_cup_ml', 'spill_fraction', 'fill_fraction']}), flush=True)
-os._exit(1 if 'error' in result else 0)
+if RT.trace is not None:
+    RT.trace.close()
+os._exit(1 if 'error' in result or result.get('statuses') != ['success'] else 0)

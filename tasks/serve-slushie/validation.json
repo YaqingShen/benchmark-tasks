@@ -1,26 +1,42 @@
 {
-  "demo": {
-    "score": 1.0,
-    "steps": 1518,
-    "termination": "success",
-    "wall_s": 167.3,
-    "video_frames": 1519,
-    "video_seconds": 75.95
+  "evidence_type": "simulation",
+  "source_sha256": {
+    "assets/cup.usda": "f66305a8d5c5649c74080153ec465274d52b1be9f006e7965cb622564bb19154",
+    "assets/cupstand.usda": "0ba335983f53ae41595f0d60d4ef1a8f0174f1c7a84ec51b5b777cfe97c6035e",
+    "assets/slush_machine.usda": "80b0e845b953e615022532cea531b6a8062487f28df1c429b3293937ab548729",
+    "check_fill.py": "322a812aee2ccdc6c274fc271997078151828ba8cdb5410170404cc44bb5990c",
+    "check_instruments.py": "70e66ce62ae11864eec29de6283091e35dc6091251c7a639a1ad80b1586a0487",
+    "check_review.py": "528ff4f2e7ca4dbaadcc7f841a97939034961eb80d3732e4be03838c7ce575a1",
+    "cup_geometry.py": "17ecd3e31cc4d911d37bae4d2da52a2697fcebf01be2a34cf15696ff7968971c",
+    "fill_model.py": "c299b9766f65a6cf7c59f04be3e4e9efad8b2ca9e9328e9ea2069b0de92e8f75",
+    "fill_visual.py": "e94f3b72400545ee4b57d6ae11b933435a42035cf5753bd8350f828ff1b113cb",
+    "hand_geometry.py": "3ceea288bd633fe3feee1cbf7ca31188b62a30a54bf602bcd24a87bdfea507d9",
+    "instrument_visual.py": "0214e4ff06a026479dc333f06403b52ca23a4ac6886b7a4b95c8d3d787bb2e69",
+    "instruments.py": "038a525397cbba48b441c45c1c4549d951c633c6ddf88511ada7d6d0617567cd",
+    "run_replay.py": "f65db778703bc3ec085fd843c3c0cd163c62f9a0a43df13a5f41f9a94508ab4c",
+    "run_variant.py": "02f9bbae1e0916650810b6e7b2127a47a0c93146c65d2160f10d4f64570152d7",
+    "slushie_runtime.py": "b2071c9452b59eba56b6393023ae49422725a001949caa5b3efc64d2b88389d7",
+    "task.py": "531db70ff8f14074e47e7b6952b4788ae95db324b7dd6c5c50551260b200aab5",
+    "trial_setup.py": "ea75b63df7d163bf28955c14029e20bb00bc94f6dc251d5f4980d2974e09fc30"
   },
-  "dream": {
-    "score": 0.1,
-    "steps": 2400,
-    "termination": "max_steps",
-    "wall_s": 294.9,
-    "video_frames": 2401,
-    "video_seconds": 120.05
+  "demo": {
+    "score": 1,
+    "steps": 1539,
+    "termination": "success",
+    "seed": 0,
+    "simulated_s": 76.95,
+    "wall_s": 171.9,
+    "video_frames": 1540,
+    "video_seconds": 77.0,
+    "media_filename": "demo.mp4",
+    "video_sha256": "bf7088fd5ec04915d3426521081096eb6aef645192a9e99404be0bcf668002e0"
   },
   "final_demo_state": {
-    "step": 1518,
+    "step": 1539,
     "cup_position": [
-      0.2992859184741974,
-      0.1990659534931183,
-      0.8875003457069397
+      0.2937694191932678,
+      0.19517290592193604,
+      0.8875002861022949
     ],
     "cup_tilt_deg": 0.0,
     "lever_deg": -15.0,
@@ -39,32 +55,161 @@
       "cup_on_tray": true,
       "tap_opened": true,
       "fill_reached_ever": true,
-      "max_in_cup_ml": 348.42406791687034,
-      "max_lever_open_deg": 54.36732482910156
+      "max_in_cup_ml": 327.32462905883807,
+      "max_lever_open_deg": 54.901161193847656
     },
     "score": 1.0,
     "hopper_empty": false,
-    "in_cup_ml": 348.42406791687034,
-    "emitted_ml": 348.42406791687034,
+    "in_cup_ml": 327.32462905883807,
+    "emitted_ml": 327.32462905883807,
     "spill_ml": 0.0,
     "airborne_ml": 0,
     "spill_fraction": 0.0,
-    "fill_fraction": 0.7272006433758641,
+    "fill_fraction": 0.6831637156051581,
     "cup_capacity_ml": 479.1305825850079,
-    "hand_clearance_m": 0.006907406435156582,
-    "cup_resting": true
+    "hand_clearance_m": 0.06951459234993343,
+    "cup_resting": true,
+    "simulated_instruments": {
+      "pickup_scale_g": 355.7,
+      "hopper_net_g": 601.3,
+      "tray_retained_g": 0.0,
+      "other_spill_g": 0.0,
+      "secondary_pan_g": 0.0,
+      "pad_covers_g": 0.0,
+      "unrecovered_g": 0.0,
+      "probe_c": -1.4
+    },
+    "batch": {
+      "sugar_g": 210.0,
+      "water_g": 1290.0,
+      "sugar_mass_fraction": 0.14,
+      "serving_c": -1.38012538281464,
+      "estimated_ice_g": 463.18795184293367,
+      "sample_temperatures_c": [
+        3.0,
+        -0.933,
+        -1.046,
+        -1.191,
+        -1.38
+      ],
+      "prep_time_min": 40
+    },
+    "payload_g": 355.69086051178,
+    "closed_drips_ml": 0.44999999999999996,
+    "mass_closure_g": 0.0,
+    "equipment_stop": false,
+    "five_second_collection": {
+      "method": "fixed endpoint pose and lever, fluid model advanced by 5 s after scoring",
+      "additional_emitted_ml": 0.0,
+      "additional_tray_ml": 0.0,
+      "additional_spill_ml": 0.0,
+      "spill_ml_including_window": 0.0,
+      "recovered_ml_including_window": 0.0
+    }
   },
-  "source_sha256": {
-    "assets/cup.usda": "f66305a8d5c5649c74080153ec465274d52b1be9f006e7965cb622564bb19154",
-    "assets/cupstand.usda": "0ba335983f53ae41595f0d60d4ef1a8f0174f1c7a84ec51b5b777cfe97c6035e",
-    "assets/slush_machine.usda": "80b0e845b953e615022532cea531b6a8062487f28df1c429b3293937ab548729",
-    "check_fill.py": "322a812aee2ccdc6c274fc271997078151828ba8cdb5410170404cc44bb5990c",
-    "cup_geometry.py": "17ecd3e31cc4d911d37bae4d2da52a2697fcebf01be2a34cf15696ff7968971c",
-    "fill_model.py": "6ac2bc1091c893bb00407909f0671ec8fedc27b55989c55c4e79df69f2f26707",
-    "fill_visual.py": "e94f3b72400545ee4b57d6ae11b933435a42035cf5753bd8350f828ff1b113cb",
-    "hand_geometry.py": "3ceea288bd633fe3feee1cbf7ca31188b62a30a54bf602bcd24a87bdfea507d9",
-    "run_replay.py": "d28ed2bdd1f5dfda6288357941444f7233d873f61b410302c2f26cf5a5eb08df",
-    "slushie_runtime.py": "49f8b257ee6c14d57829ccf4b455ae04bd2b8d37ffeea4d1ead974ea58cdd7d9",
-    "task.py": "531db70ff8f14074e47e7b6952b4788ae95db324b7dd6c5c50551260b200aab5"
+  "dream": {
+    "score": 0.1,
+    "steps": 2400,
+    "termination": "max_steps",
+    "seed": 0,
+    "simulated_s": 120.0,
+    "wall_s": 304.8,
+    "video_frames": 2401,
+    "video_seconds": 120.05,
+    "media_filename": "model_run.mp4",
+    "video_sha256": "25587be75fde5572f61b37ce73625dc562c0d409d2367d524aa170be7b702278"
+  },
+  "final_dream_state": {
+    "step": 2400,
+    "cup_position": [
+      0.33014988899230957,
+      0.1982494741678238,
+      0.793967604637146
+    ],
+    "cup_tilt_deg": 90.01606460513835,
+    "lever_deg": -15.0,
+    "opening": 0.0,
+    "checks": {
+      "cup_on_serve_stand": false,
+      "cup_upright": false,
+      "fill_reached": false,
+      "spill_below_5pct": true,
+      "released_and_resting": true,
+      "tap_closed": true
+    },
+    "passed": false,
+    "milestones": {
+      "cup_lifted": true,
+      "cup_on_tray": false,
+      "tap_opened": false,
+      "fill_reached_ever": false,
+      "max_in_cup_ml": 0.0,
+      "max_lever_open_deg": 0.009565353393554688
+    },
+    "score": 0.1,
+    "hopper_empty": false,
+    "in_cup_ml": 0.0,
+    "emitted_ml": 0.0,
+    "spill_ml": 0.0,
+    "airborne_ml": 0,
+    "spill_fraction": 0.0,
+    "fill_fraction": 0.0,
+    "cup_capacity_ml": 479.1305825850079,
+    "hand_clearance_m": 0.10118717073298061,
+    "cup_resting": true,
+    "simulated_instruments": {
+      "pickup_scale_g": 0.0,
+      "hopper_net_g": 945.0,
+      "tray_retained_g": 0.0,
+      "other_spill_g": 0.0,
+      "secondary_pan_g": 0.0,
+      "pad_covers_g": 0.0,
+      "unrecovered_g": 0.0,
+      "probe_c": -1.3
+    },
+    "batch": {
+      "sugar_g": 210.0,
+      "water_g": 1290.0,
+      "sugar_mass_fraction": 0.14,
+      "serving_c": -1.38012538281464,
+      "estimated_ice_g": 463.18795184293367,
+      "sample_temperatures_c": [
+        3.0,
+        -0.933,
+        -1.046,
+        -1.191,
+        -1.38
+      ],
+      "prep_time_min": 40
+    },
+    "payload_g": 12.0,
+    "closed_drips_ml": 0.0,
+    "mass_closure_g": 0.0,
+    "equipment_stop": false,
+    "five_second_collection": {
+      "method": "fixed endpoint pose and lever, fluid model advanced by 5 s after scoring",
+      "additional_emitted_ml": 0.0,
+      "additional_tray_ml": 0.0,
+      "additional_spill_ml": 0.0,
+      "spill_ml_including_window": 0.0,
+      "recovered_ml_including_window": 0.0
+    }
+  },
+  "physical_dispenser": {
+    "status": "awaiting bench measurements",
+    "observations": 0
+  },
+  "setup": {
+    "source": "first frame of the scripted overhead camera",
+    "sha256": "557fc7df6f2031b89f9e0f661ac5b741aadb8822b57cbc705ccf601bb1f59392"
+  },
+  "robustness": {
+    "summary_file": "evidence/robustness.json",
+    "case_count": 5,
+    "runs_per_case": 1,
+    "seed": 0,
+    "all_scores": 1.0,
+    "all_spill_ml": 0.0,
+    "controller": "scripted"
   }
 }
