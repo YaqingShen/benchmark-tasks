@@ -7,6 +7,7 @@ import numpy as np
 from scipy.spatial import ConvexHull
 from scipy.spatial.transform import Rotation
 import labkit
+from produce_contact import FruitContact, install_physics
 from cut_checks import BatchPass, both_tools_held
 
 R=.014
@@ -56,6 +57,9 @@ class Trial:
         self.world=world
         self.reset(None)
     def reset(self,env):
+        self.contact=FruitContact()
+        if env is not None:
+            install_physics(env,self)
         self.step=0;self.batch=BatchPass();self.cut=self.batch.cut_ids
         self.final=False;self.credit=0.;self.still=0
         self.log=Path(os.environ.get('TOMATO_RUN_DIR','/tmp'))/'audit.jsonl'
@@ -81,7 +85,7 @@ class Trial:
         lid_local=np.array([(p[:3]-lid[:3])@lid_rot for p in whole])
         # The centre of each fruit must lie under the plate during its crossing.
         covered=(np.abs(lid_local[:,0])<=.080)&(np.abs(lid_local[:,1])<=.072)
-        for i in self.batch.observe(knife[:3],rot,loc,covered,engaged):
+        for i in self.batch.observe(knife[:3],rot,loc,covered,engaged,self.contact.ready()):
             p=whole[i];name='tomato_'+str(i);v=velocity(name)
             write(name,np.r_[[.10+i*.04,.16,.09],p[3:]],np.zeros(6))
             for h in (0,1):write(f'half_{2*i+h}',np.r_[p[:3],knife[3:]],v)
@@ -102,7 +106,7 @@ class Trial:
         self.final=self.still>=8
         best_count,best_halves=self.batch.best_pass(retained)
         self.credit=(7*best_count+best_halves)/80 + .1*self.final
-        row=dict(step=self.step,cut=sorted(self.cut),pieces=pieces,score=self.credit,complete=self.final,
+        row=dict(work_J=self.contact.work.tolist(),draw_m=self.contact.draw.tolist(),peak_N=self.contact.peak.tolist(),max_total_N=self.contact.peak_total,max_contacts=self.contact.active_max,physics_steps=self.contact.physical_steps,step=self.step,cut=sorted(self.cut),pieces=pieces,score=self.credit,complete=self.final,
                  knife=knife.tolist(),lid=lid.tolist(),tcp=[left.tolist(),right.tolist()],engaged=bool(engaged),xyz=loc.tolist(),passes=[sorted(ids) for ids in self.batch.passes],retained=retained,best_count=best_count,best_halves=best_halves,entered=sorted(self.batch.enter),single_pass=bool(self.batch.batch_complete))
         with self.log.open('a') as f:f.write(json.dumps(row)+'\n')
         self.step+=1

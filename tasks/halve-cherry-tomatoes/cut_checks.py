@@ -25,7 +25,7 @@ class BatchPass:
         self.previous = {}
         self.pass_ids = set()
 
-    def observe(self, position, rotation, fruit_local, covered, engaged):
+    def observe(self, position, rotation, fruit_local, covered, engaged, loaded=None):
         if not engaged:
             self.reset_pass()
             return []
@@ -44,7 +44,6 @@ class BatchPass:
             if i in self.cut_ids:
                 continue
             previous = self.previous.get(i)
-            self.previous[i] = (float(y),progress)
             if not covered[i] or abs(z) > PLANE_TOLERANCE:
                 self.enter.pop(i,None)
                 self.previous.pop(i,None)
@@ -55,13 +54,16 @@ class BatchPass:
                 self.enter.pop(i,None)
                 self.previous.pop(i,None)
                 continue
-            if previous is not None and previous[0] >= depth > y:
+            # The chord changes with height. Compare each sample to its own entry surface.
+            entry_distance = float(y - depth)
+            self.previous[i] = (entry_distance, progress)
+            if previous is not None and previous[0] >= 0 > entry_distance:
                 self.enter[i] = previous[1]
             if i in self.enter and y <= -depth:
                 start = self.enter.pop(i)
                 # The edge must itself advance at least one radius. This excludes
                 # pushing a fruit through a stationary blade. Fruit can still roll slightly.
-                if progress-start >= RADIUS:
+                if progress-start >= RADIUS and (loaded is None or loaded[i]):
                     if not self.pass_ids:
                         self.passes.append(self.pass_ids)
                     self.cut_ids.add(i)
