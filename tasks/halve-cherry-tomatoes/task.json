@@ -1,0 +1,19 @@
+{
+  "title": "Halve eight tomatoes in one pass",
+  "category": "Societal relatability",
+  "keywords": [
+    "meal preparation",
+    "cherry tomatoes",
+    "batch cutting",
+    "bimanual tool use"
+  ],
+  "instruction": "Halve all eight cherry tomatoes in one pass. Leave all sixteen halves in the tray and both tools on their rests.",
+  "context": "Cherry tomatoes are often halved for salads. A shallow tray and a loose lid let a cook steady several rolling tomatoes together and portion a batch with one knife pass.",
+  "setup": "Eight 28 mm cherry tomatoes (12 g each) lie in one layer in a 170 × 154 mm rigid plastic tray with a 10 mm rim. Its floor is 80 mm above the worktop. A loose clear plastic lid (160 × 144 × 6 mm) with a green grip rests on the left. An unpowered kitchen knife with a 177 × 22 × 1.4 mm steel blade and a 92 × 20 × 18 mm plastic handle lies in front of the tray, with the handle on two rests on the right. The worktop, tray platform and three tool supports are fixed. The two parallel grippers start open. The README and fruit.json give the fixed layout.",
+  "scoring": "Score the largest batch cut in a single pass. Count C distinct tomatoes cut in that pass and H of their halves wholly in the tray and resting at the end. If passes tie on C, use the one with more retained halves. Award 0.0875 × C + 0.0125 × H. Add 0.10 for eight in one pass with all sixteen halves retained and both tools returned, released and stationary. Eight individual cuts earn at most 0.1125. Two batches of four earn at most 0.45. A single complete batch earns up to 1.0. The README defines the tolerances.",
+  "run_limit": "750 steps (37.5 seconds at 20 Hz)",
+  "reset_notes": "Clear the tray, replace the eight whole tomatoes at the coordinates in fruit.json and return the lid and knife to their rests. Start both arms in the station ready pose. Loading and unloading are outside the timed trial.",
+  "fidelity": "Fruit are rigid spheres. A geometric cut requires a near-central blade traversal under the lid; it replaces a whole fruit in place with two independent 6 g hemispheres. Either hand may steady the lid. The arms, tools, tray and pieces move in the Isaac contact simulation. Knife–fruit contact is replaced by the cut detector. The model omits skin fracture, crushing, juice, sharpness and cutting resistance. A slightly off-center qualifying cut still generates equal model halves. The trial measures batch positioning and containment.",
+  "scores": "Dream-1 run: 0.000. Scripted demonstration: 1.000.",
+  "media": "M-GBAJ44"
+}
