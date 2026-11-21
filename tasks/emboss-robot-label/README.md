@@ -28,7 +28,7 @@ The simulated fixture has the following dimensions. The wheel is 76 mm in diamet
 
 Reset the wheel to its zero detent (A), let the trigger fully return, and load a fresh blank strip. Remove any previously cut strip. The clamp, machine and support remain in the declared starting positions. Clear the event history and score. The simulated tape is unlimited; a real trial needs enough tape for five glyphs, two spaces, and the leading and cutting margins. The present fixture immobilizes the housing so that the task tests wheel manipulation and complete squeeze/release cycles; it does not test holding a free handheld embosser.
 
-For a physical outcome check, photograph the cut strip and inspect the trial video: exactly one label must read ROBOT, all five letters must be legible and intact, the trailing margin must remain, and the trigger must return after every press. Simulator joint thresholds are operational proxies for the stroke endpoints and alignment. 
+For a physical outcome check, photograph the cut strip and inspect the trial video: exactly one label must read ROBOT, all five letters must be legible and intact, the trailing margin must remain, and the trigger must return after every press. Simulator joint thresholds are operational proxies for the stroke endpoints and alignment.
 
 ## Reproduction
 
