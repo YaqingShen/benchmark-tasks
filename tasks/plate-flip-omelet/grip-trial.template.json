@@ -1,0 +1,37 @@
+{
+  "task": "TK-69HV3P",
+  "gripper_model": null,
+  "pad_sensors": null,
+  "calibration_id": null,
+  "skillet_handle": null,
+  "uncertainty_N": null,
+  "trials": [
+    {
+      "video": null,
+      "force_csv": null,
+      "turn_start_s": null,
+      "turn_end_s": null,
+      "maximum_turn_deg": null,
+      "handle_drift_mm": null,
+      "rested_and_released": null
+    },
+    {
+      "video": null,
+      "force_csv": null,
+      "turn_start_s": null,
+      "turn_end_s": null,
+      "maximum_turn_deg": null,
+      "handle_drift_mm": null,
+      "rested_and_released": null
+    },
+    {
+      "video": null,
+      "force_csv": null,
+      "turn_start_s": null,
+      "turn_end_s": null,
+      "maximum_turn_deg": null,
+      "handle_drift_mm": null,
+      "rested_and_released": null
+    }
+  ]
+}

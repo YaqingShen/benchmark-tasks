@@ -66,6 +66,10 @@ def main():
     pan, plate, food = p(0, 0, .05), p(0, 0, .081), p(0, 0, .054)
     start = (pan, plate, food)
     result = {}
+    assert task.plate_clearance([0.,0.,.100])>.040
+    assert task.plate_clearance([0.,0.,.012])<.040
+    assert task.plate_clearance([task.PR+.01,0.,.004])<.040
+    assert task.plate_clearance([task.PR+.06,0.,.004])>.040
     modules = {"yam_arena.scene": scene, "yam_arena.runtime": runtime, "isaaclab_physx.physics": physics}
     with patch.dict(sys.modules, modules):
         reset()
@@ -116,9 +120,34 @@ def main():
         assert t.stage == 5
         result["still_holding_skillet"] = task.score(None)
         t.tool_hand_views = [Feed((0,) * 6), Feed((0,) * 6)]
+        for _ in range(19):
+            tick(*finish, support=(1, 0))
+            assert task.score(None) == .85
         tick(*finish, support=(1, 0))
         assert task.score(None) == 1
         result["constructed_full_sequence"] = task.score(None)
+        for name, variant, support, grip, contact in (
+            ("move_off_hob", (p(.15,0,.05), finish[1], p(.15,0,.076,180)), (0,0), False, (1,0)),
+            ("lose_hob_contact", finish, (0,0), False, (1,0)),
+            ("return_plate_over_pan", (pan, plate, finish[2]), (1,0), False, (1,0)),
+            ("plate_rim_still_contacts_pan", finish, (1,1), False, (1,0)),
+            ("regrip_handle", finish, (1,0), True, (1,0)),
+            ("tip_food_face", (pan,finish[1],p(0,0,.076,150)), (1,0), False, (1,0)),
+            ("remove_food_support", finish, (1,0), False, (0,0)),
+        ):
+            t.tool_hand_views = [Feed((0,int(grip),0,0,0,0)), Feed((0,)*6)]
+            tick(*variant, support=support, contacts=contact)
+            assert task.score(None) == .85 and not task.success(None) and t.hold == 0
+            result[name + "_after_full"] = task.score(None)
+            t.tool_hand_views = [Feed((0,)*6), Feed((0,)*6)]
+            for _ in range(19):
+                tick(*finish,support=(1,0))
+                assert not task.success(None)
+            tick(*finish,support=(1,0))
+            assert task.score(None) == 1
+        tick(*finish, support=(1,0), forbidden_index=5)
+        assert task.score(None) == 0 and not task.success(None)
+        result["touch_replica_after_full"] = task.score(None)
     print(json.dumps(result, indent=2))
 
 

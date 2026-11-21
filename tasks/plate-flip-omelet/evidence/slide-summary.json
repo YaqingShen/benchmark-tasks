@@ -1,0 +1,34 @@
+{
+  "plate_brown": {
+    "last_hold_deg": 21,
+    "first_slide_deg": 22,
+    "travel_15mm_s": 0.10957401756140493,
+    "fixed_slope_deg": 35,
+    "hold_threshold_mm": 2,
+    "observation_s": 1
+  },
+  "plate_plain": {
+    "last_hold_deg": 21,
+    "first_slide_deg": 22,
+    "travel_15mm_s": 0.10956997380417077,
+    "fixed_slope_deg": 35,
+    "hold_threshold_mm": 2,
+    "observation_s": 1
+  },
+  "skillet_brown": {
+    "last_hold_deg": 22,
+    "first_slide_deg": 23,
+    "travel_15mm_s": 0.1132902255911676,
+    "fixed_slope_deg": 35,
+    "hold_threshold_mm": 2,
+    "observation_s": 1
+  },
+  "skillet_plain": {
+    "last_hold_deg": 22,
+    "first_slide_deg": 23,
+    "travel_15mm_s": 0.11329008178757835,
+    "fixed_slope_deg": 35,
+    "hold_threshold_mm": 2,
+    "observation_s": 1
+  }
+}

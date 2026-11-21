@@ -1,0 +1,174 @@
+{
+  "scripted": {
+    "policy": "yam_scripted",
+    "seed": 0,
+    "official_score": 1.0,
+    "actions": 1135,
+    "action_limit": 1200,
+    "control_hz": 20.0,
+    "physics_hz": 240.0,
+    "measured_substeps": 13608,
+    "first_full_action": 1116,
+    "max_skillet_tilt_deg": 179.842106270273,
+    "milestones": [
+      {
+        "step": 0,
+        "stage": 0
+      },
+      {
+        "step": 262,
+        "stage": 1
+      },
+      {
+        "step": 407,
+        "stage": 2
+      },
+      {
+        "step": 495,
+        "stage": 3
+      },
+      {
+        "step": 563,
+        "stage": 4
+      },
+      {
+        "step": 917,
+        "stage": 5
+      },
+      {
+        "step": 1115,
+        "stage": 6
+      }
+    ],
+    "peak_per_pad": {
+      "skillet": [
+        {
+          "N": 33.88784408569336,
+          "window_end_step": 259
+        },
+        {
+          "N": 33.89596176147461,
+          "window_end_step": 327
+        }
+      ],
+      "plate": [
+        {
+          "N": 23.765541076660156,
+          "window_end_step": 557
+        },
+        {
+          "N": 27.82039451599121,
+          "window_end_step": 933
+        }
+      ]
+    },
+    "duration_wall_s": 402.4787004609825
+  },
+  "repeat": {
+    "policy": "yam_scripted",
+    "seed": 0,
+    "official_score": 1.0,
+    "actions": 1135,
+    "action_limit": 1200,
+    "control_hz": 20.0,
+    "physics_hz": 240.0,
+    "measured_substeps": 13608,
+    "first_full_action": 1116,
+    "max_skillet_tilt_deg": 179.842106270273,
+    "milestones": [
+      {
+        "step": 0,
+        "stage": 0
+      },
+      {
+        "step": 262,
+        "stage": 1
+      },
+      {
+        "step": 407,
+        "stage": 2
+      },
+      {
+        "step": 495,
+        "stage": 3
+      },
+      {
+        "step": 563,
+        "stage": 4
+      },
+      {
+        "step": 917,
+        "stage": 5
+      },
+      {
+        "step": 1115,
+        "stage": 6
+      }
+    ],
+    "peak_per_pad": {
+      "skillet": [
+        {
+          "N": 33.88784408569336,
+          "window_end_step": 259
+        },
+        {
+          "N": 33.89596176147461,
+          "window_end_step": 327
+        }
+      ],
+      "plate": [
+        {
+          "N": 23.765541076660156,
+          "window_end_step": 557
+        },
+        {
+          "N": 27.82039451599121,
+          "window_end_step": 933
+        }
+      ]
+    },
+    "duration_wall_s": 258.3402019350324
+  },
+  "dream": {
+    "policy": "dream",
+    "seed": 0,
+    "official_score": 0,
+    "actions": 1200,
+    "action_limit": 1200,
+    "control_hz": 20.0,
+    "physics_hz": 240.0,
+    "measured_substeps": 14388,
+    "first_full_action": null,
+    "max_skillet_tilt_deg": 8.721873437374334e-05,
+    "milestones": [
+      {
+        "step": 0,
+        "stage": 0
+      }
+    ],
+    "peak_per_pad": {
+      "skillet": [
+        {
+          "N": 0.0,
+          "window_end_step": 0
+        },
+        {
+          "N": 0.0,
+          "window_end_step": 0
+        }
+      ],
+      "plate": [
+        {
+          "N": 0.0,
+          "window_end_step": 0
+        },
+        {
+          "N": 7.384320259094238,
+          "window_end_step": 272
+        }
+      ]
+    },
+    "duration_wall_s": 417.8564106239937
+  },
+  "code_sha256": "5e12fa73fc44d54a2934998113895bfef33fae77598a9bb58de33e0f85626b3d"
+}

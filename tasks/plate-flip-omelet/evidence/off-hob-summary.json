@@ -1,0 +1,101 @@
+{
+  "log": "adhoc_c4b1b4d3.json",
+  "policy": "yam_scripted",
+  "checkpoint": null,
+  "seed": 0,
+  "official_score": 0.85,
+  "actions": 64,
+  "action_limit": 64,
+  "control_hz": 20.0,
+  "physics_hz": 240.0,
+  "measured_substeps": 756,
+  "duration_wall_s": 45.005982561036944,
+  "milestones": [
+    {
+      "step": 0,
+      "stage": 5
+    },
+    {
+      "step": 19,
+      "stage": 6
+    },
+    {
+      "step": 20,
+      "stage": 5
+    }
+  ],
+  "first_full_action": 20,
+  "terminal": {
+    "step": 63,
+    "stage": 5,
+    "failed": false,
+    "hold": 0,
+    "seated": false,
+    "hob": false,
+    "away": true,
+    "released": false,
+    "settled_before_hand_check": false,
+    "pan_speed_m_s": 6.113392483016598e-05,
+    "food_speed_m_s": 5.9089737089138155e-05,
+    "food_on_pan": true,
+    "food_on_plate": false,
+    "pan_deg": 5.477475304429139e-05,
+    "plate_deg": 8.585414659473691e-05,
+    "food_deg": 180.0,
+    "tip_normals_N": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "physics_dt_s": 0.004166666666666667,
+    "physics_samples": 756,
+    "window_peak_N": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "physics_peak_N": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "peak_per_pad": {
+    "skillet": [
+      {
+        "N": 0.0,
+        "window_end_step": 0
+      },
+      {
+        "N": 0.0,
+        "window_end_step": 0
+      }
+    ],
+    "plate": [
+      {
+        "N": 0.0,
+        "window_end_step": 0
+      },
+      {
+        "N": 0.0,
+        "window_end_step": 0
+      }
+    ]
+  },
+  "max_skillet_tilt_deg": 5.477475304429139e-05
+}

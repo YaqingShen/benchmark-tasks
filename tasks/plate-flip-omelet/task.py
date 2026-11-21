@@ -1,5 +1,6 @@
 """Turn a thick omelet over with a skillet and a dinner plate."""
 import math
+import json
 import os
 import sys
 from pathlib import Path
@@ -172,7 +173,7 @@ def demo():
     cover=at(PAN,PAN_H+RIM_H)
     edge=cover+RIGHT
     pick=at(PARK,PAD_H+.004)-RIM_GRIP*PICK_DIR
-    g=-.0033
+    g=-.0046
     squeeze=0.
     move(2.5,"line up with handle and rim",(left+[-.065,0,.060],lr,-.031),
         (pick-.045*PICK_DIR+[0,0,.035],fr,-.022))
@@ -220,11 +221,19 @@ def demo():
         move(.25,"slide omelet off plate",R=(p,r@rr,squeeze))
     move(1.0,"let omelet settle")
     move(1.6,"clear skillet",R=(p-.040*downhill+[0,0,.015],r@rr,squeeze))
-    move(2.5,"return plate",R=(pick+[0,0,.034],inverted_fr,squeeze))
-    move(1.,"set plate down",R=(pick+[0,0,.002],inverted_fr,squeeze))
+    # Rest the plate toward the outer side of the rack so its rim clears the pan.
+    park_grip = pick + np.array([.031, -.024, 0.])
+    move(2.5,"return plate",R=(park_grip+[0,0,.034],inverted_fr,squeeze))
+    move(1.,"set plate down",R=(park_grip+[0,0,.002],inverted_fr,squeeze))
     move(1.,"release",(left,lr,-.022),(last["right"][0],last["right"][1],-.018))
     move(2.,"clear",(*home["left"],-.028),(*home["right"],-.028))
     return plans
+
+def plate_clearance(tip):
+    radial = max(0., float(np.linalg.norm(tip[:2])) - PR)
+    vertical = max(0., -float(tip[2]), float(tip[2]) - .009)
+    return math.hypot(radial, vertical)
+
 
 class Score:
     def reset(self,*_):
@@ -237,11 +246,35 @@ class Score:
         self.plate_hob=None
         self.tool_hand_views=[]
         self.peak_finger_normals=np.zeros((2,2))
+        self.physics_samples=0
+        self.physics_peaks=np.zeros((2,2))
+        self.window_peaks=np.zeros((2,2))
         self.separated_steps=0
         self.slide_start=None
         self.free_steps=0
         self.pose_cache={}
         self.food_pose=None
+
+    def monitor_physics(self, env):
+        """Read finger/utensil normal loads after each actual physics step."""
+        sim = env.unwrapped.sim
+        self.physics_dt = float(env.unwrapped.physics_dt)
+        if getattr(sim.step, "_omelet_force_monitor", False):
+            return
+        original = sim.step
+        def step(*args, **kwargs):
+            result = original(*args, **kwargs)
+            if len(self.tool_hand_views) == 2:
+                peaks = []
+                for view, tip_slice in zip(self.tool_hand_views, (slice(1, 3), slice(4, 6))):
+                    forces = view.get_contact_force_matrix(dt=self.physics_dt).numpy().reshape(-1, 3)
+                    peaks.append(np.linalg.norm(forces[tip_slice], axis=1))
+                self.physics_peaks = np.maximum(self.physics_peaks, peaks)
+                self.window_peaks = np.maximum(self.window_peaks, peaks)
+                self.physics_samples += 1
+            return result
+        step._omelet_force_monitor = True
+        sim.step = step
 
     def tick(self,env):
         from yam_arena.scene import object_states
@@ -269,6 +302,8 @@ class Score:
             self.plate_hob=view.create_rigid_contact_view([prefix+"plate/body"],filter_patterns=[[prefix+"hob/body"]],max_contact_data_count=64)
             for tool in ("skillet","plate"):
                 self.tool_hand_views.append(view.create_rigid_contact_view([prefix+tool+"/body"],filter_patterns=[paths[4:]],max_contact_data_count=128))
+            if os.environ.get("OMELET_AUDIT_FILE"):
+                self.monitor_physics(env)
             if self.contact.filter_count!=len(paths) or self.pan_support.filter_count!=2:
                 raise RuntimeError("Could not monitor food contact with both utensils and both hands.")
         matrix=np.asarray(self.contact.get_contact_force_matrix(dt=env.unwrapped.physics_dt).numpy()).reshape(-1,3)
@@ -319,23 +354,41 @@ class Score:
         away=np.linalg.norm(s.pos[:2]-p.pos[:2])>.19
         end=(self.stage>=5 and seated and away and not on_plate and not lid_contact and np.linalg.norm(s.lin_vel)<.015
              and np.linalg.norm(f.lin_vel)<.015)
-        self.hold=self.hold+1 if end else 0
-        if self.hold>=20:
-            from yam_arena.runtime import link_poses
-            tips=[link_poses(env.unwrapped.scene[a])[link][:3,3] for a in ("left_robot","right_robot")
-                  for link in ("tip_left","tip_right")]
-            hands_clear=all(np.linalg.norm(s.to_local(q)-LEFT)>.070 and np.linalg.norm(p.to_local(q)[:2])>PR+.040 for q in tips)
-            if hands_clear:
-                contact_forces=[v.get_contact_force_matrix(dt=env.unwrapped.physics_dt).numpy().reshape(-1,3)
-                                for v in self.tool_hand_views]
-                if all(np.max(np.linalg.norm(a,axis=1))<.025 for a in contact_forces):
-                    self.stage=6
+        released_now = False
+        if end and not self.failed:
+            tips = [link_poses(env.unwrapped.scene[a])[link][:3, 3]
+                    for a in ("left_robot", "right_robot") for link in ("tip_left", "tip_right")]
+            # Distance from the finite plate includes height. A released hand
+            # above the plate can legitimately share its top-view footprint.
+            clear = all(np.linalg.norm(s.to_local(q)-LEFT) > .070 and
+                        plate_clearance(p.to_local(q)) > .040 for q in tips)
+            if clear:
+                released_now = all(np.max(np.linalg.norm(
+                    v.get_contact_force_matrix(dt=env.unwrapped.physics_dt).numpy().reshape(-1, 3),
+                    axis=1)) < .025 for v in self.tool_hand_views)
+        self.hold = self.hold + 1 if end and released_now else 0
+        if self.stage >= 5:
+            self.stage = 6 if self.hold >= 20 else 5
         if self.stage!=before:
             print("OMELET_MILESTONE",self.step,self.stage,flush=True)
         if os.environ.get("OMELET_TRACE"):
             normals=[np.linalg.norm(v.get_contact_force_matrix(dt=env.unwrapped.physics_dt).numpy().reshape(-1,3),axis=1)
                      for v in self.tool_hand_views]
             self.peak_finger_normals=np.maximum(self.peak_finger_normals,np.stack((normals[0][1:3],normals[1][4:6])))
+            trace_file = os.environ.get("OMELET_AUDIT_FILE")
+            if trace_file:
+                row = dict(step=self.step, stage=self.stage, failed=bool(self.failed), hold=self.hold,
+                           seated=bool(seated), hob=bool(on_hob), away=bool(away), released=bool(released_now),
+                           settled_before_hand_check=bool(end), pan_speed_m_s=float(np.linalg.norm(s.lin_vel)),
+                           food_speed_m_s=float(np.linalg.norm(f.lin_vel)),
+                           food_on_pan=bool(on_pan), food_on_plate=bool(on_plate),
+                           pan_deg=float(tilt), plate_deg=float(p.tilt_deg()), food_deg=float(f.tilt_deg()),
+                           tip_normals_N=[normals[0][1:3].tolist(), normals[1][4:6].tolist()],
+                           physics_dt_s=self.physics_dt, physics_samples=self.physics_samples,
+                           window_peak_N=self.window_peaks.tolist(), physics_peak_N=self.physics_peaks.tolist())
+                self.window_peaks.fill(0.)
+                with open(trace_file, "a") as stream:
+                    print(json.dumps(row), file=stream)
             if self.step%20==0:
                 print("PEAK_FINGER_NORMAL_N",self.step,np.round(self.peak_finger_normals,2).tolist(),flush=True)
         if self.step%20==0 and os.environ.get("OMELET_TRACE"):

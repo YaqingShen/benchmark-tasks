@@ -7,12 +7,12 @@
     "controlled sliding"
   ],
   "context": "A dinner plate lets a cook turn a thick Spanish omelet in one piece. The cook catches it on the plate, sets the skillet upright and slides the omelet back to cook the second side.",
-  "setup": "On a cold hob (156 mm diameter, 50 mm high) place a 175 mm aluminum skillet, handle toward the left hand. Center a 130 × 21 mm two-sided omelet replica, browned side down. Put a 244 mm plastic dinner plate face down on a 66 mm wire rack to the right. Both hands start empty.",
-  "scoring": "Award 0.15 for covering the skillet, 0.35 for lifting and tilting the covered skillet, 0.60 for catching the inverted omelet, 0.75 for supporting it on the plate alone for 0.2 s and 0.85 for sliding it at least 20 mm toward the upright skillet. Award 1.0 when it rests browned side up in the skillet on the hob for 1 s and both hands release. A drop or direct hand contact with the food scores zero.",
-  "fidelity": "Finger contacts hold the skillet and plate. Gravity and friction carry the omelet during the turnover and slide. A rigid, two-sided replica represents an omelet firm enough to turn. The scripted controller reads utensil poses. The cold setup omits heating, sticking and tearing.",
-  "reset_notes": "Place the browned face down in the centered skillet, plate face down on its rack, and open both grippers. The same washable food replica can be reused.",
+  "setup": "Cold 156 × 50 mm hob and 175 mm aluminum skillet (235 g), dry silicone handle toward the left arm. Center a one-piece, washable, 130 × 21 mm American basswood disk (120 ± 3 g) with the marked face down. Both sliding faces are bare P320-finished wood. A smooth polypropylene dinner plate (244 mm, 160 g) starts face down on a 66 mm wire rack to the right. Both hands start empty.",
+  "scoring": "Sequential credits are 0.15 for the rim cover, 0.35 for a covered steep tilt, 0.60 for the inverted catch, 0.75 for plate-only support for 0.2 s, and 0.85 for a downhill slide of at least 20 mm toward the upright skillet. Full credit requires the last 1.0 s to show the browned face up in the upright skillet, supported on the hob, plate clear and both hands released. Loss of any final condition returns the score to 0.85 immediately. A drop or direct hand contact with the replica scores zero.",
+  "fidelity": "The model uses physical pad contacts, gravity and sliding friction with a rigid disk. YAM actuator settings are checked against the installed station. The setup includes a repeatable cold replica specification and a separate force-and-slide bench protocol. Hardware trials remain pending. Cooking, adhesion and soft-food fracture are outside the model.",
+  "reset_notes": "Wash the disk by hand, rinse and dry to stable mass. Verify both contact faces on the actual clean, dry aluminum pan and polypropylene plate against the inclined-slide limits in the README. Reset marked face down, grain across the discharge direction, plate face down and grippers open.",
   "instruction": "Use the plate to turn the whole omelet over. Slide it back into the skillet, browned side up, and set the skillet down.",
   "run_limit": "1,200 actions at 20 Hz",
-  "scores": "Scripted demo 1.0 in 1,137 actions. Dream-1 scored 0.0 at the 1,200-action limit.",
-  "media": "M-584THJ"
+  "scores": "Scripted demo 1.0 in 1,135 actions. A separate run of the same fixed setup scored 1.0 in 1,135 actions. Dream-1 scored 0.0 in 1,200 actions.",
+  "media": "M-HRWE9N"
 }

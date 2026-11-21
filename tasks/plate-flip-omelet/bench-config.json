@@ -1,0 +1,57 @@
+{
+  "task": "TK-69HV3P",
+  "replica": "One piece of kiln-dried American basswood, both contact faces planed and finished to P320. Identify the browned face at the upper rim.",
+  "diameter_mm": 130,
+  "diameter_tolerance_mm": 1,
+  "thickness_mm": 21,
+  "thickness_tolerance_mm": 0.5,
+  "mass_g": 120,
+  "mass_tolerance_g": 3,
+  "simulation": {
+    "replica_mu": 0.32,
+    "plate_mu": 0.46,
+    "skillet_mu": 0.5,
+    "handle_static_mu": 0.85,
+    "handle_dynamic_mu": 0.72,
+    "gripper_stiffness_N_m": 5000,
+    "gripper_damping_N_s_m": 100,
+    "driver_stall_force_setting_N": 50,
+    "comparison_limit_per_finger_N": 40
+  },
+  "slide_test": {
+    "repeats": 3,
+    "release_travel_mm": 2,
+    "travel_mm": 15,
+    "kinetic_slope_deg": 35,
+    "minimum_video_hz": 120,
+    "acceptance": {
+      "plate": {
+        "onset_deg": [
+          20,
+          24
+        ],
+        "travel_s": [
+          0.09,
+          0.13
+        ]
+      },
+      "skillet": {
+        "onset_deg": [
+          21,
+          25
+        ],
+        "travel_s": [
+          0.095,
+          0.135
+        ]
+      }
+    },
+    "max_repeat_angle_spread_deg": 3
+  },
+  "grip_test": {
+    "turnover_angle_deg": 150,
+    "full_score_hold_s": 1,
+    "maximum_handle_drift_mm": 3,
+    "repeats": 3
+  }
+}
