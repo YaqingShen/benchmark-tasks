@@ -1,0 +1,19 @@
+{
+  "title": "Refill a hot-drink cup dispenser",
+  "category": "Other",
+  "keywords": [
+    "vending machine",
+    "cup magazine",
+    "sleeve removal",
+    "single-cup dispensing"
+  ],
+  "instruction": "Load all eight paper cups into the hot-drink dispenser without touching the cups with the grippers. Leave the wrapper outside the magazine so one service request dispenses one cup.",
+  "context": "Operators load wrapped stacks into hot-drink vending machines to avoid touching the cups. At the 2025 UK average of 272 drinks per freestanding machine per week, a machine using one paper cup per drink would consume about five to six 50-cup sleeves per week.",
+  "setup": "Two parallel-gripper YAM arms face an empty single-column dispenser. Eight upright 8 oz PE-lined paper cups are nested on a 110 × 110 × 10.2 mm plastic loading dock, inside a clear polyethylene sleeve with an open bottom and sealed top. Each cup is 91.31 mm tall with an 80 mm rim and 53.55 mm base. The dock centre is 122 mm closer to the robot bases and 28 mm to the left of the magazine centre. The guide rods and drip tray are fixed. Two pairs of separator ledges move during the service test. The orange line marks the maximum fill level. Dimensions and reset positions are in the README.",
+  "scoring": "0 if a gripper pad touches exposed paper or the eight cups never seat upright below the fill line. 0.25 once the wrapped stack reaches the column and all eight cups seat. 0.5 when the complete wrapper is clear and released for 0.5 s with the stack still seated. One dry service cycle then runs automatically. 1.0 if exactly one cup stands on the tray and seven stay upright in the magazine for 0.5 s after the cycle. The dispensed rim must be at least 20 mm below the lowest retained cup base, with the wrapper still clear and released.",
+  "run_limit": "1,200 control steps at 20 Hz (60 seconds).",
+  "reset_notes": "Empty the magazine and tray, reset the separator and place eight undamaged matching cups in a fresh bottom-open sleeve on the dock. Start with both arms in the station ready pose.",
+  "fidelity": "The full-size cups are separate rigid bodies. They nest by contact and drop under gravity. The deeper collection bay lets the dispensed cup clear the stack. The sleeve uses four hinged panels and a folded seal. The single service column uses two pairs of moving ledges and a virtual drop sensor. Paper crushing, film wrinkling, heat, drinks, cabinet doors and turret indexing are outside this trial. The scripted reference tracks the simulated seal pose. Dream-1 receives the standard station observations.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-6VRMJR"
+}
