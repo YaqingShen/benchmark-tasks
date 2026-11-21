@@ -1,0 +1,19 @@
+{
+  "title": "Pack a paperback by compressing the foam beneath it",
+  "category": "Impact on jobs",
+  "keywords": [
+    "order packing",
+    "cushioning",
+    "tuck closure",
+    "bimanual"
+  ],
+  "instruction": "Pack the paperback squarely in the carton with the foam pad underneath. Press the book low enough to close the lid, fold the flaps in and tuck the lid inside the front wall. Move both hands clear and leave the carton closed.",
+  "context": "Hand packers load goods, add cushioning and close containers for handoff (O*NET 53-7064.00). Here the carton walls already stand. The paperback on its relaxed pad sits 9 mm too high for the lid to close. The packer must compress the load and seat the lid over it.",
+  "setup": "Two parallel-gripper arms face an open, preformed cardboard mailer (220 × 160 × 50 mm, 1.2 mm board) on a raised deck. A 160 × 136 × 32.8 mm slow-rebound foam pad sits on a narrow left stand. A 178 × 108 × 25 mm paperback sits on a narrow front stand, turned 10° from the box. Both hands start empty.",
+  "scoring": "Score the end state. Require a supported upright carton with four captured corners. Give 0.10 for the pad inside, then 0.10 for the book on it. With both loaded, add 0.05 for alignment within 3°, 0.10 for pressing to closing height, 0.25 for the front tuck inside, 0.10 for both flaps and both ears inside, and 0.15 for an inward flush lid. With all checks met, add 0.10 for stability and both hands 20 mm clear, then up to 0.05 linearly over 3 uninterrupted seconds.",
+  "run_limit": "9,000 control steps (450 seconds at 20 Hz)",
+  "reset_notes": "Start with empty hands, the formed carton open, and both items on their stands. Allow the foam to recover to 32.8 mm and replace worn board between bench trials. The front lid tuck is scored separately from the preformed side-wall tabs.",
+  "fidelity": "Rigid panels with passive creases model the carton. The rigid book compresses a foam model with 12 mm travel and delayed recovery. The demonstration uses feedback for loading and taught joint targets for closure. Peak measured fingertip contact was 16.7 N. Material properties, hardware loads, product damage and shipping performance have not been validated on a physical parcel.",
+  "scores": "Scripted 1.00 in 7,791 of 9,000 steps. Both hands stayed clear for 6.75 s. Dream-1 scored 0.00 in 9,000 steps on the same layout using the earlier pad-first instruction. Both items ended outside.",
+  "media": "M-F7FDKP"
+}

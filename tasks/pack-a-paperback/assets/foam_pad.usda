@@ -1,0 +1,135 @@
+#usda 1.0
+(
+    defaultPrim = "foam_pad"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "foam_pad"
+{
+    def "Looks"
+    {
+        def Material "foam"
+        {
+            token outputs:surface.connect = </foam_pad/Looks/foam/surface.outputs:surface>
+
+            def Shader "surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.93, 0.91, 0.78)
+                float inputs:roughness = 0.95
+                token outputs:surface
+            }
+        }
+
+        def Material "friction" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:dynamicFriction = 0.5
+            float physics:restitution = 0
+            float physics:staticFriction = 0.6
+        }
+    }
+
+    def Xform "pad_base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI", "PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0.002)
+        float3 physics:diagonalInertia = (0.00001157, 0.00001601, 0.00002756)
+        float physics:mass = 0.0075
+        bool physxArticulation:enabledSelfCollisions = 0
+        float physxArticulation:sleepThreshold = 0
+        int physxArticulation:solverPositionIterationCount = 32
+        int physxArticulation:solverVelocityIterationCount = 8
+        float physxArticulation:stabilizationThreshold = 0
+        bool physxRigidBody:enableCCD = 1
+        float physxRigidBody:maxDepenetrationVelocity = 0.2
+        float physxRigidBody:sleepThreshold = 0
+        int physxRigidBody:solverPositionIterationCount = 32
+        int physxRigidBody:solverVelocityIterationCount = 8
+        float physxRigidBody:stabilizationThreshold = 0
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "skirt_visual" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </foam_pad/Looks/foam>
+            double size = 1
+            float3 xformOp:scale = (0.158, 0.134, 0.012)
+            double3 xformOp:translate = (0, 0, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "collider" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+        )
+        {
+            rel material:binding = </foam_pad/Looks/foam>
+            rel material:binding:physics = </foam_pad/Looks/friction>
+            float physxCollision:contactOffset = 0.0002
+            float physxCollision:restOffset = 0
+            double size = 1
+            float3 xformOp:scale = (0.16, 0.136, 0.004)
+            double3 xformOp:translate = (0, 0, 0.002)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "pad_top" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0.02065)
+        float3 physics:diagonalInertia = (0.000027360798, 0.000037720798, 0.00006430667)
+        float physics:mass = 0.0175
+        bool physxRigidBody:enableCCD = 1
+        float physxRigidBody:maxDepenetrationVelocity = 0.2
+        float physxRigidBody:sleepThreshold = 0
+        int physxRigidBody:solverPositionIterationCount = 32
+        int physxRigidBody:solverVelocityIterationCount = 8
+        float physxRigidBody:stabilizationThreshold = 0
+        double3 xformOp:translate = (0, 0, 0.004)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "collider" (
+            prepend apiSchemas = ["MaterialBindingAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI"]
+        )
+        {
+            rel material:binding = </foam_pad/Looks/foam>
+            rel material:binding:physics = </foam_pad/Looks/friction>
+            float physxCollision:contactOffset = 0.0002
+            float physxCollision:restOffset = 0
+            double size = 1
+            float3 xformOp:scale = (0.16, 0.136, 0.0163)
+            double3 xformOp:translate = (0, 0, 0.02065)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def "joints"
+    {
+        def PhysicsPrismaticJoint "compress" (
+            prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+        )
+        {
+            float drive:linear:physics:damping = 1200
+            float drive:linear:physics:maxForce = 60
+            float drive:linear:physics:stiffness = 60
+            float drive:linear:physics:targetPosition = 0.045833334
+            uniform token drive:linear:physics:type = "force"
+            uniform token physics:axis = "Z"
+            rel physics:body0 = </foam_pad/pad_base>
+            rel physics:body1 = </foam_pad/pad_top>
+            bool physics:collisionEnabled = 0
+            point3f physics:localPos0 = (0, 0, 0.004)
+            point3f physics:localPos1 = (0, 0, 0)
+            float physics:lowerLimit = -0.012
+            float physics:upperLimit = 0
+        }
+    }
+}
+
