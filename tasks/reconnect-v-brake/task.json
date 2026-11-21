@@ -1,0 +1,18 @@
+{
+  "title": "Reconnect a bicycle V-brake and test the wheel",
+  "category": "Societal relatability",
+  "keywords": [
+    "bicycle maintenance",
+    "cable seating",
+    "functional test"
+  ],
+  "context": "A linear-pull brake opens to let the front wheel come out. After refitting the wheel, the cable guide must stay in its holder so pulling the lever can bring both pads against the rim.",
+  "setup": "Mount a 288 mm rubber-tired wheel in a stationary fork. Two 101 mm metal V-brake arms with rubber pads straddle the 20 mm rim. Leave the metal cable guide outside its slotted holder and the wire attached. Place the lever to the right and start both grippers open. A light axle drive spins the wheel.",
+  "scoring": "Earn 0.25 for squeezing the arms and seating the cable guide, 0.50 if it stays seated after withdrawal, 0.75 if a lever pull stops the previously free wheel with both pads on the rim, and 1.0 if the wheel turns freely again after release. Test with both hands clear of the wheel and brake arms.",
+  "fidelity": "Rigid bodies model the guide, brake arms, lever and wheel. A tension-only wire transmits the lever pull through a compliant housing. Light axle torque substitutes for hand spinning. The bench measures low-speed engagement, stopping and release.",
+  "reset_notes": "Open both brake arms, release the lever and disconnect the guide. Keep the wheel clear of the work surface. Return the open hands to their home positions.",
+  "instruction": "Reconnect the front V-brake, then squeeze and release the lever. The wheel should turn freely, stop, and turn freely again.",
+  "run_limit": "850 actions at 20 Hz",
+  "scores": "Scripted demo 1.0 in 738 actions. Dream-1 scored 0.0 at the 850-action limit.",
+  "media": "M-HMU7NC"
+}
