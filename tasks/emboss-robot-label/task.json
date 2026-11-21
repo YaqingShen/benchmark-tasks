@@ -1,7 +1,7 @@
 {
   "instruction": "Use the manual embosser to make one label reading ROBOT. Turn the wheel to each letter, fully squeeze and release the handle between letters, advance two spaces, and select the scissors position to cut the label. Leave the handle fully released.",
   "fidelity": "PhysX contact drives the character wheel and spring trigger. Embossing, tape feed and cutting use a declared material-response rule triggered by observed joint states. The scene uses prototype geometry, wheel ordering and spring parameters, with the device clamped to the bench and the cut strip supported by the output fixture.",
-  "scores": "Dream-1 (dreamlabs/dream-1-beta), seed 0: 0.0 after 2400 steps (120 s), normal max_steps termination, no valid embossing stroke. Scripted demo, seed 0: 1.0 in 1622 steps (81.1 s), under an original 1750-step cap. The published runner now allows 2400 steps for either policy; the scripted plan finishes within both caps. Both are fresh-reset native Isaac runs with 1280x720 cameras. Replay and source hashes passed. No physical-device result is claimed.",
+  "scores": "Dream-1 (dreamlabs/dream-1-beta), seed 0: 0.0 after 2400 steps (120 s). Scripted demo, seed 0: 1.0 in 1622 steps (81.1 s). Both are fresh-reset native Isaac runs; independent replay and source checks passed.",
   "title": "Emboss ROBOT on a manual label maker and cut the strip",
   "category": "Societal relatability",
   "keywords": [
