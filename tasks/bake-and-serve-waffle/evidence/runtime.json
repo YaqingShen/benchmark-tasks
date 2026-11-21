@@ -1,0 +1,28 @@
+{
+  "python": "3.12.16",
+  "packages": {
+    "inspect-robots": "1.0.0",
+    "isaacsim": "6.1.0.0",
+    "isaaclab": "17.0.2",
+    "isaaclab-arena": "0.3.0",
+    "yam-arena": "0.1.0",
+    "torch": "2.11.0+cu128",
+    "numpy": "2.3.1",
+    "scipy": "1.17.0"
+  },
+  "arena_git_commit": "c7edf3a9d5d8276565208f72422f8f8a0806d6cf",
+  "inspect_robots_version_from_run": "1.0.0",
+  "environment_revision_from_run": "2c734860b236",
+  "embodiment": "yam_arena",
+  "data_device": "cpu",
+  "physics_backend": "GPU PhysX with native PBD particles",
+  "control_hz": 20,
+  "camera_size": [
+    1280,
+    720
+  ],
+  "seed": 0,
+  "object_jitter": 0,
+  "max_steps": 8500,
+  "physical_hardware_trial": false
+}

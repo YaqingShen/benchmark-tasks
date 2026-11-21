@@ -1,20 +1,11 @@
-"""Single-cavity rotating Belgian waffle-maker prototype on the station table.
-The housing proportions and baking procedure use a commercial flip-maker as a
-reference. The spring-slider lid lock is a generic mechanism, not a validated
-replica of the Hamilton Beach 26031 lock. The rotating unit turns 180 degrees
-on its stand, and the lid hinges at the back. Product correspondence remains
-a limitation; no hardware measurements are claimed.
+"""Rotating flip-maker with a rotation-operated lid lock.
 
-Task: close the lid and let the spring latch on the handle snap over the lid's front tab, turn the whole unit 180
-degrees on its stand (clockwise as the robots see it) and back again, then pull the latch back and open the lid to its
-rest. Use kitchen tongs to lift the waffle and carry it onto the side plate. Never grasp food with robot fingers. One arm turns the unit by the handle; the other steadies the stand and slows the heavy unit before it hits the
-end stop of each half-turn.
-
-Run it:  inspect-robots run --embodiment yam_arena -E task=task.py -E object_jitter=0 -E control_hz=20 \\
-           --instruction "<see task.json>" --scorer task_score ...
-Development only: WAFFLE_LAYOUT=start|closed|half spawns the lid open (start), shut and latched (closed), or shut and
-turned upside down (half); WAFFLE_ANIM=spin turns the unit 180 deg and back by joint writes, then pulls the latch and
-opens the lid (preview footage only, no robot).
+Hardware reference: Hamilton Beach 26031G. See HARDWARE.md for the manufacturer's
+operating sequence and the boundary between verified features and model inputs.
+The former independently operated spring slider has been removed. A declared
+joint-limit approximation represents the rotation lock; no appliance joint is
+actuated by the controller. The robot closes the external handle, flips, waits,
+returns upright, opens by the handle, and serves with separately grasped tongs.
 """
 
 from __future__ import annotations
@@ -28,6 +19,9 @@ import sys
 import numpy as np
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from appliance_config import MODEL
+from stand_scoring import stand_credit
+import rotation_lock
 import trace_evidence
 import serving_rules
 import food_contact
@@ -54,7 +48,6 @@ from scoring_geometry import hand_bounds, separation, articulated_bounds
 from yam_arena.task_file import TABLE_TOP  # noqa: E402
 
 labkit.ARTICULATION_SLEEP = 0.0  # keep the waffle maker awake (a sleeping articulation ignores joint writes)
-labkit.LINK_FRICTION["latch"] = 0.25  # = LATCH_MU below
 SCENE = "station"
 TOP = TABLE_TOP[SCENE]
 LAYOUT = os.environ.get("WAFFLE_LAYOUT", "start")
@@ -67,41 +60,32 @@ STEEL = (0.70, 0.71, 0.72)  # brushed stainless housing
 STEEL_DARK = (0.55, 0.56, 0.57)  # trim rings
 BLACK = (0.045, 0.045, 0.05)  # black plastic (stand, handle, hinge, cap)
 GRID = (0.16, 0.16, 0.17)  # nonstick grid plates
-LATCH_RED = (0.62, 0.07, 0.06)  # prototype latch slider; red makes its position visible
 RUBBER = (0.08, 0.08, 0.08)
 LED_RED, LED_GREEN = (0.85, 0.10, 0.08), (0.10, 0.75, 0.25)
 TRAY = (0.30, 0.31, 0.32)
-labkit.MATTE_COLORS.update({BLACK: 0.55, RUBBER: 0.9, GRID: 0.45, LATCH_RED: 0.5, TRAY: 0.6})
+labkit.MATTE_COLORS.update({BLACK: 0.55, RUBBER: 0.9, GRID: 0.45, TRAY: 0.6})
 labkit.METAL_COLORS.update({STEEL: (0.32, 0.85), STEEL_DARK: (0.28, 0.85)})
 
 # -- geometry (part frame: origin on the table top under the unit's centre, x away from the robots, z up) --------------
-ZA = 0.185  # rotation axis height above the table (housing sweep radius 0.123 m clears the 3.4 cm stand + tray)
-RH = 0.110  # housing radius (22 cm round unit; 8 in grid)
-HH = 0.046  # height of each half (closed unit 9.2 cm thick)
-RP = 0.090  # grid plate radius
-POCKET = 0.013  # grid pocket depth per plate (Belgian, ~1 in thick waffle)
-HINGE = (0.118, 0.0, ZA + HH)  # lid hinge: at the top of the back of the unit
-LID_OPEN = 1.75  # rad (100 deg): hinge stop, the lid leaning just past vertical
-LID_START = math.radians(45.0)  # the lid starts propped open at 45 deg (held by the stiff hinge)
-LID_FRICTION = 0.80  # N m: holds the 0.8 kg lid at 45 deg (~0.7 N m) but not upside down unlatched (~1.0 N m)
-SPIN_MAX = math.pi  # end stops at 0 and 180 deg
-# handle (base half, points at the robots) and the lid's front tab that the latch holds down
+ZA = MODEL["rotation_axis_height_m"]  # rotation axis height above the table (housing sweep radius 0.123 m clears the 3.4 cm stand + tray)
+RH = MODEL["housing_radius_m"]  # housing radius (22 cm housing; 18 cm modeled grid)
+HH = MODEL["housing_half_height_m"]  # height of each half (closed unit 9.2 cm thick)
+RP = MODEL["grid_radius_m"]  # grid plate radius
+POCKET = MODEL["grid_pocket_depth_m"]  # grid pocket depth per plate (Belgian, ~1 in thick waffle)
+HINGE = tuple(MODEL["lid_hinge_m"])  # lid hinge: at the top of the back of the unit
+LID_OPEN = MODEL["lid_open_stop_rad"]  # rad (100 deg): hinge stop, the lid leaning just past vertical
+LID_START = math.radians(MODEL["lid_start_deg"])  # the lid starts propped open at 45 deg (held by the stiff hinge)
+LID_FRICTION = MODEL["lid_friction_nm"]  # nominal passive hinge resistance; native opening/closing and idle retention are verified separately
+SPIN_MAX = math.radians(MODEL["rotation_stop_deg"])  # end stops at 0 and 180 deg
+# One long exterior handle attached to the upper lid; used for turning and opening
 HANDLE_X0, HANDLE_X1 = -0.235, -0.100
-HANDLE_W, HANDLE_Z0, HANDLE_Z1 = 0.030, ZA - 0.026, ZA + 0.002
+HANDLE_W, HANDLE_Z0, HANDLE_Z1 = 0.030, ZA + 0.006, ZA + 0.034
 TAB_X0, TAB_X1, TAB_W, TAB_Z0, TAB_Z1 = -0.150, -0.100, 0.044, ZA + 0.008, ZA + 0.020
-GRIP_X = -0.226  # where a hand closes on the handle (part frame), beyond the latch's thumb ridge
-# latch: a spring-loaded slider on top of the handle; its nose (flat underside 1.5 mm above the tab, 8 mm overlap)
-# holds the tab down; the ramp on top of the nose is pushed back by the tab as the lid comes down, and the slider snaps
-# forward over it. Pull the thumb ridge back (towards the robots) 14 mm to release.
-LATCH_TRAVEL = 0.014
-LATCH_K = 300.0  # N/m: 4.2 N at full pull
-LATCH_C = 4.0  # N s/m: about critical for the 15 g slider (2 sqrt(k m) = 4.2), so it snaps home without ringing
-LATCH_MU = 0.25  # the slider is slick plastic (POM-like); with the unit's 0.9 the 45 deg ramp would self-lock
-NOSE_GAP = 0.0015  # nose underside above the latched tab: 3x the 0.5 mm contact offset, so no contact at rest
-NOSE_X1 = -0.142
+HANDOFF_DEG = 12.0
+GRIP_X = -0.226  # distal grip location on the lid-attached handle
 
 WX, WY = 0.40, 0.0  # world position of the unit's centre (robot base frame)
-STAND_MASS, UNIT_MASS, LID_MASS, LATCH_MASS = 0.90, 1.15, 0.80, 0.015  # 2.87 kg = 6.3 lb (26031: 6.38 lb)
+STAND_MASS, UNIT_MASS, LID_MASS = (MODEL[k] for k in ("stand_mass_kg", "lower_chamber_mass_kg", "lid_and_handle_mass_kg"))  # nominal mass partition; not measured hardware inertia
 
 
 def _ring(r, z, h, w, colour, n=24, x0=0.0):
@@ -161,16 +145,13 @@ _gb, _gc = _grid(ZA, -1)
 UNIT_BOXES = (_gb + _ring(RH - 0.006, ZA - 0.002, 0.004, 0.012, BLACK, n=28)  # black rim round the plate
               + [((0.110, s * 0.060, ZA + 0.012), (0.020, 0.012, 0.064), BLACK) for s in (1, -1)]  # hinge brackets
               + [((0.112, 0.0, ZA - 0.006), (0.024, 0.050, 0.036), BLACK)]  # neck to the hub
-              + [(((HANDLE_X0 + HANDLE_X1) / 2, 0.0, (HANDLE_Z0 + HANDLE_Z1) / 2),
-                  (HANDLE_X1 - HANDLE_X0, HANDLE_W, HANDLE_Z1 - HANDLE_Z0), BLACK),  # handle
-                 ((-0.108, 0.0, ZA - 0.016), (0.020, 0.050, 0.040), BLACK)])  # handle root block
+              )
 UNIT_BOXES = UNIT_BOXES + _ring(_WALL_R, ZA - (GRID_FLOOR + 0.004) / 2, GRID_FLOOR - 0.004, _WALL_W, STEEL, n=28)
 UNIT_MESHES = [_tube_mesh(RH, 0.0965, ZA - HH, ZA - 0.002, STEEL, cap_at=ZA - HH)]
-UNIT_CYLS = (_gc + [((0.0, 0.0, ZA - (HH + GRID_FLOOR) / 2), RH, HH - GRID_FLOOR, STEEL, "Z"),  # housing base
+UNIT_CYLS = (_gc + [((MODEL["front_bearing_x_m"],0.,ZA+MODEL["front_bearing_z_offset_m"]),MODEL["front_bearing_radius_m"],MODEL["front_bearing_length_m"],BLACK,"X"),((0.0, 0.0, ZA - (HH + GRID_FLOOR) / 2), RH, HH - GRID_FLOOR, STEEL, "Z"),  # housing base
                     ((0.0, 0.0, ZA - HH - 0.002), 0.080, 0.004, BLACK, "Z"),  # bottom cap
                     ((0.0, 0.0, ZA - 0.030), RH + 0.002, 0.006, STEEL_DARK, "Z"),  # trim band
-                    ((0.135, 0.0, ZA), 0.028, 0.034, BLACK, "X"),  # rear hub (turns in the stand's bearing)
-                    ((HANDLE_X0 + 0.004, 0.0, (HANDLE_Z0 + HANDLE_Z1) / 2), 0.016, 0.008, BLACK, "X")]  # handle end cap
+                    ((0.135, 0.0, ZA), 0.028, 0.034, BLACK, "X")]  # rear hub
              + [((HINGE[0], s * 0.060, HINGE[2]), 0.008, 0.012, BLACK, "Y") for s in (1, -1)])  # hinge knuckles
 
 # lid: housing, grid (hanging down), top cap with lights, hinge arms, front tab
@@ -179,33 +160,25 @@ LID_BOXES = (_lb + _ring(RH - 0.006, ZA + 0.002, 0.004, 0.012, BLACK, n=28)
              + [((0.105, s * 0.043, ZA + HH - 0.004), (0.036, 0.016, 0.012), BLACK) for s in (1, -1)]  # hinge arms
              + [(((TAB_X0 + TAB_X1) / 2, 0.0, (TAB_Z0 + TAB_Z1) / 2), (TAB_X1 - TAB_X0, TAB_W, TAB_Z1 - TAB_Z0), BLACK),
                 ])
+LID_BOXES += [(((HANDLE_X0 + HANDLE_X1) / 2, 0.0, (HANDLE_Z0 + HANDLE_Z1) / 2),
+               (HANDLE_X1-HANDLE_X0, HANDLE_W, HANDLE_Z1-HANDLE_Z0), BLACK)]
+LID_CLOSED_HANDLE_CAP = ((HANDLE_X0+.004, 0., (HANDLE_Z0+HANDLE_Z1)/2), .016, .008, BLACK, "X")
 LID_BOXES = LID_BOXES + _ring(_WALL_R, ZA + (GRID_FLOOR + 0.004) / 2, GRID_FLOOR - 0.004, _WALL_W, STEEL, n=28)
 LID_MESHES = [_tube_mesh(RH, 0.0965, ZA + 0.002, ZA + HH, STEEL, cap_at=ZA + HH)]
-LID_CYLS = (_lc + [((0.0, 0.0, ZA + (HH + GRID_FLOOR) / 2), RH, HH - GRID_FLOOR, STEEL, "Z"),  # housing base
+LID_CYLS = (_lc + [LID_CLOSED_HANDLE_CAP,((0.0, 0.0, ZA + (HH + GRID_FLOOR) / 2), RH, HH - GRID_FLOOR, STEEL, "Z"),  # housing base
                    ((0.0, 0.0, ZA + 0.030), RH + 0.002, 0.006, STEEL_DARK, "Z"),
                    ((0.0, 0.0, ZA + HH + 0.003), 0.072, 0.006, BLACK, "Z"),  # top cap
                    ((-0.050, 0.012, ZA + HH + 0.0065), 0.004, 0.002, LED_RED, "Z"),
                    ((-0.050, -0.012, ZA + HH + 0.0065), 0.004, 0.002, LED_GREEN, "Z")]
             + [((HINGE[0], s * 0.043, HINGE[2]), 0.008, 0.016, BLACK, "Y") for s in (1, -1)])
 
-# latch slider (slides along x on the handle's top)
-_P45 = math.radians(45.0)
-_C45 = math.cos(_P45)
-LATCH_BOXES = [
-    ((-0.1815, 0.0, ZA + 0.0072), (0.047, 0.018, 0.0094), LATCH_RED),  # carriage
-    ((-0.157, 0.0, ZA + 0.0215), (0.010, 0.018, 0.019), LATCH_RED),  # riser
-    (((-0.152 + NOSE_X1) / 2, 0.0, TAB_Z1 + NOSE_GAP + 0.002), (0.010, 0.018, 0.004), LATCH_RED),  # nose (flat underside)
-    # ramp: its top face falls at 45 deg from 11 mm above the nose to the nose tip, under the tab's near edge, so the
-    # closing tab's edge slides down it and drives the slider back (a flat face landing on a ramp's crest would not)
-    ((NOSE_X1 - 0.008 * _C45 - 0.003 * _C45, 0.0, TAB_Z1 + NOSE_GAP + 0.004 + 0.008 * _C45 - 0.003 * _C45),
-     (0.016, 0.018, 0.006), LATCH_RED, (0.0, _P45)),
-    ((-0.201, 0.0, ZA + 0.026), (0.008, 0.016, 0.028), LATCH_RED),  # thumb lever (pinch it and pull back)
-]
-
 # stand (heavy black base, drip tray, rear column with the bearing)
-STAND_BOXES = [((0.035, 0.0, 0.017), (0.330, 0.266, 0.026), BLACK),  # base, 33 x 26.6 cm
+STAND_BOXES = [((MODEL["stand_base_center_x_m"], 0.0, 0.017), tuple(MODEL["stand_base_size_m"]), BLACK),  # base extends under both support columns
                ((-0.005, 0.0, 0.032), (0.200, 0.200, 0.004), TRAY),  # drip tray
                ((0.172, 0.0, (0.030 + ZA) / 2), (0.045, 0.090, ZA - 0.030), BLACK)]  # rear column
+STAND_BOXES += [((MODEL["front_cradle_x_m"], 0., (.030+ZA-.040)/2), (.040,.090,ZA-.040-.030), BLACK),
+                ((MODEL["front_cradle_x_m"], -(MODEL["front_cradle_inner_halfwidth_m"]+.006), ZA-.005), (.040,.012,.070), BLACK),
+                ((MODEL["front_cradle_x_m"], MODEL["front_cradle_inner_halfwidth_m"]+.006, ZA-.005), (.040,.012,.070), BLACK)]
 STAND_CYLS = ([((0.172, 0.0, ZA), 0.045, 0.045, BLACK, "X"),  # rounded column top / bearing housing
                ((0.154, 0.0, ZA), 0.034, 0.010, STEEL_DARK, "X")]  # bearing ring
               + [((x, y, 0.002), 0.012, 0.004, RUBBER, "Z") for x in (-0.115, 0.185) for y in (0.115, -0.115)])
@@ -217,20 +190,17 @@ SPIN = Joint("spin", kind="hinge", axis="X", anchor=(0.0, 0.0, ZA), lower=0.0, u
 LID = Joint("lid", kind="hinge", axis="Y", anchor=HINGE, lower=0.0, upper=LID_OPEN, parent="spin",
             initial=_init[1], target=_init[1], stiffness=0.0, damping=0.03, friction=LID_FRICTION, mass=LID_MASS,
             boxes=LID_BOXES, cylinders=LID_CYLS, meshes=LID_MESHES)
-LATCH = Joint("latch", kind="slide", axis="X", anchor=(-0.18, 0.0, ZA + 0.008), lower=-LATCH_TRAVEL, upper=0.0,
-              parent="spin", initial=0.0, target=0.0, stiffness=LATCH_K, damping=LATCH_C, friction=0.05,
-              mass=LATCH_MASS, boxes=LATCH_BOXES)
 
 
 def _waffle(pos):
     return part("waffle", pos=pos, mass=STAND_MASS, friction=0.9, boxes=STAND_BOXES, cylinders=STAND_CYLS,
-                joints=[SPIN, LID, LATCH], self_collide=True)
+                joints=[SPIN, LID], self_collide=True)
 
 
 HOME = (WX, WY, TOP + 0.0005)
 
 # -- the cooked waffle: a loose rigid body lying in the lower grid (not a joint: no links added to the articulation) --
-# Round, 17.4 cm across, to the 8 in 4-section grid: a 4 mm core resting on the lower grid's ridge tops, 16 mm square
+# Round, 17.4 cm across, to the modeled 18 cm four-section grid: a 4 mm core resting on the lower grid's ridge tops, 16 mm square
 # lugs hanging into the lower grid's pockets (0.5 mm clear of the 8 mm ridges that divide the quarters, 2.25 mm of the
 # 4.5 mm ones, 1.7 mm above the plate when resting), and the same lugs on top, up to 1.3 cm above the parting plane:
 # 2.7 cm thick overall; mass inherited from the nominal250mL batch. The bottom lugs key the waffle in the grid (+-0.5 mm of play), so it cannot slide out while
@@ -369,12 +339,11 @@ TONG_CUP=part("tong_cup",pos=(TONG_HOME[0],TONG_HOME[1],TOP),yaw=TONG_YAW,mass=.
 OBJECTS=[_waffle(HOME),_belgian_waffle(HOME),_plate(PLATE_POS),TONGS,TONG_CUP]
 
 # -- scoring ------------------------------------------------------------------------------------------------------------
-TURN_DONE = SPIN_MAX - math.radians(7.0)  # a half-turn counts from 173 deg
-HOME_TOL = math.radians(7.0)  # back home: within 7 deg of 0
-TURNING = math.radians(5.0)  # the unit counts as "turned" (lid must stay shut) beyond 5 deg
+TURN_DONE = math.radians(MODEL["first_turn_credit_deg"])  # a half-turn counts from 173 deg
+HOME_TOL = math.radians(MODEL["home_tolerance_deg"])  # back home: within 7 deg of 0
+TURNING = HOME_TOL  # same opening zone in both turning and opening rules
 LID_SHUT_MAX = math.radians(5.0)
-LATCHED_MAX = 0.003  # slider within 3 mm of its forward stop = latched
-STAND_OK, STAND_ZERO = 0.010, 0.030  # stand displacement: full credit < 1 cm, none from 3 cm
+STAND_OK, STAND_ZERO = MODEL["stand_full_credit_m"], MODEL["stand_zero_credit_m"]  # stand displacement: full credit < 1 cm, none from 3 cm
 LID_OPEN_MIN = math.radians(35.0)
 W_H1, W_H2, W_SHUT, W_STAND, W_OPEN, W_PLATE = 0.20, 0.20, 0.20, 0.10, 0.10, 0.20
 FOOD_KEPT = 0.015  # the waffle counts as still in the grid while within 1.5 cm of where it lay (unit frame)
@@ -385,7 +354,7 @@ PLATE_STILL = 0.05  # m/s: and not moving
 
 
 def new_track():
-    return dict(phase=0, max_lid_turned=0.0, unsafe_turn=False, latched_at_turn=None, shut_at_turn=None, max_shift=0.0, max_spin=0.0, steps=0,
+    return dict(phase=0, max_lid_turned=0.0, unsafe_turn=False, locked_at_turn=None, shut_at_turn=None, max_shift=0.0, max_spin=0.0, steps=0,
                 food_left_early=False, inner_surface_contact=False, inner_contact_surface=None, inner_contact_step=None, **serving_rules.initial())
 
 
@@ -424,7 +393,7 @@ def track_update(tr, objects, hands=None, hulls=None):
     """Fold one observed state into the trial record ``tr`` (called every control step in the sim; offline tests feed
     synthetic trajectories)."""
     w = objects["waffle"]
-    spin, lid, latch = (w.joints.get(k, 0.0) for k in ("spin", "lid", "latch"))
+    spin, lid = (w.joints.get(k, 0.0) for k in ("spin", "lid"))
     tr["steps"] += 1
     hit = hot_surface_guard.contact(_rule_context(), w, hulls)
     if hit and not tr["inner_surface_contact"]:
@@ -442,10 +411,10 @@ def track_update(tr, objects, hands=None, hulls=None):
     # flip. Any subsequent rotation outside the home zone still requires shut.
     shut_threshold = TURNING if tr['phase'] < 2 else HOME_TOL
     if spin > shut_threshold:
-        if lid >= LID_SHUT_MAX or latch <= -LATCHED_MAX:
+        if lid >= LID_SHUT_MAX:
             tr['unsafe_turn']=True
-        if tr["latched_at_turn"] is None:
-            tr["latched_at_turn"] = bool(latch > -LATCHED_MAX and lid < LID_SHUT_MAX)
+        if tr["locked_at_turn"] is None:
+            tr["locked_at_turn"] = bool(lid < LID_SHUT_MAX)
             tr["shut_at_turn"] = bool(lid < LID_SHUT_MAX)
         tr["max_lid_turned"] = max(tr["max_lid_turned"], lid)
     if tr["phase"] == 0 and spin >= TURN_DONE:
@@ -461,20 +430,21 @@ def breakdown(objects, tr=None) -> dict:
     spin, lid = w.joints.get("spin", 0.0), w.joints.get("lid", 0.0)
     h1 = 1.0 if tr["phase"] >= 1 else 0.0
     h2 = 1.0 if tr["phase"] >= 2 else 0.0
-    shut = 1.0 if (h1 and tr["latched_at_turn"] and tr["max_lid_turned"] < LID_SHUT_MAX) else 0.0
+    shut = 1.0 if (h1 and tr["locked_at_turn"] and tr["max_lid_turned"] < LID_SHUT_MAX) else 0.0
     s = tr["max_shift"]
-    stand = h1 * (1.0 if s < STAND_OK else max(0.0, (STAND_ZERO - s) / (STAND_ZERO - STAND_OK)))
+    stand = stand_credit(first_turn_complete=bool(h1), max_displacement_m=s)
     opened = 1.0 if (h2 and tr["shut_at_turn"] and spin <= HOME_TOL and lid >= LID_OPEN_MIN) else 0.0
     plated = 1.0 if (h2 and not tr["food_left_early"] and serving_rules.valid(tr) and on_plate(objects)) else 0.0
     total = W_H1 * h1 + W_H2 * h2 + W_SHUT * shut + W_STAND * stand + W_OPEN * opened + W_PLATE * plated
-    full = bool(h1 and h2 and shut and s < STAND_OK and opened and plated)
+    full = bool(h1 and h2 and shut and s <= STAND_OK and opened and plated)
     disqualified = bool(tr['inner_surface_contact'] or tr['direct_food_contact'] or tr['invalid_serving'] or tr['unsafe_turn'] or tr['food_left_early'])
     if disqualified:
         total = 0.0
         full = False
     return dict(score=round(float(total), 4), full_success=full, disqualified=disqualified, half_turn_1=bool(h1), half_turn_2=bool(h2),
-                latched_at_turn=tr["latched_at_turn"], unsafe_turn=tr['unsafe_turn'], max_lid_deg_while_turned=round(math.degrees(tr["max_lid_turned"]), 1),
-                lid_kept_shut=bool(shut), stand_max_shift_cm=round(100 * s, 2), stand_credit=round(stand, 3),
+                locked_at_turn=tr["locked_at_turn"], unsafe_turn=tr['unsafe_turn'], max_lid_deg_while_turned=round(math.degrees(tr["max_lid_turned"]), 1),
+                lid_kept_shut=bool(shut), stand_max_shift_cm=round(100 * s, 2), stand_credit=round(stand, 3), stand_score=0.0 if disqualified else round(W_STAND * stand, 4),
+                stand_eligible=bool(h1),
                 lid_open_at_end=bool(opened), spin_deg=round(math.degrees(spin), 1), lid_deg=round(math.degrees(lid), 1),
                 max_spin_deg=round(math.degrees(tr["max_spin"]), 1), waffle_on_plate=bool(plated),
                 waffle_left_early=bool(tr["food_left_early"]),
@@ -495,7 +465,7 @@ def score(objects):
 
 
 def success(objects):
-    """Both half-turns, lid latched and never open > 5 deg while turned, stand moved < 1 cm, lid open >= 35 deg at home,
+    """Both half-turns, lid locked and never open >= 5 deg while turned, stand moved <= 1 cm, lid open >= 35 deg at home,
     and waffle carried with kitchen tongs onto the plate, tools and hands released."""
     return breakdown(objects)["full_success"] and final_release_held()
 
@@ -510,10 +480,10 @@ def update_final_release(objects, hands, dt=0.05):
         for spec in OBJECTS for bounds in articulated_bounds(objects[spec.name],spec) for h in hands)
     still = all(np.linalg.norm(o.lin_vel) < 0.01 and np.linalg.norm(o.ang_vel) < 0.1
                 for o in objects.values())
-    joints = np.array([objects["waffle"].joints.get(k, 0.) for k in ("spin", "lid", "latch")]
+    joints = np.array([objects["waffle"].joints.get(k, 0.) for k in ("spin", "lid")]
                       + [objects["kitchen_tongs"].joints.get("jaw",0.)])
     prev = _FINAL["previous_joints"]
-    still = bool(still and prev is not None and np.all(np.abs(joints-prev)/dt < [.1,.1,.005,.005]))
+    still = bool(still and prev is not None and np.all(np.abs(joints-prev)/dt < [.1,.1,.005]))
     _FINAL.update(previous_joints=joints, released=released, still=still)
     if breakdown(objects)["full_success"] and released and still:
         if _FINAL["since"] is None:
@@ -540,15 +510,8 @@ def distance(objects):
     return float(spin + rest)
 
 
-# -- demo: scripted bimanual solution (open loop, played by yam_scripted) -----------------------------------------------
-# 1. Close (left arm): pinch the lid's front tab, carry it down along the hinge arc and 2 deg past shut, so the tab
-#    rides the latch's ramp and the slider snaps over it; let go.
-# 2. Steady (left arm): press the stand's base down at its left edge, approaching from outside the unit's sweep.
-# 3. Turn (right arm): grip the handle end from the front (fingers across it, wrist rolled -90 deg), roll the wrist 178
-#    deg clockwise (slowing into the end stop), hold, roll back to 2 deg.
-# 4. Unlatch and open: the right arm pinches the latch's thumb lever and pulls it back; the left arm pinches the tab and
-#    lifts the lid; once the tab is past the nose the right arm lets go; the left arm lifts the lid to 50 deg.
-# 5. Open to the rear stop, extract with kitchen tongs and place on the side plate.
+# -- Robot-only demonstration: steady the base, close the lid handle, turn,
+# wait for baking, return upright, open upper handle and serve with tongs.
 class _Orient(float):
     def __new__(cls, R):
         v = float.__new__(cls, 0.0)
@@ -572,22 +535,16 @@ def _Rz(a):
 
 
 DEMO_T = dict(
-    tab_x=-0.128,  # pinch point on the lid tab (part frame x; the nose ends at -0.142, the lid at -0.100)
-    tab_pitch=60.0,  # deg: the tab is pinched across y by a grip pointing down and forwards
-    close_over=2.0,  # deg past shut when closing (the hinge stop takes it; pushes the tab through the ramp)
-    turn_end=180.0,  # native compliance left the prior 178-degree command at 172.95; retain the 173-degree scorer threshold
+    tab_x=-0.128,  # pressing point on the external upper handle
+    turn_end=188.0,  # robot wrist overtravel compensates grip compliance; appliance stop remains 180 degrees
     turn_back=2.0,
     step_deg=10.0,
     step_s=0.30,
     ease_steps=3,  # the last steps into each end are slowed down (decelerate the heavy unit)
     press_in=0.004,
     steady_x=-0.118,  # stand press point (part frame x): the base front-left corner, clear of the unit's sweep  # stand press: pad tips commanded this far into the base top
-    pull=0.015,  # latch pull (travel 14 mm)
     open_to=95.0,  # deg; larger angle reduces closing torque after release
-    release_at=14.0,  # deg of lid lift at which the latch is let go
-    above=0.05,  # m: the right hand comes down onto the lever from this far above
     side=0.07,  # m: the right hand slides onto the handle end from this far to its right (-y)
-    lever_z=0.032,  # lever pinch height above the axis (the lever spans +0.012..+0.040)
 
 )
 
@@ -602,9 +559,7 @@ def demo_plan(t=DEMO_T):
     FWD = _Ry(-math.pi / 2) @ DOWN @ _Rz(-math.pi / 2)  # approach +x, fingers closing along z (top and bottom of the
     # handle), wrist at -90 deg roll: the half-turn rolls the wrist from -90 to +90 deg (with the fingers across y it
     # would have to go from 0 to 180, past the wrist's 120 deg limit). The hand slides onto the handle from the side.
-    FWDY = _Ry(-math.pi / 2) @ DOWN  # approach +x, fingers closing across y: for the latch's thumb lever
     SIDE = _Rx(-math.pi / 4) @ DOWN  # pointing down and towards -y (left arm, from outside the sweep)
-    PITCH = _Ry(-math.pi / 4) @ DOWN  # pointing down and forwards (+x)
     bases = {"left": LEFT_BASE_POS, "right": RIGHT_BASE_POS}
     W = np.array([HOME[0], HOME[1], TOP])
     AX = W + np.array([0.0, 0.0, ZA])
@@ -627,7 +582,9 @@ def demo_plan(t=DEMO_T):
         if tt > clock[arm]:
             wp(arm, tt - clock[arm], p, f, label, Rm)
 
-    C0 = W + np.array([-.135, .020, (TAB_Z0 + TAB_Z1) / 2])  # tab pinch point, lid shut
+    C0 = W + np.array([-.226, .000, (HANDLE_Z0 + HANDLE_Z1) / 2])  # grip on the free span of the single handle, ahead of the front cradle
+
+    opening_grip = W+np.array([-.135,.000,(HANDLE_Z0+HANDLE_Z1)/2])
 
     def tab(th_deg, opening=False):
         R = _Ry(math.radians(th_deg))
@@ -635,64 +592,33 @@ def demo_plan(t=DEMO_T):
         if opening:
             tilt = -60.0 * min(1., max(0., (th_deg - 60.) / 30.))
             Rg = Rg @ _Ry(math.radians(tilt))
-        return Hh + R @ (C0 - Hh), Rg, -(Rg @ np.array([0.0, 0.0, 1.0]))
+        return Hh + R @ ((opening_grip if opening else C0) - Hh), Rg, -(Rg @ np.array([0.0, 0.0, 1.0]))
 
     L, Rr = "left", "right"
-    # 1. close and latch (left) ----------------------------------------------------------------------------------
-    # 0. the right hand takes the handle first and holds the unit at 0 deg while the lid is pushed shut (the
-    #    unit spins freely on its bearing, and the push on the tab would otherwise turn it past 5 deg)
+    # Close using only the external handle.
+    # 0. the right hand takes the handle first and steadies the base while the lid handle is lowered (the
+    #    unit spins freely on its bearing, and the push on the tab would otherwise turn it outside the opening zone)
     G = W + np.array([GRIP_X, 0.0, (HANDLE_Z0 + HANDLE_Z1) / 2])
     side = np.array([0.0, -t["side"], 0.0])
-    Lv_start = W + np.array([-.201,0.,ZA+t["lever_z"]])
-    wp(Rr,1.5,Lv_start+[0.,0.,.05],fo*.6,"close latch: above lever",FWDY)
-    wp(Rr,.8,Lv_start,fo*.6,"close latch: straddle lever",FWDY)
-    wp(Rr,.5,Lv_start,fc,"close latch: pinch lever",FWDY)
-    wp(Rr,.8,Lv_start+[-t["pull"],0.,0.],fc,"close latch: pull clear",FWDY)
+    right_steady_R = _Rx(math.pi/4) @ DOWN
+    right_axis = right_steady_R[:,2]
+    right_steady = W+np.array([t["steady_x"],-.118,.030-t["press_in"]])-PAD_TIP*right_axis
+    wp(Rr,1.5,right_steady-.10*right_axis,fc,"steady: above right base edge",right_steady_R)
+    wp(Rr,1.,right_steady,fc,"steady: hold base during lid closure",right_steady_R)
     th0 = math.degrees(LID_START)
-    top_zero = W + np.array([t["tab_x"],0.,TAB_Z1])
-    def close_top(deg):
-        rt = _Ry(math.radians(deg))
-        tip = Hh + rt @ (top_zero-Hh)
-        normal = rt @ np.array([0.,0.,1.])
-        pitch = 30. + 30.*max(0.,min(1.,deg/th0))
-        rotation = _Ry(-math.radians(pitch)) @ DOWN
-        axis = rotation @ np.array([0.,0.,1.])
-        return tip - PAD_TIP*axis - .002*normal,rotation
-    p,press_R = close_top(th0)
-    press_axis = press_R @ np.array([0.,0.,1.])
-    wait_until(L,.5,"close: wait")
-    wp(L,2.5,p-.04*press_axis,fc,"close: above tab top",press_R)
-    wp(L,1.2,p,fc,"close: contact tab top",press_R)
+    p, Rg, n = tab(th0)
+    wait_until(L,clock[Rr],"close: wait for base hold")
+    wp(L,2.0,p+.07*n,-.020,"close: beside upper handle",Rg)
+    wp(L,1.0,p,-.020,"close: straddle upper handle",Rg)
+    wp(L,.5,p,fc,"close: pinch upper handle",Rg)
     th=th0
-    while th > 15.0+1e-6:
-        th=max(th-3.,15.)
-        p,press_R=close_top(th)
-        wp(L,.4,p,fc,"close: press top along hinge arc",press_R)
-    wp(L,.8,p-.04*press_R[:,2],fc,"close: clear tab and latch",press_R)
-    press_R = _Ry(-math.radians(60.)) @ DOWN
-    cap_zero=W+np.array([-.050,0.,ZA+HH+.006])
-    def cap_press(deg):
-        rt=_Ry(math.radians(deg))
-        return Hh+rt@(cap_zero-Hh)-PAD_TIP*press_R[:,2]-.002*rt[:,2]
-    p=cap_press(15.)
-    wp(L,1.2,p+[0.,0.,.03],fc,"close: above lid cap",press_R)
-    wp(L,1.,p,fc,"close: contact lid cap",press_R)
-    th=15.
     while th > -1.+1e-6:
         th=max(th-3.,-1.)
-        p=cap_press(th)
-        wp(L,.4,p,fc,"close: press cap clear of latch",press_R)
-    wp(L,1.,p,fc,"close: hold lid with latch clear",press_R)
-    wait_until(Rr,clock[L],"close latch: hold clear during closure")
-    wp(Rr,.5,plans[Rr][-1].pos,fo*.6,"close latch: release spring",FWDY)
-    wp(Rr,.8,np.asarray(plans[Rr][-1].pos)+[0.,0.,.06],fo*.6,"close latch: withdraw",FWDY)
-    wp(Rr,1.0,G+side+[0.,0.,.08],fo,"hold: above handle",FWD)
-    wp(Rr,.8,G+side,fo,"hold: beside handle",FWD)
-    wp(Rr,.8,G,fo,"hold: slide onto handle",FWD)
-    wp(Rr,.5,G,fc,"hold: grip handle",FWD)
-    wait_until(L,clock[Rr]+.5,"close: wait for handle grip")
-    press_axis=press_R@np.array([0.,0.,1.])
-    wp(L,1.,p-.07*press_axis,fc,"close: withdraw top press",press_R)
+        p,Rg,n=tab(th)
+        wp(L,.4,p,fc,"close: lower external handle along hinge",Rg)
+    wp(L,.5,p,fc,"close: hold shut",Rg)
+    wp(L,.5,p,fo*.7,"close: release upper handle",Rg)
+    wp(L,1.,p+.08*n,fo*.7,"close: withdraw sideways",Rg)
     # 2. steady the stand (left) --------------------------------------------------------------------------------
     a = SIDE @ np.array([0.0, 0.0, 1.0])  # approach axis
     # the front-left corner of the base: beyond the housing (x < -0.11) and 12 cm off the axis, outside the sweep
@@ -702,8 +628,14 @@ def demo_plan(t=DEMO_T):
     wp(L, 1.0, P - 0.03 * a, fc, "steady: above the base edge", SIDE)
     wp(L, 0.8, P, fc, "steady: press the base", SIDE)
     t_steady = clock[L]
+    wait_until(Rr,t_steady,"steady: hold through handle closure")
+    wp(Rr,.8,right_steady-.08*right_axis,fc,"steady: release base",right_steady_R)
+    wp(Rr,1.,G+side+[0.,0.,.08],fo,"turn: above lid handle",FWD)
+    wp(Rr,.8,G+side,fo,"turn: beside lid handle",FWD)
+    wp(Rr,.8,G,fo,"turn: straddle lid handle",FWD)
+    wp(Rr,.5,G,fc,"turn: grip lid handle",FWD)
     # 3. turn (right) -------------------------------------------------------------------------------------------
-    # (the right hand has held the handle since the start; from in front, x 0.12, is out of reach for this wrist
+    # (the right hand takes the closed lid handle; from in front, x 0.12, is out of reach for this wrist
     # pose, so it came down onto the handle end from above)
     wait_until(Rr, max(clock[Rr], t_steady) + 0.3, "turn: wait for the stand hold")
 
@@ -719,46 +651,40 @@ def demo_plan(t=DEMO_T):
     wp(Rr, 1.0, plans[Rr][-1].pos, fc, "turn: hold upside down", plans[Rr][-1].yaw.rot)
     roll(t["turn_end"], t["turn_back"], "turn: back")
     wp(Rr, 0.6, plans[Rr][-1].pos, fc, "turn: settle", plans[Rr][-1].yaw.rot)
-    A = math.radians(t["turn_back"])
-    wp(Rr, 0.5, AX + _Rx(A) @ (G - AX), fo, "turn: let go", _Rx(A) @ FWD)
-    wp(Rr, 0.8, AX + _Rx(A) @ (G - AX) + side, fo, "turn: slide off the handle", _Rx(A) @ FWD)
-    wp(Rr, 1.0, AX + _Rx(A) @ (G - AX) + side + np.array([0.0, 0.0, 0.08]), fo, "turn: up", FWD)
-    t_turned = clock[Rr]
-    # 4. unlatch (right) and open (left) ------------------------------------------------------------------------
-    # the thumb lever is pinched with the same wrist pose as the handle grip (same IK branch, no wrist flip)
-    Lv = W + np.array([-0.201, 0.0, ZA + t["lever_z"]])
-    ap = np.array([0.0, 0.0, -1.0])  # retreat straight up
-    wp(Rr, 1.2, Lv - 0.04 * ap, fo * 0.6, "unlatch: above the lever", FWDY)
-    wp(Rr, 0.8, Lv, fo * 0.6, "unlatch: straddle the lever", FWDY)
-    wp(Rr, 0.5, Lv, fc, "unlatch: pinch the lever", FWDY)
-    wp(Rr, 0.8, Lv + np.array([-t["pull"]-.004, 0.0, 0.0]), fc, "unlatch: pull back", FWDY)
-    PITCH = FWDY
-    t_pulled = clock[Rr]
-    wait_until(L, t_turned, "steady: hold")
-    wp(L, 0.8, P - 0.08 * a, fc, "steady: lift off", SIDE)
-    p, Rg, n = tab(0.0)
-    wp(L, 2.0, p + 0.07 * n, -.007, "open: above the tab", Rg)
-    wp(L, 1.0, p, -.007, "open: straddle the tab", Rg)
-    wp(L, 0.5, p, fc, "open: pinch the tab", Rg)
-    wait_until(L, t_pulled + 0.2, "open: wait for the latch")
-    th = 0.0
+    # Keep a continuous handle grip through the handoff. A free interval can
+    # let the chamber roll and re-engage its rotation lock before opening.
+    # Lift from the unobstructed distal grip before the proximal handoff.
+    # With the lid closed, the lower bearing leaves only 6 mm below the
+    # proximal handle: too little room for the second gripper's lower pad.
+    handoff_deg = HANDOFF_DEG
+    for th in (3., 6., 9., handoff_deg):
+        lift_R = _Ry(math.radians(th))
+        wp(Rr,.5,Hh+lift_R@(G-Hh),fc,"open: distal handle initial lift",lift_R@FWD)
+    t_turned=clock[Rr]
+    wait_until(L,t_turned,"steady: hold")
+    wp(L,.8,P-.08*a,fc,"steady: lift off",SIDE)
+    wp(L,1.,P-.14*a+np.array([0.,.03,.08]),fc,"handoff: clear housing before reorienting",SIDE)
+    p,Rg,n=tab(handoff_deg,opening=True)
+    wp(L,1.2,p+.12*n+np.array([0.,0.,.05]),-.020,"handoff: reorient outside housing",Rg)
+    wp(L,1.2,p+.07*n,-.020,"open: approach proximal handle",Rg)
+    wp(L,1.,p,-.020,"open: straddle proximal handle",Rg)
+    wp(L,.5,p,fc,"open: secure handle before handoff",Rg)
+    wait_until(Rr,clock[L]+.3,"open: retain distal grip until handoff")
+    lift_R=_Ry(math.radians(handoff_deg))
+    handoff_tip=Hh+lift_R@(G-Hh)
+    wp(Rr,.5,handoff_tip,fo,"open: release distal handle",lift_R@FWD)
+    wp(Rr,.8,handoff_tip+side,fo,"open: clear handle sideways",lift_R@FWD)
+    wp(Rr,1.,handoff_tip+side+[0.,0.,.08],fo,"open: withdraw from lid path",FWD)
+    wait_until(L,clock[Rr],"open: hold proximal grip while other hand withdraws")
+    wp(Rr,1.2,right_steady-.08*right_axis,fc,"steady: approach right base",right_steady_R)
+    wp(Rr,.8,right_steady,fc,"steady: hold base for opening and serving",right_steady_R)
+    th = handoff_deg
     while th < t["open_to"] - 1e-6:
         th = min(th + 4.0, t["open_to"])
         p, Rg, n = tab(th, opening=True)
         wp(L, 0.45 if th < 16 else 0.35, p, fc, "open: lift along the hinge arc", Rg)
-        if th >= t["release_at"] and "released" not in clock:
-            clock["released"] = clock[L]
     t_open = clock[L]
-    wait_until(Rr, clock.pop("released"), "unlatch: hold back")
-    wp(Rr, 0.4, plans[Rr][-1].pos, fo * 0.6, "unlatch: let go", PITCH)
-    wp(Rr, 1.0, plans[Rr][-1].pos - 0.06 * ap, fo * 0.6, "unlatch: back off", PITCH)
-    # 5. demold: the right hand takes the handle again, so the open unit (its lid's weight now high and behind the
-    #    axis, on a 0.03 N m bearing) cannot roll during lid release and tong loosening
-    wait_until(Rr, max(clock[Rr], t_open - 2.0), "hold: wait")
-    wp(Rr, 1.0, G + side + np.array([0.0, 0.0, 0.06]), fo, "hold: above, beside the handle end", FWD)
-    wp(Rr, 0.8, G + side, fo, "hold: beside the handle end", FWD)
-    wp(Rr, 0.8, G, fo, "hold: slide onto the handle end", FWD)
-    wp(Rr, 0.5, G, fc, "hold: grip the handle", FWD)
+    wait_until(Rr, t_open, "steady: hold base during opening")
     wait_until(L, max(clock[L], clock[Rr]) + 0.2, "open: hold")
     wp(L,.8,p,fo*.7,"open: release the tab",Rg)
     wp(L,1.,p+.10*n,fo*.7,"open: clear the lid fully sideways",Rg)
@@ -806,14 +732,8 @@ def demo_plan(t=DEMO_T):
     wp(L,1.5,tong_tcp(home),TONG_HOLD,"tongs: lower into cup",cup_R)
     wp(L,.7,tong_tcp(home),TONG_WIDE,"tongs: release into cup",cup_R)
     wp(L,1.,tong_tcp(home+[-.08,0.,.055]),TONG_WIDE,"tongs: clear cup",cup_R)
-    # Keep the appliance upright during food transfer, then release its handle.
-    wait_until(Rr,clock[L]+.2,"hold: wait for tongs to be put down")
-    roll(0.,-12.,"finish: return unit upright")
-    home_turn=_Rx(math.radians(-12.));release_p=AX+home_turn@(G-AX);release_R=home_turn@FWD
-    wp(Rr,1.3,release_p,fc,"finish: settle upright",release_R)
-    wp(Rr, 0.5, release_p, fo, "hold: let go", release_R)
-    wp(Rr, 0.8, release_p + side, fo, "hold: slide off the handle", release_R)
-    wp(Rr, 0.8, G + side + np.array([0.0, 0.0, 0.08]), fo, "hold: up", FWD)
+    wait_until(Rr,clock[L]+.2,"steady: wait for tool stow")
+    wp(Rr,1.,right_steady-.10*right_axis,fc,"steady: release stand and withdraw",right_steady_R)
     for arm in (L, Rr):
         pr, Rp = ik.tcp_pose(np.asarray(READY, float), np.asarray(bases[arm], float))
         wp(arm, 2.0, pr, fo, "park", Rp)
@@ -857,11 +777,6 @@ def demo():
 _TRACK = new_track()
 _S = {"step": 0}
 SETTLE_STEPS = 3
-ANIM_C0, ANIM_CLOSE = 10, 30  # WAFFLE_ANIM=spin (with WAFFLE_LAYOUT=start): the lid is pushed shut first
-ANIM_T0, ANIM_TURN, ANIM_HOLD = 60, 70, 20  # then the turn (steps at 20 Hz)
-ANIM_PRESS_FROM = math.radians(9.0)  # writes stop here (the tab meets the ramp at ~6 deg)
-ANIM_PRESS_K = 60.0  # N m/rad on the lid hinge towards 0 while pressing (9 N m at 9 deg, 3.9 at 3.7: ~15 N at the tab;
-# the latch needs ~1.35 N m more than gravity and the hinge's 0.8 N m friction give, at the bottom of its ramp)
 
 
 def _states(env):
@@ -877,64 +792,12 @@ def _write_joint(env, name, q, qd):
     a.write_joint_velocity_to_sim_index(velocity=torch.tensor([[qd]], device=dev), joint_ids=[i])
 
 
-def _lid_press(env, k):
-    """Spring the lid hinge towards shut with stiffness k (0 = free again), through its implicit actuator."""
-    import torch
-    a = env.unwrapped.scene["waffle"]
-    i = list(a.joint_names).index("lid_joint")
-    dev = env.unwrapped.scene.env_origins.device
-    a.write_joint_stiffness_to_sim_index(stiffness=torch.tensor([[k]], device=dev), joint_ids=[i])
-    a.set_joint_position_target_index(target=torch.tensor([[0.0]], device=dev), joint_ids=[i])
-    if k == 0.0 or _S["step"] == ANIM_C0 + ANIM_CLOSE + 1:
-        print(f"WAFFLE_PRESS step={_S['step']} k={k}", flush=True)
-
-
-def _ease(u):
-    u = min(max(u, 0.0), 1.0)
-    return 0.5 - 0.5 * math.cos(math.pi * u), 0.5 * math.pi * math.sin(math.pi * u)
-
-
-def _anim(env, s):
-    """Push the lid shut (the latch must ride its ramp and snap over the tab), turn 0 -> 180 deg, hold, back to 0, hold
-    (the lid held only by the latch's contact), then pull the latch and open the lid. Joint writes only, no robot."""
-    if ANIM_C0 <= s <= ANIM_C0 + ANIM_CLOSE and LAYOUT in ("start", "ajar"):
-        # carried down by joint writes to just above the ramp, then pressed shut by a spring on the hinge (a hand's
-        # push, ~2 N m at 9 deg) so the tab really has to cam the slider back on its ramp and the slider snaps over it
-        e, de = _ease((s - ANIM_C0) / ANIM_CLOSE)
-        _write_joint(env, "lid", ANIM_PRESS_FROM + (LID_START - ANIM_PRESS_FROM) * (1 - e),
-                     -(LID_START - ANIM_PRESS_FROM) * de / ANIM_CLOSE * 20)
-    if ANIM_C0 + ANIM_CLOSE < s < ANIM_T0 - 2 and LAYOUT in ("start", "ajar"):
-        _lid_press(env, ANIM_PRESS_K)  # re-aimed every step, in case the env re-sets joint targets
-    if s == ANIM_T0 - 2 and LAYOUT in ("start", "ajar"):
-        _lid_press(env, 0.0)
-    t1 = ANIM_T0 + ANIM_TURN
-    t2 = t1 + ANIM_HOLD
-    t3 = t2 + ANIM_TURN
-    t4 = t3 + ANIM_HOLD
-    if ANIM_T0 <= s <= t1:
-        e, de = _ease((s - ANIM_T0) / ANIM_TURN)
-        _write_joint(env, "spin", SPIN_MAX * e, SPIN_MAX * de / ANIM_TURN * 20)
-    elif t1 < s < t2:
-        _write_joint(env, "spin", SPIN_MAX, 0.0)  # held at the stop, as a hand would
-    elif t2 <= s <= t3:
-        e, de = _ease((s - t2) / ANIM_TURN)
-        _write_joint(env, "spin", SPIN_MAX * (1 - e), -SPIN_MAX * de / ANIM_TURN * 20)
-    elif t3 < s < t4:
-        _write_joint(env, "spin", 0.0, 0.0)
-    elif t4 <= s <= t4 + 30:
-        _write_joint(env, "latch", -LATCH_TRAVEL * min(1.0, (s - t4) / 6), 0.0)
-    if t4 + 8 <= s <= t4 + 8 + 50:
-        e, de = _ease((s - t4 - 8) / 50)
-        _write_joint(env, "lid", LID_START * e, LID_START * de / 50 * 20)
-
-
 def _report(env, tag):
     st = _states(env)
     b = breakdown(st)
     b.update(score=score(st), full_success=success(st), hands_released=_FINAL["released"], final_still=_FINAL["still"])
     w = st["waffle"]
     b["stand_pos"] = np.round(w.pos, 4).tolist()
-    b["latch_mm"] = round(1000 * w.joints.get("latch", 0.0), 2)
     if "belgian_waffle" in st:  # the cooked waffle's centre and tilt in the turning unit's frame (mm from where it lay)
         off, tilt = food_pose(st)
         b["food_mm"] = np.round(1000 * off, 1).tolist()
@@ -962,21 +825,23 @@ def _on_step(env):
     if s <= SETTLE_STEPS:  # hold the starting pose while the scene settles (the reset left the lid falling)
         _write_joint(env, "lid", _init[1], 0.0)
         _write_joint(env, "spin", _init[0], 0.0)
-    if ANIM == "spin":
-        _anim(env, s)
     states = _states(env)
     hands=hand_bounds(env)
     track_update(_TRACK, states, hands, food_contact.hand_hulls(env))
     update_final_release(states, hands, float(getattr(env.unwrapped, "step_dt", .05)))
     trace_evidence.record(env,s,states,score(states),success(states),breakdown(states))
-    if s in (1, 2, 5) or s % 5 == 0 or (ANIM == "spin" and 38 <= s <= 60):
+    if s in (1, 2, 5) or s % 5 == 0:
         _report(env, f"step{s}")
 
+
+rotation_lock.configure(globals())
 
 import tool_alignment
 tool_alignment.configure(globals())
 import serving_alignment
 serving_alignment.configure(globals())
+import handle_alignment
+handle_alignment.configure(globals())
 
 # Explicit abstract material response, with a full 300 s simulation-time bake.
 import phase_conversion
@@ -988,14 +853,14 @@ _cooking_base_demo=demo
 def demo():
     from yam_arena.demo import Waypoint
     plans=_cooking_base_demo()
-    extra_hold=max(0.,RECIPE_S/TIME_SCALE-10.)
+    extra_hold=RECIPE_S/TIME_SCALE  # full requested interval at the inverted hold
     for arm,plan in plans.items():
         if arm=='left':
             i=next(i for i,w in enumerate(plan) if w.label=='steady: hold')
             w=plan[i];plan[i]=Waypoint(w.duration+extra_hold,w.pos,w.finger,w.label,w.yaw)
         else:
             i=next(i for i,w in enumerate(plan) if w.label=='turn: hold upside down')
-            w=plan[i];plan.insert(i+1,Waypoint(extra_hold,w.pos,w.finger,'cook: heat while latched',w.yaw))
+            w=plan[i];plan.insert(i+1,Waypoint(extra_hold,w.pos,w.finger,'cook: heat while rotation-locked',w.yaw))
     return plans
 _manipulation_breakdown=breakdown
 def breakdown(objects,tr=None):

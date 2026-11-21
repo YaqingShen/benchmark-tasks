@@ -18,9 +18,9 @@ def mold_coordinates(ns,w,points):
     axis=w.to_world([0.,0.,ns['ZA']])
     return (np.asarray(points)-axis)@rotation,axis,rotation
 
-def eligibility(*,cooked,lid,latch,spin,points_local):
+def eligibility(*,cooked,lid,spin,points_local):
     if not cooked:return 'baking timer incomplete'
-    if abs(lid)>math.radians(3) or latch<-.003:return 'lid not closed and latched'
+    if abs(lid)>math.radians(3):return 'lid not closed'
     if abs(spin-math.pi)>math.radians(5):return 'waiting for inverted hold'
     p=np.asarray(points_local)
     if not len(p) or not np.isfinite(p).all():return 'invalid batter state'
@@ -31,7 +31,7 @@ def eligibility(*,cooked,lid,latch,spin,points_local):
 def attempt(ns,env,paths,points,velocities,clock,w):
     if STATE['solid']:return
     local,axis,rot=mold_coordinates(ns,w,points)
-    reason=eligibility(cooked=clock.cooked,lid=w.joints['lid'],latch=w.joints['latch'],spin=w.joints['spin'],points_local=local)
+    reason=eligibility(cooked=clock.cooked,lid=w.joints['lid'],spin=w.joints['spin'],points_local=local)
     STATE['block_reason']=reason
     if reason:return
     import torch

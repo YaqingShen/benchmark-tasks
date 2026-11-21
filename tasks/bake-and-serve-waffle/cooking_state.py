@@ -4,11 +4,17 @@ The appliance is preheated in the setup. Opening before completion resets the
 continuous timer. This predicts neither temperature nor cooking chemistry.
 """
 from dataclasses import dataclass,asdict
+import math
+from appliance_config import MODEL
 TIME_SCALE=1.
-RECIPE_S=300.
-BATTER_VOLUME_ML=250.
-BATTER_DENSITY_KG_M3=1050.
+RECIPE_S=MODEL["bake_duration_s"]
+BATTER_VOLUME_ML=MODEL["batter_volume_ml"]
+BATTER_DENSITY_KG_M3=MODEL["batter_density_kg_m3"]
 BATTER_MASS_KG=BATTER_VOLUME_ML*1e-6*BATTER_DENSITY_KG_M3
+
+def baking_configuration(lid, spin):
+    """Only the closed, inverted cooking interval counts toward five minutes."""
+    return abs(lid) < math.radians(5.) and abs(spin-math.pi) <= math.radians(5.)
 
 @dataclass
 class State:

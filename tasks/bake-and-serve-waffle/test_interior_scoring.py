@@ -4,7 +4,7 @@ import test_release as setup
 import task as T
 from hot_surface_guard import zones
 T._TRACK.clear();T._TRACK.update(T.new_track())
-T._TRACK.update(phase=2,latched_at_turn=True,shut_at_turn=True,loosened=True,tool_stowed=True,tool_carried=True)
+T._TRACK.update(phase=2,locked_at_turn=True,shut_at_turn=True,loosened=True,tool_stowed=True,tool_carried=True)
 assert T.breakdown(setup.objects)['full_success']
 pieces=dict(zones(T,setup.objects['waffle']))
 c=pieces['upper'].mean(0)

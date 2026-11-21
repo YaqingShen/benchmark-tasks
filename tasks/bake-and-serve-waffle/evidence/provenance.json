@@ -1,292 +1,330 @@
 {
   "scripted": {
-    "run": "r43-handle-only-full-720p",
-    "instruction_identical": true,
+    "run": "r65-rotation-lock-full-720p",
     "source_comparison": {
+      "appliance_config.py": {
+        "run_sha256": "463e1a32981df30689d4baab9bd93a35d02daffe77a0a7dc717f89792fbd048d",
+        "package_sha256": "463e1a32981df30689d4baab9bd93a35d02daffe77a0a7dc717f89792fbd048d",
+        "byte_identical": true
+      },
       "arena_assets_fix.py": {
         "run_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
         "package_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "batter_fluid.py": {
-        "run_sha256": "74d2ffa1169a3f7d776bc68d99ee2dc10fdfa2e328e9fbcddbb1b0946c4b0f94",
-        "package_sha256": "74d2ffa1169a3f7d776bc68d99ee2dc10fdfa2e328e9fbcddbb1b0946c4b0f94",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "a99e6c39071f84128c91aca054e95520e22ade4fb5fc529adea5455c3fc09611",
+        "package_sha256": "a99e6c39071f84128c91aca054e95520e22ade4fb5fc529adea5455c3fc09611",
+        "byte_identical": true
       },
       "cooking_state.py": {
-        "run_sha256": "3d6447fff8a7a7a38cde8e969b826115c13d3f2141d1668bb6f38b6374403d22",
-        "package_sha256": "3d6447fff8a7a7a38cde8e969b826115c13d3f2141d1668bb6f38b6374403d22",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "d895697f973f5bc850842e2004d80e92c6a5f2e1e4f862d8b1f06e3e78636a5a",
+        "package_sha256": "d895697f973f5bc850842e2004d80e92c6a5f2e1e4f862d8b1f06e3e78636a5a",
+        "byte_identical": true
       },
       "food_contact.py": {
         "run_sha256": "52631da20a13e0febc081a7a4f437e4469d75bd7a6b372fd4b7c082ba3a8e252",
         "package_sha256": "52631da20a13e0febc081a7a4f437e4469d75bd7a6b372fd4b7c082ba3a8e252",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
+      },
+      "handle_alignment.py": {
+        "run_sha256": "a1e83f83e75ab5bab645fcc1fbfb5354103f0af01268c0a671fdcf7f678a4564",
+        "package_sha256": "a1e83f83e75ab5bab645fcc1fbfb5354103f0af01268c0a671fdcf7f678a4564",
+        "byte_identical": true
       },
       "hardware_limits.py": {
         "run_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
         "package_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "hot_surface_guard.py": {
-        "run_sha256": "4ae8f9873678e9135c67e064520ca0240fd509efa8d595dd49962e6ea7ea2d48",
-        "package_sha256": "4ae8f9873678e9135c67e064520ca0240fd509efa8d595dd49962e6ea7ea2d48",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "203497ffdbd280fe9fee7b1ec13e628e11bc17a6b690f2bf54e6c6f590c843f2",
+        "package_sha256": "203497ffdbd280fe9fee7b1ec13e628e11bc17a6b690f2bf54e6c6f590c843f2",
+        "byte_identical": true
       },
       "labkit.py": {
         "run_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
         "package_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "particle_backend_compat.py": {
         "run_sha256": "58f18370488247f9d0978bcff248dbcb98163337fdadba9a22eaf38509db50a1",
         "package_sha256": "58f18370488247f9d0978bcff248dbcb98163337fdadba9a22eaf38509db50a1",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "phase_conversion.py": {
-        "run_sha256": "284ae8bb9454e9bbc2a39e427219e567670705633ecd5c5834cc98fb118e8f0f",
-        "package_sha256": "284ae8bb9454e9bbc2a39e427219e567670705633ecd5c5834cc98fb118e8f0f",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "6e147e16beb92d37889df909efb797608c5024ecf30ee3e9fa099ff6457788fe",
+        "package_sha256": "6e147e16beb92d37889df909efb797608c5024ecf30ee3e9fa099ff6457788fe",
+        "byte_identical": true
+      },
+      "rotation_lock.py": {
+        "run_sha256": "7b1eb046c2b28c07358e36f65e319e35119235e29a5be077dc1f5a105b8412d7",
+        "package_sha256": "7b1eb046c2b28c07358e36f65e319e35119235e29a5be077dc1f5a105b8412d7",
+        "byte_identical": true
+      },
+      "run_task.py": {
+        "run_sha256": "7c80899fd59e443996dd1b2d13cf1743c6f4161d411a6eeb2bf33d4b24cc0325",
+        "package_sha256": "7c80899fd59e443996dd1b2d13cf1743c6f4161d411a6eeb2bf33d4b24cc0325",
+        "byte_identical": true
       },
       "scoring_geometry.py": {
         "run_sha256": "f15c38544d95bb5e0b0077641a8173a57857f79c89e2f90fee04b6ec8e1b6272",
         "package_sha256": "f15c38544d95bb5e0b0077641a8173a57857f79c89e2f90fee04b6ec8e1b6272",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "segment_resume.py": {
         "run_sha256": "e005cc0934c85c2dbe5840d7dd05b5fdf37876a588adb3d2fc66ea4deff458c5",
         "package_sha256": "e005cc0934c85c2dbe5840d7dd05b5fdf37876a588adb3d2fc66ea4deff458c5",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "serving_alignment.py": {
         "run_sha256": "31ae167efd8b14657666835015ab8eda6c907a5b31d25cc751e9ce3b341058d0",
         "package_sha256": "31ae167efd8b14657666835015ab8eda6c907a5b31d25cc751e9ce3b341058d0",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "serving_rules.py": {
         "run_sha256": "41beceb5706b12dbce7f5e1826029e098ca9001409307b47c8548db23b025ebd",
         "package_sha256": "41beceb5706b12dbce7f5e1826029e098ca9001409307b47c8548db23b025ebd",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
+      },
+      "stand_scoring.py": {
+        "run_sha256": "99a0b782e408652aaecc48927ed23f4f29926db373ddb1bdc704da760743ddaa",
+        "package_sha256": "99a0b782e408652aaecc48927ed23f4f29926db373ddb1bdc704da760743ddaa",
+        "byte_identical": true
       },
       "task.py": {
-        "run_sha256": "756e631ac51147d0e448a6d6d80e9fce758d566a3af7b954d7a6a363641af8a0",
-        "package_sha256": "e94449a893a94c4b054b98760f083213f9bd0762ee7ba1140f5d424c94e59d23",
-        "byte_identical": false,
-        "executable_equivalent": true
+        "run_sha256": "65e59f65ed981e6c945d23ff6dde54499f901c0ed7c0bb61c79f888f11a1aa50",
+        "package_sha256": "65e59f65ed981e6c945d23ff6dde54499f901c0ed7c0bb61c79f888f11a1aa50",
+        "byte_identical": true
       },
       "test_cooking_state.py": {
-        "run_sha256": "587a5ee2ab22cba4363c916d42a1b85a4edb5793712e5b54f643db0e732b50e9",
-        "package_sha256": "587a5ee2ab22cba4363c916d42a1b85a4edb5793712e5b54f643db0e732b50e9",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "21f95c963d94e4bb1849fa55783c4e2fa79d7b23c97d2d5240de6d383a6482d8",
+        "package_sha256": "21f95c963d94e4bb1849fa55783c4e2fa79d7b23c97d2d5240de6d383a6482d8",
+        "byte_identical": true
+      },
+      "test_hardware_geometry.py": {
+        "run_sha256": "a8793180ec1ea38158ce1a11d0b7beef6d3dbe0692468a39b903566a7511711b",
+        "package_sha256": "a8793180ec1ea38158ce1a11d0b7beef6d3dbe0692468a39b903566a7511711b",
+        "byte_identical": true
       },
       "test_home_tolerance.py": {
-        "run_sha256": "5a5169c200f8c4d4174a4e6fa0d9afb5be5259010fe2e63d9ea716d3259b5a7d",
-        "package_sha256": "5a5169c200f8c4d4174a4e6fa0d9afb5be5259010fe2e63d9ea716d3259b5a7d",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "8bda789c127eed6834f216a6e87be0c2e2277c552cdbff8e5efb3d72f76e7de0",
+        "package_sha256": "8bda789c127eed6834f216a6e87be0c2e2277c552cdbff8e5efb3d72f76e7de0",
+        "byte_identical": true
       },
       "test_hot_surface_guard.py": {
         "run_sha256": "28c279a9e53e1b294c100a68995264d24215b37726ce43777ebb0d515cf1f482",
         "package_sha256": "28c279a9e53e1b294c100a68995264d24215b37726ce43777ebb0d515cf1f482",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "test_interior_scoring.py": {
-        "run_sha256": "03559b82f34b254911f706d421dae9177add787edda6c57fe9b1f8245112122e",
-        "package_sha256": "03559b82f34b254911f706d421dae9177add787edda6c57fe9b1f8245112122e",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "d1f6c014fedd1828ee397f5a36b000abc3fff51b9515226dd5b04be945bcc1cc",
+        "package_sha256": "d1f6c014fedd1828ee397f5a36b000abc3fff51b9515226dd5b04be945bcc1cc",
+        "byte_identical": true
       },
       "test_release.py": {
-        "run_sha256": "8aff6a5546c11d8678b39b0055c52463a9a2a571b31994a288da1c6cec21e167",
-        "package_sha256": "8aff6a5546c11d8678b39b0055c52463a9a2a571b31994a288da1c6cec21e167",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "aace80be58f33c1ec30d1cc276b13b0e3819db5dfe58aeac5ed2108a0b2f045e",
+        "package_sha256": "aace80be58f33c1ec30d1cc276b13b0e3819db5dfe58aeac5ed2108a0b2f045e",
+        "byte_identical": true
+      },
+      "test_review_regressions.py": {
+        "run_sha256": "dcb3f176720c1016e47f5afc6a5824bc057bcbab6e09434c3dbcc0d597893669",
+        "package_sha256": "dcb3f176720c1016e47f5afc6a5824bc057bcbab6e09434c3dbcc0d597893669",
+        "byte_identical": true
       },
       "test_scorer.py": {
-        "run_sha256": "2c64dfce907ad9a86e3cb1a95c287fc569569ff8390ef475fb52ca3eb4625062",
-        "package_sha256": "2c64dfce907ad9a86e3cb1a95c287fc569569ff8390ef475fb52ca3eb4625062",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "11e571a238f272fecd99c4d1dc8fa5b8bd09ad0307f0862aa65250780082b5a8",
+        "package_sha256": "11e571a238f272fecd99c4d1dc8fa5b8bd09ad0307f0862aa65250780082b5a8",
+        "byte_identical": true
       },
       "test_tool_serving.py": {
-        "run_sha256": "99f2242725d29cc1a86e778087f71760f2ac236dcd947bdb29186e7a235239a8",
-        "package_sha256": "99f2242725d29cc1a86e778087f71760f2ac236dcd947bdb29186e7a235239a8",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "d9b099711ca08f2d6a8d3db761eec25ec815b74ca6ba524ea16642d3665657b8",
+        "package_sha256": "d9b099711ca08f2d6a8d3db761eec25ec815b74ca6ba524ea16642d3665657b8",
+        "byte_identical": true
       },
       "tool_alignment.py": {
         "run_sha256": "c40b4ed345c198266ed8e88193f3c21c3ae1f4de3a650f890b10b691813a63b1",
         "package_sha256": "c40b4ed345c198266ed8e88193f3c21c3ae1f4de3a650f890b10b691813a63b1",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "trace_evidence.py": {
         "run_sha256": "7013941d490d6ac9fc625f2894fcc22a4be76331ebbffef362a800eed455e1f4",
         "package_sha256": "7013941d490d6ac9fc625f2894fcc22a4be76331ebbffef362a800eed455e1f4",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
+      },
+      "verify_tests.py": {
+        "run_sha256": "d36d6f2a082a133ec5729b075df18daaa0e2168dff74cbb5a4238e82dce6f2b4",
+        "package_sha256": "d36d6f2a082a133ec5729b075df18daaa0e2168dff74cbb5a4238e82dce6f2b4",
+        "byte_identical": true
       }
     },
-    "notes": "Metadata and reproduction runner were updated after evaluation. Physics and scorer are byte-identical or differ only in comments/module documentation."
+    "hardware_config_sha256": "98073f5d68b79672ad428c9cf5a022fa9df7e2ab07e8ae566c7c1ecbc6eb8447",
+    "same_physics_scorer_instruction": true,
+    "excluded_script_only_function": null,
+    "notes": "Documentation, media references and evidence are updated after the frozen runs. Runtime equivalence was verified before packaging."
   },
   "dream": {
-    "run": "d44-handle-only-dream-1",
-    "instruction_identical": true,
+    "run": "d63-rotation-lock-dream-1",
     "source_comparison": {
+      "appliance_config.py": {
+        "run_sha256": "463e1a32981df30689d4baab9bd93a35d02daffe77a0a7dc717f89792fbd048d",
+        "package_sha256": "463e1a32981df30689d4baab9bd93a35d02daffe77a0a7dc717f89792fbd048d",
+        "byte_identical": true
+      },
       "arena_assets_fix.py": {
         "run_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
         "package_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "batter_fluid.py": {
-        "run_sha256": "74d2ffa1169a3f7d776bc68d99ee2dc10fdfa2e328e9fbcddbb1b0946c4b0f94",
-        "package_sha256": "74d2ffa1169a3f7d776bc68d99ee2dc10fdfa2e328e9fbcddbb1b0946c4b0f94",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "a99e6c39071f84128c91aca054e95520e22ade4fb5fc529adea5455c3fc09611",
+        "package_sha256": "a99e6c39071f84128c91aca054e95520e22ade4fb5fc529adea5455c3fc09611",
+        "byte_identical": true
       },
       "cooking_state.py": {
-        "run_sha256": "3d6447fff8a7a7a38cde8e969b826115c13d3f2141d1668bb6f38b6374403d22",
-        "package_sha256": "3d6447fff8a7a7a38cde8e969b826115c13d3f2141d1668bb6f38b6374403d22",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "d895697f973f5bc850842e2004d80e92c6a5f2e1e4f862d8b1f06e3e78636a5a",
+        "package_sha256": "d895697f973f5bc850842e2004d80e92c6a5f2e1e4f862d8b1f06e3e78636a5a",
+        "byte_identical": true
       },
       "food_contact.py": {
         "run_sha256": "52631da20a13e0febc081a7a4f437e4469d75bd7a6b372fd4b7c082ba3a8e252",
         "package_sha256": "52631da20a13e0febc081a7a4f437e4469d75bd7a6b372fd4b7c082ba3a8e252",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
+      },
+      "handle_alignment.py": {
+        "run_sha256": "a1e83f83e75ab5bab645fcc1fbfb5354103f0af01268c0a671fdcf7f678a4564",
+        "package_sha256": "a1e83f83e75ab5bab645fcc1fbfb5354103f0af01268c0a671fdcf7f678a4564",
+        "byte_identical": true
       },
       "hardware_limits.py": {
         "run_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
         "package_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "hot_surface_guard.py": {
-        "run_sha256": "4ae8f9873678e9135c67e064520ca0240fd509efa8d595dd49962e6ea7ea2d48",
-        "package_sha256": "4ae8f9873678e9135c67e064520ca0240fd509efa8d595dd49962e6ea7ea2d48",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "203497ffdbd280fe9fee7b1ec13e628e11bc17a6b690f2bf54e6c6f590c843f2",
+        "package_sha256": "203497ffdbd280fe9fee7b1ec13e628e11bc17a6b690f2bf54e6c6f590c843f2",
+        "byte_identical": true
       },
       "labkit.py": {
         "run_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
         "package_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "particle_backend_compat.py": {
         "run_sha256": "58f18370488247f9d0978bcff248dbcb98163337fdadba9a22eaf38509db50a1",
         "package_sha256": "58f18370488247f9d0978bcff248dbcb98163337fdadba9a22eaf38509db50a1",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "phase_conversion.py": {
-        "run_sha256": "284ae8bb9454e9bbc2a39e427219e567670705633ecd5c5834cc98fb118e8f0f",
-        "package_sha256": "284ae8bb9454e9bbc2a39e427219e567670705633ecd5c5834cc98fb118e8f0f",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "6e147e16beb92d37889df909efb797608c5024ecf30ee3e9fa099ff6457788fe",
+        "package_sha256": "6e147e16beb92d37889df909efb797608c5024ecf30ee3e9fa099ff6457788fe",
+        "byte_identical": true
+      },
+      "rotation_lock.py": {
+        "run_sha256": "7b1eb046c2b28c07358e36f65e319e35119235e29a5be077dc1f5a105b8412d7",
+        "package_sha256": "7b1eb046c2b28c07358e36f65e319e35119235e29a5be077dc1f5a105b8412d7",
+        "byte_identical": true
+      },
+      "run_task.py": {
+        "run_sha256": "7c80899fd59e443996dd1b2d13cf1743c6f4161d411a6eeb2bf33d4b24cc0325",
+        "package_sha256": "7c80899fd59e443996dd1b2d13cf1743c6f4161d411a6eeb2bf33d4b24cc0325",
+        "byte_identical": true
       },
       "scoring_geometry.py": {
         "run_sha256": "f15c38544d95bb5e0b0077641a8173a57857f79c89e2f90fee04b6ec8e1b6272",
         "package_sha256": "f15c38544d95bb5e0b0077641a8173a57857f79c89e2f90fee04b6ec8e1b6272",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "segment_resume.py": {
         "run_sha256": "e005cc0934c85c2dbe5840d7dd05b5fdf37876a588adb3d2fc66ea4deff458c5",
         "package_sha256": "e005cc0934c85c2dbe5840d7dd05b5fdf37876a588adb3d2fc66ea4deff458c5",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "serving_alignment.py": {
         "run_sha256": "31ae167efd8b14657666835015ab8eda6c907a5b31d25cc751e9ce3b341058d0",
         "package_sha256": "31ae167efd8b14657666835015ab8eda6c907a5b31d25cc751e9ce3b341058d0",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "serving_rules.py": {
         "run_sha256": "41beceb5706b12dbce7f5e1826029e098ca9001409307b47c8548db23b025ebd",
         "package_sha256": "41beceb5706b12dbce7f5e1826029e098ca9001409307b47c8548db23b025ebd",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
+      },
+      "stand_scoring.py": {
+        "run_sha256": "99a0b782e408652aaecc48927ed23f4f29926db373ddb1bdc704da760743ddaa",
+        "package_sha256": "99a0b782e408652aaecc48927ed23f4f29926db373ddb1bdc704da760743ddaa",
+        "byte_identical": true
       },
       "task.py": {
-        "run_sha256": "e94449a893a94c4b054b98760f083213f9bd0762ee7ba1140f5d424c94e59d23",
-        "package_sha256": "e94449a893a94c4b054b98760f083213f9bd0762ee7ba1140f5d424c94e59d23",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "2c734860b236a8198aa4ef284d4c755c5c89915d19ab992d07e649d8fa77be6e",
+        "package_sha256": "65e59f65ed981e6c945d23ff6dde54499f901c0ed7c0bb61c79f888f11a1aa50",
+        "byte_identical": false
       },
       "test_cooking_state.py": {
-        "run_sha256": "587a5ee2ab22cba4363c916d42a1b85a4edb5793712e5b54f643db0e732b50e9",
-        "package_sha256": "587a5ee2ab22cba4363c916d42a1b85a4edb5793712e5b54f643db0e732b50e9",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "21f95c963d94e4bb1849fa55783c4e2fa79d7b23c97d2d5240de6d383a6482d8",
+        "package_sha256": "21f95c963d94e4bb1849fa55783c4e2fa79d7b23c97d2d5240de6d383a6482d8",
+        "byte_identical": true
+      },
+      "test_hardware_geometry.py": {
+        "run_sha256": "a8793180ec1ea38158ce1a11d0b7beef6d3dbe0692468a39b903566a7511711b",
+        "package_sha256": "a8793180ec1ea38158ce1a11d0b7beef6d3dbe0692468a39b903566a7511711b",
+        "byte_identical": true
       },
       "test_home_tolerance.py": {
-        "run_sha256": "5a5169c200f8c4d4174a4e6fa0d9afb5be5259010fe2e63d9ea716d3259b5a7d",
-        "package_sha256": "5a5169c200f8c4d4174a4e6fa0d9afb5be5259010fe2e63d9ea716d3259b5a7d",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "8bda789c127eed6834f216a6e87be0c2e2277c552cdbff8e5efb3d72f76e7de0",
+        "package_sha256": "8bda789c127eed6834f216a6e87be0c2e2277c552cdbff8e5efb3d72f76e7de0",
+        "byte_identical": true
       },
       "test_hot_surface_guard.py": {
         "run_sha256": "28c279a9e53e1b294c100a68995264d24215b37726ce43777ebb0d515cf1f482",
         "package_sha256": "28c279a9e53e1b294c100a68995264d24215b37726ce43777ebb0d515cf1f482",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "test_interior_scoring.py": {
-        "run_sha256": "03559b82f34b254911f706d421dae9177add787edda6c57fe9b1f8245112122e",
-        "package_sha256": "03559b82f34b254911f706d421dae9177add787edda6c57fe9b1f8245112122e",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "d1f6c014fedd1828ee397f5a36b000abc3fff51b9515226dd5b04be945bcc1cc",
+        "package_sha256": "d1f6c014fedd1828ee397f5a36b000abc3fff51b9515226dd5b04be945bcc1cc",
+        "byte_identical": true
       },
       "test_release.py": {
-        "run_sha256": "8aff6a5546c11d8678b39b0055c52463a9a2a571b31994a288da1c6cec21e167",
-        "package_sha256": "8aff6a5546c11d8678b39b0055c52463a9a2a571b31994a288da1c6cec21e167",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "aace80be58f33c1ec30d1cc276b13b0e3819db5dfe58aeac5ed2108a0b2f045e",
+        "package_sha256": "aace80be58f33c1ec30d1cc276b13b0e3819db5dfe58aeac5ed2108a0b2f045e",
+        "byte_identical": true
+      },
+      "test_review_regressions.py": {
+        "run_sha256": "dcb3f176720c1016e47f5afc6a5824bc057bcbab6e09434c3dbcc0d597893669",
+        "package_sha256": "dcb3f176720c1016e47f5afc6a5824bc057bcbab6e09434c3dbcc0d597893669",
+        "byte_identical": true
       },
       "test_scorer.py": {
-        "run_sha256": "2c64dfce907ad9a86e3cb1a95c287fc569569ff8390ef475fb52ca3eb4625062",
-        "package_sha256": "2c64dfce907ad9a86e3cb1a95c287fc569569ff8390ef475fb52ca3eb4625062",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "11e571a238f272fecd99c4d1dc8fa5b8bd09ad0307f0862aa65250780082b5a8",
+        "package_sha256": "11e571a238f272fecd99c4d1dc8fa5b8bd09ad0307f0862aa65250780082b5a8",
+        "byte_identical": true
       },
       "test_tool_serving.py": {
-        "run_sha256": "99f2242725d29cc1a86e778087f71760f2ac236dcd947bdb29186e7a235239a8",
-        "package_sha256": "99f2242725d29cc1a86e778087f71760f2ac236dcd947bdb29186e7a235239a8",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "run_sha256": "d9b099711ca08f2d6a8d3db761eec25ec815b74ca6ba524ea16642d3665657b8",
+        "package_sha256": "d9b099711ca08f2d6a8d3db761eec25ec815b74ca6ba524ea16642d3665657b8",
+        "byte_identical": true
       },
       "tool_alignment.py": {
         "run_sha256": "c40b4ed345c198266ed8e88193f3c21c3ae1f4de3a650f890b10b691813a63b1",
         "package_sha256": "c40b4ed345c198266ed8e88193f3c21c3ae1f4de3a650f890b10b691813a63b1",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
       },
       "trace_evidence.py": {
         "run_sha256": "7013941d490d6ac9fc625f2894fcc22a4be76331ebbffef362a800eed455e1f4",
         "package_sha256": "7013941d490d6ac9fc625f2894fcc22a4be76331ebbffef362a800eed455e1f4",
-        "byte_identical": true,
-        "executable_equivalent": true
+        "byte_identical": true
+      },
+      "verify_tests.py": {
+        "run_sha256": "d36d6f2a082a133ec5729b075df18daaa0e2168dff74cbb5a4238e82dce6f2b4",
+        "package_sha256": "d36d6f2a082a133ec5729b075df18daaa0e2168dff74cbb5a4238e82dce6f2b4",
+        "byte_identical": true
       }
     },
-    "notes": "Metadata and reproduction runner were updated after evaluation. Physics and scorer are byte-identical or differ only in comments/module documentation."
+    "hardware_config_sha256": "98073f5d68b79672ad428c9cf5a022fa9df7e2ab07e8ae566c7c1ecbc6eb8447",
+    "same_physics_scorer_instruction": true,
+    "excluded_script_only_function": "demo_plan",
+    "notes": "Documentation, media references and evidence are updated after the frozen runs. Runtime equivalence was verified before packaging."
   }
 }

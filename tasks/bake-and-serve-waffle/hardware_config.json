@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "hardware_reference": {
+    "manufacturer": "Hamilton Beach",
+    "model": "26031G",
+    "product_url": "https://hamiltonbeach.com/durathon-removable-grid-belgian-waffle-maker-26031g",
+    "manual_url": "https://useandcares.hamiltonbeach.com/files/840204801.pdf",
+    "photo_url": "https://hamiltonbeach.com/media/products/26031-02.jpg",
+    "checked_date": "2026-11-21",
+    "listed_price_usd": 75.99,
+    "manufacturer_overall_dimensions_mm": {
+      "height": 241.3,
+      "width": 406.4,
+      "depth": 266.7
+    },
+    "materials": [
+      "stainless steel housing",
+      "ceramic nonstick cooking grids",
+      "cool-touch handle"
+    ],
+    "handle_attached_to": "upper lid",
+    "separate_front_slider": false,
+    "operating_sequence": [
+      "preheat",
+      "fill and close lid",
+      "turn clockwise to invert and lock",
+      "bake",
+      "turn counterclockwise upright",
+      "open lid using the same handle",
+      "remove with nonmetallic utensil"
+    ],
+    "manual_nominal_fill_ml": 250.0,
+    "manual_bake_interval_s": [
+      300.0,
+      480.0
+    ]
+  },
+  "simulation": {
+    "evidence_status": "nominal simulation inputs; not hardware measurements",
+    "rotation_axis_height_m": 0.185,
+    "housing_radius_m": 0.11,
+    "housing_half_height_m": 0.046,
+    "grid_radius_m": 0.09,
+    "grid_pocket_depth_m": 0.013,
+    "lid_hinge_m": [
+      0.118,
+      0.0,
+      0.231
+    ],
+    "lid_open_stop_rad": 1.75,
+    "lid_start_deg": 45.0,
+    "lid_friction_nm": 1.2,
+    "stand_mass_kg": 0.9,
+    "lower_chamber_mass_kg": 1.15,
+    "lid_and_handle_mass_kg": 0.8,
+    "stand_base_size_m": [
+      0.405,
+      0.266,
+      0.026
+    ],
+    "rotation_stop_deg": 180.0,
+    "lock_release_zone_deg": 7.0,
+    "open_body_stop_deg": 3.0,
+    "locked_lid_clearance_deg": 0.2,
+    "batter_volume_ml": 250.0,
+    "batter_density_kg_m3": 1050.0,
+    "bake_duration_s": 300.0,
+    "stand_full_credit_m": 0.01,
+    "stand_zero_credit_m": 0.03,
+    "stand_requires_completed_first_turn": true,
+    "first_turn_credit_deg": 173.0,
+    "home_tolerance_deg": 7.0,
+    "front_cradle_x_m": -0.18,
+    "front_cradle_inner_halfwidth_m": 0.04,
+    "front_bearing_radius_m": 0.012,
+    "stand_base_center_x_m": -0.0025,
+    "front_bearing_z_offset_m": -0.012,
+    "front_bearing_x_m": -0.14,
+    "front_bearing_length_m": 0.09
+  },
+  "hardware_measurements": {
+    "status": "not collected; manual configuration is not a measurement record",
+    "unit_serial": null,
+    "operator_record": null,
+    "date": null,
+    "total_mass_kg": null,
+    "lid_hinge_friction_nm": null,
+    "lock_release_angle_deg": null,
+    "locked_lid_free_play_deg": null,
+    "handle_dimensions_mm": null,
+    "rotation_end_stops_deg": null,
+    "cold_cycle_video": null,
+    "cook_trial_video": null
+  }
+}

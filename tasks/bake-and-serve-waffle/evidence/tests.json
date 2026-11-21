@@ -1,51 +1,56 @@
 [
   {
-    "task": "waffle",
     "test": "test_cooking_state.py",
-    "exit": 0,
-    "output": "PASS:15s/300s separate clocks; open or disabled heater cannot complete timer; no premature/open/unlatched state swap; no disappearing visible spill\n",
+    "exit_code": 0,
+    "stdout": "PASS:15s/300s separate clocks; open or disabled heater cannot complete timer; no premature/open state swap; no disappearing visible spill\nPASS: closed upright idle cannot earn baking time; five-minute clock requires inverted cooking position\n",
     "stderr": ""
   },
   {
-    "task": "waffle",
+    "test": "test_hardware_geometry.py",
+    "exit_code": 0,
+    "stdout": "PASS: front-cradle shell clearance, full rotational swept clearance, single lid-attached handle and no slider\n",
+    "stderr": ""
+  },
+  {
     "test": "test_home_tolerance.py",
-    "exit": 0,
-    "output": "PASS: consistent home tolerance; open first turn and later re-turn still detected\n",
+    "exit_code": 0,
+    "stdout": "PASS: consistent home tolerance; open first turn and later re-turn still detected\n",
     "stderr": ""
   },
   {
-    "task": "waffle",
     "test": "test_hot_surface_guard.py",
-    "exit": 0,
-    "output": "PASS: upper/lower interiors rejected and external lid handle permitted at open/closed/inverted poses\n",
+    "exit_code": 0,
+    "stdout": "PASS: upper/lower interiors rejected and external lid handle permitted at open/closed/inverted poses\n",
     "stderr": ""
   },
   {
-    "task": "waffle",
     "test": "test_interior_scoring.py",
-    "exit": 0,
-    "output": "PASS: held-food rejection, release hold, angular motion and moving-lid rejection\nPASS: interior contact revokes prior success, persists after withdrawal, and is active before baking\n",
+    "exit_code": 0,
+    "stdout": "PASS: held-food rejection, release hold, angular motion and moving-lid rejection\nPASS: interior contact revokes prior success, persists after withdrawal, and is active before baking\n",
     "stderr": ""
   },
   {
-    "task": "waffle",
     "test": "test_release.py",
-    "exit": 0,
-    "output": "PASS: held-food rejection, release hold, angular motion and moving-lid rejection\n",
+    "exit_code": 0,
+    "stdout": "PASS: held-food rejection, release hold, angular motion and moving-lid rejection\n",
     "stderr": ""
   },
   {
-    "task": "waffle",
+    "test": "test_review_regressions.py",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_closing_or_incomplete_turn_does_not_earn_stability (__main__.ReviewRegressions.test_closing_or_incomplete_turn_does_not_earn_stability) ... ok\ntest_first_turn_threshold_and_displacement_boundaries (__main__.ReviewRegressions.test_first_turn_threshold_and_displacement_boundaries) ... ok\ntest_returning_base_does_not_erase_prior_motion (__main__.ReviewRegressions.test_returning_base_does_not_erase_prior_motion) ... ok\ntest_rotation_lock_operating_sequence (__main__.ReviewRegressions.test_rotation_lock_operating_sequence) ... ok\ntest_solver_overshoot_cannot_release_an_engaged_lock (__main__.ReviewRegressions.test_solver_overshoot_cannot_release_an_engaged_lock) ... ok\ntest_unsafe_turn_revokes_even_earned_stability (__main__.ReviewRegressions.test_unsafe_turn_revokes_even_earned_stability) ... ok\ntest_untouched_for_entire_action_limit (__main__.ReviewRegressions.test_untouched_for_entire_action_limit) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.015s\n\nOK\n"
+  },
+  {
     "test": "test_scorer.py",
-    "exit": 0,
-    "output": "\": false} \nturned with lid open (never closed)                                    score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": false, \"max_lid_deg_while_turned\": 45.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle laid on the plate                                      score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle on the plate 3 cm off centre                           score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle dropped on the plate's rim (7 cm off, tilted 15 deg)   score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle still held 3 cm over the plate                         score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle still sliding on the plate                             score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nwaffle put on the plate before the turn                                score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": true} \nwaffle on the plate but no turn                                        score=0.000 full=False {\"half_turn_1\": false, \"half_turn_2\": false, \"latched_at_turn\": null, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": true} \nALL PASS\nPASS: grid retention requires both position and orientation\n",
+    "exit_code": 0,
+    "stdout": "untouched (lid open)                                                   score=0.000 full=False {\"half_turn_1\": false, \"half_turn_2\": false, \"locked_at_turn\": null, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect                                                                score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, stand nudged 0.6 cm                                           score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.6, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nlid pops open mid-turn (35 deg)                                        score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 34.4, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nlid rattles 3 deg (locked)                                             score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 3.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nturned with lid beyond lock clearance                                  score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": false, \"locked_at_turn\": false, \"max_lid_deg_while_turned\": 6.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nstand shoved 2 cm at the end stop                                      score=0.750 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 2.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nstand shoved 5 cm                                                      score=0.700 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 5.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nonly half-turn (left upside down)                                      score=0.500 full=False {\"half_turn_1\": true, \"half_turn_2\": false, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nhalf-turn, back only to 90 deg                                         score=0.500 full=False {\"half_turn_1\": true, \"half_turn_2\": false, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nturned only to 150 deg and back                                        score=0.000 full=False {\"half_turn_1\": false, \"half_turn_2\": false, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nboth turns, lid left shut                                              score=0.700 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, but lid opened only 30 deg                                    score=0.700 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nturned with lid open (never closed)                                    score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": false, \"max_lid_deg_while_turned\": 45.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle laid on the plate                                      score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle on the plate 3 cm off centre                           score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle dropped on the plate's rim (7 cm off, tilted 15 deg)   score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle still held 3 cm over the plate                         score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle still sliding on the plate                             score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nwaffle put on the plate before the turn                                score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"locked_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": true} \nwaffle on the plate but no turn                                        score=0.000 full=False {\"half_turn_1\": false, \"half_turn_2\": false, \"locked_at_turn\": null, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": true} \nALL PASS\nPASS: grid retention requires both position and orientation\n",
     "stderr": ""
   },
   {
-    "task": "waffle",
     "test": "test_tool_serving.py",
-    "exit": 0,
-    "output": "PASS: tong extraction, carry, plate support and tool stow\nPASS: plating without extraction rejected\nPASS: touching without lifting then plating rejected\nPASS: direct hand-food contact permanently revokes all credit\nPASS: placing without sustained carry evidence rejected\nPASS: legitimate incomplete extraction retains stage credit\nPASS: missing hand evidence rejected\nPASS: inverted waffle supported by actual top-lug geometry\nPASS: final release and continuous rest can reach 1.0 in synthetic test\nPASS: moving tong jaw resets final rest hold\nPASS: early prohibited plating remains disqualified after later valid motions\n",
+    "exit_code": 0,
+    "stdout": "PASS: tong extraction, carry, plate support and tool stow\nPASS: plating without extraction rejected\nPASS: touching without lifting then plating rejected\nPASS: direct hand-food contact permanently revokes all credit\nPASS: placing without sustained carry evidence rejected\nPASS: legitimate incomplete extraction retains stage credit\nPASS: missing hand evidence rejected\nPASS: inverted waffle supported by actual top-lug geometry\nPASS: final release and continuous rest can reach 1.0 in synthetic test\nPASS: moving tong jaw resets final rest hold\nPASS: early prohibited plating remains disqualified after later valid motions\n",
     "stderr": ""
   }
 ]

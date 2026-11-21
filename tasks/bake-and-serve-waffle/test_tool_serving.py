@@ -12,7 +12,7 @@ def state(p,q=Q,j=None):
 def scene(spin=0.,lid=0.,food=None,tool=None):
  R=T._Rx(spin);qp=np.array([math.sin(spin/2),0.,0.,math.cos(spin/2)])
  root=np.array(T.HOME)+[0.,0.,T.ZA]-R@np.array([0.,0.,T.ZA])
- return {'waffle':state(T.HOME,j={'spin':spin,'lid':lid,'latch':0.}),
+ return {'waffle':state(T.HOME,j={'spin':spin,'lid':lid}),
  'belgian_waffle':food or state(root,qp),'dinner_plate':state(T.PLATE_POS),
  'kitchen_tongs':tool or state(T.TONG_HOME,[0.,0.,math.sin(T.TONG_YAW/2),math.cos(T.TONG_YAW/2)],{'jaw':0.}),
  'tong_cup':state([T.TONG_HOME[0],T.TONG_HOME[1],T.TOP],[0.,0.,math.sin(T.TONG_YAW/2),math.cos(T.TONG_YAW/2)])}

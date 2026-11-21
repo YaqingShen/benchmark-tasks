@@ -8,7 +8,7 @@ _PATHS={}
 
 
 def configure(ns):
-    from cooking_state import State,BATTER_MASS_KG,TIME_SCALE
+    from cooking_state import State,BATTER_MASS_KG,BATTER_DENSITY_KG_M3,TIME_SCALE
     import phase_conversion
     thermal=State()
     # Resume only after a recorded native bake-state swap. This is explicitly
@@ -59,7 +59,7 @@ def configure(ns):
             solid_rest_offset=.0014,fluid_rest_offset=.0014,enable_ccd=True,
             solver_position_iterations=8,max_velocity=2.,max_neighborhood=96)
         particleUtils.add_pbd_particle_material(stage,material,viscosity=60.,surface_tension=.03,
-            cohesion=.02,friction=.2,damping=.0,density=1050.)
+            cohesion=.02,friction=.2,damping=.0,density=BATTER_DENSITY_KG_M3)
         physicsUtils.add_physics_material_to_prim(stage,stage.GetPrimAtPath(system),material)
         mat=UsdShade.Material(stage.GetPrimAtPath(material))
         shader=UsdShade.Shader.Define(stage,material+'/surface');shader.CreateIdAttr('UsdPreviewSurface')
@@ -148,7 +148,8 @@ def configure(ns):
         finite=bool(a.shape==_PATHS['initial'].shape and np.isfinite(a).all())
         if not finite:raise RuntimeError('Invalid native batter particle state')
         w=labkit._part_state(env,next(o for o in ns['OBJECTS'] if o.name=='waffle'))
-        closed=abs(w.joints['lid'])<np.radians(5.) and w.joints['latch']>-.003
+        from cooking_state import baking_configuration
+        closed=baking_configuration(w.joints['lid'],w.joints['spin'])
         thermal.advance(float(env.unwrapped.step_dt),closed=closed)
         shifted=np.linalg.norm(a-_PATHS['initial'],axis=1)
         mold_local,center,mold_rotation=phase_conversion.mold_coordinates(ns,w,a)

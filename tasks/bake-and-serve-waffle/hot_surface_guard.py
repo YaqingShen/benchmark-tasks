@@ -1,7 +1,7 @@
 """Reject bare robot contact with either cooking cavity, from the first step.
 Uses recorded robot collision-mesh hulls and the current lid/spin transforms.
 The guard is a conservative envelope of the grid and its recessed pockets;
-external handles, latch and housing are outside this envelope.
+external handle and housing are outside this envelope.
 """
 from functools import lru_cache
 import math

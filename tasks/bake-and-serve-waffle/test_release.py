@@ -13,11 +13,11 @@ def state(pos,joints=None):
 
 pl=np.asarray(T.PLATE_POS)
 food=pl+np.array([0.,0.,T.PLATE_FLOOR-T._W_LOW+.0008])
-objects={'waffle':state(T.HOME,{'spin':0.,'lid':T.LID_START,'latch':0.}),
+objects={'waffle':state(T.HOME,{'spin':0.,'lid':T.LID_START}),
          'belgian_waffle':state(food),'dinner_plate':state(pl), 'kitchen_tongs':state(T.TONG_HOME,{'jaw':0.}),
          'tong_cup':state([T.TONG_HOME[0],T.TONG_HOME[1],T.TOP])}
 T._TRACK.update(T.new_track())
-T._TRACK.update(phase=2,latched_at_turn=True,shut_at_turn=True,loosened=True,tool_stowed=True,tool_carried=True)
+T._TRACK.update(phase=2,locked_at_turn=True,shut_at_turn=True,loosened=True,tool_stowed=True,tool_carried=True)
 assert T.breakdown(objects)['full_success']
 far=[(np.array([2.,2.,2.]),np.array([2.1,2.1,2.1]))]
 food_centre=food+np.array([0.,0.,T.ZA])
@@ -41,9 +41,17 @@ assert not T._FINAL['still'], 'moving lid is not a final resting state'
 print('PASS: held-food rejection, release hold, angular motion and moving-lid rejection')
 
 # Articulated handles are outside the root stand bounds and must still count.
-handle=np.asarray(T.HOME)+np.array([-.20,0.,T.ZA-.01])
+w=objects['waffle']
+hinge=np.asarray(T.HINGE)
+closed_handle=np.array([-.20,0.,(T.HANDLE_Z0+T.HANDLE_Z1)/2])
+handle=w.to_world(hinge+T._Ry(w.joints['lid'])@(closed_handle-hinge))
 T.update_final_release(objects,[(handle-.005,handle+.005)])
 assert not T._FINAL['released'], 'holding appliance handle cannot count as released'
+old_lower_handle=np.asarray(T.HOME)+np.array([-.226,0.,T.ZA-.01])
+T.update_final_release(objects,[(old_lower_handle-.005,old_lower_handle+.005)])
+assert T._FINAL['released'], 'there is no separate lower turning handle in the revised appliance'
+T._TRACK['max_shift']=.010
+assert T.breakdown(objects)['full_success'], 'exactly 10 mm remains inside the declared full-credit band'
 T._TRACK['max_shift']=.010001
 assert not T.breakdown(objects)['full_success']
 assert T.score(objects)<1., 'rounded partial credit must not become 1.0'

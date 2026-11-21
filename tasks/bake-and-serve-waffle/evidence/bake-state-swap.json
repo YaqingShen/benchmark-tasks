@@ -1,0 +1,30 @@
+{
+  "type": "user-authorized abstract bake-state swap",
+  "robot_time_s": 328.25000000004036,
+  "bake_clock": {
+    "robot_time_s": 328.25000000004036,
+    "bake_equivalent_s": 300.00000000003394,
+    "closed_robot_s": 300.00000000003394,
+    "cooked": true,
+    "model": "abstract closed-lid baking timer",
+    "time_scale": 1.0,
+    "debug_time_compressed": false,
+    "physical_cooking_validated": false
+  },
+  "particle_count": 11740,
+  "nominal_mass_kg": 0.2625,
+  "rigid_origin": [
+    0.40347193677596693,
+    -0.0033771640754965892,
+    1.1174997043600716
+  ],
+  "rigid_quat_xyzw": [
+    0.9999649041649944,
+    -0.008377973327569494,
+    1.0583485826139345e-06,
+    -3.098934703995413e-07
+  ],
+  "physical_phase_change_validated": false,
+  "benchmark_eligible": true,
+  "limitations": "Canonical solid replaces in-cavity batter at a timer trigger; internal mass distribution and cooking chemistry are not simulated."
+}
