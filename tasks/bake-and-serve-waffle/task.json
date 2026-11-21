@@ -1,0 +1,24 @@
+{
+  "title": "Bake and serve a waffle with a rotating maker and kitchen tongs",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "articulated appliance",
+    "spring latch",
+    "rotation about a fixed axis",
+    "heavy object",
+    "kitchen",
+    "kitchen tongs",
+    "passive tool actuation",
+    "tool-mediated food transfer"
+  ],
+  "instruction": "Close and lock the waffle maker, flip it upside down and keep it closed for five minutes. Turn it back upright, open it, and use the kitchen tongs to lift out the waffle and place it flat inside the side plate. Operate the lid only by its external handle. Never touch the food or either inner cooking surface with the robot hand. Return the tongs to their cup, release everything, and move both hands clear.",
+  "context": "Making breakfast with a rotating waffle maker combines stabilizing and turning an articulated appliance with extracting a waffle from its grid using a separately grasped spring tool. The robot must maintain the tool grip while moving the food to a loose plate.",
+  "setup": "The maker is preheated and contains a nominal 250 mL batch of viscous batter. The lid starts 45 degrees open, rotating body upright, spring slider forward. The loose appliance has a 33x 26.6 cm base and approximately 2.87 kg total mass. The cooked proxy is 17.4 cm across and approximately 2.7 cm thick, mass 262.5 g. A 25 cm ceramic plate rests beside the maker; 16.4 cm kitchen tongs stand open in their cup. The contact pads and tong tips represent heat-resistant nonmetallic covers. See README for positions, dimensions, reset, material assumptions and the modeled appliance geometry.",
+  "scoring": "Score 0 for any robot-hand contact with either cooking interior or the food, rotating with an open or unlocked lid outside the declared home zone, removing the solid food before returning the maker home, or putting food on the plate without tong-extraction and carry evidence. Otherwise: 0.20 for reaching 173 degrees of the first half-turn; 0.20 for returning within 7 degrees of upright afterward; 0.20 for keeping the lid under 5 degrees while turning and initially locked within 3 mm of its forward stop; 0.10 for stand displacement under 1 cm, decreasing linearly to 0 at 3 cm; 0.10 for opening at least 35 degrees after return; 0.20 for tong extraction, carry, supported plate placement and tool stow. The first-turn lid guard starts beyond 5 degrees; after return the same 7 degree home zone applies to opening and the guard. The waffle must lie flat within 10 degrees, its centre within 4 cm of plate centre, all edges within the plate, with no unsupported gap over 6 mm. Full score additionally requires the completed 300s baking state and both hands at least 5 mm clear while all objects rest continuously for 1s. Missing final release limits the score to 0.9. Detailed observable rules and simulation proxies are in README.",
+  "run_limit": "8500 control steps at 20 Hz (425 seconds), including a full 300 seconds of closed-and-locked bake time; no time compression in the final evaluation.",
+  "reset_notes": "Use a fresh standardized batch, reset all objects to the documented positions, start the lid 45 degrees open and the rotation upright, remove any food from the plate, put the open tongs in their cup, and clear all histories and bake timers. Preheating and measuring the initial batch are setup operations.",
+  "fidelity": "Native Isaac rigid-body contact drives the appliance, hands, passive spring tongs and plated waffle. Native PBD particles represent the initial batter; viscosity and cohesion are uncalibrated. After 300 continuous seconds closed and locked, a declared abstract material rule replaces contained particles with the molded rigid waffle at the inverted mold pose. No cooking chemistry, evaporation, temperature prediction or internal phase-change dynamics are claimed. Thereafter the food is moved only by contact. Visible spills outside the cavity block replacement. Nominal batch mass is retained. The scene uses the declared spring-slider mechanism and simplified grid/contact geometry defined in the source. Front top-lug collision depths are reduced relative to rendered crust to approximate yielding at lid clearance; rear top-lug visuals are non-colliding. The scripted controller reads privileged simulated poses; Dream-1 must be evaluated separately from normal reset. No physical hardware validation is claimed.",
+  "scores": "Scripted native simulation, seed 0: 1.0 in 7945 steps (397.25 s), including a full 300 s bake. Dream-1 (dreamlabs/dream-1-beta), seed 0: 0.0 after 8500 steps (425 s), normal max_steps termination. Both start from reset; independent replay passed.",
+  "media": "M-36EMZT"
+}

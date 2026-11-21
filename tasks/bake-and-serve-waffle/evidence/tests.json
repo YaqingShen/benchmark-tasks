@@ -1,0 +1,51 @@
+[
+  {
+    "task": "waffle",
+    "test": "test_cooking_state.py",
+    "exit": 0,
+    "output": "PASS:15s/300s separate clocks; open or disabled heater cannot complete timer; no premature/open/unlatched state swap; no disappearing visible spill\n",
+    "stderr": ""
+  },
+  {
+    "task": "waffle",
+    "test": "test_home_tolerance.py",
+    "exit": 0,
+    "output": "PASS: consistent home tolerance; open first turn and later re-turn still detected\n",
+    "stderr": ""
+  },
+  {
+    "task": "waffle",
+    "test": "test_hot_surface_guard.py",
+    "exit": 0,
+    "output": "PASS: upper/lower interiors rejected and external lid handle permitted at open/closed/inverted poses\n",
+    "stderr": ""
+  },
+  {
+    "task": "waffle",
+    "test": "test_interior_scoring.py",
+    "exit": 0,
+    "output": "PASS: held-food rejection, release hold, angular motion and moving-lid rejection\nPASS: interior contact revokes prior success, persists after withdrawal, and is active before baking\n",
+    "stderr": ""
+  },
+  {
+    "task": "waffle",
+    "test": "test_release.py",
+    "exit": 0,
+    "output": "PASS: held-food rejection, release hold, angular motion and moving-lid rejection\n",
+    "stderr": ""
+  },
+  {
+    "task": "waffle",
+    "test": "test_scorer.py",
+    "exit": 0,
+    "output": "\": false} \nturned with lid open (never closed)                                    score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": false, \"max_lid_deg_while_turned\": 45.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle laid on the plate                                      score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle on the plate 3 cm off centre                           score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle dropped on the plate's rim (7 cm off, tilted 15 deg)   score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle still held 3 cm over the plate                         score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \ncorrect, waffle still sliding on the plate                             score=0.800 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": false} \nwaffle put on the plate before the turn                                score=0.000 full=False {\"half_turn_1\": true, \"half_turn_2\": true, \"latched_at_turn\": true, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": true, \"waffle_on_plate\": false, \"waffle_left_early\": true} \nwaffle on the plate but no turn                                        score=0.000 full=False {\"half_turn_1\": false, \"half_turn_2\": false, \"latched_at_turn\": null, \"max_lid_deg_while_turned\": 0.0, \"stand_max_shift_cm\": 0.0, \"lid_open_at_end\": false, \"waffle_on_plate\": false, \"waffle_left_early\": true} \nALL PASS\nPASS: grid retention requires both position and orientation\n",
+    "stderr": ""
+  },
+  {
+    "task": "waffle",
+    "test": "test_tool_serving.py",
+    "exit": 0,
+    "output": "PASS: tong extraction, carry, plate support and tool stow\nPASS: plating without extraction rejected\nPASS: touching without lifting then plating rejected\nPASS: direct hand-food contact permanently revokes all credit\nPASS: placing without sustained carry evidence rejected\nPASS: legitimate incomplete extraction retains stage credit\nPASS: missing hand evidence rejected\nPASS: inverted waffle supported by actual top-lug geometry\nPASS: final release and continuous rest can reach 1.0 in synthetic test\nPASS: moving tong jaw resets final rest hold\nPASS: early prohibited plating remains disqualified after later valid motions\n",
+    "stderr": ""
+  }
+]

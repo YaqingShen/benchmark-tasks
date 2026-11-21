@@ -1,0 +1,16 @@
+{
+  "policy": "dream",
+  "model": "dreamlabs/dream-1-beta",
+  "instruction": "Close and lock the waffle maker, flip it upside down and keep it closed for five minutes. Turn it back upright, open it, and use the kitchen tongs to lift out the waffle and place it flat inside the side plate. Operate the lid only by its external handle. Never touch the food or either inner cooking surface with the robot hand. Return the tongs to their cup, release everything, and move both hands clear.",
+  "error": null,
+  "status": "success",
+  "termination_reasons": [
+    "max_steps"
+  ],
+  "termination_details": [
+    null
+  ],
+  "reduced": {
+    "task_score": 0.0
+  }
+}
