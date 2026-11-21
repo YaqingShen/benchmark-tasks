@@ -1,0 +1,122 @@
+{
+  "scripted": {
+    "run": "r06-complete-label-720p",
+    "source_comparison": {
+      "arena_assets_fix.py": {
+        "run_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
+        "package_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "glyph_geometry.py": {
+        "run_sha256": "df77360a8ac5f86d2f05e12c47144ce57a4ba771f9a7378fb7b60b9315e0afe8",
+        "package_sha256": "df77360a8ac5f86d2f05e12c47144ce57a4ba771f9a7378fb7b60b9315e0afe8",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "hardware_limits.py": {
+        "run_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
+        "package_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "labkit.py": {
+        "run_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
+        "package_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "mechanism.py": {
+        "run_sha256": "2dce2764c769f5d8dd90e428e2546304851cb26199147c88a64b5ccfcdf45b81",
+        "package_sha256": "2dce2764c769f5d8dd90e428e2546304851cb26199147c88a64b5ccfcdf45b81",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "preflight.py": {
+        "run_sha256": "acd44e2ea82f5a70063bc23e2f40fa557f1115672bc78488f84b351aaa40a5a0",
+        "package_sha256": "acd44e2ea82f5a70063bc23e2f40fa557f1115672bc78488f84b351aaa40a5a0",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "task.py": {
+        "run_sha256": "f4a77c881acfd2b000a1a715037df654545a428cefd622c17399f402db7f902f",
+        "package_sha256": "f4a77c881acfd2b000a1a715037df654545a428cefd622c17399f402db7f902f",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "test_mechanism.py": {
+        "run_sha256": "d0b4f63fec76b53defd42775311ea07db038090d09c36fc77ee4d413f27fe112",
+        "package_sha256": "d0b4f63fec76b53defd42775311ea07db038090d09c36fc77ee4d413f27fe112",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "glyphs.json": {
+        "run_sha256": "64da1f89f34326fa5804833c3b322629a42974ced60195e19a623cc732522c13",
+        "package_sha256": "64da1f89f34326fa5804833c3b322629a42974ced60195e19a623cc732522c13",
+        "byte_identical": true,
+        "executable_equivalent": true
+      }
+    },
+    "notes": "Metadata and reproduction runner were updated after evaluation. Physics and scorer are byte-identical or differ only in comments/module documentation."
+  },
+  "dream": {
+    "run": "d07-reviewed-dream-1",
+    "source_comparison": {
+      "arena_assets_fix.py": {
+        "run_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
+        "package_sha256": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "glyph_geometry.py": {
+        "run_sha256": "df77360a8ac5f86d2f05e12c47144ce57a4ba771f9a7378fb7b60b9315e0afe8",
+        "package_sha256": "df77360a8ac5f86d2f05e12c47144ce57a4ba771f9a7378fb7b60b9315e0afe8",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "hardware_limits.py": {
+        "run_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
+        "package_sha256": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "labkit.py": {
+        "run_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
+        "package_sha256": "ad4fd12ddf1f075a58137772c6d315a39414db447e9c8ace1cee73770c43fcda",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "mechanism.py": {
+        "run_sha256": "2dce2764c769f5d8dd90e428e2546304851cb26199147c88a64b5ccfcdf45b81",
+        "package_sha256": "2dce2764c769f5d8dd90e428e2546304851cb26199147c88a64b5ccfcdf45b81",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "preflight.py": {
+        "run_sha256": "acd44e2ea82f5a70063bc23e2f40fa557f1115672bc78488f84b351aaa40a5a0",
+        "package_sha256": "acd44e2ea82f5a70063bc23e2f40fa557f1115672bc78488f84b351aaa40a5a0",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "task.py": {
+        "run_sha256": "f4a77c881acfd2b000a1a715037df654545a428cefd622c17399f402db7f902f",
+        "package_sha256": "f4a77c881acfd2b000a1a715037df654545a428cefd622c17399f402db7f902f",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "test_mechanism.py": {
+        "run_sha256": "d0b4f63fec76b53defd42775311ea07db038090d09c36fc77ee4d413f27fe112",
+        "package_sha256": "d0b4f63fec76b53defd42775311ea07db038090d09c36fc77ee4d413f27fe112",
+        "byte_identical": true,
+        "executable_equivalent": true
+      },
+      "glyphs.json": {
+        "run_sha256": "64da1f89f34326fa5804833c3b322629a42974ced60195e19a623cc732522c13",
+        "package_sha256": "64da1f89f34326fa5804833c3b322629a42974ced60195e19a623cc732522c13",
+        "byte_identical": true,
+        "executable_equivalent": true
+      }
+    },
+    "notes": "Metadata and reproduction runner were updated after evaluation. Physics and scorer are byte-identical or differ only in comments/module documentation."
+  }
+}

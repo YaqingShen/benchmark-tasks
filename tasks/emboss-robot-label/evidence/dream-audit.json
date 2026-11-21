@@ -1,0 +1,23 @@
+{
+  "steps": 2400,
+  "sim_time_s": 120.0,
+  "continuous": true,
+  "result": {
+    "score": 0.0,
+    "success": false,
+    "ribbon": "",
+    "cut_labels": [],
+    "full_strokes": 0,
+    "released_cycles": 0,
+    "errors": [],
+    "cut_released": false
+  },
+  "events": [],
+  "source_verified": true,
+  "source_changes": [],
+  "replay_mismatches": [],
+  "framework_score": 0.0,
+  "exit_code": 0,
+  "prototype_full_success": false,
+  "limitation": "Prototype mechanism; product forces, wheel layout and cut-strip physics are uncalibrated."
+}

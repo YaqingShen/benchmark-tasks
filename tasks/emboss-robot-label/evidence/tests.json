@@ -1,0 +1,9 @@
+[
+  {
+    "task": "label",
+    "test": "test_mechanism.py",
+    "exit": 0,
+    "output": "PASS: exact text, full stroke/return, cut margin, alignment, extra strip, and negative cases\n",
+    "stderr": ""
+  }
+]

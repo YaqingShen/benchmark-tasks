@@ -1,0 +1,75 @@
+{
+  "steps": 1622,
+  "sim_time_s": 81.1,
+  "continuous": true,
+  "result": {
+    "score": 1.0,
+    "success": true,
+    "ribbon": "",
+    "cut_labels": [
+      "ROBOT  "
+    ],
+    "full_strokes": 8,
+    "released_cycles": 8,
+    "errors": [],
+    "cut_released": true
+  },
+  "events": [
+    {
+      "t": 13.55,
+      "wheel_rad": -2.1742019653320312,
+      "trigger_rad": -0.2850780785083771,
+      "symbol": "R"
+    },
+    {
+      "t": 19.6,
+      "wheel_rad": -1.7856076955795288,
+      "trigger_rad": -0.2849760055541992,
+      "symbol": "O"
+    },
+    {
+      "t": 32.75,
+      "wheel_rad": -0.11865288019180298,
+      "trigger_rad": -0.2850368022918701,
+      "symbol": "B"
+    },
+    {
+      "t": 45.9,
+      "wheel_rad": -1.7856075763702393,
+      "trigger_rad": -0.28505197167396545,
+      "symbol": "O"
+    },
+    {
+      "t": 51.95,
+      "wheel_rad": -2.4276199340820312,
+      "trigger_rad": -0.28505995869636536,
+      "symbol": "T"
+    },
+    {
+      "t": 68.65,
+      "wheel_rad": 0.2660345435142517,
+      "trigger_rad": -0.28497835993766785,
+      "symbol": " "
+    },
+    {
+      "t": 71.15,
+      "wheel_rad": 0.2660345435142517,
+      "trigger_rad": -0.2849966883659363,
+      "symbol": " "
+    },
+    {
+      "t": 79.2,
+      "wheel_rad": 0.1378045231103897,
+      "trigger_rad": -0.28505128622055054,
+      "symbol": "CUT",
+      "label": "ROBOT  "
+    }
+  ],
+  "source_verified": true,
+  "source_changes": [],
+  "replay_mismatches": [],
+  "framework_score": 1.0,
+  "exit_code": 0,
+  "prototype_full_success": true,
+  "limitation": "Prototype mechanism; product forces, wheel layout and cut-strip physics are uncalibrated."
+}
