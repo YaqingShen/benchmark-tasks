@@ -1,0 +1,18 @@
+{
+  "title": "Lift a loaded plate out of a steamer",
+  "category": "Societal relatability",
+  "keywords": [
+    "household cooking",
+    "plate lifter",
+    "tool use"
+  ],
+  "instruction": "Use the plate lifter to take the loaded plate out of the steamer. Keep all three chicken drumsticks on the plate. Rest the plate on the cork trivet before releasing the rim, then lift the tool clear.",
+  "context": "The pot leaves a narrow gap around the plate. The lifter must hold opposite sides of the rim during transfer and open far enough to withdraw without tipping the food.",
+  "setup": "On the table are an open 200 mm metal steamer with a 28 mm-high rack, a 156 mm ceramic plate on the rack, three loose 90 mm chicken drumstick replicas, an open metal spring-hinged plate lifter and a 110 mm cork trivet. The lifter rests beside the pot. Both hands start empty. Layout and reset dimensions are in the README.",
+  "run_limit": "720 steps (36 seconds at 20 Hz)",
+  "reset_notes": "Return the three pieces to the plate with the middle piece facing the opposite direction. Center the plate on the rack and lay the open lifter on the table.",
+  "fidelity": "The pot and trivet are fixed. The hinged lifter, plate and three food replicas have gravity, friction and collision geometry. The food stays rigid. The pot is open and at room temperature. Heat, steam and food deformation are outside the task.",
+  "scoring": "Award 0.15 for lifting by the rim, 0.40 for clearing the pot and 0.65 for carrying the plate over the trivet. For 1.0 the trivet must support the plate before release, then the plate must rest centered and level with the tool clear for 1 s. Dropped food, inversion, bare-finger contact or loss of grip in mid-transfer voids the trial.",
+  "scores": "Scripted demo 1.0 in 654 actions (32.70 s). Dream-1 scored 0.0 at the 720-action limit (36.00 s), with the plate still on the rack.",
+  "media": "M-7GDDFV"
+}
