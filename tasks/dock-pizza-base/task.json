@@ -1,0 +1,19 @@
+{
+  "title": "Dock a thin pizza base",
+  "category": "Other",
+  "keywords": [
+    "pizza preparation",
+    "dough docker",
+    "rolling contact",
+    "puncture spacing"
+  ],
+  "instruction": "Dock the whole thin pizza base evenly with the pin roller. Return the tool to its rest.",
+  "context": "Before baking a thin pizza, kitchen staff roll a spiked docker over the dough to leave small vents. An untreated patch can puff into a large blister. Even spacing matters across the base.",
+  "setup": "Two parallel-gripper arms face a 309 × 320 × 36 mm wooden board. A 152 mm round, 4.5 mm thick dough sheet lies flat near its centre. A handheld docker rests beside it, its axle parallel to the station y axis, 11 mm back along x and 113 mm along negative y from the dough centre. The 60 mm polymer roller carries 32 pins in a steel yoke with a polymer grip. The grip sits on a 24 × 15 × 42.5 mm wooden support block. The roller and handle start at rest.",
+  "scoring": "Each puncture covers points within 12 mm. Score the covered fraction of the central 142 mm diameter disk on a 3 mm grid, capped at 0.99. Full credit requires at least 96% coverage and the tool back at rest. For the return check the axle is within 22 mm horizontally and 9 mm vertically of its start, tool speed is below 16 mm/s, and the right gripper has stayed more than 42 mm from the grip centre for six control steps.",
+  "run_limit": "570 control steps at 20 Hz (28.5 seconds).",
+  "reset_notes": "Replace the dough with a fresh unmarked disk of the same dimensions. Set the tool back on its support and start both arms in the station ready pose. Simulation trials use seed 0 and zero object jitter.",
+  "fidelity": "The roller turns freely on a physical hinge. Each pin leaves a visible imprint after entering the dough surface by 2.2 mm. The board supplies contact resistance. The sheet stays fixed. The model omits dough deformation, tearing and baking. Pin penetration force has not been measured on real dough.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-2W2K5K"
+}
