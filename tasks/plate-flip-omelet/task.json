@@ -1,0 +1,18 @@
+{
+  "title": "Turn a whole omelet over with a dinner plate",
+  "category": "Societal relatability",
+  "keywords": [
+    "cooking",
+    "bimanual handling",
+    "controlled sliding"
+  ],
+  "context": "A dinner plate lets a cook turn a thick Spanish omelet in one piece. The cook catches it on the plate, sets the skillet upright and slides the omelet back to cook the second side.",
+  "setup": "On a cold hob (156 mm diameter, 50 mm high) place a 175 mm aluminum skillet, handle toward the left hand. Center a 130 × 21 mm two-sided omelet replica, browned side down. Put a 244 mm plastic dinner plate face down on a 66 mm wire rack to the right. Both hands start empty.",
+  "scoring": "Award 0.15 for covering the skillet, 0.35 for lifting and tilting the covered skillet, 0.60 for catching the inverted omelet, 0.75 for supporting it on the plate alone for 0.2 s and 0.85 for sliding it at least 20 mm toward the upright skillet. Award 1.0 when it rests browned side up in the skillet on the hob for 1 s and both hands release. A drop or direct hand contact with the food scores zero.",
+  "fidelity": "Finger contacts hold the skillet and plate. Gravity and friction carry the omelet during the turnover and slide. A rigid, two-sided replica represents an omelet firm enough to turn. The scripted controller reads utensil poses. The cold setup omits heating, sticking and tearing.",
+  "reset_notes": "Place the browned face down in the centered skillet, plate face down on its rack, and open both grippers. The same washable food replica can be reused.",
+  "instruction": "Use the plate to turn the whole omelet over. Slide it back into the skillet, browned side up, and set the skillet down.",
+  "run_limit": "1,200 actions at 20 Hz",
+  "scores": "Scripted demo 1.0 in 1,137 actions. Dream-1 scored 0.0 at the 1,200-action limit.",
+  "media": "M-584THJ"
+}
