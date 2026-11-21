@@ -1,0 +1,18 @@
+{
+  "title": "Apply a flexible screen protector while peeling its backing",
+  "category": "Societal relatability",
+  "keywords": [
+    "screen protector",
+    "adhesive film",
+    "squeegee"
+  ],
+  "instruction": "Align the protector with the phone. Peel the backing as you smooth the film down with the card. Press the whole screen edge to edge, then lift the card clear.",
+  "setup": "A 150 × 72 × 12 mm dummy phone sits on the work surface. A 140 × 64 mm backed PET protector starts offset 22 mm lengthwise and 12 mm sideways. The pull sticker stands up at one corner. A 106 mm plastic squeegee rests on its edge in a packaging insert. Both hands start empty.",
+  "run_limit": "465 actions at 20 Hz",
+  "scoring": "First align all four corners within 3 mm. After the first bond, award 0.15 × liner fraction peeled, 0.45 × area bonded and 0.30 × area first pressed within 25 mm of the peel front. Full credit requires all three fractions at 1 and the card lifted at least 15 mm for 0.5 s. Zero bonded area scores zero.",
+  "fidelity": "The phone is fixed. Both hands physically grasp their tools. Tab motion determines liner travel. Where the loaded card crosses exposed film, a 28 × 8 grid records contact and changes color. This approximates film adhesion and bending. The score measures alignment, coverage and peel-and-press coordination. It does not measure trapped air, dust or adhesive strength.",
+  "scores": "Scripted demo 1.0 in 420 actions (21 s). Dream-1 0.0 in 465 actions (23.25 s). It moved the card and reached the action limit without bonding the leading edge.",
+  "reset_notes": "Return the card to its insert and place an unbonded protector on its liner at the documented offset. Start with both hands open.",
+  "context": "A flexible phone protector can shift before the first edge sticks. One hand peels the liner while the other presses the newly exposed film onto the screen.",
+  "media": "M-QJ4BXK"
+}
