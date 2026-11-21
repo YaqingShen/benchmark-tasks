@@ -1,7 +1,7 @@
 {
   "instruction": "Use the manual embosser to make one label reading ROBOT. Turn the wheel to each letter, fully squeeze and release the handle between letters, advance two spaces, and select the scissors position to cut the label. Leave the handle fully released.",
-  "fidelity": "PhysX contact drives the character wheel and spring trigger. Embossing, tape feed and cutting use a declared material-response rule triggered by observed joint states. The scene uses prototype geometry, wheel ordering and spring parameters, with the device clamped to the bench and the cut strip supported by the output fixture.",
-  "scores": "Dream-1 (dreamlabs/dream-1-beta), seed 0: 0.0 after 2400 steps (120 s). Scripted demo, seed 0: 1.0 in 1622 steps (81.1 s). Both are fresh-reset native Isaac runs; independent replay and source checks passed.",
+  "fidelity": "Real reference: DYMO Office-Mate II. Modeled feed is 5.9 mm from photos of one print. A passive spring gives full-stroke equivalents of 8 N for embossing and 9 N for cutting on a 42 mm simulated arm. These are historical procurement ceilings. Retail peak forces and exact wheel positions are unverified. Wheel and trigger move by contact; tape embossing, feed and separation are discrete events.",
+  "scores": "Scripted: 1.0 in 1,622 steps (81.1 s), eight presses and full releases. Dream-1: 0.0 at 2,400 steps (120 s), no completed press. Both use the same engineering profile and seed 0.",
   "title": "Emboss ROBOT on a manual label maker and cut the strip",
   "category": "Societal relatability",
   "keywords": [
@@ -13,9 +13,9 @@
     "tape cutting"
   ],
   "context": "Making a short label for home or workshop storage requires repeatedly regrasping and indexing a small character wheel, completing each squeeze and return, and selecting the cutter. This task tests those physical operations. Tape loading and applying the finished label are outside the trial.",
-  "setup": "A bench-clamped manual embosser stands at x 0.300 m, y 0 in the station frame, on the standard station worktop. The prototype has a 76 mm wheel with 49 detents, axis 135 mm above the worktop, a spring-return trigger with 0.30 rad travel, a 120 by 130 mm clamp base, and a 52 by 13 mm output support. Housing is approximated as ABS plastic and clamp as steel. The preloaded black embossing tape is 9 mm wide and 0.6 mm thick. Reset to the A detent, fully released trigger, blank tape and no cut label. Model dimensions and the wheel order are declared prototype settings.",
+  "setup": "Use a DYMO Office-Mate II 1540-00 and black 12.7 mm plastic embossing tape (DYMO 15809). Hold the stationary housing in a soft-jaw vise with the dial horizontal, center 135 mm above the worktop and the index pointing along station +X. Keep the trigger, wheel rim and tape exit clear. The simulated fixture is centered at (300, 0) mm.",
   "scoring": "0.60 times the length of the correct leading prefix divided by five; an additional 0.15 for exactly ROBOT; 0.15 for exactly one cut label with the two-space trailing margin; 0.10 for fully releasing the trigger after cutting. Full score requires exactly ROBOT followed by two blanks, exactly one cut, no residual new strip, and full release. A between-detent squeeze, turning the wheel during a squeeze, extra characters beyond the target, a second cut label, or starting a second strip after the correct cut sets the score to zero. Holding the trigger cannot print twice and a partial squeeze prints nothing. See README for the visible outcome check and numeric simulation proxies.",
   "run_limit": "2400 control steps at 20 Hz (120 seconds).",
-  "reset_notes": "Remove the previous cut strip, reset the wheel to A and trigger to its released stop, and load clean blank 9 mm embossing tape. Clear all event and score history. The housing remains clamped; the clamp is not manipulated during the trial.",
-  "media": "M-3MERRE"
+  "reset_notes": "Remove any cut strip, load blank tape, set the selector to A and fully release the trigger.",
+  "media": "M-H5Q32F"
 }

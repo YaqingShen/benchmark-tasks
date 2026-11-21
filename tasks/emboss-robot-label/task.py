@@ -1,8 +1,4 @@
-"""Contact-driven manual embossing prototype: ROBOT, then cut.
-The 49-position wheel ordering, dimensions, and forces are prototype assumptions.
-No task joints or robot poses are teleported. Embossing/feed/shearing are discrete
-material responses driven exclusively by measured joint stroke and wheel angle.
-"""
+"""Contact-driven DYMO Omega task. Requires the measured hardware profile."""
 from __future__ import annotations
 import math,json,os,pathlib,sys
 import numpy as np
@@ -11,12 +7,13 @@ import arena_assets_fix
 import labkit
 from labkit import part,Joint,Mesh,on_reset,on_step
 import hardware_limits
-from mechanism import Mechanism,SYMBOLS,PITCH,TARGET,selected
+from mechanism import Mechanism,SYMBOLS,PROFILE,TARGET,selected
 from glyph_geometry import combined
+from omega import dial_moves
 from yam_arena.task_file import TABLE_TOP
 SCENE='station';TOP=TABLE_TOP[SCENE]
 WX,WY=.30,0.
-WH=.135;WR=.038
+WH=.135;WR=PROFILE.radius
 BLACK=(.035,.040,.045);BLUE=(.08,.25,.42);WHITE=(.89,.89,.83)
 STEEL=(.55,.57,.60);RED=(.75,.06,.04)
 labkit.ARTICULATION_SLEEP=0.
@@ -26,13 +23,13 @@ on_reset(hardware_limits.verify)
 
 items=[]
 for i,c in enumerate(SYMBOLS):
-    a=i*PITCH
-    items.append((c,(.031*math.cos(a),.031*math.sin(a),WH+.0042),.0032,a-math.pi/2))
+    a=PROFILE.angles[i]
+    items.append((c,((WR-.007)*math.cos(a),(WR-.007)*math.sin(a),WH+.0042),.0032,a-math.pi/2))
 p,f=combined(items)
 wheel_mesh=Mesh(p,f,BLACK,'none')
 # Each ridge is part of the wheel collider and provides frictional grip.
 ridges=[((WR*math.cos(a),WR*math.sin(a),WH),(.0018,.0025,.007),WHITE,a)
-        for a in np.linspace(0,2*math.pi,98,endpoint=False)]
+        for a in np.linspace(0,2*math.pi,2*len(SYMBOLS),endpoint=False)]
 OBJECTS=[
  part('embosser',pos=(WX,WY,TOP),fixed=True,friction=.8,
   boxes=[((0,-.013,.067),(.029,.021,.108),BLUE),
@@ -46,7 +43,8 @@ OBJECTS=[
                 friction=.002,mass=.025,
                 cylinders=[((0,0,WH),WR,.007,WHITE)],boxes=ridges,meshes=[wheel_mesh]),
           Joint('trigger',kind='hinge',axis='X',anchor=(0,0,.112),
-                lower=-.30,upper=0.,stiffness=.85,damping=.018,mass=.025,
+                lower=-PROFILE.end,upper=0.,stiffness=PROFILE.torque('A','press',.001)/.001,
+                damping=getattr(PROFILE,'damping',0.),mass=.025,
                 boxes=[((0,.027,.073),(.027,.009,.074),BLACK)])]),
  part('bench_clamp',pos=(WX,WY,TOP),fixed=True,
       boxes=[((0,0,.005),(.12,.13,.01),STEEL),
@@ -95,12 +93,9 @@ def demo():
     wp('right',2.,hover,fo,'approach wheel',down)
     q=0.
     for n,char in enumerate(list(TARGET)+[' ',' ','CUT']):
-        goal=-SYMBOLS.index(char)*PITCH
+        goal=-PROFILE.angles[SYMBOLS.index(char)]
         delta=(goal-q+math.pi)%(2*math.pi)-math.pi
-        remaining=int(round(delta/PITCH));turns=[]
-        while remaining:
-            count=int(math.copysign(min(6,abs(remaining)),remaining))
-            turns.append(count*PITCH);remaining-=count
+        turns=dial_moves(PROFILE,q,char)
         for turn in turns:
             wp('right',.65,hover,fo,'reset grasp angle',down)
             wp('right',.65,center,fo,'lower to wheel',down)
@@ -138,15 +133,15 @@ def _visual_tape(env):
     root=_VIS['root']+'/body'
     text=_STATE.labels[-1] if _STATE.labels else _STATE.ribbon
     start=.046 + (.002 if _STATE.labels else 0.)
-    length=.008+.004*len(text)
+    length=.008+PROFILE.feed*len(text)
     tape=UsdGeom.Cube.Define(stage,root+'/emitted_tape')
     tape.CreateSizeAttr(1.)
     if not tape.GetOrderedXformOps():
         tape.AddTranslateOp();tape.AddScaleOp()
     ops=tape.GetOrderedXformOps();ops[0].Set(Gf.Vec3d(start+length/2,0,WH-.006))
-    ops[1].Set(Gf.Vec3d(length,.009,.0006))
+    ops[1].Set(Gf.Vec3d(length,getattr(PROFILE,"tape_width",.009),.0006))
     tape.CreateDisplayColorAttr().Set([(0.02,0.02,0.02)])
-    its=[(c,(start+.005+(len(text)-1-i)*.004,0,WH-.0055),.005,math.pi)
+    its=[(c,(start+.005+(len(text)-1-i)*PROFILE.feed,0,WH-.0055),PROFILE.glyph_height,math.pi)
          for i,c in enumerate(text) if c!=' ']
     mesh=UsdGeom.Mesh.Define(stage,root+'/embossed_glyphs')
     p,f=combined(its)
@@ -171,12 +166,21 @@ def update(env):
     # Passive nearest-detent spring: target comes only from measured wheel angle.
     a=env.unwrapped.scene['embosser'];idx=list(a.joint_names).index('wheel_joint')
     dev=env.unwrapped.scene.env_origins.device
-    detent=round(q/PITCH)*PITCH
+    symbol,_,detent=PROFILE.nearest(q)
     a.set_joint_position_target_index(target=torch.tensor([[detent]],device=dev),joint_ids=[idx])
+    trigger_idx=list(a.joint_names).index('trigger_joint')
+    speed=float(a.data.joint_vel[0,trigger_idx].item())
+    if abs(speed)>1e-4:
+        _STATE.load_phase='press' if speed<0 else 'return'
+    depth=max(.001,-tr)
+    stiffness=PROFILE.torque(symbol,_STATE.load_phase,depth)/depth
+    if abs(stiffness-_STATE.spring_setting)>1e-7:
+        a.write_joint_stiffness_to_sim_index(stiffness=torch.tensor([[stiffness]],device=dev),joint_ids=[trigger_idx])
+        _STATE.spring_setting=stiffness
     event=_STATE.update(q,tr,float(env.unwrapped.step_dt))
     if _N==1 or event:_visual_tape(env)
     result=_STATE.result()
-    row=dict(step=_N,wheel=q,trigger=tr,selected=selected(q)[0],event=event,**result)
+    row=dict(step=_N,wheel=q,trigger=tr,selected=symbol,target_stiffness_nm_per_rad=stiffness,load_phase=_STATE.load_phase,event=event,**result)
     if event or _N%10==0 or _N==1:print('EMBOSSER '+json.dumps(row),flush=True)
     dest=os.environ.get('TASK_TRACE_PATH')
     if dest:

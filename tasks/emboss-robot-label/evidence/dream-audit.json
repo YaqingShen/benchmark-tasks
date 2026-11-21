@@ -1,7 +1,6 @@
 {
   "steps": 2400,
-  "sim_time_s": 120.0,
-  "continuous": true,
+  "score": 0.0,
   "result": {
     "score": 0.0,
     "success": false,
@@ -13,11 +12,9 @@
     "cut_released": false
   },
   "events": [],
-  "source_verified": true,
-  "source_changes": [],
-  "replay_mismatches": [],
-  "framework_score": 0.0,
-  "exit_code": 0,
-  "prototype_full_success": false,
-  "limitation": "Prototype mechanism; product forces, wheel layout and cut-strip physics are uncalibrated."
+  "termination": [
+    "max_steps"
+  ],
+  "environment_revision": "1d2a0c952211",
+  "native_log": "adhoc_66c591a7.json"
 }

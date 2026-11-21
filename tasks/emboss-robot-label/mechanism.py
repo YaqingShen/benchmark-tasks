@@ -1,26 +1,27 @@
-"""State of a manual embosser. Inputs are measured hinge angles, never desired letters.
-Prototype wheel layout and force parameters are not measured product specifications.
-"""
+"""Label scoring from observed dial and trigger angles."""
 import math
 from dataclasses import dataclass, field
 
 TARGET = 'ROBOT'
-# 49 equally spaced detents; prototype ordering, not a measured Omega wheel layout.
-SYMBOLS = tuple("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-/&'ÄÖÜÅÉ? ") + ('CUT',)
-assert len(SYMBOLS) == 49
-PITCH = 2*math.pi / len(SYMBOLS)
-FULL_STROKE = .255
-FULL_RELEASE = .018
+import os
+from omega import Omega, OfficeMateScenario, PrototypeLoad, mode
+
+if os.environ.get("EMBOSS_OFFICEMATE_SCENARIO") == "1":
+    PROFILE = OfficeMateScenario()
+else:
+    PROFILE = PrototypeLoad() if os.environ.get("EMBOSS_ENGINEERING_BASELINE") == "1" else Omega()
+SYMBOLS = PROFILE.symbols
 ALIGN_TOL = math.radians(1.8)
 
 def selected(q):
-    k = int(round(-q/PITCH))
-    return SYMBOLS[k % len(SYMBOLS)], abs(q + k*PITCH)
+    return PROFILE.nearest(q)[:2]
 
 @dataclass
 class Mechanism:
     ribbon: str = ''
     labels: list = field(default_factory=list)
+    load_phase: str = 'press'
+    spring_setting: float = -1.
     armed: bool = True
     release_s: float = 0.
     stroke_wheel: float | None = None
@@ -34,7 +35,7 @@ class Mechanism:
     def update(self, wheel, trigger, dt=.05):
         self.time_s += dt
         depth = max(0., -trigger)
-        if depth > .05:
+        if depth > PROFILE.release:
             if self.stroke_wheel is None:
                 self.stroke_wheel = wheel
             elif abs(wheel-self.stroke_wheel) > math.radians(3.5):
@@ -42,7 +43,7 @@ class Mechanism:
                     self.errors.append('wheel turned during squeeze')
         else:
             self.stroke_wheel = None
-        if depth <= FULL_RELEASE:
+        if depth <= PROFILE.release:
             self.release_s += dt
             if self.release_s >= .15 and not self.armed:
                 self.armed = True
@@ -51,7 +52,7 @@ class Mechanism:
                     self.cut_released = True
         else:
             self.release_s = 0.
-        if depth >= FULL_STROKE and self.armed:
+        if depth >= PROFILE.complete[mode(selected(wheel)[0])] and self.armed:
             self.armed = False
             self.full_strokes += 1
             symbol, error = selected(wheel)
