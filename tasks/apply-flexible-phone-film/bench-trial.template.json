@@ -1,0 +1,32 @@
+{
+  "task": "TK-VM7GXE",
+  "trial_id": null,
+  "overhead_video": null,
+  "side_video": null,
+  "final_photo_left_light": null,
+  "final_photo_right_light": null,
+  "photo_width_px": null,
+  "photo_height_px": null,
+  "video_hz": null,
+  "phone_corners_px": [],
+  "ruler_check_px": [],
+  "film_corners_px": [],
+  "flat_outlines_px": [],
+  "bubble_outlines_px": [],
+  "first_press_frame": null,
+  "first_pass": [
+    null,
+    null,
+    null
+  ],
+  "liner_clear": null,
+  "clear_frames": null,
+  "minimum_card_clearance_mm": null,
+  "force_sample_csv": [],
+  "force_setup": {
+    "laminate_and_lot": null,
+    "gauge_model": null,
+    "strip_width_mm": null,
+    "angle_deg": null
+  }
+}

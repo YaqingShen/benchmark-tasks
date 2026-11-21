@@ -6,13 +6,13 @@
     "adhesive film",
     "squeegee"
   ],
-  "instruction": "Align the protector with the phone. Peel the backing as you smooth the film down with the card. Press the whole screen edge to edge, then lift the card clear.",
-  "setup": "A 150 × 72 × 12 mm dummy phone sits on the work surface. A 140 × 64 mm backed PET protector starts offset 22 mm lengthwise and 12 mm sideways. The pull sticker stands up at one corner. A 106 mm plastic squeegee rests on its edge in a packaging insert. Both hands start empty.",
+  "instruction": "Fit the flexible protector to the phone. Keep it aligned and smooth as you peel the backing. Finish with the liner off the phone, the card clear and the screen free of large visible bubbles.",
+  "setup": "A fixed 150 × 72 × 12 mm glass-faced dummy, a 140 × 64 mm PET protector on a folded silicone-coated PET liner, and a 66 mm plastic card with an elastomer edge. The card stands in a plastic insert 145 mm to the side, opposite the draw paddle. A 9 mm registration slot holds the leading edge. The far liner ear rests on a 13 mm-high support. The 7 × 40 × 56 mm paddle draws the returned liner along a 255 mm slide. Both arms start empty. Fixture dimensions and reset positions are in the README.",
   "run_limit": "465 actions at 20 Hz",
-  "scoring": "First align all four corners within 3 mm. After the first bond, award 0.15 × liner fraction peeled, 0.45 × area bonded and 0.30 × area first pressed within 25 mm of the peel front. Full credit requires all three fractions at 1 and the card lifted at least 15 mm for 0.5 s. Zero bonded area scores zero.",
-  "fidelity": "The phone is fixed. Both hands physically grasp their tools. Tab motion determines liner travel. Where the loaded card crosses exposed film, a 28 × 8 grid records contact and changes color. This approximates film adhesion and bending. The score measures alignment, coverage and peel-and-press coordination. It does not measure trapped air, dust or adhesive strength.",
-  "scores": "Scripted demo 1.0 in 420 actions (21 s). Dream-1 0.0 in 465 actions (23.25 s). It moved the card and reached the action limit without bonding the leading edge.",
-  "reset_notes": "Return the card to its insert and place an unbonded protector on its liner at the documented offset. Start with both hands open.",
+  "scoring": "Alignment 0.20 for all four corners within 3 mm. After the first visible card press on exposed film against glass, coverage up to 0.20 in proportion to flat target coverage, reaching full points at 98%. Entire liner off the phone 0.15. Three first-pass video checks at 35, 70 and 105 mm share 0.25. Each requires a loaded card on exposed film and a visible fold 0–25 mm ahead. Finish 0.20 requires at least 98% coverage, liner clear, card lifted 15 mm for 0.5 s, largest visible pocket at most 2 mm and total pocket area at most 8 mm².",
+  "fidelity": "Both layers have separate contact surfaces and bending joints. Force-limited interlayer springs represent liner release. Card pressure and contact with glass can fix an exposed film strip to the phone. The film bends along the application direction. A reduced venting model renders enclosed air pockets. Dust, optics and wrinkles across the width are outside the model.",
+  "scores": "Scripted demonstration 1.0 in 407 actions. Dream-1 (dreamlabs/dream-1-beta) 0.0 in 465 actions. It reached the limit without pressing the exposed film or removing the liner.",
+  "reset_notes": "Use fresh film and liner for each physical trial. Seat the phone in the tray, put the leading edge at the near end of its 9 mm travel and support the far liner ear opposite the pull tab. Fold back the starter flap to expose 28 mm. Put the card upright in its insert. Reset simulation by starting a fresh episode.",
   "context": "A flexible phone protector can shift before the first edge sticks. One hand peels the liner while the other presses the newly exposed film onto the screen.",
-  "media": "M-QJ4BXK"
+  "media": "M-PQGMLP"
 }

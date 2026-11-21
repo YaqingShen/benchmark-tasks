@@ -1,0 +1,38 @@
+{
+  "diagnostic_replay_changes": [
+    "inspection_camera.py"
+  ],
+  "path": "runs/far-view/runs/opposite",
+  "checkpoints": [
+    {
+      "station_mm": 35,
+      "trace_step": 213,
+      "max_position_difference_mm": {
+        "film": 0.0,
+        "liner": 0.0,
+        "edge": 0.0
+      },
+      "recorded_gap_mm": 18.25842261314392
+    },
+    {
+      "station_mm": 70,
+      "trace_step": 254,
+      "max_position_difference_mm": {
+        "film": 0.0,
+        "liner": 0.0,
+        "edge": 0.0
+      },
+      "recorded_gap_mm": 19.761323928833008
+    },
+    {
+      "station_mm": 105,
+      "trace_step": 295,
+      "max_position_difference_mm": {
+        "film": 0.0,
+        "liner": 0.0,
+        "edge": 0.0
+      },
+      "recorded_gap_mm": 24.41507577896118
+    }
+  ]
+}

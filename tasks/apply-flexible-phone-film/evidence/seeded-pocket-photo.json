@@ -1,0 +1,83 @@
+{
+  "source": "seeded-pocket.png",
+  "kind": "annotation of the separate seeded defect control",
+  "method": "Same fixed overhead camera and bezel calibration. Trace the bright pocket on the native image between x 570\u2013630 and y 330\u2013390 at half-pixel outer edges. All RGB channels exceed 180 inside the bright contour.",
+  "phone_corners_px": [
+    [
+      130.5,
+      584.5
+    ],
+    [
+      1068.5,
+      584.5
+    ],
+    [
+      1068.5,
+      133.5
+    ],
+    [
+      130.5,
+      133.5
+    ]
+  ],
+  "film_corners_px": [
+    [
+      161.5,
+      560.5
+    ],
+    [
+      1040.5,
+      554.0
+    ],
+    [
+      1037.0,
+      153.5
+    ],
+    [
+      161.5,
+      159.5
+    ]
+  ],
+  "bubble_outlines_px": [
+    [
+      [
+        583.5,
+        346.5
+      ],
+      [
+        615.5,
+        346.5
+      ],
+      [
+        615.5,
+        372.5
+      ],
+      [
+        583.5,
+        372.5
+      ]
+    ]
+  ],
+  "scale_px_per_mm": 6.253333333333333,
+  "flat_outlines_px": [
+    [
+      [
+        161.5,
+        560.5
+      ],
+      [
+        1040.5,
+        554.0
+      ],
+      [
+        1037.0,
+        153.5
+      ],
+      [
+        161.5,
+        159.5
+      ]
+    ]
+  ],
+  "source_sha256": "83a792581413aa8a849e4bd756c582a48079c1474c5771ea676cff8c279e0b7f"
+}

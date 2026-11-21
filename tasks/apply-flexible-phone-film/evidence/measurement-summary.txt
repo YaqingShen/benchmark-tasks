@@ -1,0 +1,24 @@
+TK-VM7GXE | Local review copy
+
+The revised scripted trial earned 1.0 in 407 official actions. The first full-score observation followed action 388. The native video contains 408 frames including reset, at 20 Hz. All ten film bands registered simultaneous card and glass load at least once. Video frame numbers below include reset as frame 0.
+
+Station      Action / frame     Fold ahead of card     Total card-to-film normal load
+35 mm        214                18.26 mm               0.50 N
+70 mm        255                19.76 mm               0.63 N
+105 mm       296                24.42 mm               0.61 N
+
+The final physical geometry gave 99.20% coverage and 1.11 mm maximum corner error. Independent manual tracing of the rendered final photograph gave 99.41% and 1.01 mm. Scale was 6.25 pixels per mm. The clear final capture shows no discrete visible air pocket. The narrow repeated lines are boundaries between the physical sheet elements.
+
+Across the specified 30–110 mm paddle interval, the model's measured gripper/paddle normal-work equivalent was 0.0733 N at a mean moving speed of 48.8 mm/s. It includes the fixture and differs from a standalone peel-gauge experiment. The front spring cap is 0.25 N per axis. Manufacturer release data and the bench procedure appear in calibration.md. There are no real rig measurements in this packet.
+
+In the negative control the left arm kept the aligned paddle stationary while the right arm executed the same sweep. No interface released. The score was 0.240749, consisting of alignment and the already exposed starter area after pressing. Removal, progressive application and final finish each scored zero.
+
+An intentionally seeded 5 × 4 mm pocket remained visible in the native inspection photograph. It measured 20.0 mm² with a 6.40 mm maximum caliper dimension. Reading the native image independently gives 21.24 mm² and 6.59 mm maximum caliper diameter. The bright rendered boundary and finite pixel size account for about 1 mm² of difference. The defect alone removed 0.20 finish points. The official score was 0.800. It is a controlled optical/scoring test.
+
+Dream-1 completed 465 actions and received 0.0. There was no first press or liner removal. Its 466-frame H.264 video is separate from the scripted 408-frame video. Both use the same hashed physics, scoring, instruction and camera source files. The original run manifest is preserved with each official log. The review metadata differs from the archived run metadata only in its expanded setup description.
+
+A separate reset check completed two successive scripted episodes in one simulator process. Both began at zero with empty tack and release histories, and both earned 1.0 in 407 actions. Maximum initial section-position differences were 0.0011 mm for each sheet. The official run counted 814 actions and zero errors. These trials use the same fixed layout.
+
+An opposite-side optical replay reproduced all three checkpoint poses and the 1.0 result. At the third mark the fold was hidden in the original side view. Reading the opposite-side image yields approximately 24.5 mm, within 0.6 mm of the upper limit. The calibrated pixel picks and the unmodified images are in evidence/checkpoints.
+
+In the resistance sensitivity control the same scripted commands drove both arms. Only the release-force constant changed, from 0.25 to 1.0 N per axis. The first interface opened at zero-based step 244, compared with 212 at the nominal setting (1.6 s later). The liner came off, but only 10.0% of the target lay flat, the maximum corner error was 4.33 mm, and no progressive station earned credit. The final official score was 0.170408 in 456 actions. The 30–110 mm gripper/paddle work per forward travel changed from 0.0733 to 4.00 N. The pull speed and contacts also changed. This diagnostic establishes sensitivity of the simulated task to the resistance setting. It cannot establish the force of a physical phone kit.

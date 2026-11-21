@@ -1,0 +1,122 @@
+{
+  "policy": "yam_scripted",
+  "checkpoint": null,
+  "run_log": "adhoc_fdb83c65.json",
+  "official_score": 0.170408,
+  "actions": 456,
+  "limit": 465,
+  "trace_samples": 456,
+  "final_inspection": {
+    "score": 0.170408,
+    "points": {
+      "alignment": 0.0,
+      "coverage": 0.020408162770607332,
+      "removal": 0.15,
+      "progressive": 0.0,
+      "finish": 0.0
+    },
+    "corner_error_mm": 4.326467772138362,
+    "coverage": 0.09999999757597591,
+    "first_press": true,
+    "stations": [
+      false,
+      false,
+      false
+    ],
+    "liner_clear": true,
+    "max_bubble_mm": 0.0,
+    "bubble_area_mm2": 0,
+    "card_clear": false,
+    "gaps_mm": [
+      null,
+      null,
+      null
+    ],
+    "front_mm": null
+  },
+  "stations": [
+    {
+      "station_mm": 35,
+      "step": null,
+      "gap_mm": null,
+      "earned": false
+    },
+    {
+      "station_mm": 70,
+      "step": null,
+      "gap_mm": null,
+      "earned": false
+    },
+    {
+      "station_mm": 105,
+      "step": null,
+      "gap_mm": null,
+      "earned": false
+    }
+  ],
+  "film_bands_loaded_on_glass": [
+    0,
+    1,
+    2
+  ],
+  "start_edges_mm": [
+    -8.613,
+    0.0,
+    0.42
+  ],
+  "final_edges_mm": [
+    0.0,
+    0.0,
+    0.42
+  ],
+  "release_steps": [
+    [
+      244,
+      2
+    ],
+    [
+      245,
+      3
+    ],
+    [
+      247,
+      4
+    ],
+    [
+      260,
+      5
+    ],
+    [
+      263,
+      6
+    ],
+    [
+      275,
+      7
+    ],
+    [
+      293,
+      8
+    ],
+    [
+      307,
+      9
+    ]
+  ],
+  "same_source_verification": "input.sha256",
+  "paddle_load": {
+    "source": "simulated gripper-paddle normal contact, component along slide",
+    "stroke_window_mm": [
+      30,
+      110
+    ],
+    "forward_travel_mm": 80.58749318122864,
+    "forward_work_mJ": 322.475915377664,
+    "work_per_travel_N": 4.001562806432832,
+    "moving_sample_median_N": 6.4351279735565186,
+    "moving_time_s": 0.7586839882177459,
+    "mean_moving_speed_mm_s": 106.22010538345467,
+    "samples": 16,
+    "sample_rate_hz": 20
+  }
+}

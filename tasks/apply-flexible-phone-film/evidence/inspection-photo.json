@@ -1,0 +1,66 @@
+{
+  "source": "../media/inspection.png",
+  "kind": "manual annotation of a native simulator inspection image",
+  "method": "Intersect visible straight bezel edges at the two guide-obscured corners. Trace the exterior edge of the installed film, excluding the guide tabs.",
+  "phone_corners_px": [
+    [
+      130.5,
+      584.5
+    ],
+    [
+      1068.5,
+      584.5
+    ],
+    [
+      1068.5,
+      133.5
+    ],
+    [
+      130.5,
+      133.5
+    ]
+  ],
+  "film_corners_px": [
+    [
+      161.5,
+      560.5
+    ],
+    [
+      1040.5,
+      554.0
+    ],
+    [
+      1037.0,
+      153.5
+    ],
+    [
+      161.5,
+      159.5
+    ]
+  ],
+  "bubble_outlines_px": [],
+  "measured_corner_error_mm": 1.0140820792798935,
+  "measured_coverage_fraction": 0.9941493279152439,
+  "scale_px_per_mm": 6.253333333333333,
+  "flat_outlines_px": [
+    [
+      [
+        161.5,
+        560.5
+      ],
+      [
+        1040.5,
+        554.0
+      ],
+      [
+        1037.0,
+        153.5
+      ],
+      [
+        161.5,
+        159.5
+      ]
+    ]
+  ],
+  "source_sha256": "0364387910b9ac7fcccef191b6a09318213078c0f96896dfdfa0e1fe8448254d"
+}

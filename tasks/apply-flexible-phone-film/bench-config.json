@@ -1,0 +1,35 @@
+{
+  "task": "TK-VM7GXE",
+  "length_unit": "mm",
+  "phone_mm": [150, 72, 12],
+  "target_mm": [140, 64],
+  "corner_limit_mm": 3.0,
+  "full_coverage_fraction": 0.98,
+  "checkpoints_mm": [35, 70, 105],
+  "checkpoint_window_mm": 5,
+  "max_fold_gap_mm": 25,
+  "bubble_diameter_limit_mm": 2.0,
+  "bubble_total_area_limit_mm2": 8.0,
+  "card_clearance_mm": 15,
+  "clear_duration_s": 0.5,
+  "camera": {
+    "views": ["overhead", "low_angle"],
+    "minimum_pixels_per_mm": 5,
+    "minimum_video_hz": 20,
+    "horizontal_ruler_check_mm": 50,
+    "ruler_error_limit_mm": 0.5,
+    "lighting": ["left_diffuse", "right_diffuse"]
+  },
+  "force_check": {
+    "gauge_range_N": [0, 2],
+    "width_mm": 64,
+    "replicates": 3,
+    "reference_speed_mm_s": 5.08,
+    "middle_stroke_mm": [30, 110],
+    "reference_force_N_per_25mm": 0.0980665,
+    "reference_source": "https://www.m-petfilm.de/wp-content/uploads/RN_SI63Oe.pdf",
+    "reference_geometry": "Unsupported T-peel of tesa 7475 on HOSTAPHAN RN SI63O",
+    "trial_geometry": "Fold liner back over itself; steady in-line pull parallel to the glass",
+    "sample_columns": ["time_s", "travel_mm", "force_N"]
+  }
+}

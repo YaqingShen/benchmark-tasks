@@ -61,6 +61,7 @@ __all__ = ["Joint", "Part", "PartState", "part", "Model", "JointSet", "model", "
 CONTACT_REPORT: set[str] = set()
 MASS_PROPERTIES: dict = {}
 JOINT_FRAME_ROT: dict = {}  # identical parent/child frames preserve the rest pose
+TRANSLUCENT_COLORS: dict = {}
 MATTE_COLORS: dict = {}  # tray-sort: colour -> roughness (matte foam, paper)
 TEXTURES: dict = {}  # tray-sort: part name -> [(centre xyz in the part frame, width, height, facing yaw, png path)]
 TABLE_CUTS: list = []  # tray-sort: holes through the station table [(centre x, centre y, size x, size y)]
@@ -430,7 +431,12 @@ def _author(prim_path: str, cfg, translation=None, orientation=None, **kwargs):
         if color not in looks:
             path = f"{prim_path}/Looks/c{len(looks)}"
             made = False
-            if color in GLASS_COLORS:
+            if color in TRANSLUCENT_COLORS:
+                vis = sim_utils.PreviewSurfaceCfg(diffuse_color=linear_rgb(color), roughness=.21,
+                                                  opacity=TRANSLUCENT_COLORS[color])
+                vis.func(path, vis)
+                made = True
+            elif color in GLASS_COLORS:
                 # Omniverse's glass material; failing that, a translucent surface; failing that, a plain one below.
                 makers = (
                     lambda: sim_utils.GlassMdlCfg(glass_color=linear_rgb(color), thin_walled=True),
@@ -542,6 +548,8 @@ def _author(prim_path: str, cfg, translation=None, orientation=None, **kwargs):
     for j in spec.joints:
         path = f"{prim_path}/{j.name}"
         body(path, j.anchor, j.mass)
+        if spec.name in CONTACT_REPORT:
+            PhysxSchema.PhysxContactReportAPI.Apply(stage.GetPrimAtPath(path)).CreateThresholdAttr(0.)
         shapes(path, j.boxes, j.cylinders, j.anchor, j.meshes)
         if j.kind == "slide":
             jp = UsdPhysics.PrismaticJoint.Define(stage, f"{path}/{j.joint_name}")
@@ -602,6 +610,8 @@ def _author(prim_path: str, cfg, translation=None, orientation=None, **kwargs):
         if ARTICULATION_SLEEP is not None:  # tray-sort: a sleeping GPU articulation ignores root-pose writes
             art.CreateSleepThresholdAttr(ARTICULATION_SLEEP)
             art.CreateStabilizationThresholdAttr(0.0)
+    from laminate import adhesive_links
+    adhesive_links(stage, prim_path, spec)
     return root.GetPrim()
 
 
@@ -704,11 +714,13 @@ def _arena_object(spec: Part):
 
     kind = ObjectType.ARTICULATION if spec.joints else ObjectType.RIGID
     yaw = spec.yaw
+    pitch=spec.meta.get('pitch',0.)
+    quat=(0., math.sin(pitch/2), 0., math.cos(pitch/2)) if pitch else (0.,0.,math.sin(yaw/2),math.cos(yaw/2))
     return LabPartObject(
         name=spec.name,
         object_type=kind,
         spawner_cfg=LabPartSpawnerCfg(part_name=spec.name),
-        initial_pose=Pose(position_xyz=tuple(spec.pos), rotation_xyzw=(0.0, 0.0, math.sin(yaw / 2), math.cos(yaw / 2))),
+        initial_pose=Pose(position_xyz=tuple(spec.pos), rotation_xyzw=quat),
     )
 
 
@@ -888,6 +900,11 @@ def _part_state(environment, spec: Part) -> PartState:
 
 _STEP: list = []
 _RESET: list = []
+_BEFORE_RESET: list = []
+
+def on_before_reset(fn):
+    _BEFORE_RESET.append(fn)
+    return fn
 _ENV: dict = {"env": None}
 
 
@@ -958,6 +975,9 @@ def _patch_embodiment(module) -> None:
         return base_step(self, *a, **k)
 
     def reset(self, *a, **k):
+        if self._env is not None:
+            for fn in _BEFORE_RESET:
+                fn(self._env)
         obs = base_reset(self, *a, **k)
         _ENV["env"] = self._env
         for fn in _RESET:
