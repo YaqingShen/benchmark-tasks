@@ -1,0 +1,107 @@
+{
+  "seed": 0,
+  "control_hz": 20,
+  "physics_hz": 240,
+  "max_steps": 1800,
+  "scripted": {
+    "policy": "yam_scripted",
+    "score": 1.0,
+    "control_steps": 1492,
+    "simulated_seconds": 74.6,
+    "wall_seconds": 643.0769095010473,
+    "inspect_robots_version": "1.0.0",
+    "video_sha256": "fde38374e80f8d8e90129ab1124b9b530b2f2a83d71068c3e70a89243bfcd9f8"
+  },
+  "dream": {
+    "policy": "dream",
+    "score": 0.0,
+    "control_steps": 1800,
+    "simulated_seconds": 90.0,
+    "wall_seconds": 667.7309406680288,
+    "inspect_robots_version": "1.0.0",
+    "video_sha256": "c013ea9d5de3360cd9ee6b974d14d0b03aa7e594245c7d2ee3476417acbab433"
+  },
+  "native_filled_load": {
+    "native_average_support_n": 19.481680427842758,
+    "nominal_weight_n": 19.816200000000002,
+    "control_steps": 26
+  },
+  "native_material_release": {
+    "step": 1128,
+    "outward_force_peak_n": 24.091577955091232,
+    "threshold_n": 24.0,
+    "physics_hz": 240,
+    "airborne_hook_force_check": {
+      "hook_mass_kg": 0.045,
+      "samples": 552,
+      "expected_weight_n": 0.44145,
+      "normal_z_n": -0.27796128428156447,
+      "friction_z_n": 0.718286776834208,
+      "total_z_n": 0.4403254925526436
+    },
+    "observed_handoff_steps": {
+      "raised": 317,
+      "captured": 502,
+      "withdrawn": 633,
+      "parked": 780
+    },
+    "release_carton_yaw_deg": -0.0017336418303746089,
+    "release_carton_tilt_deg": 0.49086339958729236,
+    "center_fingertip_contacts": {
+      "tip_left": {
+        "xyz_m": [
+          0.0019943437936295006,
+          0.011870296395076935,
+          0.2580096527126485
+        ],
+        "force_n": 5.761508168802103
+      },
+      "tip_right": {
+        "xyz_m": [
+          -0.0023240830770306898,
+          0.0007168308606042551,
+          0.24871582376963147
+        ],
+        "force_n": 29.632996653817575
+      }
+    }
+  },
+  "frozen_source_sha256": {
+    "tear_response.py": "5d772d74d8e93710b76ce50f596cb15c2263205344c9b2db0c57571cd1a28708",
+    "labkit.py": "871f5e3106d27d1e340c68b643aebbfc10bd6ab8bc3cb75b7f4a743da1f18799",
+    "test_rest_support.py": "9c988352adba65caaf7b42863f2ed6d1c8daa927a35b02b69e94906119804dec",
+    "arena_assets_fix.py": "d9d4f39c6a0e7e6cc48cf64f25c981492de077eaf85dc3bd066eda7e82714f5c",
+    "grasp_geometry.py": "e59eb9d5784eabd6f5ebd7d592f787d3d1f40e0c7bc5f9626262215b53df027e",
+    "task.py": "ac2faae0718d87fe6281466f78e176b8a5f0ab4ed75ffb93a3f51d765c17ba65",
+    "test_asset_paths.py": "d9f2bf8a643990e1ccdc0a30ee88262cfbcbe3a2d8fba5bbec09910e8d181559",
+    "hardware_config.json": "d6f8e76a0a6fe969ff44c1e92fe28eef7f1d00e40271241f85f0d219efebeee6",
+    "controller.py": "017ad67bc188639e53c50a69e6379cceec13e8212b05b6d7ebca5740ea287521",
+    "supported_pull.py": "733f656e44f534336d4bff5aaaf730a8c66bf8278070a553328312ad5bbd3786",
+    "physics_inspection.py": "5b4f727b8d0e37519abd4710173fa6e95e7e84b19c6d70080ba60ec8f95f19b3",
+    "test_tear_response.py": "d94dd3535bd5debdc6db5e2bc895d96ace41c62a940ebec0067708622341a883",
+    "handoff.py": "55e5b60c2d6e56aa1c267d87245d963bd7ec5489c23fed86c7ca355d50fd6153",
+    "test_geometry_observer.py": "bac7c716fc6abc25dbc4c1788047282ebc70d01c598db0bc699b364b68b40146",
+    "particle_backend_compat.py": "58f18370488247f9d0978bcff248dbcb98163337fdadba9a22eaf38509db50a1",
+    "contact_evidence.py": "5c8b15699bca58976fcc3efb5dad8909900e92209703734f5d04c2d70c713036",
+    "tool_feedback.py": "d6402fdebf16284dd76e5b97da7f655b3568baec0c34ed9455020ccc740bb28e",
+    "outcome_evidence.py": "ee4d7d7c72e4031ec85281c0769152f231383f87a1dbe9d64739db71fbd2dcee",
+    "test_handoff.py": "2ca50376cb5d821c01be6c57e7e9c166750446418fddb8de3db73e33fb37fa38",
+    "rules.py": "42b608e2232f4b06e66b276d358fff76a79a464fa9ebc060a6981e9ab2c404e5",
+    "roof_fitment.py": "d0fd8fe6dee63af709fc7dd7477bcdc69a180a886b13925412ef1c4b7763eeea",
+    "cap_controller.py": "9b67ffa0b70d45984690a588694f21329f3f5362dc7a21a0d5cad84553416ea0",
+    "inner_receiver.py": "8ae9e4fbb4f1c1239ad31c4b80e66a888bc223cdfebbf023888731e3db88c54a",
+    "idle_controller.py": "f69b3909e091a9ea2e1dd7e0cddaca3d845932a4f4c75e853b742ff5cdc8d305",
+    "validate_run.py": "eb1f1597fffc55aa70ab55bd34d728df6c552c00a2840be9b314d188fdf86ab1",
+    "geometry_observer.py": "59b2fc59f6b01ea113750775f5866e8c7536ba5cd01fc5e6d445584203b0d74d",
+    "milk_fluid.py": "7a0ab8d3c4f95a28872f9b72c3a04d53e5eb2781739c85b58428eff5f863414f",
+    "test_contact_rules.py": "3e4c97bc7eee4a625ffee3c131be38c8b8a79fb36c4adc29499444492db6a9af",
+    "rest_support.py": "c5b53e79c21229fa6a1c00dfd4785613dc7cf82ae521eca55b6ee72126919f72",
+    "hardware_limits.py": "21c0d5d2a979a253cd07ef2b612de42d1aebf6bcb7051bc9df2d53cc29af5317",
+    "test_rules.py": "b8dfd989718832c438b68cb58fa05a3e57dd2e5ca0dac741c6e6a06c869c8aea",
+    "thread_mesh.py": "a0ff4a3e74ed1dff12a1dc801d5aa6aee13ea6469c759a8925778b8fb1e79a0d",
+    "contact_rules.py": "d451aa0dc7b1514898ed1574e89f7b9e4a67c80669c49fce2e0ea1b99092f021",
+    "tool_build/steel_profile_mm.dxf": "918d5f4032d610eae55bbd1f130cc3e8edc6d5818664a6ef29c2318a0ec9b64f",
+    "tool_build/README.md": "ee937ece4616fa4c6bd4564c8184e546157db84745c488d31c8f3121cb3b1690",
+    "tool_build/hook_dimensions.png": "e4f950e7d60a8af3f1b5ec8c7dfa3234f2bc9b171dd51d4c640b62607690eb89"
+  }
+}

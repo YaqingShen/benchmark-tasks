@@ -1,0 +1,127 @@
+{
+  "reference_product": "LACTAID Whole Milk, 64 fl oz (1.89 L), pull-ring inner seal matching user photos",
+  "photo_verified": [
+    "gable-top carton",
+    "threaded external cap",
+    "white molded ring resting on intact inner seal",
+    "ring folds upward while seal remains attached"
+  ],
+  "measured_parameters": {},
+  "nominal_simulation": {
+    "carton_width_m": 0.102,
+    "carton_depth_m": 0.102,
+    "carton_wall_height_m": 0.2,
+    "carton_total_height_m": 0.258,
+    "filled_mass_kg": 2.02,
+    "mouth_inner_radius_m": 0.016,
+    "mouth_outer_radius_m": 0.0196,
+    "ring_inner_radius_m": 0.01,
+    "ring_wire_radius_m": 0.0015,
+    "seal_thickness_m": 0.001,
+    "spout_angle_deg": 45.0,
+    "hook": {
+      "handle_size_m": [
+        0.044,
+        0.016,
+        0.018
+      ],
+      "backbone_cross_section_m": [
+        0.006,
+        0.003
+      ],
+      "toe_cross_section_m": [
+        0.0015,
+        0.001
+      ],
+      "toe_length_m": 0.009,
+      "material": "17-4 PH stainless steel H1150 with rounded contact edges; acetal handle; rigid simulation, no yielding",
+      "source": "dimensioned proposed auxiliary tool, not a measured retail hook",
+      "physical_build_validated": false,
+      "toe_center_from_grip_m": [
+        0.01,
+        -0.065,
+        -0.031
+      ],
+      "holder_post_height_m": 0.0355,
+      "holder_post_separation_m": 0.032,
+      "handle_offset_y_m": 0.065,
+      "lower_stem_cross_section_m": [
+        0.002,
+        0.0015
+      ],
+      "lateral_step_y_m": 0.032
+    },
+    "outer_thread": {
+      "pitch_m": 0.003,
+      "turns": 1.25,
+      "neck_thread_root_radius_m": 0.0193,
+      "neck_thread_tip_radius_m": 0.0202,
+      "cap_thread_inner_radius_m": 0.0199,
+      "rib_thickness_m": 0.00065,
+      "measurement_status": "nominal, unmeasured",
+      "cap_thread_outer_radius_m": 0.02065,
+      "cap_shell_inner_radius_m": 0.0206,
+      "cap_shell_bottom_m": 0.002,
+      "task_relevance": "Legacy unscrewing diagnostic only; disabled for the user-selected inner-seal task"
+    },
+    "outer_cap_contact": {
+      "outer_material_friction": 0.6,
+      "internal_thread_friction": 0.15,
+      "external_ribs": 48,
+      "rib_cross_section_m": [
+        0.0007,
+        0.0007
+      ],
+      "rib_height_m": 0.016,
+      "measurement_status": "nominal; ribbed exterior visible in product reference; friction values unmeasured"
+    },
+    "ring_post_failure_reference_n": 49.0,
+    "ring_post_failure_modeled": false,
+    "measured_product_opening_force_n": null,
+    "carton_roof_peak_height_m": 0.25,
+    "native_resultant_bond_force_n": 24.0,
+    "candidate_bond_force_range_n": [
+      24.0,
+      30.0,
+      40.0
+    ],
+    "inner_floor_height_m": 0.002,
+    "liquid_inertia_model": {
+      "represented_volume_ml": 1890,
+      "nominal_density_kg_m3": 1030,
+      "particle_inertia_fraction": 0.02,
+      "rigidly_retained_milk_inertia_fraction": 0.98,
+      "scope": "Nearly upright carton with less than or equal to 1 mL spilled for scoring. Large-pour momentum and migration of bulk inertia are unresolved."
+    }
+  },
+  "force_basis": "US6390342B1, Table A, reports 5.4 lbf (24.0 N) mean opening force for its improved molded gable-top fitment; three other fitments ranged from 6.5 to 9.1 lbf. This task approximates a tear at 24 N outward native external contact force over two consecutive 240 Hz substeps. No physical measurement of the photographed carton is claimed. The threshold applies to the material response regardless of policy or action sequence.",
+  "unverified": [
+    "actual carton and closure dimensions",
+    "actual Lactaid force-displacement curve",
+    "identity of closure manufacturer",
+    "ring hinge stiffness",
+    "friction coefficients"
+  ],
+  "retail_reference": {
+    "checked_utc": "2026-11-22T00:38:53.992843+00:00",
+    "url": "https://www.target.com/p/-/A-13292765",
+    "product": "Lactaid Lactose Free Whole Milk, 0.5 gallon",
+    "upc": "041383090363",
+    "listed_price_usd": 4.49,
+    "observed_availability": "page says In Stock; local store availability not checked",
+    "retailer_estimated_ship_dimensions_in": [
+      3.93,
+      4.15,
+      9.62
+    ],
+    "converted_estimated_ship_dimensions_mm": [
+      99.822,
+      105.41,
+      244.34799999999996
+    ],
+    "retailer_estimated_ship_weight_lb": 4.48,
+    "converted_estimated_ship_weight_kg": 2.0320938176000003,
+    "interpretation": "Retailer shipping estimates support the approximate scale only. They are not direct carton/closure measurements and do not establish mouth diameter, cap pitch or seal force."
+  },
+  "task_start": "Outer cap removed on clean rest, inner seal intact and ring flat; user-selected simplification"
+}
