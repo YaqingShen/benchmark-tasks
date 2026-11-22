@@ -1,0 +1,20 @@
+{
+  "title": "Refill a cash drawer with a roll of quarters",
+  "category": "Impact on jobs",
+  "keywords": [
+    "cash handling",
+    "paper coin roll",
+    "cash drawer",
+    "bimanual opening",
+    "controlled pouring"
+  ],
+  "instruction": "Empty the wrapped roll of quarters into the middle coin compartment. Keep change out of the neighboring compartments and off the counter. Leave the empty wrapper on the counter.",
+  "context": "Cashiers replenish coin compartments so they can make change without delaying checkout. One unopened roll supplies $10 in quarters.",
+  "setup": "A closed, 75.6 mm orange kraft-paper roll holds 40 U.S. quarters on a level counter. Each clad-metal coin is 24.26 mm in diameter, 1.75 mm thick and 5.670 g. The roll lies in front of a fixed three-compartment plastic till. Each cup has a 108 × 116 mm interior and a rim 41 mm above the table. A 43 × 3 × 31 mm blunt steel breaker projects into the middle cup from its far wall. Both parallel grippers start empty.",
+  "scoring": "Each loose quarter that exits the opened wrapper and settles wholly inside the middle compartment earns 0.0225. A coin that comes to rest on the counter or in a neighboring compartment is excluded. The final 0.10 requires all 40 qualifying coins and both empty wrapper halves resting on the counter outside the drawer with both hands clear for ten consecutive observations at 20 Hz.",
+  "reset_notes": "Use 40 quarters of the same denomination and a fresh orange wrapper from the same lot. Count the stack, close both ends, clear all three compartments and return the closed roll, tray and hands to their marked locations.",
+  "run_limit": "900 control steps (45 seconds at 20 Hz)",
+  "fidelity": "A force- and torque-limited joint connects two paper sleeves. Inside each close-fitting sleeve the quarters slide axially under gravity, friction and acceleration. Each quarter becomes a freely colliding rigid body at the open mouth. The remaining load changes the mass and inertia of the sleeve. Distributed paper tearing and individual coin rotation inside the sleeve are simplified.",
+  "scores": "Dream-1 run: 0; demo: 1",
+  "media": "M-8ZA4NE"
+}
