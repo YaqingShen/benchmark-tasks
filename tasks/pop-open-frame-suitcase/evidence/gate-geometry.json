@@ -1,0 +1,12 @@
+{
+  "full_stroke_mm": 5.7,
+  "permitted_codes": [
+    [
+      4,
+      7,
+      2
+    ]
+  ],
+  "blocked_codes": 999,
+  "rest_clear": true
+}

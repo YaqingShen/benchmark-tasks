@@ -1,0 +1,66 @@
+{
+  "reference": {
+    "policy": "yam_scripted",
+    "status": "success",
+    "task_score": 1.0,
+    "actions": 225,
+    "wall_seconds": 95.37823588598985,
+    "terminal_observation": {
+      "step": 224,
+      "angles": [
+        2.5130342912658143,
+        4.397986272171892,
+        1.2563972894345419
+      ],
+      "digits": [
+        4,
+        7,
+        2
+      ],
+      "button_mm": -2.8867970750368185e-13,
+      "lid_gap_mm": 41.782126641628075,
+      "lid_contact_N": 0.0,
+      "valid": true,
+      "score": 1.0
+    }
+  },
+  "model": {
+    "policy": "dream",
+    "checkpoint": "dreamlabs/dream-1-beta",
+    "status": "error",
+    "task_score": null,
+    "actions": 80,
+    "wall_seconds": 48.69036971096648,
+    "terminal_observation": {
+      "step": 79,
+      "angles": [
+        1.8847601004877852,
+        5.026352698518366,
+        0.6281230389354526
+      ],
+      "digits": [
+        3,
+        8,
+        1
+      ],
+      "button_mm": -7.409544533487633e-06,
+      "lid_gap_mm": 0.48472616633323573,
+      "lid_contact_N": 0.0,
+      "valid": true,
+      "score": 0.0
+    },
+    "error": "PolicyError: DreamAPI refused the inference request: DA-4000 BAD_REQUEST (malformed): unsafe instruction in this scene, refused: Instruction acts on a mousetrap disguised as a suitcase."
+  },
+  "seed": 0,
+  "action_limit": 700,
+  "control_hz": 20.0,
+  "source_sha256": {
+    "labkit.py": "f178d69b4be8c85f8ef7bc41cb719eec80c1e478fbb81b261c900a5aa626e8dc",
+    "arena_assets_fix.py": "688b4a4db51386f4b25e352f272c87e6ec7388dd9b18f10fe4052dc219a0ba1c",
+    "mechanism.py": "f6d7274f5972e67f7b55c2dfdcae171d30dcc6c5948d3394e83e903ee1291d66",
+    "task.py": "5f02fc0848f65103785d19a5cfba9189ad6be4a6094f7b74d2d86f2017628913",
+    "fixture.py": "721c4052ce2eef133ba8bde7d0d55d93165f624d110503a1e5788a78eef4272e",
+    "scoring.py": "73c2717d8428705bc5d6ca64e3d07e1373f4524959b75cff164efef530bf8ad0",
+    "run.sh": "1eaaf45a64d7be547821d173c79815898115a35c2f7739e399d4edf713cd5f74"
+  }
+}

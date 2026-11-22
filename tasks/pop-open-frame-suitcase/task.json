@@ -1,0 +1,19 @@
+{
+  "title": "Open a frame suitcase",
+  "category": "Societal relatability",
+  "keywords": [
+    "travel",
+    "combination lock",
+    "latch",
+    "spring-assisted lid"
+  ],
+  "instruction": "Open the suitcase with the code 4-7-2. Let the lid spring open on its own.",
+  "context": "Travelers use a compact bank of dials to open a zipperless suitcase. A neighboring wheel can turn if the fingertip straddles two dials. The rising lid shows whether the latch actually released.",
+  "setup": "An empty, fixed tabletop case has a rigid polymer lower shell 270 × 243 × 44 mm, a 254 × 156 mm polymer lid, a steel hinge with an opening spring, and two metal keepers. Three numbered polymer wheels, 18 mm in diameter on 12 mm centers, share one index. The thumb slide is 42 mm to the left of the center wheel and drives both metal keepers. The case starts closed, the slide is at rest, and the wheels read 3-8-1.",
+  "scoring": "Award 0.15 for each final digit within 7 degrees of its target at the index. Award 1.0 when all three match, the slide has released the keepers, and the front lid edge stays at least 20 mm above its closed position for the final 0.5 seconds with the slide back within 1 mm of rest and both hands clear. Forcing or holding the lid open gives zero.",
+  "run_limit": "700 actions (35 seconds at 20 Hz)",
+  "reset_notes": "Close the lid until both keepers engage. Scramble to 3-8-1 and confirm that the release holds. Keep the index and front seam visible from the cameras.",
+  "fidelity": "The physical contacts of three notched gate disks control a sliding bar shared by both keepers. A stiff frame, rigid lid and preloaded spring hinge provide a visible opening. The tabletop dimensions and spring are benchmark settings. The travel reference is a zipperless hard-shell suitcase with one central release.",
+  "scores": "Scripted demo: 1.0. Dream-1: unscored. The service refused after 80 actions. The last frame had scene score 0.0.",
+  "media": "M-X7WSGC"
+}
