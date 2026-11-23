@@ -26,7 +26,7 @@ def plan(ns):
  # Pinch the two exterior slopes at the midpoint of the top seam.
  angle=math.radians(50)
  br=np.array([[-1.,0.,0.],[0.,math.cos(angle),-math.sin(angle)],[0.,-math.sin(angle),-math.cos(angle)]])
- brace=P+np.array([0.,0.,ns['PEAK']-.0105])-.007*br[:,2]
+ brace=P+np.array([0.,-.003,ns['PEAK']-.0105])-.007*br[:,2]
  # Pick up the dimensioned hook by its handle; the tip stays clear of the table.
  h=ns['HOOK_POS'].copy();g=ns['HOOK_GRIP'];pick=h+g-.007*down[:,2]
  wp(L,1.5,pick+[0,0,.075],open,down,'above hook handle')
@@ -87,7 +87,7 @@ def plan(ns):
  for dist in np.arange(.0025,.0851,.0025):
   wp(R,.47,finger_tcp+dist*N,closed,take,'draw seal with direct grip')
  wp(R,.8,finger_tcp+.085*N+[0.,0.,.01],closed,take,'lift seal clear')
- target=ns['TRAY_POS']+[-.020,0.,.040]
+ target=ns['TRAY_POS']+[-.020,.020,.040]
  wp(R,2.6,target+[0.,0.,.080],closed,take,'carry seal to tray')
  wp(R,1.4,target+[0.,0.,.07],closed,down,'turn wrist above tray')
  wp(R,1.4,target,closed,down,'lower held seal')

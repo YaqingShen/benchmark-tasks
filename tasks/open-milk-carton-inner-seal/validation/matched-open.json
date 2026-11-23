@@ -1,0 +1,93 @@
+{
+  "model": "Isaac PhysX PBD full-charge instantaneous directional release; no physical apparatus",
+  "fixture": "open_control",
+  "capacity_lower_bound_l": 7.2,
+  "initial_bottom_m": 0.226,
+  "initial_horizontal_mps": 0.6,
+  "physics_steps": 960,
+  "physics_hz": 240,
+  "nominal_ml_per_particle": 0.0640005418035285,
+  "scenarios": [
+    {
+      "direction": "arm_side",
+      "first_primary_overrun": {
+        "step": 58,
+        "id": 3163,
+        "x": 0.07757064700126648,
+        "y": 0.032685648649930954,
+        "z": 0.001999929314479232,
+        "overrun_mm": 14.429352760314941
+      },
+      "max_primary_overrun_mm": 14039.5419921875,
+      "left_primary_ever": 6047,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 6047,
+      "outside_equivalent_ml": 387.0112762859368,
+      "median_vertical_drop_m": 0.34000003319978717,
+      "final_max_z_m": 0.10401125252246857,
+      "passed": false
+    },
+    {
+      "direction": "far_side",
+      "first_primary_overrun": {
+        "step": 50,
+        "id": 593,
+        "x": 0.7093026041984558,
+        "y": 0.1045970767736435,
+        "z": 0.10162067413330078,
+        "overrun_mm": 11.302610397338867
+      },
+      "max_primary_overrun_mm": 14187.0263671875,
+      "left_primary_ever": 673,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 673,
+      "outside_equivalent_ml": 43.072364633774676,
+      "median_vertical_drop_m": 0.3159996681213375,
+      "final_max_z_m": 0.16200923919677734,
+      "passed": false
+    },
+    {
+      "direction": "left_end",
+      "first_primary_overrun": {
+        "step": 63,
+        "id": 2249,
+        "x": 0.4058886170387268,
+        "y": 0.4158501923084259,
+        "z": 0.0019998550415039062,
+        "overrun_mm": 12.85018539428711
+      },
+      "max_primary_overrun_mm": 13909.1845703125,
+      "left_primary_ever": 978,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 978,
+      "outside_equivalent_ml": 62.592529883850865,
+      "median_vertical_drop_m": 0.31937005615234426,
+      "final_max_z_m": 0.10400009155273438,
+      "passed": false
+    },
+    {
+      "direction": "right_end",
+      "first_primary_overrun": {
+        "step": 68,
+        "id": 553,
+        "x": 0.6988061666488647,
+        "y": -0.1189267486333847,
+        "z": 0.0019998550415039062,
+        "overrun_mm": 0.8061738014221191
+      },
+      "max_primary_overrun_mm": 13796.3369140625,
+      "left_primary_ever": 1231,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 1231,
+      "outside_equivalent_ml": 78.78466696014358,
+      "median_vertical_drop_m": 0.32000014495849705,
+      "final_max_z_m": 0.10401248931884766,
+      "passed": false
+    }
+  ],
+  "passed": false
+}

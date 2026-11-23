@@ -1,0 +1,86 @@
+{
+  "model": "Isaac PhysX PBD full-charge instantaneous directional release; no physical apparatus",
+  "fixture": "sealed_double_catch",
+  "capacity_lower_bound_l": 7.2,
+  "initial_bottom_m": 0.226,
+  "initial_horizontal_mps": 0.6,
+  "physics_steps": 960,
+  "physics_hz": 240,
+  "nominal_ml_per_particle": 0.0640005418035285,
+  "scenarios": [
+    {
+      "direction": "arm_side",
+      "first_primary_overrun": {
+        "step": 58,
+        "id": 3163,
+        "x": 0.08152158558368683,
+        "y": 0.03300653398036957,
+        "z": 0.0006675284821540117,
+        "overrun_mm": 10.478414535522461
+      },
+      "max_primary_overrun_mm": 11.94433879852295,
+      "left_primary_ever": 1,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.3160000334326178,
+      "final_max_z_m": 0.10401125252246857,
+      "passed": true
+    },
+    {
+      "direction": "far_side",
+      "first_primary_overrun": null,
+      "max_primary_overrun_mm": 0.0,
+      "left_primary_ever": 0,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.31199966812133795,
+      "final_max_z_m": 0.10400056838989258,
+      "passed": true
+    },
+    {
+      "direction": "left_end",
+      "first_primary_overrun": {
+        "step": 82,
+        "id": 1071,
+        "x": 0.709993302822113,
+        "y": 0.38527825474739075,
+        "z": 0.000667572021484375,
+        "overrun_mm": 11.993309020996094
+      },
+      "max_primary_overrun_mm": 14.53020191192627,
+      "left_primary_ever": 2,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.31599728393554827,
+      "final_max_z_m": 0.10401248931884766,
+      "passed": true
+    },
+    {
+      "direction": "right_end",
+      "first_primary_overrun": {
+        "step": 68,
+        "id": 553,
+        "x": 0.6988291144371033,
+        "y": -0.11893481016159058,
+        "z": 0.0019998550415039062,
+        "overrun_mm": 0.8291215896606445
+      },
+      "max_primary_overrun_mm": 12.424797058105469,
+      "left_primary_ever": 4,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.3160001449584975,
+      "final_max_z_m": 0.10400009155273438,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

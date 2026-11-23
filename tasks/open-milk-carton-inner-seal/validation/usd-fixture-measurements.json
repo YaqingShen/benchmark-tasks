@@ -1,0 +1,22 @@
+{
+  "source_geometry_sha256": "bc903333b5a7b760a3730fe20a6f02f83fabf34f7cec9189352b774959a8576d",
+  "bounds_from_usd": true,
+  "inner_clear_mm": [
+    600,
+    800
+  ],
+  "lowest_rim_mm": 40,
+  "outer_clear_mm": [
+    680,
+    880
+  ],
+  "hood_height_mm": 550,
+  "primary_usable_l": 7.2,
+  "secondary_annular_l": 2.199,
+  "max_sampled_port_center_to_tcp_m": {
+    "left": 0.3471143105518402,
+    "right": 0.42420923047086695
+  },
+  "reach_sample_every_control_steps": 20,
+  "physical_routing_checked": false
+}

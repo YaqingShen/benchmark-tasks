@@ -227,3 +227,6 @@ outcome_evidence.configure(globals())
 
 import physics_inspection
 physics_inspection.configure(globals())
+
+import spill_station
+spill_station.configure(globals())

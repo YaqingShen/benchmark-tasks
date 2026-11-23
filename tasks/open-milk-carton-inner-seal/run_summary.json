@@ -8,61 +8,61 @@
     "score": 1.0,
     "control_steps": 1492,
     "simulated_seconds": 74.6,
-    "wall_seconds": 643.0769095010473,
+    "wall_seconds": 509.31692906899843,
     "inspect_robots_version": "1.0.0",
-    "video_sha256": "fde38374e80f8d8e90129ab1124b9b530b2f2a83d71068c3e70a89243bfcd9f8"
+    "video_sha256": "22c515335d2a796b51b9d6cfb37223b5a414f3b31355595f319ad9622e24c717"
   },
   "dream": {
     "policy": "dream",
     "score": 0.0,
     "control_steps": 1800,
     "simulated_seconds": 90.0,
-    "wall_seconds": 667.7309406680288,
+    "wall_seconds": 468.4638350929599,
     "inspect_robots_version": "1.0.0",
-    "video_sha256": "c013ea9d5de3360cd9ee6b974d14d0b03aa7e594245c7d2ee3476417acbab433"
+    "video_sha256": "781f0203c3a7028d630cb5ed77291f04ab403aaf89f2e516d3e1dbe63a011d9b"
   },
   "native_filled_load": {
-    "native_average_support_n": 19.481680427842758,
+    "native_average_support_n": 19.48157116405827,
     "nominal_weight_n": 19.816200000000002,
     "control_steps": 26
   },
   "native_material_release": {
-    "step": 1128,
-    "outward_force_peak_n": 24.091577955091232,
+    "step": 1130,
+    "outward_force_peak_n": 24.11354827042498,
     "threshold_n": 24.0,
     "physics_hz": 240,
     "airborne_hook_force_check": {
       "hook_mass_kg": 0.045,
       "samples": 552,
       "expected_weight_n": 0.44145,
-      "normal_z_n": -0.27796128428156447,
-      "friction_z_n": 0.718286776834208,
-      "total_z_n": 0.4403254925526436
+      "normal_z_n": -0.27789499785285443,
+      "friction_z_n": 0.7180511583979039,
+      "total_z_n": 0.44015616054504947
     },
     "observed_handoff_steps": {
-      "raised": 317,
-      "captured": 502,
-      "withdrawn": 633,
+      "raised": 316,
+      "captured": 501,
+      "withdrawn": 634,
       "parked": 780
     },
-    "release_carton_yaw_deg": -0.0017336418303746089,
-    "release_carton_tilt_deg": 0.49086339958729236,
+    "release_carton_yaw_deg": -0.002104118906494537,
+    "release_carton_tilt_deg": 0.5913901258169211,
     "center_fingertip_contacts": {
-      "tip_left": {
-        "xyz_m": [
-          0.0019943437936295006,
-          0.011870296395076935,
-          0.2580096527126485
-        ],
-        "force_n": 5.761508168802103
-      },
       "tip_right": {
         "xyz_m": [
-          -0.0023240830770306898,
-          0.0007168308606042551,
-          0.24871582376963147
+          -0.0023805830058925654,
+          -0.0022799315942224566,
+          0.24865871481621954
         ],
-        "force_n": 29.632996653817575
+        "force_n": 29.63163915346195
+      },
+      "tip_left": {
+        "xyz_m": [
+          0.001995361048157118,
+          0.00884948804763401,
+          0.2580046165435301
+        ],
+        "force_n": 6.027388971841407
       }
     }
   },
@@ -72,10 +72,10 @@
     "test_rest_support.py": "9c988352adba65caaf7b42863f2ed6d1c8daa927a35b02b69e94906119804dec",
     "arena_assets_fix.py": "d9d4f39c6a0e7e6cc48cf64f25c981492de077eaf85dc3bd066eda7e82714f5c",
     "grasp_geometry.py": "e59eb9d5784eabd6f5ebd7d592f787d3d1f40e0c7bc5f9626262215b53df027e",
-    "task.py": "ac2faae0718d87fe6281466f78e176b8a5f0ab4ed75ffb93a3f51d765c17ba65",
+    "task.py": "77e1ebef8bd9b07796b78318d78ce6e18f6e8eedb647083bcb42780102a6747e",
     "test_asset_paths.py": "d9f2bf8a643990e1ccdc0a30ee88262cfbcbe3a2d8fba5bbec09910e8d181559",
     "hardware_config.json": "d6f8e76a0a6fe969ff44c1e92fe28eef7f1d00e40271241f85f0d219efebeee6",
-    "controller.py": "017ad67bc188639e53c50a69e6379cceec13e8212b05b6d7ebca5740ea287521",
+    "controller.py": "a0f59ca8df3e4b31c6413d7afbc66afb602afe21eea87a41464d91e48f17e9ae",
     "supported_pull.py": "733f656e44f534336d4bff5aaaf730a8c66bf8278070a553328312ad5bbd3786",
     "physics_inspection.py": "5b4f727b8d0e37519abd4710173fa6e95e7e84b19c6d70080ba60ec8f95f19b3",
     "test_tear_response.py": "d94dd3535bd5debdc6db5e2bc895d96ace41c62a940ebec0067708622341a883",
@@ -88,10 +88,12 @@
     "test_handoff.py": "2ca50376cb5d821c01be6c57e7e9c166750446418fddb8de3db73e33fb37fa38",
     "rules.py": "42b608e2232f4b06e66b276d358fff76a79a464fa9ebc060a6981e9ab2c404e5",
     "roof_fitment.py": "d0fd8fe6dee63af709fc7dd7477bcdc69a180a886b13925412ef1c4b7763eeea",
+    "spill_station.py": "bc903333b5a7b760a3730fe20a6f02f83fabf34f7cec9189352b774959a8576d",
     "cap_controller.py": "9b67ffa0b70d45984690a588694f21329f3f5362dc7a21a0d5cad84553416ea0",
     "inner_receiver.py": "8ae9e4fbb4f1c1239ad31c4b80e66a888bc223cdfebbf023888731e3db88c54a",
     "idle_controller.py": "f69b3909e091a9ea2e1dd7e0cddaca3d845932a4f4c75e853b742ff5cdc8d305",
     "validate_run.py": "eb1f1597fffc55aa70ab55bd34d728df6c552c00a2840be9b314d188fdf86ab1",
+    "wet-trial.md": "5aee504adc4421bda7a589ffd01a7ebefbaa3779b405f20f283a4c1803c1123c",
     "geometry_observer.py": "59b2fc59f6b01ea113750775f5866e8c7536ba5cd01fc5e6d445584203b0d74d",
     "milk_fluid.py": "7a0ab8d3c4f95a28872f9b72c3a04d53e5eb2781739c85b58428eff5f863414f",
     "test_contact_rules.py": "3e4c97bc7eee4a625ffee3c131be38c8b8a79fb36c4adc29499444492db6a9af",

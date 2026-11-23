@@ -1,0 +1,71 @@
+{
+  "model": "Isaac PhysX PBD full-charge instantaneous directional release; no physical apparatus",
+  "capacity_lower_bound_l": 7.2,
+  "initial_bottom_m": 0.226,
+  "initial_horizontal_mps": 0.6,
+  "physics_steps": 1920,
+  "physics_hz": 480,
+  "nominal_ml_per_particle": 0.0640005418035285,
+  "scenarios": [
+    {
+      "direction": "arm_side",
+      "first_primary_overrun": null,
+      "max_primary_overrun_mm": 0.0,
+      "left_primary_ever": 0,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.31600000712275506,
+      "final_max_z_m": 0.10401244461536407,
+      "passed": true
+    },
+    {
+      "direction": "far_side",
+      "first_primary_overrun": null,
+      "max_primary_overrun_mm": 0.0,
+      "left_primary_ever": 0,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.31199919128417974,
+      "final_max_z_m": 0.10400056838989258,
+      "passed": true
+    },
+    {
+      "direction": "left_end",
+      "first_primary_overrun": {
+        "step": 225,
+        "id": 1071,
+        "x": 0.7007961273193359,
+        "y": 0.3956325650215149,
+        "z": 0.0020036697387695312,
+        "overrun_mm": 2.7961344718933105
+      },
+      "max_primary_overrun_mm": 2.797863006591797,
+      "left_primary_ever": 1,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.3148703308105478,
+      "final_max_z_m": 0.10399913787841797,
+      "passed": true
+    },
+    {
+      "direction": "right_end",
+      "first_primary_overrun": null,
+      "max_primary_overrun_mm": 0.0,
+      "left_primary_ever": 0,
+      "input_ml": 1890,
+      "particles": 29531,
+      "outside_ever": 0,
+      "outside_equivalent_ml": 0.0,
+      "median_vertical_drop_m": 0.3159991912841811,
+      "final_max_z_m": 0.10400199890136719,
+      "passed": true
+    }
+  ],
+  "passed": true
+}
